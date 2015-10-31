@@ -1,6 +1,6 @@
 ## Adaptive web user interfaces for TANGO Control System
 
-*MSc thesis P1*
+*MSc thesis, P1*
 
 Michal Liszcz
 
