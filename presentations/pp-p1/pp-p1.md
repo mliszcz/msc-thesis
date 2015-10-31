@@ -1,9 +1,14 @@
 ## Adaptive web user interfaces for TANGO Control System
 
+*MSc thesis P1*
+
 Michal Liszcz
 
 Supervisor:  
 Wlodzimierz Funika
+
+Collaboration:  
+National Synchrotron Radiation Centre SOLARIS
 
 2015-11-04
 
@@ -17,7 +22,7 @@ http://www.tango-controls.org/
 * built on top of CORBA,
 * with bindings for C++, Java and Python.
 
-Main purpose: controlling synchrotron-related equipment  
+Main purpose: controlling accelerator-related systems  
 in physics experiments. <!-- .element: style="margin:1.5em" -->
 
 Sites using TANGO:
@@ -27,6 +32,7 @@ Sites using TANGO:
 
 
 http://iramis.cea.fr/en/Phocea/Vie_des_labos/Ast/ast_sstechnique.php?id_ast=1776
+
 ![](http://iramis.cea.fr/Images/astImg/1776_1.gif)
 
 ---
@@ -82,10 +88,10 @@ Like Taurus or JDraw - nope.
 ## Thesis aims
 
 * Build Taurus-like application for web browsers:
-  * easily modifiable by operator,
-  * modern Javascript APIs,
-  * multi-backend support (mTango, Taurus Web, ...),
-  * solid and well-tested code.
+  * which is easily modifiable by operator,
+  * uses modern Javascript APIs,
+  * supports multiple backends (mTango, Taurus Web, ...),
+  * code solid and well-tested.
 
 * Deploy the application at SOLARIS.
 
@@ -94,19 +100,19 @@ Like Taurus or JDraw - nope.
 ## Objectives
 
 0. Develop Javascript equivalent of TANGO API:
-  * `DeviceProxy`, `DeviceAttribute`, etc. ...
+  * `DeviceProxy`, `DeviceAttribute`, etc.
 
 0. Add support for pluggable backends and protocols:
   * mTango
   * HTTP, WebSocket
 
 0. Develop set of HTML widgets:
-  * HTML, vanilla JS
+  * HTML5, vanilla JS (ES6)
   * framework-agnostic
 
 0. Glue everything together.
 
-0. What about security?
+0. Make these things secure.
 
 ---
 
