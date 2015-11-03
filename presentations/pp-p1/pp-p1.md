@@ -62,11 +62,31 @@ Applications with specific requirements may be:
 
 ---
 
-## Any web-tools?
+## Thesis aims
 
-Like Taurus or JDraw - nope.
+Only desktop client apps are currently supported.
 
-#### Existing solutions:
+**Main goal:**
+
+### *Move TANGO to the Web*
+... and build Taurus-like application for SOLARIS
+
+---
+
+## Why web applications?
+
+* easy to develop,
+
+* cheap to maintain,
+
+* multiplatform,
+
+* available on PCs, tablets, terminals  
+  (low deployment cost).
+
+---
+
+## Existing solutions:
 
 * [mTango](https://bitbucket.org/hzgwpn/mtango/overview) -
   RESTful interface for TANGO
@@ -83,36 +103,24 @@ Like Taurus or JDraw - nope.
 * ... and a few more proofs-of-concept, works-in-progress  
   and dead projects
 
----
-
-## Thesis aims
-
-* Build Taurus-like application for web browsers:
-  * which is easily modifiable by operator,
-  * uses modern Javascript APIs,
-  * supports multiple backends (mTango, Taurus Web, ...),
-  * code solid and well-tested.
-
-* Deploy the application at SOLARIS.
+**None suit our needs.**
 
 ---
 
 ## Objectives
 
-0. Develop Javascript equivalent of TANGO API:
-  * `DeviceProxy`, `DeviceAttribute`, etc.
+0. Find a way to integrate CORBA middleware with browser technologies,
 
-0. Add support for pluggable backends and protocols:
-  * mTango
-  * HTTP, WebSocket
+0. Stick to the standard TANGO interfaces (defined in IDL),
 
-0. Develop set of HTML widgets:
-  * HTML5, vanilla JS (ES6)
-  * framework-agnostic
+0. Design and develop presentation layer:
+  * extendable collection of widgets,
+  * not tied to any web-framework,
 
-0. Glue everything together.
+0. Handle communication in a secure way,
 
-0. Make these things secure.
+0. Become a *de-facto-standard* for developing TANGO
+   web-applications.
 
 ---
 
