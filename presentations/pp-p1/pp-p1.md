@@ -14,11 +14,21 @@ National Synchrotron Radiation Centre SOLARIS
 
 ---
 
+## Agenda
+
+0. (Brief) Introduction to TANGO Controls
+   0. Core
+   0. GUIs
+0. Thesis goal
+0. Objectives
+
+---
+
 ## TANGO
 
 http://www.tango-controls.org/
 
-* A system for controlling hardware in distributed environment,
+* A software toolkit for controlling hardware in distributed environment,
 * built on top of CORBA,
 * with bindings for C++, Java and Python.
 
@@ -54,9 +64,13 @@ Applications with specific requirements may be:
 
 
 
+JDraw - drag-and-drop GUI designer:
+
 ![](tango9-jdraw.png)
 
 
+
+Taurus - *panels* may be modified at runtime:
 
 ![](tango9-taurus.png)
 
@@ -83,27 +97,6 @@ Only desktop client apps are currently supported.
 
 * available on PCs, tablets, terminals  
   (low deployment cost).
-
----
-
-## Existing solutions:
-
-* [mTango](https://bitbucket.org/hzgwpn/mtango/overview) -
-  RESTful interface for TANGO
-  * JS frontend highly tied to their technology stack
-
-* [Canone](http://www.tango-controls.org/resources/documentation/guis/canone/) -
-  HTML + PHP + Python (for TANGO access)
-  * discontinued in 2007, used by nobody
-
-* [Taurus Web](http://www.taurus-scada.org/en/stable/devel/api/taurus/web.html) -
-  TANGO over WebSockets
-  * discontinued *proof-of-copcept*
-
-* ... and a few more proofs-of-concept, works-in-progress  
-  and dead projects
-
-**None suit our needs.**
 
 ---
 
