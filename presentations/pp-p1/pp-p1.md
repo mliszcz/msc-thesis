@@ -100,6 +100,27 @@ Only desktop client apps are currently supported.
 
 ---
 
+## Existing solutions:
+
+* [mTango](https://bitbucket.org/hzgwpn/mtango/overview) -
+  RESTful interface for TANGO
+  * JS frontend highly tied to their technology stack
+
+* [Canone](http://www.tango-controls.org/resources/documentation/guis/canone/) -
+  HTML + PHP + Python (for TANGO access)
+  * discontinued in 2007, used by nobody
+
+* [Taurus Web](http://www.taurus-scada.org/en/stable/devel/api/taurus/web.html) -
+  TANGO over WebSockets
+  * discontinued *proof-of-copcept*
+
+* ... and a few more proofs-of-concept, works-in-progress  
+  and dead projects
+
+**None suit our needs.**
+
+---
+
 ## Objectives
 
 0. Find a way to integrate CORBA middleware with browser technologies,
