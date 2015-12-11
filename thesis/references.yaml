@@ -1,0 +1,12 @@
+---
+references:
+  - id: lindley13
+    type: book
+    author:
+      family: Lindley
+      given: Cody
+    title: DOM Enlightenment
+    publisher: O'Reilly Media
+    issued:
+      year: 2013
+---

@@ -1,0 +1,21 @@
+---
+title: Adaptive Web User Interfaces for TANGO Control System
+author: Michał Liszcz
+date: 2015
+
+documentclass: documentclass/aghthesis
+classoption: english
+fontsize: 12pt
+papersize: a4
+
+bibliography: references.yaml
+csl: documentclass/archives-of-computational-methods-in-engineering.csl
+link-citations: true
+
+header-includes:
+  - \supervisor{Włodzimierz Funika, PhD}
+  - \graphicspath{{documentclass/}}
+
+include-before:
+  - \graphicspath{{figures/}}
+---
