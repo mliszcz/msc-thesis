@@ -1,13 +1,25 @@
 # Introduction
 
-Some text.
+## TANGO Control System
 
-![Some image](../figures/w3cx-logo.png)
+### General introduction
 
-# Solution
+### Architecture overview
 
-Blah blah.
+### GUI Tools and Frameworks
 
-Awesome book [@lindley13].
+## Web applications
 
-# References
+### Trends in application development
+
+### Modern web technologies
+
+## Adaptive user interfaces
+
+### Adaptation techniques
+
+### Manual adaptation
+
+## Aims and goals
+
+## Objectives

@@ -3,14 +3,26 @@ title: Adaptive Web User Interfaces for TANGO Control System
 author: Michał Liszcz
 date: 2015
 
+abstract: >
+  Tematem pracy jest zbadanie możliwości zastosowania technologii webowych
+  do dynamicznego generowania interfejsu operatora urządzeń korzystających
+  z systemu kontroli TANGO. Należy porównać istniejące rozwiązania i
+  sprawdzić możliwość wykorzystania tych technologii do budowy aplikacji
+  webowej pozwalającej na sterowanie urządzeniem z poziomu przeglądarki WWW.
+
+  Projekt realizowany jest we współpracy z Narodowym Centrum
+  Promieniowania Synchrotronowego SOLARIS.
+
 documentclass: documentclass/aghthesis
 classoption: english
 fontsize: 12pt
 papersize: a4
 
-bibliography: references.yaml
+bibliography: build/references.bib
 csl: documentclass/archives-of-computational-methods-in-engineering.csl
 link-citations: true
+nocite: |
+  @*
 
 header-includes:
   - \supervisor{Włodzimierz Funika, PhD}

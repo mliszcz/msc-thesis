@@ -5,12 +5,22 @@ FLAGS=--number-sections \
 			--filter pandoc-citeproc
 
 OUTDIR=build
-OUTFILE=msc-thesis-michal-liszcz.pdf
+OUTFILE=$(OUTDIR)/msc-thesis-michal-liszcz.pdf
+REFFILE=$(OUTDIR)/references.bib
 
-all: header.yaml $(OUTDIR)
+HEADER=header.yaml
+CHAPTERS=$(wildcard chapters/*.md)
+REFERENCES=$(wildcard references/*)
+
+all: $(OUTFILE)
+
+$(OUTFILE): $(HEADER) $(CHAPTERS) $(REFFILE) $(OUTDIR)
 	pandoc $(FLAGS) \
-	-o $(OUTDIR)/$(OUTFILE) \
-	$< $(wildcard chapters/*.md)
+		-o $@ \
+		$(HEADER) $(CHAPTERS)
+
+$(REFFILE): $(OUTDIR)
+	cat $(REFERENCES) > $@
 
 $(OUTDIR):
 	mkdir $@
