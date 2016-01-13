@@ -117,9 +117,12 @@
 % \setbeamertemplate{background}{\pgfuseimage{agh-slide}}
 
 \setbeamertemplate{background}{
+  \ifx\Oldincludegraphics\undefined
+    \let\Oldincludegraphics\includegraphics
+  \fi
   \ifnum\thepage>1
-    \includegraphics[width=\paperwidth,height=\paperheight]{beamerthemeAGH-slide}
+    \Oldincludegraphics[width=\paperwidth,height=\paperheight]{beamerthemeAGH-slide}
   \else
-    \includegraphics[width=\paperwidth,height=\paperheight]{beamerthemeAGH-en-title}
+    \Oldincludegraphics[width=\paperwidth,height=\paperheight]{beamerthemeAGH-en-title}
   \fi
 }
