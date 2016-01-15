@@ -148,7 +148,41 @@ Evaluate solution:
 * 46-70 pages total
 * things to remember about:
     * title page, **abstract**, acknowledgements,
-      table of contents, table of figures, ...
+      table of contents, table of figures, references ...
+
+---
+
+# Roadmap (1/2)
+
+* ...
+* Dec 2015
+    * `tangojs-web-components`: development
+* Jan 2016
+    * `tangojs-panel` mockups; application skeleton
+    * writing 2nd chapter (State of the art)
+* Feb 2016
+    * `tangojs-web-components`: refactoring, charts
+    * `tangojs-panel`: implementation (1/2)
+    * writing 1st chapter (Introduction)
+* Mar 2016
+    * `tangojs-panel`: implementation (2/2)
+    * writing 3rd chapter (Solution)
+
+---
+
+# Roadmap (2/2)
+
+* Apr 2016
+    * writing 3rd chapter (Solution)
+    * writing 4th chapter (Implementation aspects)
+    * `tangojs-connector-rest`: implementation
+* May 2016
+    * writing 5th and 6th chapters
+    * `tangojs-panel`: testing; minor changes
+* Jun 2016
+    * safety buffer
+
+---
 
 # Thank you
 
