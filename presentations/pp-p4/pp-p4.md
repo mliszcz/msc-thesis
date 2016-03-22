@@ -369,29 +369,203 @@ toc: true
 
 ## Introduction
 
-TODO
+* **Web Components**,
+* common name for 4 independent standards:
+    * HTML Templates
+    * HTML Imports
+    * Custom Elements
+    * Shadow DOM
+* allow for building **reusable**, **self-contained** widgets,
+* there are frameworks built on-top of Web Components, like Google Polymer,
+  Microsoft X-Tag or Mozilla Brick.
 
 ## HTML Templates
 
 * included in HTML5 standard,
 * <https://www.w3.org/TR/html5/scripting-1.html#the-template-element>
 
-## HTML Imports
+> The HTML template element <template> is a mechanism for holding client-side
+  content that is not to be rendered when a page is loaded but may subsequently
+  be instantiated during runtime using JavaScript.
 
-TODO
+```html
+<template> <!-- content --> </template>
+```
+
+```javascript
+const documentFragment = document
+  .querySelector('template').content
+  .cloneNode(true)
+```
+
+## HTML Imports (1/2)
+
+* packaging mechanism for Web Components,
+* <https://www.w3.org/TR/html-imports/>,
+* new `<link>` type: `import`,
+* imported document available in `linkNode.import`,
+* synchronous or not (according to the spec).
+
+```html
+<!-- index.html -->
+<html>
+  <head>
+    <!-- ... -->
+    <link rel="import" href="imported-document.html">
+  </head>
+  <body> <!-- ... --> </body>
+</html>
+```
+
+## HTML Imports (2/2)
+
+```html
+<!-- imported-document.html -->
+<html>
+  <script type="text/javascript">
+
+    // index.html
+    const document = window.document
+
+    // imported-document.html
+    const currentDocument =
+      document.currentScript.ownerDocument
+
+  </script>
+</html>
+```
 
 ## Custom Elements
 
-TODO
+* <https://www.w3.org/TR/custom-elements/>,
+* support for **custom tags**,
+* also existing tags may be extended,
+* support for both ES5 and ES6 classes,
+* dead simple API.
+
+## Custom Elements - element definition
+
+* all elements should have `HTMLElement` is prototype chain
+
+```javascript
+class MyCustomElement extends HTMLElement {
+
+  constructor () {
+    // actually constructor may be never called!
+  }
+}
+```
+
+## Custom Elements - lifecycle callbacks
+
+* four lifecycle callbacks:
+    * `createdCallback()`,
+    * `attachedCallback()`,
+    * `detachedCallback()`,
+    * `attributeChangedCallback(name, oldVal, newVal)`
+
+```javascript
+class MyCustomElement extends HTMLElement {
+
+  createdCallback () {
+    // put your initialization here
+  }
+}
+```
+
+## Custom Elements - element lifecycle
+
+1. parser encounters `<my-custom-element>` tag,
+1. `HTMLUnknownElement` DOM node is created,
+1. element definition is loaded (asynchronously, via HTML import),
+1. element is **upgraded** - becomes `MyCustomElement`,
+1. `createdCallback()` is invoked.
+
+## Custom Elements - element registration
+
+* browser upgrades only elements it knows about,
+* to introduce `MyCustomElement` to the browser:
+    ```javascript
+    const HTMLMyCustomElement =
+      document.registerElement('my-custom-element', {
+        prototype: MyCustomElement.prototype
+      })
+    ```
+* the best place to put the registration code is the imported document,
+* to create instance programmatically:
+    ```javascript
+    const e1 = document.createElement('my-custom-element')
+    const e2 = new HTMLMyCustomElement()
+    ```
+
+## Custom Elements = extending existing elements
+
+* to extend `<button>`:
+    * make sure `HTMLButtonElement` is in prototype chain,
+    * pass `extends` option to the `registerElement` API,
+    * use `is="..."` attribute to upgrade buttons to your element
+
+```javascript
+MyButtonElement extends HTMLButtonElement { }
+
+document.registerElement('my-button', {
+  prototype: MyButtonElement.prototype,
+  extends: 'button'
+})
+```
+
+```html
+<button is="my-button">click!</button>
+```
 
 ## Shadow DOM
 
-TODO
+* sometimes we do not want external scripts and stylesheets to affect our
+  component.
+
+> Shadow DOM provides encapsulation for the JavaScript, CSS, and templating
+  in a Web Component. Shadow DOM makes it so these things remain separate
+  from the DOM of the main document.
+
+* <https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM>,
+* <https://www.w3.org/TR/shadow-dom/>.
+
+---
+
+![Shadow tree hierarchy (source: w3.org)](images/shadow-trees.png)
+
+## Shadow DOM - features
+
+* nodes inside Shadow DOM cannot be accessed from outside
+  (with APIs like `document.querySelector(...)`),
+
+* nodes inside Shadow DOM cannot be affected by CSS stylesheets placed
+  outside shadow tree; note: shadow-piercing selectors
+  (`/deep/`, `>>>`, `::shadow`) has been deprecated,
+
+* it is common practice to put your element's internals inside a shadow tree.
+
+## Shadow DOM - API
+
+* to create shadow a tree hosted at the given element, use:
+
+    ```javascript
+    const root = element.createShadowRoot()
+    element.appendChild(root)
+
+    const divInShadowTree = document.createElement('div')
+    root.appendChild(divInShadowTree)
+    ```
+
+* *note*: `createShadowRoot()` has been deprecated in favor of
+`attachShadow(...)`.
 
 # Summary
 
 ## Hands-on lab
 
+1. you are going to see all Web Components technologies in action,
+1. to begin:
 1. clone the repo: <https://github.com/mliszcz/agh-webcomponents-tutorial>
 
 1. run the example (you need Firefox 45+ or Chrome ~49 and Node.js)
