@@ -2,7 +2,8 @@ FLAGS=--number-sections \
 			--table-of-contents \
 			--chapters \
 			--standalone \
-			--filter pandoc-citeproc
+			--filter pandoc-citeproc \
+			--tab-stop=2
 
 OUTDIR=build
 OUTFILE=$(OUTDIR)/msc-thesis-michal-liszcz.pdf
