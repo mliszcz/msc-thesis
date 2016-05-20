@@ -23,14 +23,24 @@ include-before:
 
 # Agenda
 
+* Progress evaluation
 * Acheivements
+* Thesis status
+* Roadmap
+* Why this matters
 * Summary
+
+---
+
+# Progress evaluation
+
+TODO
 
 ---
 
 # Acheivements
 
-* 5 major subprojects
+* 5 main subprojects
     
     * `tangojs-core`
     * `tangojs-connector-local`
@@ -40,16 +50,33 @@ include-before:
 
 * 4 available in NPM
 
-* ~9417 lines of code (incl. 2431 genreated)
+* ~3.5k SLOC (excl. comments, blank lines and generated code)
 
 * few minor repositories
 
-* Docker containers
+* Docker containers - Tango 9, mTango
 
-    * Tango 9
-    * mTango
+* a webpage (<https://tangojs.github.io>)
 
-* a webpage
+---
+
+# Thesis status
+
+TODO
+
+---
+
+# Roadmap
+
+TODO
+
+---
+
+# Why this matters
+
+TODO
+
+---
 
 # Summary
 
