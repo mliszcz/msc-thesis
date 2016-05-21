@@ -1,0 +1,28 @@
+@startuml
+
+package "TangoJS Connector" {
+  [Server] <-> HTTP
+  HTTP <-> [Client]
+}
+
+package "TangoJS Core" {
+  [API]
+}
+
+package "TangoJS Web Components" {
+  [line-edit]
+  [label]
+  [trend]
+  [form]
+  [...]
+}
+
+[TANGO] <-> IIOP
+IIOP <--> [Server]
+[Client] <--> [API]
+[API] <--> [line-edit]
+[API] <--> [label]
+[API] <--> [trend]
+[API] <--> [form]
+
+@enduml
