@@ -24,9 +24,10 @@ include-before:
 # Agenda
 
 * Progress evaluation
-* Acheivements
+* Acheivements (1/2)
+* Acheivements (2/2)
 * Thesis status
-* Roadmap
+* Updated roadmap
 * Why this matters
 * Summary
 
@@ -34,14 +35,19 @@ include-before:
 
 # Progress evaluation
 
-TODO
+* Most objectives have been achieved:
+    * Development is *almost* done,
+    * TangoJS architecture is implemented according to initial design,
+    * Everything has been tested against a real device server (`TangoTest`),
+* Still few bugs left in the issue tracker,
+* Thesis status is dicsussed later.
 
 ---
 
-# Acheivements
+# Acheivements (1/2)
 
 * 5 main subprojects
-    
+
     * `tangojs-core`
     * `tangojs-connector-local`
     * `tangojs-connector-mtango`
@@ -60,27 +66,59 @@ TODO
 
 ---
 
+# Acheivements (2/2)
+
+*TODO: wstawic obrazek*
+
 # Thesis status
 
-TODO
+Just a few pages ... written.
+
+...
+
+Expected delivery date - Sept. 2016.
 
 ---
 
-# Roadmap
+# Updated roadmap
 
-TODO
+* 21-23 Jun. 2016 - 30th Tango Collaboration meeting (Toulouse, FR):
+    * make sure TangoJS is stable enough for a public release preview,
+    * Solaris team member will make a presentation,
+* end of June, July and August - writing actual thesis:
+    * compare existing solutions,
+    * describe proposed solution (architecture and technical details),
+    * discuss different approaches to building web UIs.
+* holidays:
+    * deploy TangoJS on a server located at Solaris site.
 
 ---
 
 # Why this matters
 
-TODO
+* TangoJS allows you:
+
+    * to quickly design and build UIs,
+    * for any device server,
+    * using your web-dev skills,
+    * and modern web standards.
+
+* Framework-less solution,
+
+* Suitable for any developer.
 
 ---
 
 # Summary
 
-*TODO*
+* Objectives have been achieved,
+
+* The solution looks promising,
+
+* More testing is required,
+
+* The thesis has to be written.
+
 
 ---
 
