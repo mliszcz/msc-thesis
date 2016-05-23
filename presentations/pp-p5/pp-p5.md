@@ -24,8 +24,8 @@ include-before:
 # Agenda
 
 * Progress evaluation
-* Acheivements (1/2)
-* Acheivements (2/2)
+* Achievements (1/2)
+* Achievements (2/2)
 * Thesis status
 * Updated roadmap
 * Why this matters
@@ -44,7 +44,7 @@ include-before:
 
 ---
 
-# Acheivements (1/2)
+# Achievements (1/2)
 
 * 5 main subprojects
 
@@ -66,9 +66,9 @@ include-before:
 
 ---
 
-# Acheivements (2/2)
+# Achievements (2/2)
 
-*TODO: wstawic obrazek*
+![TangoJS *Panel* application](images/tangojs-panel.png)
 
 # Thesis status
 
@@ -118,7 +118,6 @@ Expected delivery date - Sept. 2016.
 * More testing is required,
 
 * The thesis has to be written.
-
 
 ---
 
