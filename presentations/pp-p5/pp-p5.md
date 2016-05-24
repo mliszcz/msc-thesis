@@ -72,11 +72,9 @@ include-before:
 
 # Thesis status
 
-Just a few pages ... written.
+* Just one chapter started,
 
-...
-
-Expected delivery date - Sept. 2016.
+* Expected delivery date - Sept. 2016.
 
 ---
 
@@ -111,9 +109,13 @@ Expected delivery date - Sept. 2016.
 
 # Summary
 
-* Objectives have been achieved,
+* Objectives have been achieved:
 
-* The solution looks promising,
+    * CORBA  and browser technologies integration,
+    * interfaces familiar for TANGO developers,
+    * Web Components -based presentation layer.
+
+* Positive feedback from Solaris team
 
 * More testing is required,
 
