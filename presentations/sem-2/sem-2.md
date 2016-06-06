@@ -33,6 +33,7 @@ include-before:
     * *mtango-connector* (backend client)
     * *web-components* (widget toolkit)
 * *Panel* application
+* Other outcomes
 * Summary
 
 ---
@@ -235,18 +236,17 @@ le.showName = true
 
 ---
 
-# Why this matters
+# Other outcomes and artifacts
 
-* TangoJS allows one:
+* Website: <https://tangojs.github.io>
 
-    * to quickly design and build UIs,
-    * for any device server,
-    * using your web-dev skills,
-    * and modern web standards.
+* API documentation
 
-* Framework-less solution,
+* *getting-started* application template,
 
-* Suitable for any developer.
+* Docker containers
+    * TANGO 9
+    * mTango rc2
 
 ---
 
