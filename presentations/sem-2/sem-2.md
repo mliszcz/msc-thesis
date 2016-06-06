@@ -33,6 +33,7 @@ include-before:
     * *mtango-connector* (backend client)
     * *web-components* (widget toolkit)
 * *Panel* application
+* Security considerations
 * Other outcomes
 * Summary
 
@@ -235,6 +236,17 @@ le.showName = true
 ![*TangoJS Panel* - synoptic panel application built with TangoJS](images/tangojs-panel.png)
 
 ---
+
+# Security considerations
+
+* Authentication:
+    * handled by the connector
+    * *mTango-connector* uses HTTP basic auth
+    * authentication filter may be configured for e.g. LDAP
+
+* Authorization:
+    * handled by TANGO
+    * `TangoAccessControl` device
 
 # Other outcomes and artifacts
 
