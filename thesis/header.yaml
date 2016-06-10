@@ -1,7 +1,10 @@
 ---
-title: Adaptive Web User Interfaces for TANGO Control System
+title: |
+  Adaptive Web User Interfaces\
+  for TANGO Control System
+subtitle: Adaptowalne Interfejsy Użytkownika dla Systemu Kontroli TANGO
 author: Michał Liszcz
-date: 2015
+date: 2016
 
 abstract: >
   Tematem pracy jest zbadanie możliwości zastosowania technologii webowych
@@ -13,8 +16,8 @@ abstract: >
   Projekt realizowany jest we współpracy z Narodowym Centrum
   Promieniowania Synchrotronowego SOLARIS.
 
-documentclass: documentclass/aghthesis
-classoption: english
+documentclass: documentclass/aghthesis2016
+classoption: [english, titlepage-polish]
 fontsize: 12pt
 papersize: a4
 
@@ -25,7 +28,8 @@ nocite: |
   @*
 
 header-includes:
-  - \supervisor{Włodzimierz Funika, PhD}
+  - \supervisor{dr inż. Włodzimierz Funika}
+  - \major{Informatyka}
   - \graphicspath{{documentclass/}}
 
 include-before:
