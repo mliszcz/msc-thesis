@@ -8,18 +8,20 @@ Supervisor: Włodzimierz Funika
 
 AGH University of Science and Technology
 
-2015
+2016
 
-## Abstract [PL]
+## Abstract
 
-Tematem pracy jest zbadanie możliwości zastosowania technologii webowych
-do dynamicznego generowania interfejsu operatora urządzeń korzystających
-z systemu kontroli TANGO. Należy porównać istniejące rozwiązania i
-sprawdzić możliwość wykorzystania tych technologii do budowy aplikacji
-webowej pozwalającej na sterowanie urządzeniem z poziomu przeglądarki WWW.
-
-Projekt realizowany jest we współpracy z Narodowym Centrum
-Promieniowania Synchrotronowego SOLARIS.
+TANGO Control System is a system designed to control *devices* in a
+distributed environment, widely used in automation industry and scientific
+facilities. The hardware is controlled by operators, using many graphical
+applications. Providing usability and ease of access has become a crucial
+part in design and development of modern GUIs. The web-based approach to
+GUI development has emerged recently to meet these requirements.
+However, TANGO, as a CORBA-based software, cannot benefit from this new
+approach. This thesis presents the **TangoJS** - a modular, extensible
+software stack for building TANGO client applications using the latest web
+standards.
 
 ## Contents
 
