@@ -1,0 +1,19 @@
+@startuml
+
+cloud "TANGO Infrastructure" {
+  component [Canone Socket Server (Python)] as SockServ
+  component [Device Servers ...] as DevServ
+}
+
+component [Canone Web Interface (PHP)] as Canone
+
+' component [TANGO Database] as TangoDb
+
+component [Canone Database] as CanoneDb
+
+[SockServ] <-> [DevServ] : IIOP:10000
+[Canone] <-> [SockServ] : TCP:9300
+[Canone] <-> [CanoneDb] : TCP:3306
+' [DevServ] <-> [TangoDb] : TCP:3306
+
+@enduml

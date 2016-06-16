@@ -35,6 +35,14 @@ the system as a CORBA remote object.
 
 ### GUI Tools and Frameworks
 
+#### Taurus
+
+Tiago Coutinho
+
+First official release: 2008-05-07
+
+<http://www.taurus-scada.org/en/stable/>
+
 ## Web applications
 
 ### Trends in application development
@@ -42,10 +50,6 @@ the system as a CORBA remote object.
 ### Modern web technologies
 
 ## Adaptive user interfaces
-
-### Adaptation techniques
-
-### Manual adaptation
 
 ## Aims and goals
 
