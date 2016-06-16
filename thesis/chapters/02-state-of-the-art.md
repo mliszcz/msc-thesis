@@ -65,6 +65,24 @@ a *proxy server* that connects CORBA-based world and to the web browser.
 
 ## Taurus Web
 
+* Part of Taurus project
+* Proof of concept
+* 300 lines of server code (websocket)
+* almost no frontend code
+* just few basic fields displayed
+* started in 2011
+* <http://plone.tango-controls.org/Events/meetings/may_2013/Taurus%20Web%20-%20Tango%20Collaboration%20Meeting%20ALBA%202013.pdf>
+* [@taurusweb2013]
+* presentation:
+  * HTML5, CSS3, WebSocket
+  * Tornado WS server
+  * "ready for modern technologies: Angular, Node, RequireJs, Dojo"
+* fixed, static interface [@Fig:02-taurusweb-gui]
+
+![Taurus Web Interface. (source [@taurusweb2013])](
+  figures/images/02-taurusweb-gui.png){
+  #fig:02-taurusweb-gui width=60% }
+
 ## Tango REST
 
 ## mTango
