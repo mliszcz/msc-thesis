@@ -96,12 +96,6 @@ Taurus Web development has started in 2011 and the project has been abandoned
 at early proof of concept stage. There are just few hundred lines of server
 code and **almost no frontend code**.
 
-## GoTan
-
-* <https://github.com/hardion/GoTan>
-* <https://www.dropbox.com/s/9nqeabizxlmj6zp/Gotan%20-%20Tango%20REST.pdf?dl=0>
-
-
 ## Tango REST
 
 Tango REST [@tangorest2015] is a RESTful interface for TANGO. The goal of this
@@ -121,6 +115,25 @@ to provide a RESTful endpoint.
 Tango REST, on its own, is not useful for building web user interfaces.
 However, paired with a frontend client, it may be used as a complete solution
 for accessing TANGO API from a web browser.
+
+## GoTan
+
+GoTan [@gotan2012] is a complete ecosystem for accessing TANGO via RESTful
+interface over HTTP protocol. The project consists of multiple modules.
+However, it has no web frontend layer. GoTan has been written in Java and
+Groovy. The API has been well documented, which makes it easy to write a client
+for GoTan server. Example minimal client applications are available for Android
+phones and iPhone. These are native clients, written i Java and Objective-C
+respectively. GoTan does not support user accounts or permissions.
+
+**Technological aspects.**
+GoTan server is a standalone application, that exposes RESTful API using
+Restlet framework. It is written mostly in Groovy, with some parts written in
+Java. It is capable of accessing classes and servers defined in TANGO database
+as well as using attributes, commands and properties of any device.
+
+The project is not actively developed and has been discontinued in 2013,
+reaching only a proof-of-concept stage.
 
 ## mTango
 
