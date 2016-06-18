@@ -96,7 +96,31 @@ Taurus Web development has started in 2011 and the project has been abandoned
 at early proof of concept stage. There are just few hundred lines of server
 code and **almost no frontend code**.
 
+## GoTan
+
+* <https://github.com/hardion/GoTan>
+* <https://www.dropbox.com/s/9nqeabizxlmj6zp/Gotan%20-%20Tango%20REST.pdf?dl=0>
+
+
 ## Tango REST
+
+Tango REST [@tangorest2015] is a RESTful interface for TANGO. The goal of this
+project was to expose a subset of TANGO APIs over a HTTP protocol. Tango REST
+acts as a proxy between *device servers* and RESTful client, which may run in
+e.g. a web browser. The system may be configure to authenticate users against
+LDAP database. The project also includes a mobile application for Android
+devices, which provides Jive-like functionality using Tango REST server. Since
+this application is a native Java application, it is out of scope of this
+discussion.
+
+**Technological aspects.**
+Tango REST is implemented as a Java EE servlet. It may be deployed on any
+application server or on a servlet container. It uses the standard JAX-RS API
+to provide a RESTful endpoint.
+
+Tango REST, on its own, is not useful for building web user interfaces.
+However, paired with a frontend client, it may be used as a complete solution
+for accessing TANGO API from a web browser.
 
 ## mTango
 
