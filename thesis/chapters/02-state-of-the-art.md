@@ -65,23 +65,36 @@ a *proxy server* that connects CORBA-based world and to the web browser.
 
 ## Taurus Web
 
-* Part of Taurus project
-* Proof of concept
-* 300 lines of server code (websocket)
-* almost no frontend code
-* just few basic fields displayed
-* started in 2011
-* <http://plone.tango-controls.org/Events/meetings/may_2013/Taurus%20Web%20-%20Tango%20Collaboration%20Meeting%20ALBA%202013.pdf>
-* [@taurusweb2013]
-* presentation:
-  * HTML5, CSS3, WebSocket
-  * Tornado WS server
-  * "ready for modern technologies: Angular, Node, RequireJs, Dojo"
-* fixed, static interface [@Fig:02-taurusweb-gui]
+Taurus Web [@taurusweb2013] is part of the Taurus project. Taurus Web provides
+access to TANGO devices from a web browser. The user interface is very limited
+and there are no customizable widgets. The source code is distributed with
+few demo applications, where just few basic fields are displayed. Available
+interaction options are very limited. The example GUI panel is presented
+on [@Fig:02-taurusweb-gui].
 
 ![Taurus Web Interface. (source [@taurusweb2013])](
   figures/images/02-taurusweb-gui.png){
   #fig:02-taurusweb-gui width=60% }
+
+**Architecture.**
+The architecture of the Taurus Web is, like in Canone, divided into server part
+and frontend part. The server is written in Python and links browser-based GUI
+with TANGO using WebSocket connection. This provides full duplex link, that may
+be used for robust integration of TANGO event system with browser. The frontend
+part requires WebSocket-enabled browser, but this is not a problem today.
+
+**Technological aspects.**
+According to the creators, Taurus Web is meant to be a framework, that may be
+used to create a dedicated GUI applications, rather than being a generic
+standalone application, like Canone. The backend part uses Tornado web server
+for handling WebSocket connection. The frontend part is written in Javascript,
+HTML5 and CSS3. The authors state that it is ready for integration with modern
+web technologies like Angular, jQuery, Node.js and Dojo framework.
+
+
+Taurus Web development has started in 2011 and the project has been abandoned
+at early proof of concept stage. There are just few hundred lines of server
+code and **almost no frontend code**.
 
 ## Tango REST
 
