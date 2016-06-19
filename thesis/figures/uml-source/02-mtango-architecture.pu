@@ -1,0 +1,26 @@
+@startuml
+
+cloud "TANGO Infrastructure" {
+  component [Device Servers ...] as DevServ
+}
+
+node "Java VM / Servlet container" {
+  component [mTangoREST server] as Server
+}
+
+node "Java VM" {
+  component [mTangoREST client] as Client
+}
+
+node "Web Browser" {
+  component [jsTangORB] as JsOrb
+  component [mTangoUI] as UI
+}
+
+
+[Server] <-> [DevServ] : IIOP:10000
+[Client] <-> [Server] : HTTP:8443
+[JsOrb] <-> [Server] : HTTP:8443
+[UI] <-> [JsOrb]
+
+@enduml
