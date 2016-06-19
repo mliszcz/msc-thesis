@@ -101,8 +101,8 @@ code and **almost no frontend code**.
 Tango REST [@tangorest2015] is a RESTful interface for TANGO. The goal of this
 project was to expose a subset of TANGO APIs over a HTTP protocol. Tango REST
 acts as a proxy between *device servers* and RESTful client, which may run in
-e.g. a web browser. The system may be configure to authenticate users against
-LDAP database. The project also includes a mobile application for Android
+e.g. a web browser. The system may be configure to **authenticate users against
+a LDAP database**. The project also includes a mobile application for Android
 devices, which provides Jive-like functionality using Tango REST server. Since
 this application is a native Java application, it is out of scope of this
 discussion.
@@ -113,7 +113,7 @@ application server or on a servlet container. It uses the standard JAX-RS API
 to provide a RESTful endpoint.
 
 Tango REST, on its own, is not useful for building web user interfaces.
-However, paired with a frontend client, it may be used as a complete solution
+However, paired with a frontend client, **it may be used as a backend layer**
 for accessing TANGO API from a web browser.
 
 ## GoTan
@@ -121,7 +121,7 @@ for accessing TANGO API from a web browser.
 GoTan [@gotan2012] is a complete ecosystem for accessing TANGO via RESTful
 interface over HTTP protocol. The project consists of multiple modules.
 However, it has no web frontend layer. GoTan has been written in Java and
-Groovy. The API has been well documented, which makes it easy to write a client
+Groovy. The API is well documented, which makes it easy to write own client
 for GoTan server. Example minimal client applications are available for Android
 phones and iPhone. These are native clients, written i Java and Objective-C
 respectively. GoTan does not support user accounts or permissions.
@@ -129,12 +129,16 @@ respectively. GoTan does not support user accounts or permissions.
 **Technological aspects.**
 GoTan server is a standalone application, that exposes RESTful API using
 Restlet framework. It is written mostly in Groovy, with some parts written in
-Java. It is capable of accessing classes and servers defined in TANGO database
-as well as using attributes, commands and properties of any device.
+Java. It is a generic solution, capable of accessing classes and servers
+defined in TANGO database as well as using attributes, commands and
+properties of any device.
 
 The project is not actively developed and has been discontinued in 2013,
-reaching only a proof-of-concept stage.
+reaching only a proof-of-concept stage. The project may be integrated with a
+third party frontend layer to create complete web-based TANGO client.
 
 ## mTango
+
+TODO
 
 ## Summary
