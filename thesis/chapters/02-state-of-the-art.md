@@ -273,7 +273,7 @@ may be extended (e.g. with new widgets).
 +------------+-----------+------------+------------+------------+------------+
 |            |           |            |            |            |            |
 +------------+-----------+------------+------------+------------+------------+
-| Initial    | 2015      | 2011       | 2015       | 2012       | 2013       |
+| Initial    | 2005      | 2011       | 2015       | 2012       | 2013       |
 | release    |           |            |            |            |            |
 +------------+-----------+------------+------------+------------+------------+
 |            |           |            |            |            |            |
@@ -286,8 +286,11 @@ may be extended (e.g. with new widgets).
 Table: Comparison of existing solutions. {#tbl:02-summary-comparison}
 
 Solutions presented in this chapter use different techniques to access TANGO
-infrastructure from a web browser. Most of them are no longer supported. Only
-mTango is actively developed and is already used in some sites []. However, the
-evaluation have showed that mTango frontend layer (`jsTangORB` and `mTangoUI`) has
-some drawbacks and issues that have to be addressed before it may become the
-ultimate solution for building web-based TANGO client applications.
+infrastructure from within a web browser. Most of them are no longer maintained
+and have been abandoned years ago. Only mTango project  is actively developed
+and is already used in some sites []. It is currently
+the leading technology for integrating TANGO with browser. The server part is
+flexible, configurable and performant. However, the evaluation have showed that
+mTango frontend layer (`jsTangORB` and `mTangoUI` modules) has some drawbacks and
+issues that have to be addressed before it may become the ultimate solution for
+building web-based TANGO client applications.
