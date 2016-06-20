@@ -223,4 +223,71 @@ when older browsers have to be supported. **All these factors make `jsTangoORB`
 and `mTangoUI` non suitable for building lightweight, modern,
 standards-driven user interfaces in a web browser**.
 
+Due to the incorporation of an unpopular, third party frontend framework and
+CLI tools, mTango has some learning curve that may slow developers down. It is
+hard to spin up a simple application if you are not familiar with JavascriptMVC.
+
 ## Summary
+
+The [@Tbl:02-summary-comparison] summarizes solutions discussed above.
+The main focus is put on
+user experience, flexibility, extensibility. The technological aspects and 
+software architecture are also importantv factors, since they affect how software
+may be extended (e.g. with new widgets).
+
++------------+-----------+------------+------------+------------+------------+
+| Feature    | Canone    | Taurus Web | TangoREST  | GoTan      | mTango     |
++============+===========+============+============+============+============+
+| Has        | yes,      | yes,       | no,        | no         | yes,       |
+| frontend   | (PHP)     |(Javascript)| (native    | (native    |(Javascript)|
+| layer      |           |            | Android)   | Android    |            |
+|            |           |            |            | and iPhone)|            |
++------------+-----------+------------+------------+------------+------------+
+|            |           |            |            |            |            |
++------------+-----------+------------+------------+------------+------------+
+| Has        | yes,      | no,        | N/A        | N/A        | yes,       |
+| widgets    | (limited  |            |            |            | (few       |
+|            | AJAX      |            |            |            | default    |
+|            | support)  |            |            |            | views)     |
++------------+-----------+------------+------------+------------+------------+
+|            |           |            |            |            |            |
++------------+-----------+------------+------------+------------+------------+
+| Ships with | yes       | N/A        | N/A        | N/A        | no         |
+| interactive|           |            |            |            |            |
+| *synoptic  |           |            |            |            |            |
+| panel*     |           |            |            |            |            |
++------------+-----------+------------+------------+------------+------------+
+|            |           |            |            |            |            |
++------------+-----------+------------+------------+------------+------------+
+| Supports   | yes,      | no         | yes,       | no         | yes,       |
+| user       | (database)|            | (LDAP)     |            | (multiple  |
+| accounts   |           |            |            |            |  options)  |
+|            |           |            |            |            |            |
++------------+-----------+------------+------------+------------+------------+
+|            |           |            |            |            |            |
++------------+-----------+------------+------------+------------+------------+
+| Backend    | PHP,      | Python,    | Java,      | Groovy,    | Java,      |
+| server     | Python    | Tornado,   | JAX-RS,    | Restlet    | RESTEasy,  |
+| technology |           | WebSocket  | HTTP       | HTTP       | HTTP       |
+|            |           |            |            |            |            |
++------------+-----------+------------+------------+------------+------------+
+|            |           |            |            |            |            |
++------------+-----------+------------+------------+------------+------------+
+| Initial    | 2015      | 2011       | 2015       | 2012       | 2013       |
+| release    |           |            |            |            |            |
++------------+-----------+------------+------------+------------+------------+
+|            |           |            |            |            |            |
++------------+-----------+------------+------------+------------+------------+
+| Is         | no        | no         | no         | no         | yes        |
+| actively   |           |            |            |            |            |
+| developed  |           |            |            |            |            |
++------------+-----------+------------+------------+------------+------------+
+
+Table: Comparison of existing solutions. {#tbl:02-summary-comparison}
+
+Solutions presented in this chapter use different techniques to access TANGO
+infrastructure from a web browser. Most of them are no longer supported. Only
+mTango is actively developed and is already used in some sites []. However, the
+evaluation have showed that mTango frontend layer (`jsTangORB` and `mTangoUI`) has
+some drawbacks and issues that have to be addressed before it may become the
+ultimate solution for building web-based TANGO client applications.
