@@ -2,33 +2,57 @@
 
 Each of the existing solutions presented in previous chapter has some drawbacks.
 There is no *best choice* that will suit everyone's needs. **To address these
-issues and fulfill goals discussed in [Introduction] chapter, the TangoJS project
-has been developed.**
+issues and fulfill goals discussed in [Introduction] chapter, the TangoJS
+project has been developed.**
 
-This chapter describes the implemented solution and provides a high level
-overview of the system architecture.
+This chapter describes the implemented solution in terms of formulated design
+goals and provides a high level overview of the system architecture, including
+all related software layers.
 
-## TangoJS introduction
+## Introducing TangoJS
 
-TangoJS allows to build TANGO client applications using standard web front-end
-technologies like HTML, CSS and Javascript. It is a comprehensive solution that
-gives TANGO developers a complete set of tools and APIs. There is minimal set
-of dependencies is required.
+TangoJS allows to build TANGO client applications using the standard web
+front-end technologies like HTML, CSS and Javascript. It is a comprehensive
+solution that gives TANGO developers a complete set of tools and APIs. There
+is minimal set of dependencies is required.
 
-It is a modular ecosystem - one includes only what is needed and configures
-everything according to the business requirements. There are three main
-components which form overall TangoJS experience:
+TangoJS has been designed to be a modular ecosystem - one includes only
+required modules and configures everything according to the project
+requirements. There are three main layers, which are separated and connected
+using well-defined interfaces. This forms overall TangoJS experience.
 
-* *TangoJS Core* - API for programmatic interactions with TANGO from
-  Javascript;
-* *TangoJS Connector* - interface that abstracts-out communication with TANGO
-  infrastructure;
-* *TangoJS WebComponents* - a widget toolkit for rapid GUI development;
+* **TangoJS Core** - Javascript API for programmatic interactions with TANGO
+  from a web browser, partly generated from TANGO IDL;
+* **TangoJS Connector** - interface that abstracts-out communication with TANGO
+  infrastructure via pluggable backend servers;
+* **TangoJS WebComponents** - an extensible widget toolkit for rapid GUI
+  applications development, inspired on Taurus;
 
-All these components are described later in this chapter.
+All these components are described in detail later in this chapter.
 
-## Design goals
+## Design Goals and Design Decisions
 
+Apart from general goals formulated in [Introduction], a set of design goals
+has been established before TangoJS development has started. These goals aim to
+meet the challenges where existing solutions have failed. The goals are mostly
+related to technological aspects of implementation.
+
+**Use the latest web standards.**
+TODO.
+
+**Make it extensible.**
+TODO.
+
+**Learn from the best.**
+TODO.
+
+**Reuse what works well.**
+TODO.
+
+**Be future-proof.**
+TODO.
+
+**Keep it simple to start with.**
 One of project goals was to minimize learning curve. TangoJS Core API brings
 familiar TANGO abstractions, like *DeviceProxy* to the browser ecosystem.
 The widget collection has been inspired by the Taurus framework - the leading
@@ -36,7 +60,7 @@ solution for building TANGO clients in Python/Qt. It was designed with ease of
 use and ease of deployment in mind. Only basic knowledge of web-development
 and Node.js [@tools-nodejs] is required to get started.
 
-**Language choice.**
+**Choose the best language.**
 Since TangoJS amis to allow for building TANGO clients that run in web
 browsers, it immediately becomes obvious that the whole thing is build with
 Javascript (and with HTML, when it comes to the presentation layer). Javascript
@@ -56,7 +80,7 @@ CoffeeScript. It also works in all modern browsers without need for
 transcompilation to ECMAScript 5. The ECMAScript 2015 and its role in TangoJS
 is discussed in the next chapter.
 
-**Platform.**
+**Select a popular platform.**
 Node.js has been choosen as a both development and target platform for TangoJS.
 In recent days it has become most popular solution for building Javascript
 applications, both on server and client side. It is not just an ordinary
