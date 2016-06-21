@@ -82,10 +82,29 @@ possible to change some parameters related to the internal details, e.g.
 polling period.
 
 **Reuse what works well.**
-TODO.
+In the software development field it is crucial to avoid *reinventing the
+wheel*. The evaluation of existing solutions showed that there are usually at
+least two layers - the backend and the frontend. The frontend part directly
+impacts user experience. The backend is never exposed to the end user nor
+to the GUI application developer. Instead, the frontend layer is responsible
+for interactions with the backend. The most complete solution for TANGO and
+browser integration is mTango. The mTango does it's job well on the server side.
+However, it's frontend part has some drawbacks, which are, due to the design
+decisions, impossible to overcome withour rewriting it from a scratch.
+**TangoJS will use *mTango* as a default backend**, leaving developers option
+to easily replace it with another backend of their choice.
 
 **Be future-proof.**
-TODO.
+When starting a new software project, one should focus not only on current
+requirements, but think about project's future. It is important that project
+should age slowly. When unmaintained or unpoplar third party solutions are
+incorporated, it may soon turn out that project uses deprecated software.
+It may be impossible to remove these dependencies later and the project has
+to be abandoned. The goal in TangoJS development is to **not include any third
+party code** and use **latest web standards**, like HTML5, CSS Level 3
+modules or ECMAScript 2015/16. The standard solutions rarely become deprecated.
+Instead they evolve gradually, which makes easy to keep the project up-to-date.
+
 
 **Keep it simple to start with.**
 One of project goals was to minimize learning curve. TangoJS Core API brings
