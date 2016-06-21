@@ -1,7 +1,5 @@
 # Selected Aspects of Implementation
 
-## CORBA IDL to Javascript translation
-
 ## Web Components
 
 ## ECMAScript 2015

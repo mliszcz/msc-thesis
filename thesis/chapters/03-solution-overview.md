@@ -38,10 +38,33 @@ meet the challenges where existing solutions have failed. The goals are mostly
 related to technological aspects of implementation.
 
 **Use the latest web standards.**
-TODO.
+The Web started to evolve faster and faster in recent years. A lot of
+applications has been migrated to the browser. This includes both desktop
+mobile applications. The developers are willing to write their software using
+web technologies because they can be more productive and target a wider group
+of potential users. This forces standardization bodies, like W3C, and browser
+vendors to speed up their development cycle. The new standard of ECMAScript
+is released once a year. Even before official release it is supported by
+browsers. The same applies to HTML5 standard and CSS Level 3 (and above)
+modules. These technologies are attractive to developers because they have to
+write less code, which is also cleaner and more maintainable. They can put more
+focus on their business goals and deliver the high quality project on time.
+The developer will then more likely select a framework that is being kept
+up-to-date with latest web standards. 
 
 **Make it extensible.**
-TODO.
+Today's libraries are easy to extend when necessary. Developers often chose a
+modular, pluggable architecture for their frameworks and libraries. This brings
+significant benefits for both library authors and users. A modular project is
+easier to maintain, especially when it becomes larger than a few files of a
+proof of concept. Dividing library into modules can bring better separation
+of concerns, at higher level of abstraction. Also, library users can benefit
+from a pluggable project. They can include only required parts in their projects.
+This allow for reducing the dependencies, which is a crucial aspect of web
+development. When a single module does not meet their requirements, they can
+develop their own, and use it like a plugin. In case of TangoJS, this may be
+developing a *Connector* for new backend server or creating a new widget that
+will integrate neatly with the rest of *TangoJS Web Components* module.
 
 **Learn from the best.**
 TODO.
@@ -92,13 +115,21 @@ Node.js, but also for web browsers.
 
 ## TangoJS architecture
 
-The architecture of TangoJS is layered, where next layer builds on previous
-one. The architectural diagram is depicted at [@Fig:03-tangojs-architecture].
+The architecture of TangoJS is layered, where next layer builds on the previous
+one. Application developer will interact mostly with the topmost layer, the
+*TangoJS WebComponents* module. When programmatic access to TANGO API is
+required, one may use *TangoJS Core*. *TangoJS Connector* implementations are
+used only by the core layer and are not exposed directly to the developer. The
+backend server is not a part of TangoJS. Any backend may be used to access
+TANGO infrastructure, provided that a dedicated *Conenctor* is available.
+TangoJS ships with two default connectors: an in-memory *mock connector* and
+a **mTango connector** which allows to use mTango as a backend for TangoJS.
+The architectural diagram is depicted at [@Fig:03-tangojs-architecture-simple].
 Below a brief overview of each layer is given.
 
 ![TangoJS high-level architecture overview.](
-  figures/uml/03-tangojs-architecture.tex){
-  #fig:03-tangojs-architecture width=80% }
+  figures/uml/03-tangojs-architecture-simple.tex){
+  #fig:03-tangojs-architecture-simple width=90% }
 
 **TANGO Infrastructure.**
 The whole TangoJS stack sits on top of existing TANGO
@@ -111,7 +142,7 @@ Connector concept.
 A Connector is a bridge between TANGO and TangoJS. Most of the
 time there are two separate components in this layer: a serer-side part and
 a client-side part. TangoJS specifies only the interface of the client-side
-part. How the client communicates with the server is a implementation detail.
+part. How the client communicates with the server is an implementation detail.
 TangoJS ships with a mTango connector, which may be paired with mTango RESTful
 server.
 
@@ -129,14 +160,17 @@ No third-party framework is required. The library offers widgets similar to
 Taurus core widgets, but provides means for developing new components.
 
 Any kind of web application can build upon layers described above. As a proof
-of concept, a synoptic panel application, which is described later, has been
-developed. Each TangoJS layer is described in details in the following
-sections.
+of concept, **a synoptic panel application has been developed**. This
+application is described later in this chapter. Each TangoJS layer is
+covered in details in the following sections.
 
 ## TangoJS Core - the TANGO API for browsers
 
 ## TangoJS Connector - pluggable backends
 
 ## TangoJS WebComponents - HTML widget toolkit
+
+TangoJS, for example, uses the Web Components [] standard for building UI layer.
+The Web Components 
 
 ## TangoJS Panel - synoptic panel application

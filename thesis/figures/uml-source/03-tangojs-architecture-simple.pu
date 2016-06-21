@@ -1,0 +1,31 @@
+@startuml
+top to bottom direction
+
+cloud "TANGO" {
+  [Device Servers ...] as DevSrv
+}
+
+node "Server (I)" {
+  [Backend 1\n(HTTP)] as B1
+}
+
+node "Server (II)" {
+  [Backend 2\n(WebSocket)] as B2
+}
+
+node "Web Browser" {
+  [TangoJS\nWeb Components] as WC
+  [TangoJS\nConnector 1] as C1
+  [TangoJS\nConnector 2] as C2
+  [TangoJS Core] as Core
+}
+
+[DevSrv] <-> B1 : IIOP
+[DevSrv] <-> B2 : IIOP
+B1 <-> C1 : HTTP
+B2 <-> C2 : WebSocket
+Core ..> C1
+Core ..> C2
+Core <.. WC
+
+@enduml
