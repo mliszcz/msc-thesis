@@ -4,6 +4,4 @@
 
 ## Usability evaluation
 
-## Performance tests
-
 ## Deployment at SOLARIS

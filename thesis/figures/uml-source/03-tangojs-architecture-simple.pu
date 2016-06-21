@@ -20,10 +20,10 @@ node "Web Browser" {
   [TangoJS Core] as Core
 }
 
-[DevSrv] <-> B1 : IIOP
-[DevSrv] <-> B2 : IIOP
-B1 <-> C1 : HTTP
-B2 <-> C2 : WebSocket
+[DevSrv] <--> B1 : IIOP
+[DevSrv] <--> B2 : IIOP
+B1 <--> C1 : HTTP
+B2 <--> C2 : WebSocket
 Core ..> C1
 Core ..> C2
 Core <.. WC

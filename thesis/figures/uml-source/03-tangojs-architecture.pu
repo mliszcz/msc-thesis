@@ -6,23 +6,32 @@ package "TangoJS Connector" {
 }
 
 package "TangoJS Core" {
-  [API]
+  [TangoJS API] as API
 }
 
 package "TangoJS Web Components" {
-  [line-edit]
-  [label]
-  [trend]
-  [form]
+  [line-edit\nwidget] as WLineEdit
+  [label\nwidget] as WLabel
+  [trend\nwidget] as WTrend
+  [form\nwidget] as WForm
+  [Widget API]
   [...]
 }
 
 [TANGO] <-> IIOP
-IIOP <--> [Server]
-[Client] <--> [API]
-[API] <--> [line-edit]
-[API] <--> [label]
-[API] <--> [trend]
-[API] <--> [form]
+IIOP <-> [Server]
+[Client] <.. [API]
+[API] <.. WLineEdit
+[API] <.. WLabel
+[API] <.. WTrend
+[API] <.. WForm
+
+' [Web Application] as WA
+'
+' WA ..> [line-edit]
+' WA ..> [label]
+' WA ..> [trend]
+' WA ..> [form]
+' WA ..> [API]
 
 @enduml

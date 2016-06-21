@@ -105,7 +105,6 @@ party code** and use **latest web standards**, like HTML5, CSS Level 3
 modules or ECMAScript 2015/16. The standard solutions rarely become deprecated.
 Instead they evolve gradually, which makes easy to keep the project up-to-date.
 
-
 **Keep it simple to start with.**
 One of project goals was to minimize learning curve. TangoJS Core API brings
 familiar TANGO abstractions, like *DeviceProxy* to the browser ecosystem.
@@ -113,6 +112,17 @@ The widget collection has been inspired by the Taurus framework - the leading
 solution for building TANGO clients in Python/Qt. It was designed with ease of
 use and ease of deployment in mind. Only basic knowledge of web-development
 and Node.js [@tools-nodejs] is required to get started.
+
+**Consider security aspects.**
+Each application, especially one that performs network communication, has to
+secure sensible data and prevent unwanted access. In case of TangoJS this is
+the job for the *Connector* and corresponding backend server. For instance,
+mTango server may use roles defined in servlet container. It also integrates
+with TangoAccessControl. The authentication in the server is performed using
+HTTP Basic Auth, which is simple and secure way of providing user credentials.
+The link between the *Connector* and the server may be secured by using
+**encrypted HTTPS protocol**. This has not impact on development and should
+be handled during deployment.
 
 **Choose the best language.**
 Since TangoJS amis to allow for building TANGO clients that run in web
@@ -166,8 +176,8 @@ Below a brief overview of each layer is given.
 The whole TangoJS stack sits on top of existing TANGO
 infrastructure. Since CORBA requires access to the complete TCP/IP stack, TANGO
 cannot be accessed directly from the web browser. Some kind of middleman
-software is required here. TangoJS addresses this issue by introducing
-Connector concept.
+software is required here. TangoJS addresses this issue by introducing the
+*Connector* concept.
 
 **TangoJS Connector.**
 A Connector is a bridge between TANGO and TangoJS. Most of the
@@ -190,10 +200,24 @@ collection of standalone widgets, which may be included in any web application.
 No third-party framework is required. The library offers widgets similar to
 Taurus core widgets, but provides means for developing new components.
 
+More detailed view on TangoJS architecture is shown at
+[@Fig:03-tangojs-architecture]. The topmost module, *TangoJS WebComponents*,
+offers a set of widgets and an API for creating own widgets. All this is
+avaliable for the application code. Application developer also have access
+to *TangoJS Core API*, when direct access to raw TANGO proxies is required.
+This API forwards all calls (after some preprocessing) to the *Connector* layer,
+which is then responsible for making the requests to the backend and collecting
+the responses. 
+
+![TangoJS component-level architecture.](
+  figures/uml/03-tangojs-architecture.tex){
+  #fig:03-tangojs-architecture width=90% }
+
+
 Any kind of web application can build upon layers described above. As a proof
 of concept, **a synoptic panel application has been developed**. This
-application is described later in this chapter. Each TangoJS layer is
-covered in details in the following sections.
+application is described later in this chapter. Each TangoJS layer is covered
+in details in the following sections.
 
 ## TangoJS Core - the TANGO API for browsers
 
