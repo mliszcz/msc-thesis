@@ -67,7 +67,19 @@ developing a *Connector* for new backend server or creating a new widget that
 will integrate neatly with the rest of *TangoJS Web Components* module.
 
 **Learn from the best.**
-TODO.
+Some of existing web-based TANGO solutions provide configurable widgets that
+may be used as a building blocks for larger graphical client applications,
+like *synoptic panels*. The leading solution for desktop TANGO clients, the
+Taurus framework, offers a broad collection of widgets. These widgets may
+be used programmatically or may be interactively put on panels via a simple
+drag-and-drop. The goal in TangoJS development was to deliver a set of
+widgets most commonly used in Taurus, like *label*, *line edit* or *trend*.
+The widgets shall be accessible programmatically from Javascript,
+declaratively from a HTML page and interactively, using a dedicated application
+for rapid GUI development. In all ways, the user should be able to tweak the
+widget's appearance, e.g. hiding some optional parts. It should be also
+possible to change some parameters related to the internal details, e.g.
+polling period.
 
 **Reuse what works well.**
 TODO.
