@@ -221,11 +221,49 @@ in details in the following sections.
 
 ## TangoJS Core - the TANGO API for browsers
 
+TODO: introduction
+
+**General assumptions.**
+TODO.
+
+**Internal structure.**
+TODO.
+
 ## TangoJS Connector - pluggable backends
 
+TODO: introduction
+
+**General assumptions.**
+TODO.
+
+**In-memory mock connector.**
+TODO.
+
+**mTango connector.**
+TODO.
+
 ## TangoJS WebComponents - HTML widget toolkit
+
+TODO: introduction
+
+**General assumptions.**
+TODO.
+
+**Internal structure.**
+TODO.
+
+**Widget development API.**
+TODO.
+
+**Available widgets.**
+TODO list or sth.
 
 TangoJS, for example, uses the Web Components [] standard for building UI layer.
 The Web Components 
 
 ## TangoJS Panel - synoptic panel application
+
+TODO: introduction
+
+**General assumptions.**
+TODO.
