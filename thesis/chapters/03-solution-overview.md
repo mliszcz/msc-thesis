@@ -307,22 +307,51 @@ of *device* objects, where each device exposes some attributes and commands.
 
 ## TangoJS WebComponents - HTML widget toolkit
 
-TODO: introduction
+The most important part of TangoJS, from end user's perspective, is the widget
+toolkit. This module sits on top of core layer in TangoJS stack. It contains
+a set of customizable widgets and provides utilities for easily building own
+widgets. 
 
-**General assumptions.**
-TODO.
+**Module structure.**
+This module is designed for in browser use only. The widgets are packed as a
+separate HTML files and may be included on demand. The module also exports the
+`tangojs.web` package, which contains mixins and utility functions useful for
+creating non-standard widgets. This is covered in details in
+[@Sec:widget-development].
 
-**Internal structure.**
-TODO.
+**Widget concept.**
+A widget is a self-contained piece of UI, that may be used on its own and
+requires zero configuration.
 
-**Widget development API.**
-TODO.
+*TODO*
+
+```{#lst:03-declarative-widgets .html}
+<tangojs-label
+  model="tangojs/test/dev1/sine_trend"
+  poll-period="500"
+  show-name
+  show-unit
+  show-quality>
+</tangojs-label>
+
+<tangojs-trend
+  model="sys/tg_test/1/long_scalar_w,sys/tg_test/1/double_scalar"
+  poll-period="1000"
+  data-limit="20">
+</tangojs-trend>
+```
+Listing: Declarative widget instantiation.
 
 **Available widgets.**
-TODO list or sth.
+The *TangoJS Web Components* is highly influenced by the Taurus library. The
+initial goal was to bring the most commonly used widgets to the browser. The
+widgets offer layout and appearance similar to their counterparts from Taurus.
+The avaliable widgets are depicted at []. Below, each widget is provided with
+a shord description:
 
-TangoJS, for example, uses the Web Components [] standard for building UI layer.
-The Web Components 
+* `tangojs-label` - TODO
+* TODO
+
 
 ## TangoJS Panel - synoptic panel application
 
