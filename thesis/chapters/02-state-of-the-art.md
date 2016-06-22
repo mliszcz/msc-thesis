@@ -144,8 +144,8 @@ applications **for web browsers and mobile devices**. It consists of multiple
 components, which may be used together to create flexible web-based TANGO GUIs.
 The key part of mTango is a REST server, which allows to access TANGO *device
 servers* using HTTP protocol and a well defined API. The UI part ships with a
-set of widgets useful in building client applications. mTango allows for
-user **authentication from many sources, including LDAP**.
+set of widgets useful in building client applications. mTango allows for user
+**authentication from many sources, including LDAP**.
 
 **Architecture.**
 The mTango architecture consists of a few loosely coupled components. There is
@@ -154,8 +154,8 @@ and exposes it's APIs via a RESTful gateway. The clients connect directly to
 this server via HTTP protocol. mTango ships with two clients. First is called
 *mTangoREST client* and is written in Java. The second client, called
 *jsTangORB* is written in Javascript and runs in web browsers. On top of this
-browser-based client there is a UI layer, called *mTangoUI*.
-The architecture is depicted at [@Fig:02-mtango-architecture].
+browser-based client there is a UI layer, called *mTangoUI*. The architecture
+is depicted at [@Fig:02-mtango-architecture].
 
 ![mTango architecture.](figures/uml/02-mtango-architecture.tex){
   #fig:02-mtango-architecture width=70% }
@@ -165,9 +165,9 @@ The server part is implemented in Java as a standard Java EE servlet. It uses
 JBoss RESTEasy to provide a RESTful web service. The server is distributed as
 a `web archive` package, or as a standalone application with embedded Apache
 Tomcat servlet container. User authentication may be performed in the filter
-chain, during request processing. mTango integrates with TangoAccessControl
-to provide authorization. The server performs some optimizations, like
-caching. TANGO events are supported, thanks to the Comet model.
+chain, during request processing. mTango integrates with TangoAccessControl to
+provide authorization. The server performs some optimizations, like caching.
+TANGO events are supported, thanks to the Comet model.
 
 **mTangoREST client.**
 This client is a Java library, that allows applications that run on JVM
@@ -178,22 +178,22 @@ be required, e.g. in a network where all traffic but HTTP is blocked.
 **jsTangORB.**
 The Javascript client allows for accessing *mTangoREST server* from a web
 browser. It uses **JavascriptMVC framework** to model abstractions like
-*Request* and *Response* or TANGO-specific proxies, e.g. *DeviceProxy*. It
-uses **JSONP** to overcome the same-origin policy restrictions. The API is
-callback-based which makes it difficult to write clean and maintainable
-code. There is client-side caching and other optimizations are performed.
+*Request* and *Response* or TANGO-specific proxies, e.g. *DeviceProxy*. It uses 
+**JSONP** to overcome the same-origin policy restrictions. The API is
+callback-based which makes it difficult to write clean and maintainable code.
+There is client-side caching and other optimizations are performed.
 
 **mTangoUI.**
-mTangoUI is a **JavascriptMVC application** built on top of *jsTangORB*.
-It provides abstractions like *Page*, and widgets like *DeviceAttribute*,
+mTangoUI is a **JavascriptMVC application** built on top of *jsTangORB*. It
+provides abstractions like *Page*, and widgets like *DeviceAttribute*,
 *DeviceCommand* or *Plot*. One has to use the mTango CLI tools (which are
 wrappers for the JavascriptMVC CLI tools) to create applications skeleton.
-Then, widgets may be created declaratively, by placing `mtango:attr` tag, 
-on a webpage. The `mtango:attr` tag takes one of the following *views* as an
+Then, widgets may be created declaratively, by placing `mtango:attr` tag,  on
+a webpage. The `mtango:attr` tag takes one of the following *views* as an
 argument: read-only/read-write text, read-only/read-write list or it may be
-empty (useful for programmatic access). User may also provide own view.
-Example read-write widget bound to a `double_spectrum` attribute of
-`TangoTest` device is shown at [@Fig:02-mtango-fld_text_rw].
+empty (useful for programmatic access). User may also provide own view. Example
+read-write widget bound to a `double_spectrum` attribute of `TangoTest`
+device is shown at [@Fig:02-mtango-fld_text_rw].
 
 ![mTango *read-write list field* widget.](
   figures/images/02-mtango-fld_list_rw.png){
@@ -212,16 +212,16 @@ from being ideal. They are dependent on old version of Javascript MVC, a
 framework that never gained attention and has not been widely adopted by the
 web developers community. This is especially controversial in case of
 `jsTangORB`, as a non-UI library, to depend on a model-view-controller
-framework. Also, the **Rhino runtime** (and thus Java) is required for development.
-Today, the Node.js is a *de-facto-standard* in Javascript development and
-package management. Another drawback is that `jsTangORB` uses JSONP for
-handling cross origin request. The canonical way of doing this is to implement the
-CORS protocol. The `jsTangORB` API has been designed to use callback functions
-for asynchronous code. This may lead to writing unmaintainable and unreadable
-code. The solution is to use standard *Promise* API, or a polyfill library
-when older browsers have to be supported. **All these factors make `jsTangoORB`
-and `mTangoUI` non suitable for building lightweight, modern,
-standards-driven user interfaces in a web browser**.
+framework. Also, the **Rhino runtime** (and thus Java) is required for
+development. Today, the Node.js is a *de-facto-standard* in Javascript
+development and package management. Another drawback is that `jsTangORB` uses
+JSONP for handling cross origin request. The canonical way of doing this is to
+implement the CORS protocol. The `jsTangORB` API has been designed to use
+callback functions for asynchronous code. This may lead to writing
+unmaintainable and unreadable code. The solution is to use standard
+*Promise* API, or a polyfill library when older browsers have to be supported.
+**All these factors make `jsTangoORB` and `mTangoUI` non suitable for building
+lightweight, modern, standards-driven user interfaces in a web browser**.
 
 Due to the incorporation of an unpopular, third party frontend framework and
 CLI tools, mTango has some learning curve that may slow developers down. It is
@@ -230,10 +230,9 @@ hard to spin up a simple application if you are not familiar with JavascriptMVC.
 ## Summary
 
 The [@Tbl:02-summary-comparison] summarizes solutions discussed above.
-The main focus is put on
-user experience, flexibility, extensibility. The technological aspects and 
-software architecture are also importantv factors, since they affect how software
-may be extended (e.g. with new widgets).
+The main focus is put on user experience, flexibility, extensibility. The
+technological aspects and  software architecture are also importantv factors,
+since they affect how software may be extended (e.g. with new widgets).
 
 +------------+-----------+------------+------------+------------+------------+
 | Feature    | Canone    | Taurus Web | TangoREST  | GoTan      | mTango     |
@@ -298,6 +297,6 @@ and have been abandoned years ago. Only mTango project  is actively developed
 and is already used in some sites []. It is currently
 the leading technology for integrating TANGO with browser. The server part is
 flexible, configurable and performant. However, the evaluation have showed that
-mTango frontend layer (`jsTangORB` and `mTangoUI` modules) has some drawbacks and
-issues that have to be addressed before it may become the ultimate solution for
-building web-based TANGO client applications.
+mTango frontend layer (`jsTangORB` and `mTangoUI` modules) has some drawbacks
+and issues that have to be addressed before it may become the ultimate solution
+for building web-based TANGO client applications.
