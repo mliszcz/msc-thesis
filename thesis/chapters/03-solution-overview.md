@@ -213,7 +213,6 @@ the responses.
   figures/uml/03-tangojs-architecture.tex){
   #fig:03-tangojs-architecture width=90% }
 
-
 Any kind of web application can build upon layers described above. As a proof
 of concept, **a synoptic panel application has been developed**. This
 application is described later in this chapter. Each TangoJS layer is covered
@@ -221,13 +220,39 @@ in details in the following sections.
 
 ## TangoJS Core - the TANGO API for browsers
 
-TODO: introduction
+The main part of the TangoJS, the *TangoJS Core*, is a library for programmatic
+access to TANGO APIs. This library __gives user access to concepts like
+*DeviceProxy*__, a client side representation of a *device server*, typically
+used in client applications in TANGO world. This module also **contains all
+structures, enums, typedefs and interfaces defined by the TANGO IDL**.
 
 **General assumptions.**
-TODO.
+The goal of this layer is to provide a well-defined, convenient set of
+classes that hide the lower layers of the TangoJS stack, like *Connector* or
+backend. This is a object-oriented API, similar to jTango, the standard TANGO
+Java API. This makes the TANGO developers immediately familiar with it. The
+API is nonblocking, due to the asynchronous nature of Javascript. It
+extensively uses *Promises*, which means that every method call returns
+immediately a standard *Promise* object. This promise may be later resolved
+to a value or may be rejected in error case. Use of promises may save the user
+from the situations like *calback hell*[^03-callback-hell].
 
-**Internal structure.**
-TODO.
+[^03-callback-hell]: <http://callbackhell.com/>
+
+**Module structure.**
+The *TangoJS Core* **is distributed as an UMD module** [^03-umd-module]. This
+makes it easy to load it in diffrent environments, like Node.js or web browser.
+When loaded in browser, it is attached to the global object `tangojs.core`. The
+module is internally divided into two packages: the `api` and `tango`. The
+`api` package contains TANGO proxies as well as information classes for
+*Device*, *Attribute* and *Command* entities. The `tango` package has been
+generated from the TANGO IDL and provides common TANGO data types.
+
+[^03-umd-module]: <https://github.com/umdjs/umd>
+
+![*TangoJS Core* package class diagram.](
+  figures/uml/03-tangojs-internal-core.tex){
+  #fig:03-tangojs-internal-core width=100% }
 
 ## TangoJS Connector - pluggable backends
 

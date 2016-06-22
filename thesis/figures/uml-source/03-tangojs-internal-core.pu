@@ -1,0 +1,40 @@
+@startuml
+
+package "tangojs.core" {
+
+  interface Connector
+
+  class "<free functions>" {
+    +setConnector()
+  }
+
+  hide "<free functions>" circle
+  hide "<free functions>" fields
+
+  package "api" {
+    class AttributeInfo
+    class AttributeProxy
+    class CommandInfo
+    class CommandProxy
+    class Database
+    class DeviceAttribute
+    class DeviceData
+    class DeviceInfo
+    class DeviceProxy
+  }
+
+  package "tango" {
+    class AttributeConfig_5 <<(S,orange)>>
+    interface Device_5
+    enum AttrDataFormat
+    note as N1
+      Rest of structures, interfaces
+      and enums defined by the TANGO IDL ...
+    end note
+  }
+
+  ' just for alignment
+  Connector -[hidden]-> Device_5
+}
+
+@enduml
