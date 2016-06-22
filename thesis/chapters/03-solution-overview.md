@@ -247,6 +247,8 @@ module is internally divided into two packages: the `api` and `tango`. The
 `api` package contains TANGO proxies as well as information classes for
 *Device*, *Attribute* and *Command* entities. The `tango` package has been
 generated from the TANGO IDL and provides common TANGO data types.
+Event-related APIs are not available, since **events are not currently
+supported**.
 
 [^03-umd-module]: <https://github.com/umdjs/umd>
 
@@ -282,11 +284,26 @@ const deviceProxy = new tangojs.core.api.DeviceProxy('sys/tg_test/1')
 ```
 Listing: Connector setup process.
 
-**In-memory mock connector.**
-TODO.
-
 **mTango connector.**
-TODO.
+The mTango has been choosen as a default backend for TangoJS. A connector for
+the *mTangoREST server* is a simple client that consumes RESTful API exposed by
+the mTango server. In most cases TangoJS will be deployed on a diffrent server
+than the mTango. *TangoJS mTango Connector* supports this setup, with proper
+**implementation of CORS protocol**. The mTango's servlet container has to be
+configured for CORS support. Most containers provide suitable servlet filter
+that may be included in the filter chain.
+mTango also supports user authorization. Since this is handled completely by
+the server, there is no concept of user in TangoJS APIs. The only part aware
+of this is the connector. User credentials have to be passed upon connector
+instantiation. It's the application developer responsibility to secure these
+credentials and re-instantiate connector when user identity changes.
+
+**In-memory mock connector.**
+TangoJS ships with a mocked connector implementation, which mimics real TANGO
+infrastructure with in-memory hierarchy of objects. There is no network
+communication performed. This approach is useful for e.g. automated testing
+the upper layers. This connector is flexible and may be configured with a list
+of *device* objects, where each device exposes some attributes and commands.
 
 ## TangoJS WebComponents - HTML widget toolkit
 
