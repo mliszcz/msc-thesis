@@ -26,6 +26,7 @@ papersize: a4
 bibliography: build/references.bib
 csl: documentclass/archives-of-computational-methods-in-engineering.csl
 link-citations: true
+codeBlockCaptions: true
 nocite: |
   @*
 

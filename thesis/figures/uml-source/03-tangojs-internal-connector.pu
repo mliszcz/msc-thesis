@@ -1,0 +1,28 @@
+@startuml
+
+package "tangojs.core" {
+
+  interface Connector
+
+  class "<package level objects>" {
+    +setConnector()
+  }
+
+  hide "<package level objects>" circle
+  hide "<package level objects>" fields
+
+  package "api" {
+    class DeviceProxy
+  }
+}
+
+package "customConnector" {
+
+  class CustomConnectorImpl
+}
+
+"<package level objects>" o-- "1" CustomConnectorImpl
+Connector <|-- CustomConnectorImpl
+DeviceProxy ..> CustomConnectorImpl : uses
+
+@enduml

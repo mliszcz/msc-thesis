@@ -4,12 +4,12 @@ package "tangojs.core" {
 
   interface Connector
 
-  class "<free functions>" {
+  class "<package level objects>" {
     +setConnector()
   }
 
-  hide "<free functions>" circle
-  hide "<free functions>" fields
+  hide "<package level objects>" circle
+  hide "<package level objects>" fields
 
   package "api" {
     class AttributeInfo

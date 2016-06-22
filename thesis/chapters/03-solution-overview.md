@@ -256,10 +256,31 @@ generated from the TANGO IDL and provides common TANGO data types.
 
 ## TangoJS Connector - pluggable backends
 
-TODO: introduction
+The *Connector* concept allows the TangoJS to support multiple backends. A
+*Connector* is an implementation of the *Connector* interface from the *TangoJS
+Core* module. The dependencies between the core and the connector are depicted
+on [@Fig:03-tangojs-internal-connector].
 
-**General assumptions.**
-TODO.
+![Dependency between the *TangoJS Core* and the *Connector*.](
+  figures/uml/03-tangojs-internal-connector.tex){
+  #fig:03-tangojs-internal-connector width=60% }
+
+A concrete **connector implementation has to be plugged into TangoJS**, before
+it may be used. This process is shown at [@Lst:03-connector-setup].
+There is always only one connector active. The upper layer, which is *TangoJS
+Core*, forwards most calls to this connector and awaits for the results. Since
+the core knows nothing about the backend used, it cannot perform any caching
+or optimizations. This has to be handled at a connector level.
+
+```{#lst:03-connector-setup .javascript}
+// this has to be done before using the TangoJS:
+const connector = new CustomConnectorImpl( /* configuration */ )
+tangojs.core.setConnector(connector)
+
+// now TangoJS will work using this connector
+const deviceProxy = new tangojs.core.api.DeviceProxy('sys/tg_test/1')
+```
+Listing: Connector setup process.
 
 **In-memory mock connector.**
 TODO.
