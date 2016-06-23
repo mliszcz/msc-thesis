@@ -321,26 +321,42 @@ creating non-standard widgets. This is covered in details in
 
 **Widget concept.**
 A widget is a self-contained piece of UI, that may be used on its own and
-requires zero configuration.
+requires zero configuration. The widget is a graphical representation of a
+*model*. A model is an abstraction that may be a *device*, a device's
+*attribute* or a *command*. Two examples are a device status indicator widget
+and a edit field for a value of an attribute. Some widgets, e.g. a trend
+widget, may be bound to a multiple models. A widget may only interact with
+it's corresponding models. It is isolated from the rest of the TANGO
+environment and independent from the application that it is embedded in.
+To acheive these goals, TangoJS widget toolkit module has been developed
+using the latest set of W3C standards, including *Custom Elements*, *HTML
+Imports*, *HTML Templates* and *Shadow DOM*. These standards together are
+called *Web Components*. From the developer point of view, this widgets
+behave like native web controls, e.g. *input* or *button*.
 
-*TODO*
+**Using TangoJS widgets.**
+The developer should be able to include desired widgets in his application.
+He may then optionally configure these widgets to match his requirements.
+The widgets may be instantiated and configured in two ways. The first way
+is via standard DOM manipulation APIs available in Javascript, like the
+`document.createElement` function. This is shown at
+[@Lst:03-widget-instantiation-js]. Apart from imperative access, there is
+also way to create widgets declaratively, by simply putting desired tag
+in HTML markup. This is shown at [@Lst:03-widget-instantiation-html].
 
-```{#lst:03-declarative-widgets .html}
-<tangojs-label
-  model="tangojs/test/dev1/sine_trend"
-  poll-period="500"
-  show-name
-  show-unit
-  show-quality>
-</tangojs-label>
+```{ #lst:03-widget-instantiation-js .javascript }
+// TODO
+```
+Listing: Programmatic widget instantiation.
 
+```{ #lst:03-widget-instantiation-html .html }
 <tangojs-trend
   model="sys/tg_test/1/long_scalar_w,sys/tg_test/1/double_scalar"
   poll-period="1000"
   data-limit="20">
 </tangojs-trend>
 ```
-Listing: Declarative widget instantiation.
+Listing: Declarative widget instantiation from HTML.
 
 **Available widgets.**
 The *TangoJS Web Components* is highly influenced by the Taurus library. The
