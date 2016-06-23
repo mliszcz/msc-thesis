@@ -341,13 +341,18 @@ The widgets may be instantiated and configured in two ways. The first way
 is via standard DOM manipulation APIs available in Javascript, like the
 `document.createElement` function. This is shown at
 [@Lst:03-widget-instantiation-js]. Apart from imperative access, there is
-also way to create widgets declaratively, by simply putting desired tag
+also a way to create widgets declaratively, by simply putting desired tag
 in HTML markup. This is shown at [@Lst:03-widget-instantiation-html].
 
 ```{ #lst:03-widget-instantiation-js .javascript }
-// TODO
+const lineEdit = document.createElement('tangojs-line-edit')
+
+lineEdit.setAttribute('model', 'sys/tg_test/1/long_scalar_w')
+lineEdit.pollPeriod = 1000 // attributes have reflected properties
+lineEdit.showName = true
+lineEdit.showQuality = true
 ```
-Listing: Programmatic widget instantiation.
+Listing: Imperative widget instantiation from Javascript code.
 
 ```{ #lst:03-widget-instantiation-html .html }
 <tangojs-trend
@@ -356,22 +361,101 @@ Listing: Programmatic widget instantiation.
   data-limit="20">
 </tangojs-trend>
 ```
-Listing: Declarative widget instantiation from HTML.
+Listing: Declarative widget instantiation from HTML markup.
 
 **Available widgets.**
 The *TangoJS Web Components* is highly influenced by the Taurus library. The
 initial goal was to bring the most commonly used widgets to the browser. The
 widgets offer layout and appearance similar to their counterparts from Taurus.
-The avaliable widgets are depicted at []. Below, each widget is provided with
-a shord description:
+The avaliable widgets are depicted at [@Fig:03-tangojs-widgets-all].
+Below, each widget is provided with a short description:
 
-* `tangojs-label` - TODO
-* TODO
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.80\textwidth}
+    \includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-label}
+    \caption{\texttt{tangojs-label}}
+  \end{subfigure}
+  \quad
+  \par\bigskip\par\bigskip
+  \begin{subfigure}[b]{0.80\textwidth}
+    \includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-line-edit-bool}
+    \caption{\texttt{tangojs-line-edit}}
+  \end{subfigure}
+  \quad
+  \par\bigskip\par\bigskip
+  \begin{subfigure}[b]{0.80\textwidth}
+    \includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-state-led}
+    \caption{\texttt{tangojs-state-led}}
+  \end{subfigure}
+  \quad
+  \par\bigskip\par\bigskip
+  \begin{subfigure}[b]{0.80\textwidth}
+    \includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-command-button}
+    \caption{\texttt{tangojs-command-button}}
+  \end{subfigure}
+  \quad
+  \par\bigskip\par\bigskip
+  \begin{subfigure}[b]{0.30\textwidth}
+    \includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-device-tree}
+    \caption{\texttt{tangojs-device-tree}}
+  \end{subfigure}
+  \quad
+  \begin{subfigure}[b]{0.50\textwidth}
+    \includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-trend}
+    \caption{\texttt{tangojs-trend}}
+  \end{subfigure}
+  \quad
+  \par\bigskip\par\bigskip
+  \begin{subfigure}[b]{0.80\textwidth}
+    \includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-form}
+    \caption{\texttt{tangojs-form}}
+  \end{subfigure}
+  \caption{TangoJS widgets.}
+  \label{fig:03-tangojs-widgets-all}
+\end{figure}
 
+* `tangojs-label` - displays name, value, unit and status of a *read-only*
+  attribute;
+* `tangojs-line-edit` - displays name, value, unit, status and edit box of a
+  *writable* attribute. Depending on attribute type, the edit box may be a
+  text field, a spinner or a checkbox;
+* `tangojs-state-led` - displays name, state and status of a device;
+* `tangojs-command-button` - when pressed, executes a command. Fires a DOM
+  event when result becomes available;
+* `tangojs-device-tree` - displays all devices defined in TANGO database. This
+  is the only widget that is not bind to any model;
+* `tangojs-trend` - displays values of multiple attributes in time domain;
+* `tangojs-form` - displays a group of widgets for multiple models. Best
+  matching widget is choosen for each model;
 
 ## TangoJS Panel - synoptic panel application
 
-TODO: introduction
+It is not always necessary to build a dedicated GUI application for given set
+of hardware components. There are tools like Taurus, which supports creating
+GUIs interactively, by placing widgets on a panels. This process may be
+performed by the hardware operator, to **adapt the GUI to the current
+requirements** and **display only relevant information**. TangoJS also supports
+this scenario, through a web application called *TangoJS Panel*. This
+application also shows that TangoJS may be successfuly used for building
+complete and non-trivial web applications.
 
-**General assumptions.**
-TODO.
+*TangoJS Panel* is a framework-less solution, that also uses *Web Components*
+technology to separate it's UI parts. This approach gives the full control over
+the DOM and allows for some optimizations. The application is presented at [].
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{figures/images/03-tangojs-panel-01-fixed}
+    \caption{Dashboard with widgets.}
+  \end{subfigure}
+  \quad
+  \par\bigskip\par\bigskip
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{figures/images/03-tangojs-panel-02}
+    \caption{\textit{New widget} dialog window.}
+  \end{subfigure}
+  \caption{\textit{TangoJS Panel} application.}
+  \label{fig:03-tangojs-panel}
+\end{figure}
