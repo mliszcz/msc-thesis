@@ -83,14 +83,109 @@ used as a replacement for it's native frontend layer.
 [@Tbl:05-comparison-existing] compares TangoJS to existing web-based TANGO
 frontend libraries.
 
- | Canone | Taurus Web | mTango | TangoJS
--|--------|------------|--------|--------
-TODO | | | |
+Feature | Canone | Taurus Web | mTango | TangoJS
+---------------|---------------|---------------|---------------|---------------
+Has widgets | yes, (limited AJAX support) | no | yes, (5 default views) | **yes, (7 base widgets + variants)**
+Ships with interactive *synoptic panel* | yes | N/A | no | **yes, (*TangoJS Panel*)**
+Supports user accounts | yes, (database) | no | yes, (multiple options) | **N/A, (depends on backend)**
+Supports TANGO events | no | no | yes | **no**
+Backend server technology | PHP, Python | Python, Tornado, WebSocket | Java, RESTEasy, HTTP | **any possible**
 
 Table: Comparison to existing web-based GUI libraries. {#tbl:05-comparison-existing}
 
-## UI-metrics
+TangoJS is the leading choice in all categories but TANGO events support. This
+is currently not implemented and shall be addressed in future releases. Use of
+events may significantly reduce network traffic, but requires support on
+both frontend and backend side.
 
 ## Usability evaluation { #sec:05-usability-evaluation }
 
-* <https://en.wikipedia.org/wiki/Usability_testing#Expert_review>
+Quantitive evaluation of user interfaces is a complex task and the results are
+often diffrent than real user experiences []. This is due to involvement of
+rather unpredictable human factors, like mind, perception or personal
+preferences. To address these issues, a method called *heuristic evaluation*
+has emerged [@nielsen1990heuristic]. This is one of the
+*usability engineering* methods.
+
+The heuristic evaluation helps to detect problems with the software usability,
+by examining the user interface in context of a set of well-defined principles,
+called *heuristics*. The most widely used heuristics have been propsed by the
+Jakob Nielsen in 1994 [@nielsen1994heuristic]. They are however still
+applicable to today's software. The 10 heuristics, as formulated by Nielsen:
+
+> 1. **Visibility of sytstem status:**
+>    *«The system should always keep users informed about what is going on,
+>    through appropriate feedback within reasonable time».*
+> 1. **Match between system and the real world:**
+>    *«The system should speak the user's language, with words, phrases and
+>    concepts familiar to the user, rather than system-oriented terms. Follow
+>    real-world conventions, making information appear in a natural and logical
+>    order».*
+> 1. **User control and freedom:**
+>    *«Users often choose system functions by mistake and will need a clearly
+>    marked "emergency exit" to leave the unwanted state without having to go
+>    through an extended dialogue. Support undo and redo».*
+> 1. **Consistency and standards:**
+>    *«Users should not have to wonder whether different words, situations, or
+>    actions mean the same thing. Follow platform conventions».*
+> 1. **Error prevention:**
+>    *«Even better than good error messages is a careful design which prevents
+>    a problem from occurring in the first place. Either eliminate error-prone
+>    conditions or check for them and present users with a confirmation option
+>    before they commit to the action».*
+> 1. **Recognition rather than recall:**
+>    *«Minimize the user's memory load by making objects, actions, and options
+>    visible. The user should not have to remember information from one part
+>    of the dialogue to another. Instructions for use of the system should be
+>    visible or easily retrievable whenever appropriate».*
+> 1. **Flexibility and efficiency of use:**
+>    *«Accelerators—unseen by the novice user—may often speed up the
+>    interaction for the expert user such that the system can cater to both
+>    inexperienced and experienced users. Allow users to tailor frequent
+>    actions».*
+> 1. **Aesthetic and minimalist design:**
+>    *«Dialogues should not contain information which is irrelevant or rarely
+>    needed. Every extra unit of information in a dialogue competes with
+>    the relevant units of information and diminishes their relative
+>    visibility».*
+> 1. **Help users recognize, diagnose, and recover from errors:**
+>    *«Error messages should be expressed in plain language (no codes),
+>    precisely indicate the problem, and constructively suggest a solution».*
+> 1. **Help and documentation:**
+>    *«Even though it is better if the system can be used without
+>    documentation, it may be necessary to provide help and documentation.
+>    Any such information should be easy to search, focused on the user's
+>    task, list concrete steps to be carried out, and not be too large».*
+
+These heuristics has been applied to *TangoJS Panel* application as well as to
+separate widgets to detect potential usability issues.
+
+**Visibility of sytstem status.**
+TODO.
+
+**Match between system and the real world.**
+TODO.
+
+**User control and freedom.**
+TODO.
+
+**Consistency and standards.**
+TODO.
+
+**Error prevention.**
+TODO.
+
+**Recognition rather than recall.**
+TODO.
+
+**Flexibility and efficiency of use.**
+TODO.
+
+**Aesthetic and minimalist design.**
+TODO.
+
+**Help users recognize, diagnose, and recover from errors.**
+TODO.
+
+**Help and documentation.**
+TODO.

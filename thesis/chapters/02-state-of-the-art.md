@@ -244,7 +244,7 @@ since they affect how software may be extended (e.g. with new widgets).
 +------------+-----------+------------+------------+------------+------------+
 |            |           |            |            |            |            |
 +------------+-----------+------------+------------+------------+------------+
-| Has        | yes,      | no,        | N/A        | N/A        | yes,       |
+| Has        | yes,      | no         | N/A        | N/A        | yes,       |
 | widgets    | (limited  |            |            |            | (few       |
 |            | AJAX      |            |            |            | default    |
 |            | support)  |            |            |            | views)     |
