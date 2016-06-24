@@ -93,10 +93,11 @@ Backend server technology | PHP, Python | Python, Tornado, WebSocket | Java, RES
 
 Table: Comparison to existing web-based GUI libraries. {#tbl:05-comparison-existing}
 
-TangoJS is the leading choice in all categories but TANGO events support. This
-is currently not implemented and shall be addressed in future releases. Use of
-events may significantly reduce network traffic, but requires support on
-both frontend and backend side.
+Only a web-related aspects have been chosen as comparison criterias. The
+comparison has shown that the TangoJS is the leading choice in all categories
+but TANGO events support. **Events are currently not implemented and shall be
+addressed in future releases. Use of events may significantly reduce network
+traffic, but requires support on both frontend and backend side.**
 
 ## Usability evaluation { #sec:05-usability-evaluation }
 
@@ -111,7 +112,17 @@ The heuristic evaluation helps to detect problems with the software usability,
 by examining the user interface in context of a set of well-defined principles,
 called *heuristics*. The most widely used heuristics have been propsed by the
 Jakob Nielsen in 1994 [@nielsen1994heuristic]. They are however still
-applicable to today's software. The 10 heuristics, as formulated by Nielsen:
+applicable to today's software.
+
+The heuristic evaluation is not the only one method of *usability inspection*.
+There have been other, more formal methods proposed [@nielsen1994usability],
+like *cognitive walkthrouhgs*, *formal inspections*, *feature inspections* or
+*standards inspections*. These methods usually require to involve a domain
+experts who provide usability feedback.
+
+The heuristic evaluation is relatively a simple method and produces reasonable
+outcome. It has been choosen to evaluate TangoJS' usability and user
+experience. The 10 heuristics, as formulated by Nielsen:
 
 > 1. **Visibility of sytstem status:**
 >    *«The system should always keep users informed about what is going on,
@@ -161,31 +172,73 @@ These heuristics has been applied to *TangoJS Panel* application as well as to
 separate widgets to detect potential usability issues.
 
 **Visibility of sytstem status.**
-TODO.
+Most widgets in TangoJS have a *quality*/*status* LED bulb indicator. In normal
+mode of operation this bulb shows status received from device server. Whenever
+a communication error occurs, the indicator changes it's color. This directly
+translates to the visibility of system in the case of *Panel* application.
 
 **Match between system and the real world.**
-TODO.
+TangoJS widgets map directly to the corresponding entities in TANGO object
+model, like *devices* or *attributes*. Each widget have a strict set of
+resposibilities and usually performs limited number of operations, like reading
+or writing a value. The dashboards in the *Panel* application correspond to
+physical panels and switches in real-world control rooms.
 
 **User control and freedom.**
-TODO.
+Usecases for TangoJS widgets are simple and often consist of a single action.
+Thus, this rule has no application here.
 
 **Consistency and standards.**
-TODO.
+The widgets are consisted one with another and they share the same set of
+design principles related to the functionality and layout. The widgets have
+been inspired by the Taurus framework, which is the leading and widely library
+for creating adopted widget-based GUI clients for TANGO on desktops. 
 
 **Error prevention.**
-TODO.
+In case of web-based or distributed applications it is impossible to prevent
+error. This is due to fact that where network communication is involved, the
+errors may happen. In such case, the widgets are inoperable, until
+communication is back. These errors are indicated to the user. Other kind of
+errors are handled and corrected by the widget code, e.g. bad input. 
 
 **Recognition rather than recall.**
-TODO.
+The widgets in TangoJS are simple pieces of UI. There are no dialog boxes or
+nested views and user interacts always with single view that maps directly to
+a TANGO entity. The *Panel* application uses dialogs, e.g. for initial widget
+configuration, but the dialog view includes only entries related to the single
+widget, like HTML attributes configuration. 
 
 **Flexibility and efficiency of use.**
-TODO.
+From the end-user's perspective, the *accelerators* for *power users*, that may
+boost their productivity, are not applicable to TangoJS at current state. The
+UI is flat and, most of the time, use cases are just single actions. 
 
 **Aesthetic and minimalist design.**
-TODO.
+The TangoJS GUI is kept clean and minimal. It's up to the application developer
+to decide what information will be included in widget's layout, e.g an unit
+field or a quality bulb. In case of the *Panel* application, the user may
+decide which widgets are present on the dashboard and what fields are included.
 
 **Help users recognize, diagnose, and recover from errors.**
-TODO.
+If error occurs within widget, the user is only informed by the change of
+indicator's color. No message is displayed to the user. The same applies to
+the *Panel* application.
 
 **Help and documentation.**
-TODO.
+TangoJS provides extensive set of resouces, for both developers and end-users,
+including webpage, widget specifications, API documentation and template
+project to get started.
+
+From the analysis performed, it may be seen that the **rule related to error
+diagnosis is violated by TangoJS**, as the user does not get sufficient
+information in case of an error. An explanation of error cause may help him
+to diagnose the problem and find a solution, or at least submit a descriptive
+ticket in the TangoJS issue tracker. This problem has to be addressed in future
+TangoJS releases. Since a widget should not pop with alerts, a reasonable way
+of error indication has to be proposed.
+
+Analysis performed according to Nielsen's heuristics may quickly provide GUI
+developers with useful feedback, without the need to involve other people,
+like UI experts or targeted users. The outcome of heuristic evaluation are
+usability problems, that may negatively impact user experience. Performing the
+analysis during software development, one may address these issues early.
