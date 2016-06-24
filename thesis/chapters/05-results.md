@@ -50,10 +50,21 @@ project. Developers new to TangoJS may choose to start with an blank web
 application template available in TangoJS repositories.
 
 **Extensibility.**
-TODO.
+TangoJS has been designed to be extensible at many levels. The whole backend
+part, which connects TangoJS to the TANGO infrastructure, may be replaced, by
+writing a dedicated *Connector*. This pluggable backends allow TangoJS to be
+adapted to the cretain deployment requirements and network configuration.
+It is also possible to extend the behavior of TangoJS, by implementing new
+widgets. Developers are supported in this task by the various utility functions
+available in the *TangoJS Web Components* package.
 
 **Standards-driven.**
-TODO.
+By using only standard web technologies, a wider audience of developers may be
+targeted. Web standards form the core of browser-based development, and every
+other framework is built upon them. It is safe to assume that most
+webdevelopers are familiar with raw DOM APIs. This also makes TangoJS a
+future-proof technology and does not expose it to the risk of being tied to
+old, unpopular or deprecated third party libraries.
 
 **User experience.**
 Any piece of software exposed for direct interactions with end-users that has
