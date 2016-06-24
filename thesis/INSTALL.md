@@ -16,6 +16,12 @@ cabal install pandoc pandoc-citeproc pandoc-crossref
 
 * <http://plantuml.com/download.html>
 
+Dependencies:
+
+```
+sudo apt-get install graphviz
+```
+
 ### PDF output
 
 Working setup:
