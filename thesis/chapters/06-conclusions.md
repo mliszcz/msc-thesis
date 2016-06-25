@@ -117,15 +117,14 @@ compared to the dedicated backend implementation, is depicted at
   \centering
   \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{figures/uml/06-connect-dedicated.tex}
-    \caption{Dedicated backend solution.}
+    \caption{Dedicated client-server solution.}
   \end{subfigure}
   \quad
   \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{figures/uml/06-connect-generic.tex}
     \caption{Generic Javascript RPC.}
   \end{subfigure}
-  \caption{Comparison of dedicated client-server connection and a RPC
-    middleware for accessing backend server.}
+  \caption{Backend access methods compared.}
   \label{fig:06-connection-dedicated-generic-compared}
 \end{figure}
 
