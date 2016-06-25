@@ -1,0 +1,43 @@
+@startuml
+
+node "Web browser" {
+  component WebDeviceProxy
+}
+
+cloud "" {
+  interface transport
+}
+
+node "Backend server" {
+  component BackendDeviceProxy
+
+  package "fr.esrf.TangoApi" {
+    component DeviceProxy
+  }
+}
+
+cloud "TANGO" {
+  component DeviceServer
+}
+
+transport <-> WebDeviceProxy
+transport <-> BackendDeviceProxy
+BackendDeviceProxy <.> DeviceProxy
+DeviceProxy <-> DeviceServer : IIOP
+
+note top of transport
+  always the same protocol (HTTP or WS),
+  carries dedicated messages
+end note
+
+note bottom of WebDeviceProxy
+  dedicated implementation,
+  requires effort
+end note
+
+note top of BackendDeviceProxy
+  dedicated implementation,
+  requires effort
+end note
+
+@enduml

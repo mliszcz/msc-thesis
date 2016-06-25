@@ -109,7 +109,25 @@ or *DeviceAttribute* have to be available in the browser. In the currently
 discussed model with a middleman proxy server, these abstractions are already
 present on the server side. Instead of creating a dedicated RESTful or
 WebSocket-based API, to access the proxies from a web browser, it may be
-possible to use some generic middleware to perform this task.
+possible to use some generic middleware to perform this task. This approach,
+compared to the dedicated backend implementation, is depicted at
+[@Fig:06-connection-dedicated-generic-compared]
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{figures/uml/06-connect-dedicated.tex}
+    \caption{Dedicated backend solution.}
+  \end{subfigure}
+  \quad
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{figures/uml/06-connect-generic.tex}
+    \caption{Generic Javascript RPC.}
+  \end{subfigure}
+  \caption{Comparison of dedicated client-server connection and a RPC
+    middleware for accessing backend server.}
+  \label{fig:06-connection-dedicated-generic-compared}
+\end{figure}
 
 One example of such middleware is JSON-WS[^06-connect-jsonws] based on
 JSON-RPC specification. This project aims to support creating of RPC-based
@@ -140,19 +158,56 @@ by any project.
 [^06-connect-htiop]: <https://github.com/cflowe/ACE/tree/master/TAO/orbsvcs/orbsvcs/HTIOP>
 
 Using TAO broker in TANGO implementation may put into question the need of
-using a proxy server for TANGO-browser communication. **The future research
-is to investigate this possibility and try to implement support for HTIOP in
-TangoJS.**
+using a proxy server for TANGO-browser communication. This significantly
+simplifies the architecture, as depicted at [@Fig:06-connection-htiop].
+**The future research is to investigate this possibility and try to implement
+support for HTIOP in TangoJS.**
+
+![Accessing TANGO from web browser over HTIOP.](
+  figures/uml/06-connect-htiop.tex){ #fig:06-connection-htiop width=35% }
 
 **Removing the CORBA.**
 There have been several attempts to remove CORBA from TANGO and replace it with
 another technology, e.g. ZeroMQ[^06-connect-zmq]. All this attempts have
 failed. With the recent emergence of lightweight RPC frameworks, that work
 in a web browser, like gRPC or Apache Thrift, it should be possible to replace
-the middleware layer without modifications to TANGO code, just by implementing
-a proxy wrappers for new stubs and skeletons, to expose CORBA-like interface
-to the TANGO code.
+the middleware layer without any modifications to the TANGO code, just by
+implementing a proxy wrappers for new stubs and skeletons, to expose
+CORBA-like interface to the TANGO code.
 
 [^06-connect-zmq]: <https://github.com/taurel/tango_zmq>
 
 ## Future work
+
+Evaluation of proposed solution have shown that there is still place for
+improvements and few issues have to be addressed in TangoJS.
+
+**Bring more widgets.**
+The set of currently implemented widgets allows for developing even complex
+web clients for TANGO, but there are some usecases which are currently not
+covered, e.g. a scatter X-Y plots. TangoJS widget toolkit has been designed
+to be extensible, and such widget may be added at any time without impact on
+the rest of the project.
+
+**Event support.**
+At the current stage, TANGO events are not supported in TangoJS. The constant
+polling may reduce performance and generate unnecessary traffic. To implement
+this feature in TangoJS, a backend with event support is required. The mTango
+supports events, but uses JSONP and Comet model. As a design decision, TangoJS
+should use only standardized technologies, and it would be possible to handle
+events with WebSocket connection or using server-sent events from HTML5.
+This should be investigated to propose the best solution.
+
+**Better error indication.**
+This issue has arisen during usability evaluation. User is not sufficiently
+informed about the cause when error happend. Some way to indicate such problems
+have to be developed, since changing the indicator bulb is not enough and does
+not allow user to look for a problem solution more deeply.
+
+**More backends.**
+Even that mTango does it's job as a default backend reasonably well, it would
+be better to have such backend generated automatically by some third-party RPC
+framework. This will probably introduce some overhead and any optimizations
+will not be possible, but maintenance of backend and *Connector* will be
+simplified. Other scenarios, e.g. backend-less as described earlier, should
+also be investigated.

@@ -1,0 +1,47 @@
+@startuml
+
+node "Web browser" {
+  package "RPC.client" {
+    component DeviceProxyStub
+  }
+}
+
+cloud "" {
+  interface transport
+}
+
+node "Backend server" {
+
+  package "RPC.server" {
+    component DeviceProxySkeleton
+  }
+
+  package "fr.esrf.TangoApi" {
+    component DeviceProxy
+  }
+}
+
+cloud "TANGO" {
+  component DeviceServer
+}
+
+transport <-> DeviceProxyStub
+transport <-> DeviceProxySkeleton
+DeviceProxySkeleton <.> DeviceProxy
+DeviceProxy <-> DeviceServer : IIOP
+
+note top of transport
+  configurable protocol (HTTP or WS)
+end note
+
+note bottom of DeviceProxyStub
+  generated
+end note
+
+note top of DeviceProxySkeleton
+  generated,
+  small adjustments required,
+  like a proxy/adapter class
+end note
+
+@enduml

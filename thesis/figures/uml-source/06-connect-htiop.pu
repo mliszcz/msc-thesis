@@ -1,0 +1,15 @@
+@startuml
+
+node "Web browser" {
+  component DeviceProxy
+}
+
+cloud "TANGO" {
+  component "TAO ORB" as ORB
+  component DeviceServer
+}
+
+DeviceProxy <-> ORB : HTIOP
+ORB <.> DeviceServer
+
+@enduml
