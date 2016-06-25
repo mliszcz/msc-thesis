@@ -122,7 +122,7 @@
 \vspace*{1.5cm}
 
 \MakeUppercase{\textbf{\large \LangThesisType}}\\
-\vspace*{1.5cm}
+\vspace*{2.5cm}
 
 % \doublespacing
 
@@ -131,6 +131,8 @@
 
 \textit{\normalsize \@subtitle}\\
 \vspace*{1.5cm}
+
+\vspace*{2.5cm}
 
 \end{center}
 
