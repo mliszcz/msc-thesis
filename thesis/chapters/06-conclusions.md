@@ -22,23 +22,137 @@ available and applications may be developed using diffrent styles, like
 object-oriented or functional programming. The web applications are fast to
 prototype due to the use of declarative HTML and styling with CSS.
 
-This has been verified during TangoJS development. TODO.
+This has been verified during TangoJS development. The TangoJS applications
+may be ported to desktop or mobile, using tools like Electron or Cordova.
+The developers may use any framework they like, because TangoJS widgets behave
+like a native UI controls, derived from `HTMLElement`. Commonly agreed
+semantics apply here - the widgets may work without any configuration, and to
+write a simple web application using TangoJS, one have to write almost no
+Javascript code.
 
 **Framework-less solutions.**
 From many available frontend frameworks, like Angular or React, TangoJS chooses
 none. Developing even complex web applications usig plain DOM APIs is possible
 nowadays. Features once available only in libraries like jQuery have been
-incorporated into the DOM. HTML5 supports native drag-and-drops and recent
-emergence of *Web Components* standard is going to put a definitive end of
-monolithic web applications. The componentized approach is already used in
-frameworks like Angular 2, React or Polymer, but *Web Components* allow to
-acheive the same effects, when not being tied to any particular framework.
-The component-based web applications are more maintainable than classic
-MVC applications.
+incorporated into the DOM. An once popular argument against this framework-less
+approach was that the *vanilla* JS application are unstructured, and thus
+unmaintainable. This is not true any more, thanks to the technologies like
+*Web Components.*.
 
 **Componentized approach.**
-TODO.
+The recent emergence of *Web Components* standard is going to put a definitive
+end of monolithic web applications. The componentized approach is already used
+in frameworks like Angular 2, React or Polymer, but *Web Components* allow to
+acheive the same effects, when not being tied to any particular framework.
+The component-based web applications are more maintainable than a classic
+MVC applications, especially when they grow larger.
+This approach has been applied with success during *TangoJS Panel* development,
+where each piece of UI, e.g. a tabs bar or a modal window, is a separate
+component, that talks to the other components via DOM events.
 
 ## Connecting TANGO and the Web
+
+There were many attempts to access TANGO infrastructure from the web browsers.
+all of them however have a common concept of a *proxy server*, that connects
+both worlds. This server has to run on a platform where the TANGO is already
+supported. At one side of this proxy, there is CORBA, IIOP and ZeroMQ in some
+cases. On the opposite side, the proxy exposes an interface accessible from
+browser. This use diffrent technologies for data transport, including HTTP and
+WebSockets. Every approach have advantages and disatvantages.
+
+**HTTP**.
+The most obvious choice for transport technology is HTTP, because it is the
+native communication protocol of the Web. It is a high-level application
+protocol, and the HTTP methods may be mapped to operation on TANGO resources,
+like GET maps to reading attributes value, and PUT sets the value. A RESTful
+API may be built using HTTP protocol. The HTTP is supported by all, even old
+browsers. Proxies and firewalls can handle HTTP traffic. It may be cached,
+both on server and browser side. HTTP scales horizontally, since it is a
+stateless protocol. The security may be achieved by using SSL for encryption.
+
+However, in control systems, a near real-time transmission is required. The
+HTTP introduces large overhead which negatively impacts performance.
+This overhead is even larger when SSL handshake is involved.
+As a text based protocol and use of headers, HTTP requests and responses
+have poor efficiency when it comes to the data-to-header ratio in case of small
+messages, like reading or writing a single attribute. HTTP is also
+not suitable for delivery of asynchronous events triggered on the server side.
+Applications has to constantly poll the resource to detect any changes.
+This limitation is commonly bypassed by using the Comet model [], like
+long-polling. There is support for server-sent events in HTML5 standard, but
+it has not been widely adopted yet in web applications.
+
+HTTP is used by Canone, Tango REST, GoTan and mTango projects. Thus, it is the
+default in TangoJS. 
+
+**WebSocket.**
+The goal behind WebSocket development was to provide a full-duplex,
+bidirectional communication between the client and the server. This protocol
+is currently supported in all modern browsers. It is TCP-based, but uses HTTP
+for initial handshakes. The servers may then handle HTTP and WebSocket traffic
+on the same port. The WebSocket protocol have been developed to fill the gap
+where communication have to be initiated from the server side, and obsoletes
+the non-standard solutions like e.g. Comet. It is the best choice, when
+event-driven communication is required, like in TANGO applications. Again,
+SSL may be used for encryption of WebSocket traffic.
+
+Compared to the HTTP, the WebSocket is a low-level. The abstractions like
+request, response or methods have to be implemented on application level. This
+requires some effort but also gives the developer flexibility and field for
+optimizations.
+
+The only web-based TANGO solution that uses WebSocket is the Taurus Web. 
+
+**Generic RPC.**
+To communicate with TANGO *device servers*, the abstractions like *DeviceProxy*
+or *DeviceAttribute* have to be available in the browser. In the currently
+discussed model with a middleman proxy server, these abstractions are already
+present on the server side. Instead of creating a dedicated RESTful or
+WebSocket-based API, to access the proxies from a web browser, it may be
+possible to use some generic middleware to perform this task.
+
+One example of such middleware is JSON-WS[^06-connect-jsonws] based on
+JSON-RPC specification. This project aims to support creating of RPC-based
+application that may be accessed from a web-browser. It may automatically
+generate code for in-browser client proxies. Both HTTP and WebSocket are
+supported as transport mechanisms.
+
+[^06-connect-jsonws]: <https://github.com/ChaosGroup/json-ws>
+
+Currently, no project uses this approach. **Future work aims to investigate
+the RPC-based solutions more deeply and try to implement a new backend for
+TangoJS using the JSON-WS to access jTango library on the server side.**
+This should be possible and easy to integrate with TangoJS, thanks to it's
+support for pluggable backends.
+
+**HTIOP.**
+The GIOP, *General Inter-ORB Protocol*, is the specification if a protocol
+that CORBA uses for communication. The IIOP, *Internet Inter-ORB Protocol*
+is the default implementation of GIOP used by the request brokers. It requires
+full access to the TCP/IP stack, which is not possible in web browsers.
+There is also an implementation called HTIOP[^06-connect-htiop], *HyperText
+Inter-ORB protocol*, which is basically an IIOP over HTTP. This protocol has
+been developed as a part of ACE[^06-connect-ace], the Adaptive Communication
+Environment, which offers TAO, a CORBA-compliant ORB. It is however not used
+by any project.
+
+[^06-connect-ace]: <http://www.cs.wustl.edu/~schmidt/ACE.html>
+[^06-connect-htiop]: <https://github.com/cflowe/ACE/tree/master/TAO/orbsvcs/orbsvcs/HTIOP>
+
+Using TAO broker in TANGO implementation may put into question the need of
+using a proxy server for TANGO-browser communication. **The future research
+is to investigate this possibility and try to implement support for HTIOP in
+TangoJS.**
+
+**Removing the CORBA.**
+There have been several attempts to remove CORBA from TANGO and replace it with
+another technology, e.g. ZeroMQ[^06-connect-zmq]. All this attempts have
+failed. With the recent emergence of lightweight RPC frameworks, that work
+in a web browser, like gRPC or Apache Thrift, it should be possible to replace
+the middleware layer without modifications to TANGO code, just by implementing
+a proxy wrappers for new stubs and skeletons, to expose CORBA-like interface
+to the TANGO code.
+
+[^06-connect-zmq]: <https://github.com/taurel/tango_zmq>
 
 ## Future work
