@@ -13,14 +13,12 @@ power-supplies have to be orchestrated. To address this problem, the TANGO
 Control System [@gotz1999tango] has been developed at ESRF
 synchrotron-radiation facility.
 
-### General introduction
-
+**General introduction.**
 TANGO Controls is a distributed system built on top of CORBA and ZeroMQ.
 
 *TODO*
 
-### Architecture overview
-
+**Architecture overview.**
 TANGO deployment usually spans over several machines, connected in a network.
 There are clients and servers. Clients are just terminals that allow operators
 to interact with the hardware. Servers machines are responsible for direct
@@ -31,23 +29,28 @@ server is an abstraction that represents a single device in a TANGO deployment.
 Each device server has a well-defined interface, and is exposed to the rest of
 the system as a CORBA remote object.
 
+![TANGO Control System architecture overview.](
+  figures/uml/01-tango-architecture.tex){
+  #fig:01-tango-architecture width=80% }
+
 *TODO*
 
-### GUI Tools and Frameworks
+## TANGO GUI frameworks
 
-#### Taurus
+**Taurus.**
+TODO.
 
-Tiago Coutinho
-
-First official release: 2008-05-07
-
-<http://www.taurus-scada.org/en/stable/>
+* Tiago Coutinho
+* First official release: 2008-05-07
+* <http://www.taurus-scada.org/en/stable/>
 
 ## Web applications
 
-### Trends in application development
+**Trends in application development.**
+TODO.
 
-### Modern web technologies
+**Modern web technologies.**
+TODO.
 
 ## Adaptive user interfaces
 
