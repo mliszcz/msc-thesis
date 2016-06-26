@@ -156,6 +156,10 @@ the *TaurusGUI* application. The users may put any widgets on a set of panels,
 without writing a single line of code. This GUI may be later adjusted at
 runtime. This application is shown at [@Fig:01-tango-gui-taurus].
 
+The Taurus has been widely adapted by the community and is currently more
+popular than ATK, since Python is the leading platform in science, where
+TANGO is mainly used.
+
 ## Web-based approach
 
 While it is easy to create a desktop client application, the __*web-based*
@@ -202,8 +206,8 @@ decreases significantly.
 
 An Adaptive user interface, or AUI, is an user interface that both adapts, or
 changes it's layout depending on context where it is used and also allows the
-user to perform this adaptation manually. Providing adaptive interface is a
-key part of maximizing the *user experience*.
+user to perform this adaptation manually.
+Providing adaptive interface is a key part of maximizing the *user experience*.
 
 **Automatic adaptation.**
 The interface can adapt it's layout to the surrounding environement. For,
@@ -221,8 +225,38 @@ creating a personalized views for diffrent users and diffrent situations.
 This approach is supported in TANGO world by the Taurus framework, which offers
 tools for manipulating the UI at runtime.
 
+
+
 ## Goals and objectives
 
 Web-based approach to building user interfaces gains popularity. However,
 it has not beed widely adopted among the TANGO Control System client
-applications and GUI frameworks.
+applications and GUI frameworks. The thesis goals may be formulated as follows:
+
+* **evaluate existing solutions (if any) for building TANGO clients for web
+  browsers**; find out why these solutions have not been adopted by the
+  community like ATK or Taurus has; identify any pain points;
+
+* consider extending and updating existing solutions if possible, or **design
+  and develop a new one**, reusing the good parts;
+
+* if new solution will be delivered, it shall be implemented according to the
+  following principles:
+
+  * use modern, standardized web technologies; it should not be tied to any
+    particular web framework and should have a limited number of dependencies;
+
+  * focus on *user experience* and adaptivity; the interface should be adaptive
+    both automatically and manually;
+
+  * be widget based, providing at least basic widgets from the Taurus
+    framework, which are recognized and appreciated by the users;
+
+  * be flexible and modular, allowing users to create their own widgets and
+    extend the system functionality via plugins;
+
+  * offer a *TaurusGUI*-like application, where end-users can build and adapt
+    the GUI at runtime;
+
+  * be lightweight, easy to start with and have a documentation for both
+    developers and end users;
