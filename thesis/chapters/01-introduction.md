@@ -165,4 +165,6 @@ TODO.
 
 ## Adaptive user interfaces
 
-## Aims, goals and objectives
+## Aims and goals
+
+## Objectives

@@ -1,3 +1,5 @@
 # Building web application with TangoJS
 
-TODO
+## Managing Node.js project
+
+## Using the *TangoJS WebApp Template*
