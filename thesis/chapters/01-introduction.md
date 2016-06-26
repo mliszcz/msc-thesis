@@ -107,24 +107,53 @@ allow to access devices programmatically. Using these proxies, a client
 applications may be built using any technology and language where TANGO is
 available, including **C++, Java and Python**. Most of the client applications
 have share common goals and requirements. They also use common patterns to
-fulfill these goals. This raised the need for standardization and development
-of universal frameworks that will speed up TANGO client applications
-development.
+fulfill these goals. This raised the need for GUI standardization and
+development of universal frameworks that will speed up TANGO client
+applications development.
 
 **ATK**.
-[@poncet2005atk].
+The *Tango Application Toolkit*[@poncet2005atk], ATK, has been developed to
+address the need for consistent, easy do develop TANGO GUI applications.
+It provides universal *viewers*, for attributes and commands. These viewers
+are called widgets nowadays. It has been implemented with Java and Swing,
+which makes it portable in desktop environments.
 
-The TANGO ecosistem is not only the core middleware, but tons of software,
-developed by the community.
+ATK uses Model-View-Controller architecture, and is internally divided into
+two parts, the *ATKCore*, which contains *models*, and *ATKWidget*, which
+is a set of Swing-based viewers. There is also the third component, a graphical
+editor called *JDraw*. It provides a way to interactively build a schema of
+the system and then attach TANGO models, like commands or attributes, to it.
+This schema may be stored in a file and rendered in runtime by ATK as a
+*synoptic panel*. The *JDraw* interface is presented at
+[@Fig:01-tango-gui-jdraw].
+
+ATK became the standard solution for building graphical TANGO clients and
+multiple applications, like *AtkPanel* or *AtkMoni*, has been built using this
+framework.
+
+![\textit{JDraw} synoptic panel editor.](
+  figures/images/01-tango-gui-jdraw.png){
+  #fig:01-tango-gui-jdraw width=80% }
 
 **Taurus.**
-TODO.
+The Taurus framework[@pascual2015taurus] has been developed with the same
+concepts in mind that the ATK, but targets Python environments and uses Qt
+library for GUI rendering. It shares with the ATK some common concepts and
+design principles. It is divided into two packages, *taurus.core* and
+*taurus.qt*. The first one brings *TaurusModel* object, which represents an
+entity from TANGO world, e.g. device or attribute. The other one is a set of
+widgets, that behave like standard Qt widgets, but each is bound to possibly
+multiple *TaurusModels*.
 
-* Tiago Coutinho
-* First official release: 2008-05-07
-* <http://www.taurus-scada.org/en/stable/>
+Taurus applications may be created using any tools suitable for creating
+Python/Qt applications. However, Taurus ships with an interactive GUI builder,
+the *TaurusGUI* application. The users may put any widgets on a set of panels,
+without writing a single line of code. This GUI may be later adjusted at
+runtime. This application is shown at [@Fig:01-tango-gui-taurus].
 
-*TODO*
+![Taurus GUI.](
+  figures/images/01-tango-gui-taurus.png){
+  #fig:01-tango-gui-taurus width=80% }
 
 ## Web applications
 
