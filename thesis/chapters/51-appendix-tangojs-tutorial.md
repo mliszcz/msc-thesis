@@ -121,7 +121,7 @@ The steps described in previous section may be omited, and the *TangoJS WebApp
 Template* may be used instead. It is an empty TangoJS project hosted at
 GitHub[^A-tangojs-webapp-link].
 
-[^A-tangojs-webapp-link]: https://github.com/tangojs/tangojs-webapp-template
+[^A-tangojs-webapp-link]: <https://github.com/tangojs/tangojs-webapp-template>
 
 To use the project, one has to clone the repository, and then type
 `npm install` in project's directory. The `master` branch is configured with
@@ -134,7 +134,10 @@ to type `npm run server`. The `index.html` file is served at
 
 The mentioned earlier `index.html` file contains a section with connector
 configuration and a simple `tangojs-trend` and `tangojs-line-edit` widgets
-declared in HTML markup.
+declared in HTML markup. A detailed list of available widgets and information
+how to use them can be found at TangoJS project webpage[^A-tangojs-link].
+
+[^A-tangojs-link]: <http://tangojs.github.io/>
 
 One may access the address in a web browser to see the TangoJS working.
 **The Web Components and CSS Grid Layout support must be enabled in web browser
