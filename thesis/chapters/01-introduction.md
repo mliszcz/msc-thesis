@@ -171,13 +171,13 @@ writing a native, dedicated application for each platform, it brings many
 benefits, including:
 
 * the deployment process is simplified, especially in case of browser
-  applications;
+  applications, where new version is immediately available to users;
 * there are many frameworks and libraries available, multiple programming
   styles are supported like object-oriented or functional programming;
 * there is a wide choice of tools like linters, transpilers, build tools,
   editors and other utilities appreciated by developers;
-* over 250,000 open source packages are available in npm, the standard
-  repository for Javascript code;
+* over 250,000 open source packages are available in npm, which is the
+  standard repository for Javascript and other frontend code;
 * the applications are portable between platforms thanks to the projects like
   Electron[^01-web-electron] or Apache Cordova[^01-web-cordova];
 
@@ -193,12 +193,36 @@ This thesis focuses only on frontend solutions, that run solely inside a web
 browser, and any server side processing, like in e.g. PHP, is not necessary.
 The *old* approach, where web pages were rendered on the server and returned
 in a HTTP response, is always paired with some Javascript whenever
-interactivity is required. With the emergence of *single-page apps* [], where
-each piece the of UI is updated independently using AJAX or similar technology,
-the number of use cases for server-side approach decreases significantly.
+interactivity is required. With the emergence of *single-page web applications*
+[], where each piece the of UI is updated independently using AJAX calls or a
+similar technology, the number of use cases for server-side approach
+decreases significantly.
 
 ## Adaptive user interfaces
 
-## Aims and goals
+An Adaptive user interface, or AUI, is an user interface that both adapts, or
+changes it's layout depending on context where it is used and also allows the
+user to perform this adaptation manually. Providing adaptive interface is a
+key part of maximizing the *user experience*.
 
-## Objectives
+**Automatic adaptation.**
+The interface can adapt it's layout to the surrounding environement. For,
+instance, parts of a widget may by shown or hidden and the widgets may be
+reordered when displayed on e.g. a mobile device. This is critical part behind
+the success of *mobile web* approach to web development. Automatic adaptation
+may be easily achieved thanks to web technologies like *media queries*, but is
+often not supported in desktop solutions. This also applies to existing GUI
+frameworks for TANGO.
+
+**Manual adaptation.**
+The second form of adaptive user interface is an interface that may be
+dynamically changed by the user according to his needs. This allows for
+creating a personalized views for diffrent users and diffrent situations.
+This approach is supported in TANGO world by the Taurus framework, which offers
+tools for manipulating the UI at runtime.
+
+## Goals and objectives
+
+Web-based approach to building user interfaces gains popularity. However,
+it has not beed widely adopted among the TANGO Control System client
+applications and GUI frameworks.
