@@ -109,7 +109,8 @@ available, including **C++, Java and Python**. Most of the client applications
 have share common goals and requirements. They also use common patterns to
 fulfill these goals. This raised the need for GUI standardization and
 development of universal frameworks that will speed up TANGO client
-applications development.
+applications development. The two leading solutions are ATK and Taurus,
+discussed below.
 
 **ATK**.
 The *Tango Application Toolkit*[@poncet2005atk], ATK, has been developed to
@@ -127,13 +128,13 @@ This schema may be stored in a file and rendered in runtime by ATK as a
 *synoptic panel*. The *JDraw* interface is presented at
 [@Fig:01-tango-gui-jdraw].
 
-ATK became the standard solution for building graphical TANGO clients and
-multiple applications, like *AtkPanel* or *AtkMoni*, has been built using this
-framework.
-
 ![\textit{JDraw} synoptic panel editor.](
   figures/images/01-tango-gui-jdraw.png){
   #fig:01-tango-gui-jdraw width=80% }
+
+ATK became the standard solution for building graphical TANGO clients and
+multiple applications, like *AtkPanel* or *AtkMoni*, has been built using this
+framework.
 
 **Taurus.**
 The Taurus framework[@pascual2015taurus] has been developed with the same
@@ -145,23 +146,56 @@ entity from TANGO world, e.g. device or attribute. The other one is a set of
 widgets, that behave like standard Qt widgets, but each is bound to possibly
 multiple *TaurusModels*.
 
+![Taurus GUI.](
+  figures/images/01-tango-gui-taurus.png){
+  #fig:01-tango-gui-taurus width=80% }
+
 Taurus applications may be created using any tools suitable for creating
 Python/Qt applications. However, Taurus ships with an interactive GUI builder,
 the *TaurusGUI* application. The users may put any widgets on a set of panels,
 without writing a single line of code. This GUI may be later adjusted at
 runtime. This application is shown at [@Fig:01-tango-gui-taurus].
 
-![Taurus GUI.](
-  figures/images/01-tango-gui-taurus.png){
-  #fig:01-tango-gui-taurus width=80% }
+## Web-based approach
 
-## Web applications
+While it is easy to create a desktop client application, the __*web-based*
+approach for TANGO GUI development is still an unexplored area__. This is
+mainly because TANGO, as CORBA technology, requires access to TCP/IP stack,
+which is not the case for the web browsers.
 
-**Trends in application development.**
-TODO.
+**Trends in GUI development.**
+Use of Web frontend technologies for GUI development for both mobile and
+desktop is
+gaining more and more popularity. Compared to the traditional approach of
+writing a native, dedicated application for each platform, it brings many
+benefits, including:
 
-**Modern web technologies.**
-TODO.
+* the deployment process is simplified, especially in case of browser
+  applications;
+* there are many frameworks and libraries available, multiple programming
+  styles are supported like object-oriented or functional programming;
+* there is a wide choice of tools like linters, transpilers, build tools,
+  editors and other utilities appreciated by developers;
+* over 250,000 open source packages are available in npm, the standard
+  repository for Javascript code;
+* the applications are portable between platforms thanks to the projects like
+  Electron[^01-web-electron] or Apache Cordova[^01-web-cordova];
+
+[^01-web-electron]: <http://electron.atom.io/>
+[^01-web-cordova]: <https://cordova.apache.org/>
+
+There are also disadvantages of using web technologies [@charland2011mobile],
+like performance degradation and limitations in UI, but this are the costs
+of increased productivity and maintainability.
+
+**Server-side processing.**
+This thesis focuses only on frontend solutions, that run solely inside a web
+browser, and any server side processing, like in e.g. PHP, is not necessary.
+The *old* approach, where web pages were rendered on the server and returned
+in a HTTP response, is always paired with some Javascript whenever
+interactivity is required. With the emergence of *single-page apps* [], where
+each piece the of UI is updated independently using AJAX or similar technology,
+the number of use cases for server-side approach decreases significantly.
 
 ## Adaptive user interfaces
 
