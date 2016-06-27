@@ -90,7 +90,7 @@ Listing: `web.xml` - mTango CORS configuration (security constraints).
 ```
 Listing: `tomcat-users.xml` - defining a user for mTango.
 
-## a Managing Node.js project
+## Managing a Node.js project
 
 The Node.js [] is the most commonly used runtime for Javascript. It also comes
 with the npm, a package manager. The TangoJS packages are available in npm
