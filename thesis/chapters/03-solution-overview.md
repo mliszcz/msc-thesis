@@ -1,4 +1,4 @@
-# Solution Overview
+# Solution Overview { #sec:solution-overview }
 
 Each of the existing solutions presented in previous chapter has some drawbacks.
 There is no *best choice* that will suit everyone's needs. **To address these
@@ -30,7 +30,7 @@ using well-defined interfaces. This forms overall TangoJS experience.
 
 All these components are described in detail later in this chapter.
 
-## Design Goals and Design Decisions
+## Design Goals
 
 Apart from general goals formulated in [Introduction], a set of design goals
 has been established before TangoJS development has started. These goals aim to
@@ -123,6 +123,11 @@ HTTP Basic Auth, which is simple and secure way of providing user credentials.
 The link between the *Connector* and the server may be secured by using
 **encrypted HTTPS protocol**. This has not impact on development and should
 be handled during deployment.
+
+## Design Decisions
+
+Also, some more technical design decisions have been mage regarding the
+language of choice and development platform.
 
 **Choose the best language.**
 Since TangoJS amis to allow for building TANGO clients that run in web
@@ -305,7 +310,7 @@ communication performed. This approach is useful for e.g. automated testing
 the upper layers. This connector is flexible and may be configured with a list
 of *device* objects, where each device exposes some attributes and commands.
 
-## TangoJS WebComponents - HTML widget toolkit
+## TangoJS WebComponents - HTML widget toolkit {#sec:solution-tangojs-webcomponents}
 
 The most important part of TangoJS, from end user's perspective, is the widget
 toolkit. This module sits on top of core layer in TangoJS stack. It contains
