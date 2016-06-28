@@ -156,31 +156,27 @@ Listing: Empty widget file.
 Any valid HTML can be placed in the `template` tag. Then, the template may be
 accessed from the Javascript code by querying the document, like
 `tangojs.web.util.getCurrentDocument().querySelector('template')`. Each widget
-instance clones this template and attaches it to is's DOM. Alternatively,
+instance clones this template and attaches it to is's DOM tree. Alternatively,
 widgets may create layouts imperatively, using APIs like
 `document.createElement`.
 
 The widget described here will be a simple label that displays value of an
 attribute. A single `span` element will be enough to achieve this. This has
-been already appended to the `template` element. An id has been assigned to
+been already appended to the `template` element. An `id` has been assigned to
 that element, but still there may be multiple instances of this widget in a
 single document, thanks to the encapsulation provided by the *Shadow DOM*.
 
 **The widget class.**
 A widget is a class, or a prototype, that extends `HTMLElement` and is
 registered in the browser as a custom element. The definition of this simple
-widget is shown at []. It is discussed in the following paragraphs. This code
-should be placed inside the `script` tag.
+widget is shown at [@Lst:B-js-full]. It is discussed in the following
+paragraphs. This code should be placed inside the `script` tag.
 
-The widget usually sets it's layout during `createdCallback`. The code that
-clones the view template and attaches it to the shadow root[^B-note-shadow]
-is shown at [@Lst:B-js-class]. This code should be put inside the `script` tag.
-
-```{#lst:B-js-class .javascript .numberLines}
+```{#lst:B-js-full .javascript .numberLines}
 const template = tangojs.web.util.getCurrentDocument()
                                    .querySelector('template')
 
-class SimpleTangoLabelElement extends window.HTMLElement {
+class SimpleTangoLabel extends window.HTMLElement {
   createdCallback () {
     const clone = document.importNode(template.content, true)
     const root = this.createShadowRoot()
@@ -188,21 +184,6 @@ class SimpleTangoLabelElement extends window.HTMLElement {
     this.appendChild(root)
     this._label = clone.querySelector('#label')
   }
-}
-```
-Listing: Basic widget class.
-
-[^B-note-shadow]: This example uses the *Shadow DOM V0* API, which has been
-deprecated, but no browser implements the V1 API yet.
-
-**Polling the model.**
-To poll the model, the `withPolledModel` mixin may be used. This requires
-implementing the four methods and invoking the mixin on the prototype, as
-shown on [@Lst:B-js-model].
-
-```{#lst:B-js-model .javascript .numberLines}
-class SimpleTangoLabelElement extends window.HTMLElement {
-  // ...
   createProxy (model) {
     const [_, devname, name] = model.match(/^(.+)\/([A-Za-z0-9_]+)$/)
     return new tangojs.core.api.AttributeProxy(devname, name)
@@ -219,85 +200,66 @@ class SimpleTangoLabelElement extends window.HTMLElement {
   }
 }
 
-tangojs.web.util.mixins.withPolledModel
-                          .call(SimpleTangoLabelElement.prototype)
-```
-Listing: Polling the model with mixin.
+tangojs.web.util.mixins.withPolledModel.call(SimpleTangoLabel.prototype)
 
-The `createProxy` method parses the model and
-instantiates an `AttributeProxy` from the *TangoJS Core*. The mixin supports
-multiple models, thus `onModelRead` method is called with a map of results.
-However, in this simple widget, only a single model will be supported. One may
-assume it will be stored in the `model` property. The `onModelRead` and
-`onErrorRead` are responsible for updating the widgets view, by setting the
-label's text. After class definition, the mixin is called.
-
-**Reflecting the attributes.**
-The widget will have two attributes, `model` and `poll-period`. The first one
-will be the TANGO model string. The second one is a number that denotes how
-frequently the model is polled. These attributes should also be reflected into
-`model` and `pollPeriod` properties of the widget class. The
-`withReflectedAttribute` mixin may be used to create such properties. This is
-presented on [@Lst:B-js-attributes]. The `onChange` callbacks are used to
-invoke methods added by the `withPolledModel` mixin.
-
-```{#lst:B-js-attributes .javascript .numberLines}
 tangojs.web.util.mixins.withReflectedAttribute.call(
-  SimpleTangoLabelElement.prototype,
-  {
+  SimpleTangoLabel.prototype, {
     attributeName: 'model',
     reflectedName: 'model',
     type: 'string',
-    onChange: function (model) {
-      if (model) {
-        this.onModelChange(model) // this is bound to the widget
-      }
-    }
+    onChange: SimpleTangoLabelElement.prototype.onModelChange
   })
+
 tangojs.web.util.mixins.withReflectedAttribute.call(
-  SimpleTangoLabelElement.prototype,
-  {
+  SimpleTangoLabel.prototype, {
     attributeName: 'poll-period',
     reflectedName: 'pollPeriod',
     type: 'string',
     onChange: SimpleTangoLabelElement.prototype.onPollPeriodChange
   })
+
+tangojs.web.util.registerComponent('simple-tango-label', SimpleTangoLabel)
 ```
-Listing: Adding reflected attributes.
+Listing: Widget prototype implementation.
+
+
+The widget usually sets it's layout in the `createdCallback`. This method is
+invoked whenever the widget is *upgraded* from `HTMLUnknownElement`. In the
+example implementation, the template is cloned and attached to the shadow
+root[^B-note-shadow].
+
+[^B-note-shadow]: This example uses the *Shadow DOM V0* API, which has been
+deprecated, but no browser implements the V1 API yet.
+
+**Polling the model.**
+To poll the device and be notified whenever a new value is obtained, the
+`withPolledModel` mixin may be used. This requires implementing the four
+methods mentioned earlier.
+The `createProxy` method parses the model and instantiates an `AttributeProxy`
+from the *TangoJS Core* package. The `onModelRead` is called with a map of
+models, but this widget expects only one model, stored in the `model` property.
+This property is defined later. The `onModelRead` and `onErrorRead` are
+responsible for updating the widget's view periodically. In these methods,
+the label's text is set to the obtained value.
+This mixin is invoked on the widget's prototype, immediately after class
+definition.
+
+**Reflecting the attributes.**
+The widget has two attributes, a `model` and a `poll-period`. The first one
+is a string that represents TangoJS model. The second one is a number that
+denotes how frequently the model is polled. These attributes should be
+reflected into the `model` and `pollPeriod` properties of the widget class. The
+`withReflectedAttribute` mixin may be used to create such properties. The
+`onChange` callbacks are used to invoke methods added by the `withPolledModel`
+mixin.
 
 **Registering the widget.**
 The last step is to register the widget. The `registerComponent` utility
-function may be used. This is shown on [@Lst:B-js-register]. This function
-should be called after all mixins have been applied.
-
-```{#lst:B-js-register .javascript .numberLines}
-tangojs.web.util.registerComponent(
-  'simple-tango-label',
-  SimpleTangoLabel)
-```
-Listing: Registering the widget in browser.
+function may be used. This function registers the widget in the current
+document and attaches it's constructor to the `tangojs.web.components` object.
+It should be called after all mixins have been applied.
 
 **Using the widget.**
 The widget is now ready. It may be included in any web application that uses
 TangoJS. Putting the widget in a HTML file allows it to be loaded using the
-*HTML imports*, as shown on [@Lst:B-html-include]. The widget behaves like an
-ordinary HTML element.
-
-```{#lst:B-html-include .html .numberLines}
-<!DOCTYPE html>
-<html>
-  <head>
-    <script src="tangojs-core.js"></script>
-    <script src="tangojs-web-components.js"></script>
-    <link rel="import" href="simple-tango-label.html">
-    <!-- configure TangoJS Connector -->
-  </head>
-  <body>
-    <simple-tango-label
-      model="sys/tg_test/double_scalar"
-      poll-period="1000">
-    </simple-tango-label>
-  </body>
-</html>
-```
-Listing: Using the created widget.
+*HTML imports*.The widget behaves like an ordinary HTML element.
