@@ -28,12 +28,61 @@ been developed.
 [^C-url-idl2js]: <https://github.com/mliszcz/idl2js>
 
 **idl2js.**
-The goal behind *idl2js* development was not to provide a Javascript equivalent
-of existing tools, that generate *stubs* and handle marshalling. No matter
-what, CORBA currently cannot run in browser. Instead TODO.
+The *idl2js* does not aim to be a Javascript equivalent of the existing tools,
+that generate *stubs* and the marshalling code. This is not possible, since
+CORBA cannot run in a web browser. All the TangoJS needs is to have the TANGO
+structures, enumerations and interfaces translated to the Javascript. The
+mapping is relatively simple:
+
+* a `struct` becomes a `class` with properties mapped reflecting the fields;
+* an `enum` becomes a *frozen* object with properties reflecting the enumerated
+  values;
+* an `interface` becomes a `class` with empty methods;
+* a `typedef` becomes an ESDoc `@typedef` comment;
+
+For each generated entity a docstring comment is also generated. The comments
+use the syntax supported by the JSDoc and ESDoc tools. These comment strings
+may be used to gerneate the API documentation. Also, static typecheckers or
+code intelligence tools may use such comments as a source of information about
+data types. Example output is shown on [@Lst:C-generated-code].
+
+```{#lst:C-generated-code .javascript .numberLines}
+/**
+ * @public
+ */
+export class DevAttrHistory {
+
+  /** @param {Object} data */
+  constructor(data = {}) {
+    /** @private */
+    this._data = Object.assign({}, data)
+  }
+
+  /** @type {boolean} */
+  get attr_failed() {
+    return this._data.attr_failed
+  }
+
+  /** @type {AttributeValue} */
+  get value() {
+    return this._data.value
+  }
+
+  /** @type {DevError[]} */
+  get errors() {
+    return this._data.errors
+  }
+}
+```
+Listing: Example structure translated to Javascript.
 
 **Translation.**
-TODO.
+The translator has been written in Scala language. It uses the `IDLLexer`,
+`IDLParser` and `IDLVisitor` classes from the Apache Axis2[^C-url-axis2]
+project to generate the internal representation of the parsed IDL. Then, each
+type is transformed to it's Javascript equivalent, as discussed earlier.
+
+[^C-url-axis2]: <http://axis.apache.org/axis2/java/core/>
 
 **Using the idl2js.**
 The *idl2js* simple, command line utitlity, that takes a single argument, the
