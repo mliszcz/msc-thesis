@@ -379,8 +379,115 @@ functions and template literals. There features however are available in pure
 Javascript since ECMAScript 2015. The TypeScript is a Javascript with optional
 typechecking.
 
-## HTML5 and CSS3
+## CSS Level 3 modules
 
-The HTML specification is constantly extended with new featurs.
+After the release of CSS2, the CSS specification has been divided into modules.
+Each module evolves independently, reaching new *levels*. Each builds upon
+previous level. TangoJS uses modules described here to handle is's layout.
+
+**CSS Custom Properties.**
+The *CSS Custom Properties for Cascading Variables Module Level
+1*[^D-url-properties] adds support for variables to the stylesheets. Variables
+may be defined on any element using the syntax `--name: value;`. Variables are
+cascading and are inherited by all child nodes. An example of a variable is
+shown on [@Lst:D-css-variables].
+
+[^D-url-properties]: <https://www.w3.org/TR/css-variables-1/>
+
+```{#lst:D-css-variables .css .numberLines}
+:root {
+  --main-color: #06c;
+  --accent-color: #006;
+}
+#foo h1 {
+  color: var(--main-color);
+}
+```
+Listing: Using the CSS variables.
+
+**CSS Values.**
+The *CSS Values and Units Module Level 3*[^D-url-values] introduces two new
+functions, namely `calc` and `attr`. The first one allows to calculate values
+for attributes dynamically. The second one allows to reference a value of a
+certain attribute. An example using this functions is shown on
+[@Lst:D-css-values].
+
+[^D-url-values]: <https://www.w3.org/TR/css3-values/>
+
+```{#lst:D-css-values .css .numberLines}
+section {
+  float: left;
+  margin: 1em; border: solid 1px;
+  width: calc(100%/3 - 2*1em - 2*1px);
+  height: attr(width em);
+}
+```
+Listing: Using the CSS values.
+
+**CSS Flexible Box.**
+The *CSS Flexible Box Layout Module Level 1*[D^url-flexbox] is a new `display`
+option for building containers filled with items that occupy all available
+space in horizontal or vertical direction. Each item gets space proportional to
+it's `flex` attribute. On the orthogonal axis the elements may be aligned,
+centered or stretched. This gives the flexibility in positioning elements and
+building complex user interfaces without the need for *floats*. The elements
+within a flexbox may be reordered using CSS attributes. A vertical flexbox
+where each item gets the same space is shown on [@Lst:D-css-flexbox]/
+
+[^D-url-flexbox]: <https://www.w3.org/TR/css-flexbox-1/>
+
+```{#lst:D-css-flexbox .css .numberLines}
+.root {
+  display: flex;
+  flex-direction: column;
+}
+.root > * {
+  flex: 1;
+}
+```
+Listing: Using the CSS Flexbox.
+
+**CSS Grid Layout.**
+The *CSS Grid Layout Module Level 1*[^D-url-grid]
+allows to specify `grid` as a `display`
+option. An element which is displayed as a grid is divided into a number of
+rows and columns. Each of it's may be assigned a `grid-column` or a `grid-row`
+attribute to position the item on a certain grid cell. Items spanning over
+multiple grid cells are also allowed. This gives the developer a ultimate
+flexibility on how the items may be aligned on the grid. Multiple areas may
+be defined on the grid. An area is a named set of adjacent cells. Child nodes
+may be assigned to this areas without need for setting rows and columns.
+This is shown on [@Lst:D-css-grid].
+
+[^D-url-grid]: <https://www.w3.org/TR/css-grid-1/>
+
+```{#lst:D-css-grid .css .numberLines}
+#grid {
+  display: grid;
+  grid-template-areas: "title stats"
+                       "score stats"
+                       "board board"
+                       "ctrls ctrls";
+  grid-template-columns:
+    auto minmax(min-content, 1fr);
+  grid-template-rows:
+    auto auto minmax(min-content, 1fr) auto
+}
+
+#title { grid-area: title }
+
+#board { grid-column: 1 / span 2; grid-row: 3;}
+```
+Listing: Using the CSS Grid Layout.
 
 ## Limitations and browser support
+
+Most technologies described in this chapter are undergoing the standardization
+process. They are often implemented in major browser, but are disabled and
+hidden behind various flags. This is because the features has not been fully
+tested yet and APIs may slightly change during standardization. All features
+from this chapter has been verified to work on Mozilla Firefox 46 and Google
+Chrome 50. For Mozilla Firefox, the flags `dom.webcomponents.enabled` and
+`layout.css.grid.enabled` should be set to `true` in *about:config* tab.
+In Google Chrome, the *Experimental Web Platform features* should be enabled
+in the *chrome://flags* tab.
