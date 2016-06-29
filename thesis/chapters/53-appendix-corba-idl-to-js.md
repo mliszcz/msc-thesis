@@ -1,8 +1,8 @@
 # CORBA IDL to Javascript translation
 
 One of TangoJS goals was to bring the standard TANGO data types to the browser.
-These types represent abstractions that TANGO developers are familiar with
-already. Use of standard structures and enumerations will allow for easier
+These types represent abstractions that TANGO developers are already familiar
+with. Use of standard structures and enumerations will allow for easier
 integration with other TANGO technologies in the future.
 
 **TANGO IDL.**
