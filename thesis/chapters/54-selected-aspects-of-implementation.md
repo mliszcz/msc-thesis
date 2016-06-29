@@ -211,17 +211,176 @@ Mozilla's Brick[^D-url-brick] and Microsoft's X-Tag[^D-url-xtag].
 
 ## ECMAScript 2015
 
+The Javascript development has been stalled for years. The 5th version of the
+standard has been published by the Ecma International, the standardization body
+behind Javascript, in 2009. From that time, new features have not been added
+to the language until 2015. The rapid growth of web development popularity has
+forced the Ecma to speed up the standardization process. In June, 2015, the
+ECMAScript 2015 specification has been published. It contained numerous
+improvements over the previous version and a set of new features. After the
+ECMAScript 2015 release, the development schedule has been changed. A new
+version of ECMAScript shall be expected every year.
+
+This section discussed the new features introduced in the latest releases and
+extensively used by TangoJS. 
+
 **Standard library.**
+The list of standard prototypes has been extended, by adding new collection
+classes, like `Map`, `Set` `WeakMap`, `WeakSet` and utilities like `Promise`,
+`Symbol` and `Proxy`.
+
+The `Map` and the `Set` are standard collections known
+from other languages. Until now, an `Object` has been a common replacement for
+`Map`. However, `Object`s keys are always converted to `string`s. The `Map`
+may be indexed with any type. In the `WeakMap` and `WeakSet` the objects may
+be garbage-collected when there are no references to the keys or entries.
+
+The `Promise` is an abstract object that represents an asynchronous
+computation, which may succed and resolve the promise, or may fail, rejecting
+the promise. This allows asynchronous functions to return a value, instead of
+accepting a callback as an argument. The promises are chainable which means
+that the result of previous computation may be passed to the next one. The
+errors may safely flow through the chain and should be catched at the end.
+The example code is shown at [@Lst:D-es-promise].
+
+```{#lst:D-es-promise .javascript .numberLines}
+(new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(1)
+  }, 1000)
+}))
+.then(x => Promise.resolve(x + 1)) // promises may be returned
+.then(x => x / 0)
+.then(x => x * 2)
+.then(x => console.log(`result: ${x}`))
+.catch(e => console.error(`error: ${e}`))
+```
+Listing: Using ECMAScript 2015 Promises.
 
 **Classes.**
+The Javascript is an object-oriented language with a prototypical inheritance.
+This means that for every object there is also another object, it's prototype.
+Each prototype has it's own prototype. This relations form a prototype chain.
+There are multiple ways to define a *class* in Javascript. There are also
+multiple ways to make this class extend another class. The ECMAScript 2015
+introducates one more method, with the `class` keyword. This method is however
+more the most readable. Class can define methods, properties and static
+attributes. Diffrent ways of defining a class are shown on
+[@Lst:D-es-class-es5] and [@Lst:D-es-class-es2015].
 
-**Block scoped declarations.**
+```{#lst:D-es-class-es5 .javascript .numberLines}
+const Base = function (x) {
+  this._x = x
+}
+Base.prototype.add = function (y) {
+  return this._x + y
+}
+const Derived = function (x) {
+  Base.call(this, x)
+}
+Derived.prototype = Object.create(Base.prototype);
+Derived.prototype.constructor = Derived
+Derived.prototype.mul = function (y) {
+  return this._x * y
+}
+```
+Listing: Classes and inheritance in ES5.
+
+```{#lst:D-es-class-es2015 .javascript .numberLines}
+class Base {
+  constructor (x) {
+    this._x = x
+  }
+  add (y) {
+    return this._x + y
+  }
+}
+class Derived extends Base {
+  constructor (x) {
+    super(x)
+  }
+  mul (y) {
+    return this._x * y
+  }
+}
+```
+Listing: Classes and inheritance in ES2015.
 
 **Arrow functions.**
+The ECMAScript 2015 introduced a new kind of functions, called *arrow
+functions*. In a normal function,
+`this` may point to diffrent things, depending on how the function has been
+called. In the *arrow functions* `this` is lexically scoped, which means that
+`this` from a surrounding scope may be accessed without creating a variable for
+it. This is useful in e.g. anonymous functions. Example of such function is
+shown on [@Lst:D-es-arrow].
+
+```{#lst:D-es-arrow .javascript .numberLines}
+class Calculator {
+  constructor (x) {
+    this._x = x
+  }
+  addLater (y) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(this._x + y)
+      }, 1000)
+    })
+  }
+}
+```
+Listing: Arrow functions in ES2015.
 
 **Modules.**
+In Javascript a module is usually an object that holds another objects or
+classes. When browser environment is considered, the modules are often attached
+to the global `window` object. This is diffrent for e.g. a server-side runtime,
+Node.js, where modules are loaded synchronously with `require` function.
 
+The important part of ECMAScript 2015 is the modules specification. This is the
+first step to a truly modular Javascript applications. The standard specifies
+only the syntax used to export and import objects from modules. The *module
+loader* specification is still under development, but new module syntax may be
+used already thanks to the tools like Rollup[^D-url-rollup]. Rollup
+preprocesses Javascript sources and changes the `export`s and `import`s to
+the global variables or `require` calls, depending on the targeted environment.
+
+[^D-url-rollup]: <http://rollupjs.org/>
+
+A module in ECMAScript 2015 is a *file*, that contains `import` and `export`
+statements. Any variable or constant may be exported. Example of such module
+is shown on [@Lst:D-es-modules].
+
+```{#lst:D-es-modules .javascript .numberLines}
+import functionA from './util/functions'
+import * as helpers from './util/helpers'
+
+export function functionB (x) {
+  return functionA(helpers.mul(x))
+}
+```
+Listing: Modules in ES2015.
+
+**Other features.**
+Apart from the major features described above, a few less important but useful
+improvements have been introduced in ECMAScript 2015. This includes
+*destructuring* which allows to assing an object or array to an expected
+pattern, the default parameters, the template literals where variables can be
+interpolated, the block-scoped declarations like `let` and `const` and the
+short object initializers.
+
+**Alternative languages.**
+Javascript is a dynamic and flexible langage, which makes it easy to create
+a *x-to-javascript* transcompilers. A lot of new languages has been developed
+in recent years. The two most popular are *CoffeeScript* and *TypeScript*.
+Both are compiled to Javascript and there is no runtime overhead.
+The CoffeScript aims to simplify Javascript's syntax with classes, arrow
+functions and template literals. There features however are available in pure
+Javascript since ECMAScript 2015. The TypeScript is a Javascript with optional
+typechecking.
 
 ## HTML5 and CSS3
+
+The HTML specification is constantly extended with new featurs.
 
 ## Limitations and browser support
