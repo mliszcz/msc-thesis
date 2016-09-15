@@ -1,10 +1,12 @@
 # Introduction
 
-This chapter provides an ntroduction to the field of research and briefly
+This chapter provides an introduction to the field of research and briefly
 describes problems addressed in this thesis. Later on the thesis goals are
 formulated.
 
-## TANGO Control System
+TODO: tu napisac o aspektach sterowania i ... w zlozonych systemach
+
+## Visualization and control functionality in TANGO Control System
 
 Control of the expensive and sensitive hardware components in large
 installations like scientific facilities may be a challenging task. In order to
@@ -19,55 +21,58 @@ a lot of tools and utilities related to the TANGO project.
 The core TANGO is a free and open source software, released under GPLv3
 license.
 
-**General introduction.**
+**What is TANGO?**
 TANGO Controls is a distributed system built on top of CORBA and ZeroMQ.
 It introduces a concept of *device server* to represent a physical piece of
-hardware. This device server is available as a *remote object* that
-implements a well defined interface. TANGO is object-oriented middleware, and
-each device server is characterized by:
+hardware. This device server is available as a *remote object* that implements
+a well defined interface. TANGO is object-oriented middleware, and each device
+server is characterized by:
 
-* *name* - an unique string in a form of a `group/family/member`;
+* *name* - an unique string in the form of a `group/family/member`;
 * *attributes* - a set of data fields that may be writable or read only,
   e.g a current of a power supply;
 * *commands* - a set of actions that device can perform, e.g. a reset action;
-* *properties* - a set of parameters not directly reflected in the
-  hardware, but impact how the device server works;
+* *properties* - a set of parameters not reflected in the hardware, but
+  essential to the device server's implementation;
 
 Device servers are distributed by vendors with the hardware or they are created
 by the community. The internal implementation, especially how the device server
 connects to the hardware, is out of scope of TANGO.
 
 Another important part of TANGO is the database, where the TANGO schema is
-stored. This schema keeps information of all the available devices registered in
-the system. The clients use the database for device server discovery. The
-database also stores the properties of each device. Device servers and clients
-do not access the database directly. Instead, the database is exposed as a
-device server, called *DataBaseds*, and interaction is performed using
+stored. This schema keeps information of all the available devices registered
+in the system. Client applications use the database for device server discovery.
+The database also stores the properties of each device. Device servers and
+clients do not access the database directly. Instead, the database is exposed
+as a device server, called *DataBaseds*, and interaction is performed using
 commands, e.g. there is a command that returns a list of all the registered
-device servers or to exports a new device.
+device servers or a command that exports a new device.
 A MySQL or MariaDB server is required to run TANGO. It is also possible to run
-TANGO without a database and with a limited functionality. Also, multi-database
-configurations are possible (TODO: write more).
+TANGO without a database and with a limited functionality. When high
+availability is required TANGO may run in a multi-database configuration
+[^01-multi-db].
 
-The hardware is controlled by the operators. They use **graphical client
+[^01-multi-db]: http://www.esrf.eu/computing/cs/tango/tango_doc/kernel_doc/ds_prog/node10.html
+
+The hardware is controlled by human operators. They use **graphical client
 applications**, that connect to the device servers. Typical tasks include
 manipulating device's attributes, observing the status of the hardware and
 collecting logs.
-These client applications are often dedicated to the hardware they operate on,
+Client applications are often dedicated to the hardware they operate on,
 but there are also applications where the operator may adapt the interface by
-selecting which attributes of which devices he wants to control. The applications
-that allow one to control multiple attributes and give an overview of a set of
-the devices and attributes are called *synoptic panels*.
+selecting which attributes of which devices he wants to control. The
+applications that allow one to control multiple attributes and give an overview
+of a set of devices and attributes are called *synoptic panels*.
 
 Although relying heavily on CORBA, TANGO also uses ZeroMQ for **event-based
 communication**. There are events that the client registers for, and is
-notified
-whenever the event occurs, e.g. a value of attribute changes significantly.
-This allows for efficient communication in scenarios where client would
-otherwise constantly poll the device server. Device server developers may
-also fire events when server-initiated communication is required.
+notified whenever the event occurs, e.g. a value of attribute changes
+significantly. This allows for efficient communication in scenarios where
+client would otherwise constantly poll the device server. Device server
+developers may also fire events when server-initiated communication is
+required.
 
-The concepts described in this section are just an overview to give the reader
+The concepts ~~described in this section~~ are just an overview to give the reader
 understanding what TANGO is. Providing an extensive description of TANGO is out
 of scope of this thesis and some simplifications have been made here. All these
 topics are discussed deeply in the TANGO Control System Manual
@@ -77,10 +82,10 @@ topics are discussed deeply in the TANGO Control System Manual
 TANGO deployment usually spans over several machines, connected in a network.
 There are clients and servers. *Clients* are just terminals that allow operators
 to interact with the hardware. *Server* machines are responsible for accessing
-the hardware, and they are the place where *device servers* run. A single machine
-can host any number of device server instances. The details of communication
-are hidden behind the CORBA and TANGO abstractions. Client application
-developer may treat the system just as a pool of device servers.
+the hardware, and they are the place where *device servers* run. A single
+machine can host any number of device server instances. The details of
+communication are hidden behind the CORBA and TANGO abstractions. Client
+application developer may treat the system just as a pool of device servers.
 
 There are some special device servers that do not control any hardware. These
 are the above mentioned database device server, the *DataBaseds*, and the
@@ -89,6 +94,8 @@ authorization service, the *TangoAccessControl* device server. This
 and offers fine-grained permission control, at a single attribute level.
 An overview of the TANGO architecture is depicted in
 [@Fig:01-tango-architecture].
+
+TODO: uproscic rysunek (jak?) + wczesniej zdjecie hardwaru
 
 ![TANGO Control System architecture overview.](
   figures/uml/01-tango-architecture.tex){
@@ -120,8 +127,8 @@ are called widgets nowadays. ATK has been implemented with Java and Swing,
 which makes it portable in desktop environments.
 
 ATK uses Model-View-Controller architecture, and is internally divided into
-two parts, the *ATKCore*, which offers APIs to access the *models* (e.g. devices,
-attributes or commands), and *ATKWidget*, which
+two parts, the *ATKCore*, which offers APIs to access the *models* (e.g.
+devices, attributes or commands), and *ATKWidget*, which
 is a set of Swing-based viewers. There is also the third component, a graphical
 editor called *JDraw*. It provides a way to interactively build a schema of
 the system and then attach TANGO models, like commands or attributes, to it.
@@ -194,10 +201,10 @@ like performance degradation and limitations in UI, but this are the costs
 of increased productivity and maintainability.
 
 **Server-side processing.**
-In the present thesis we focus only on frontend solutions that run solely inside a
-web browser, and any server side processing, like in e.g. PHP, is not necessary.
-The *old* approach, where web pages were generated on the server and returned
-in a HTTP response, is always paired with some Javascript whenever
+In the present thesis we focus only on frontend solutions that run solely
+inside a web browser, and any server side processing, like in e.g. PHP, is not
+necessary. The *old* approach, where web pages were generated on the server and
+returned in a HTTP response, is always paired with some Javascript whenever
 interactivity is required. With the emergence of *single-page web applications*
 [], where each piece of UI is updated independently using AJAX calls or a
 similar technology, the number of use cases for server-side approach
@@ -208,7 +215,8 @@ decreases significantly.
 An Adaptive user interface, or AUI, is an user interface that both adapts, or
 changes its layout depending on the context where it is used and also allows the
 user to perform this adaptation manually.
-Providing the adaptive interface is a key part of maximizing the *user experience*.
+Providing the adaptive interface is a key part of maximizing the *user
+experience*.
 
 **Automatic adaptation.**
 The interface can adapt its layout to the surrounding environement. Fo
@@ -226,8 +234,6 @@ creating personalized views for diffrent users and diffrent situations.
 This approach is supported in TANGO world by the Taurus framework, which offers
 tools for manipulating the UI at runtime.
 
-
-
 ## Goals and objectives
 
 The web-based approach to building user interfaces gains popularity. However,
@@ -239,7 +245,7 @@ applications and GUI frameworks. The thesis goals may be formulated as follows:
   community like ATK or Taurus has; identify any pain points;
 
 * consider the extending and updating of the existing solutions if possible,
-  or **design and develop a new one**, reusing the good parts;
+  or **design and develop a new one**, reusing the ~~good~~ parts;
 
 * if the new solution is delivered, it shall be implemented according to the
   following principles:
@@ -261,3 +267,6 @@ applications and GUI frameworks. The thesis goals may be formulated as follows:
 
   * be lightweight, easy to start with and have a documentation for both
     developers and end users;
+
+TODO: skrocic introduction do 2.5 strony; wyrzucic tekst czy przeniesc?
+
