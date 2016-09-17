@@ -212,14 +212,14 @@ decreases significantly.
 
 ## Adaptive user interfaces
 
-An Adaptive user interface, or AUI, is an user interface that both adapts, or
+An Adaptive user interface, or AUI, is a user interface that both adapts, or
 changes its layout depending on the context where it is used and also allows the
 user to perform this adaptation manually.
 Providing the adaptive interface is a key part of maximizing the *user
 experience*.
 
 **Automatic adaptation.**
-The interface can adapt its layout to the surrounding environement. Fo
+The interface can adapt its layout to the surrounding environment. For
 instance, parts of a widget may be shown or hidden and the widgets may be
 reordered when displayed on e.g. a mobile device. This is critical part behind
 the success of *mobile web* approach to web development. Automatic adaptation
@@ -230,14 +230,14 @@ frameworks for TANGO.
 **Manual adaptation.**
 The second form of adaptive user interface is an interface that may be
 dynamically changed by the user according to their needs. This allows for
-creating personalized views for diffrent users and diffrent situations.
+creating personalized views for different users and different situations.
 This approach is supported in TANGO world by the Taurus framework, which offers
 tools for manipulating the UI at runtime.
 
 ## Goals and objectives
 
 The web-based approach to building user interfaces gains popularity. However,
-it has not beed widely adopted among the TANGO Control System client
+it has not been widely adopted among the TANGO Control System client
 applications and GUI frameworks. The thesis goals may be formulated as follows:
 
 * **evaluate existing solutions (if any) for building TANGO clients for web

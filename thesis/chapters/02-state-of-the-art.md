@@ -40,14 +40,14 @@ for storing Canone configuration. The architecture is depicted in
   #fig:02-canone-arch width=80% }
 
 **User experience.**
-Being unmaintained for almost 10 years, Canone shows its age and may be considered
-a legacy software today. This is reflected in its  limited interaction options
-and the poor overall user experience. The actions performed by the user are most
-of the time submitted to the PHP server, which then forwards the calls to the
-*socket server*. There is a limited support for AJAX in some widgets. These
-two layers of indirection and incorporation of old technologies affects
-user experience and makes Canone unsuitable for today's world of dynamic web
-applications.
+Being unmaintained for almost 10 years, Canone shows its age and may be
+considered a legacy software today. This is reflected in its  limited
+interaction options and the poor overall user experience. The actions performed
+by the user are most of the time submitted to the PHP server, which then
+forwards the calls to the *socket server*. There is a limited support for AJAX
+in some widgets. These two layers of indirection and incorporation of old
+technologies affects user experience and makes Canone unsuitable for today's
+world of dynamic web applications.
 
 **Technological aspects.**
 Canone generates UI on the server side, during HTTP request processing.
@@ -68,20 +68,21 @@ to the browser. It is also the first project that introduced the concept of
 Taurus Web [@taurusweb2013] is part of the Taurus project. Taurus Web provides
 access to TANGO devices from a web browser. The user interface is very limited
 and there are no customizable widgets. The source code is distributed with a
-few demo applications, where just a few basic fields are displayed. The available
-interaction options are very limited. The example GUI panel is presented
-in [@Fig:02-taurusweb-gui].
+few demo applications, where just a few basic fields are displayed. The
+available interaction options are very limited. The example GUI panel is
+presented in [@Fig:02-taurusweb-gui].
 
 ![Taurus Web Interface. (source [@taurusweb2013])](
   figures/images/02-taurusweb-gui.png){
   #fig:02-taurusweb-gui width=60% }
 
 **Architecture.**
-The architecture of the Taurus Web is, like in Canone, divided into a server part
-and a frontend part. The server is written in Python and links the browser-based
-GUI with TANGO using WebSocket connection. This provides a full duplex link that
-may be used for robust integration of TANGO's event system with browser. The frontend
-part requires a WebSocket-enabled browser, but this is not a problem today.
+The architecture of the Taurus Web is, like in Canone, divided into a server
+part and a frontend part. The server is written in Python and links the
+browser-based GUI with TANGO using WebSocket connection. This provides a full
+duplex link that may be used for robust integration of TANGO's event system
+with browser. The frontend part requires a WebSocket-enabled browser, but this
+is not a problem today.
 
 **Technological aspects.**
 According to its creators, Taurus Web is meant to be a framework that can be
@@ -100,11 +101,11 @@ code and **almost no frontend code**.
 Tango REST [@tangorest2015] is a RESTful interface for TANGO. The goal of this
 project was to expose a subset of TANGO APIs over a HTTP protocol. Tango REST
 acts as a proxy between *device servers* and a RESTful client, which may run in
-e.g. a web browser. The system may be configured to **authenticate users against
-an LDAP database**. The project also includes a mobile application for Android
-devices, which provides a Jive-like functionality using Tango REST server. Since
-this application is a native Java application, it is out of scope of this
-discussion.
+e.g. a web browser. The system may be configured to **authenticate users
+against an LDAP database**. The project also includes a mobile application for
+Android devices, which provides a Jive-like functionality using Tango REST
+server. Since this application is a native Java application and cannot run
+in a web browser, it is out of scope of this discussion.
 
 **Technological aspects.**
 Tango REST is implemented as a Java EE servlet. It can be deployed on any
@@ -166,10 +167,10 @@ a `web archive` package, or as a standalone application with embedded Apache
 Tomcat servlet container. User authentication can be performed in the filter
 chain, during request processing. mTango integrates with TangoAccessControl to
 provide authorization. The server performs some optimizations, like caching.
-TANGO events are supported, thanks to the Comet model [].
+TANGO events are supported, thanks to the Comet model [@crane2009].
 
 **mTangoREST client.**
-This client is a Java library that allows applications run run on JVM to
+This client is a Java library that allows applications which run on JVM to
 communicate with *mTangoREST server*. With full access to TCP/IP stack, Java
 applications can use TANGO APIs directly, but in some cases using mTango may
 be required, e.g. in a network where all traffic but HTTP is blocked.
@@ -178,28 +179,31 @@ be required, e.g. in a network where all traffic but HTTP is blocked.
 The Javascript client allows for accessing *mTangoREST server* from a web
 browser. It uses **JavascriptMVC framework** to model abstractions like
 *Request* and *Response* or TANGO-specific proxies, e.g. *DeviceProxy*. It uses
-**JSONP** to overcome the same-origin policy restrictions. The API is
-callback-based which makes it difficult to write clean and maintainable code.
-There is client-side caching and other optimizations are performed.
+**JSONP** to overcome the same-origin policy restrictions which prevent clients
+from accessing servers on different hosts. The API is callback-based which
+makes it difficult to write clean and maintainable code. There is client-side
+caching and other optimizations are performed.
 
 **mTangoUI.**
 mTangoUI is a **JavascriptMVC application** built on top of *jsTangORB*. It
 provides abstractions like *Page*, and widgets like *DeviceAttribute*,
 *DeviceCommand* or *Plot*. One has to use the mTango CLI tools (which are
-wrappers for the JavascriptMVC CLI tools) to create an application's skeleton.
-Then, widgets can be created declaratively, by placing an `mtango:attr` tag on
-a webpage. The `mtango:attr` tag takes one of the following *views* as an
-argument: read-only/read-write text, read-only/read-write list or it may be
-empty (useful for programmatic access). The user may also provide own view. The
-example read-write widget bound to the `double_spectrum` attribute of `TangoTest`
-device is shown in [@Fig:02-mtango-fld_text_rw].
+wrappers for the JavascriptMVC CLI tools) to create a minimal application
+template. Then, widgets can be created declaratively, by placing an
+`mtango:attr` tag on a webpage. The `mtango:attr` tag can be customized by
+using a *view* attribute that controls widget's appearance. Only two views are
+available: a text field and a list, both in read-only and writable variants.
+The user may also implement his own view. The `mtango:img` and `mtango:plot`
+tags can be used to create an image or a plot. The example read-write widget
+bound to the `double_spectrum` attribute of `TangoTest` device is shown in
+[@Fig:02-mtango-fld_text_rw].
 
 ![mTango *read-write list field* widget.](
   figures/images/02-mtango-fld_list_rw.png){
   #fig:02-mtango-fld_text_rw width=70% }
 
-The mTango project is under active development since 2013, with the last release
-dating to August, 2016. The frontend part has been updated in 2015. The
+The mTango project is under active development since 2013, with the last
+release dating to August, 2016. The frontend part has been updated in 2015. The
 server side part is very flexible and may be extended with custom filters when
 deployed on a standalone servlet container. In 2016 the standardization of the
 official TANGO REST API was started by the community, and mTango has been
@@ -217,14 +221,16 @@ development and package management. Another drawback is that `jsTangORB` uses
 JSONP for handling cross origin requests. The canonical way of doing this is to
 implement the CORS protocol. The `jsTangORB` API has been designed to use
 callback functions for asynchronous code. This may lead to writing
-unmaintainable and unreadable code. A solution is to use standard
-*Promise* API, or a polyfill library when older browsers have to be supported.
+unmaintainable and unreadable code [@kambona2013]. A solution for the *callback
+hell* problem is to use standard *Promise* API, or a polyfill library when
+older browsers have to be supported.
 **All these factors make `jsTangoORB` and `mTangoUI` unsuitable for building
 lightweight, modern, standards-driven user interfaces in a web browser**.
 
 Due to the incorporation of an unpopular, third party frontend framework and
-CLI tools, mTango has a steep learning curve that may slow developers down. It is
-hard to spin up a simple application if the user is not familiar with JavascriptMVC.
+CLI tools, mTango has a steep learning curve that may slow developers down. It
+is hard to spin up a simple application if the user is not familiar with
+JavascriptMVC.
 
 ## Summary
 
@@ -290,12 +296,12 @@ since they affect the way software can be extended (e.g. with new widgets).
 
 Table: Comparison of existing solutions. {#tbl:02-summary-comparison}
 
-The solutions discussed in this chapter use different techniques to access TANGO
-infrastructure from within a web browser. Most of them are no longer maintained
-and have been abandoned years ago. Only mTango project  is actively developed
-and is already used in some sites []. It is currently
-the leading technology for integrating TANGO with the browser. The server part is
-flexible, configurable and well-performing. However, the evaluation have showed that
+The solutions discussed in this chapter use different techniques to access
+TANGO infrastructure from within a web browser. Most of them are no longer
+maintained and have been abandoned years ago. Only mTango project is actively
+developed and it's user base is constantly growing making mTango the leading
+technology for integrating TANGO with the browser. The server part is flexible,
+configurable and well-performing. However, the evaluation have showed that
 mTango frontend layer (`jsTangORB` and `mTangoUI` modules) has some drawbacks
 and issues that have to be addressed before it may become the ultimate solution
 for building web-based TANGO client applications.
