@@ -1,7 +1,7 @@
 # State-of-the-art
 
 There have been a few projects aiming to enable development of web-based TANGO
-client applications. Most of them havw been abandoned at early proof-of-concept
+client applications. Most of them have been abandoned at early proof-of-concept
 stage. This chapters presents the existing solutions and evaluates different
 approaches to web-enabled TANGO clients.
 
@@ -54,14 +54,14 @@ Canone generates UI on the server side, during HTTP request processing.
 However, there is no model-view- * framework or even templating engine used.
 All HTML code is printed to the response stream. This makes the code extremely
 unreadable and unmaintainable. When it comes to the frontend part, there is a
-minimal amount of CSS, but tables are used for maintainingi the page layout.
+minimal amount of CSS, but tables are used for maintaining the page layout.
 All these factors make it impossible to extend or reuse any parts of this
 10-year-old project.
 
 All Canone drawbacks described above were acceptable 10 years ago. This is
 a very important project and a first step in moving TANGO client applications
 to the browser. It is also the first project that introduced the concept of
-*proxy server* that connects CORBA-based world and thtat of the web browser.
+*proxy server* that connects CORBA-based world and that of the web browser.
 
 ## Taurus Web
 
@@ -189,7 +189,7 @@ mTangoUI is a **JavascriptMVC application** built on top of *jsTangORB*. It
 provides abstractions like *Page*, and widgets like *DeviceAttribute*,
 *DeviceCommand* or *Plot*. One has to use the mTango CLI tools (which are
 wrappers for the JavascriptMVC CLI tools) to create a minimal application
-template. Then, widgets can be created declaratively, by placing an
+template. Then, widgets can be created declaratively, by placing a
 `mtango:attr` tag on a webpage. The `mtango:attr` tag can be customized by
 using a *view* attribute that controls widget's appearance. Only two views are
 available: a text field and a list, both in read-only and writable variants.
@@ -203,7 +203,7 @@ bound to the `double_spectrum` attribute of `TangoTest` device is shown in
   #fig:02-mtango-fld_text_rw width=70% }
 
 The mTango project is under active development since 2013, with the last
-release dating to August, 2016. The frontend part has been updated in 2015. The
+release dating to August 2016. The frontend part has been updated in 2015. The
 server side part is very flexible and may be extended with custom filters when
 deployed on a standalone servlet container. In 2016 the standardization of the
 official TANGO REST API was started by the community, and mTango has been

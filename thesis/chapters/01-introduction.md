@@ -28,7 +28,7 @@ hardware. This device server is available as a *remote object* that implements
 a well defined interface. TANGO is object-oriented middleware, and each device
 server is characterized by:
 
-* *name* - an unique string in the form of a `group/family/member`;
+* *name* - a unique string in the form of a `group/family/member`;
 * *attributes* - a set of data fields that may be writable or read only,
   e.g a current of a power supply;
 * *commands* - a set of actions that device can perform, e.g. a reset action;
@@ -48,7 +48,7 @@ as a device server, called *DataBaseds*, and interaction is performed using
 commands, e.g. there is a command that returns a list of all the registered
 device servers or a command that exports a new device.
 A MySQL or MariaDB server is required to run TANGO. It is also possible to run
-TANGO without a database and with a limited functionality. When high
+TANGO without a database and with a limited functionality. In cases where high
 availability is required TANGO may run in a multi-database configuration
 [^01-multi-db].
 
@@ -110,7 +110,7 @@ reliable and convenient graphical client applications to do their job
 effectively.
 
 The TANGO API offers abstractions like *DeviceProxy* or *AttributeProxy* that
-allow to access devices programmatically. Using these proxies, a client
+allow accessing devices programmatically. Using these proxies, a client
 application may be built using any technology and language where TANGO is
 available, including **C++**, **Java** and **Python**. Most of the client
 applications have share a common goals and requirements. They also use common
