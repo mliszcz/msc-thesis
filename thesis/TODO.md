@@ -5,3 +5,6 @@
 * Tbl. -> Table
 * poprawic formatowanie tabelek
 * referencje do rozdzialow -> Chapter X (to samo Appendix)
+* glossary:
+  * end-user
+
