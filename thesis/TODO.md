@@ -4,3 +4,4 @@
 * przypisy [^1] vs wpisy w bibliografii
 * Tbl. -> Table
 * poprawic formatowanie tabelek
+* referencje do rozdzialow -> Chapter X (to samo Appendix)
