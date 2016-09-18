@@ -7,4 +7,4 @@
 * referencje do rozdzialow -> Chapter X (to samo Appendix)
 * glossary:
   * end-user
-
+* duzo jest zdan gdzie *The* jest pierwszym slowem kilka razy z rzedu
