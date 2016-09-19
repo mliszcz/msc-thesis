@@ -17,3 +17,4 @@
 * glossary:
   * end-user
 * duzo jest zdan gdzie *The* jest pierwszym slowem kilka razy z rzedu
+* in Figure, on Listing ?
