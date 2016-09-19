@@ -206,9 +206,9 @@ inside a web browser, and any server side processing, like in e.g. PHP, is not
 necessary. The *old* approach, where web pages were generated on the server and
 returned in a HTTP response, is always paired with some Javascript whenever
 interactivity is required. With the emergence of *single-page web applications*
-[], where each piece of UI is updated independently using AJAX calls or a
-similar technology, the number of use cases for server-side approach
-decreases significantly.
+[@mesbah2007migrating], where each piece of UI is updated independently using
+AJAX calls or a similar technology, the number of use cases for server-side
+approach decreases significantly.
 
 ## Adaptive user interfaces
 
