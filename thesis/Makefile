@@ -7,7 +7,8 @@ FLAGS=--number-sections \
 			--tab-stop=2
 
 OUTDIR=build
-OUTFILE=$(OUTDIR)/msc-thesis-michal-liszcz.pdf
+PROJECT=msc-thesis-michal-liszcz
+OUTFILE=$(OUTDIR)/$(PROJECT).pdf
 REFFILE=$(OUTDIR)/references.bib
 
 HEADER=header.yaml
@@ -29,10 +30,29 @@ clean:
 	rm -f $(OUTDIR)/*
 	rm -rf $(UML_OUTDIR)/*
 
-$(OUTFILE): $(HEADER) $(CHAPTERS) $(REFFILE) $(UML_DIAGRAMS) | $(OUTDIR)
+# $(OUTFILE): $(HEADER) $(CHAPTERS) $(REFFILE) $(UML_DIAGRAMS) | $(OUTDIR)
+#     pandoc $(FLAGS) \
+#         -o $@ \
+#         $(HEADER) $(CHAPTERS)
+
+# due to the use of glossaries, unsupported by pandoc,
+# pandoc generates only .tex file (with included citations)
+# this file is then compiled using standard latex tools
+
+$(OUTDIR)/$(PROJECT).tex: $(HEADER) $(CHAPTERS) $(REFFILE) $(UML_DIAGRAMS) | $(OUTDIR)
 	pandoc $(FLAGS) \
 		-o $@ \
 		$(HEADER) $(CHAPTERS)
+
+$(OUTDIR)/$(PROJECT).pdf: $(OUTDIR)/$(PROJECT).tex
+	ln -sf ../documentclass $(OUTDIR)/
+	ln -sf ../figures $(OUTDIR)/
+	cd $(OUTDIR); pdflatex --interaction=batchmode $(PROJECT)
+	# cd $(OUTDIR); bibtex $(PROJECT)
+	cd $(OUTDIR); makeglossaries -q $(PROJECT)
+	cd $(OUTDIR); pdflatex --interaction=batchmode $(PROJECT)
+	cd $(OUTDIR); makeglossaries -q $(PROJECT) # rerun for correct page numbering
+	cd $(OUTDIR); pdflatex --interaction=batchmode $(PROJECT)
 
 $(REFFILE): $(REFERENCES) | $(OUTDIR)
 	cat $^ > $@
