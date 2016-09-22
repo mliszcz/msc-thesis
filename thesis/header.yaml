@@ -48,7 +48,7 @@ header-includes:
   - \usepackage{caption}
   - \usepackage{subcaption}
   - \expandafter\def\csname ver@subfig.sty\endcsname{}
-  - \usepackage[xindy,toc]{glossaries}
+  - \usepackage[xindy,toc,nonumberlist]{glossaries}
   - \makeglossaries
   - \usepackage[xindy]{imakeidx}
   - \makeindex
