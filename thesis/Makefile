@@ -45,14 +45,16 @@ $(OUTDIR)/$(PROJECT).tex: $(HEADER) $(CHAPTERS) $(REFFILE) $(UML_DIAGRAMS) | $(O
 		$(HEADER) $(CHAPTERS)
 
 $(OUTDIR)/$(PROJECT).pdf: $(OUTDIR)/$(PROJECT).tex
-	ln -sf ../documentclass $(OUTDIR)/
-	ln -sf ../figures $(OUTDIR)/
+	cd $(OUTDIR); ln -sf ../documentclass
+	cd $(OUTDIR); ln -sf ../figures
 	cd $(OUTDIR); pdflatex --interaction=batchmode $(PROJECT)
 	# cd $(OUTDIR); bibtex $(PROJECT)
 	cd $(OUTDIR); makeglossaries -q $(PROJECT)
 	cd $(OUTDIR); pdflatex --interaction=batchmode $(PROJECT)
 	cd $(OUTDIR); makeglossaries -q $(PROJECT) # rerun for correct page numbering
 	cd $(OUTDIR); pdflatex --interaction=batchmode $(PROJECT)
+	cd $(OUTDIR); rm documentclass
+	cd $(OUTDIR); rm figures
 
 $(REFFILE): $(REFERENCES) | $(OUTDIR)
 	cat $^ > $@
