@@ -471,9 +471,10 @@ is shown in [@Fig:03-tangojs-sequence-widget-polling]. Some widgets, like
 `tangojs-trend` or `tangojs-form` offers support for multiple models, which
 makes actions flow even more complex.
 
-![(Re)Initialization of a widget upon model update.](
+![Interactions of a widget with other modules during its lifecycle. Message
+details omitted.](
   figures/uml/03-tangojs-sequence-widget-polling.tex){
-  #fig:03-tangojs-sequence-widget-polling width=90% }
+  #fig:03-tangojs-sequence-widget-polling width=100% }
 
 ## TangoJS Panel - synoptic panel application
 

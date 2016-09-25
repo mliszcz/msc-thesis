@@ -17,19 +17,22 @@ box "TangoJS Connector" #LightBlue
 	participant Connector
 end box
 
-participant "Backend server" as Backend
+participant "Backend" as Backend
 
 activate Widget
 
 note over Widget
-  initialization or reinitialization triggered
+  after initialization or
+  reinitialization triggered
 end note
 
+|||
+
 create AttributeProxy
-Widget -> AttributeProxy: << new >>
+Widget -> AttributeProxy: <<new>>
 
 create DeviceProxy
-AttributeProxy -> DeviceProxy: << new >>
+AttributeProxy -> DeviceProxy: <<new>>
 
 opt if configuration is requred
 
@@ -42,7 +45,8 @@ opt if configuration is requred
   DeviceProxy -> Connector: get_device_attr_info()
   activate Connector
 
-  Connector ->> Backend: << request >>
+  Connector ->> Backend: << req >>
+  activate Backend
 
   Connector --> DeviceProxy:
   deactivate Connector
@@ -56,6 +60,7 @@ opt if configuration is requred
   |||
 
   Backend -->> Widget: << response >>
+  deactivate Backend
 
   |||
 
@@ -68,13 +73,14 @@ loop on polling timer expiration
   Widget -> AttributeProxy: read()
   activate AttributeProxy
 
-  AttributeProxy -> DeviceProxy: read_attr(')
+  AttributeProxy -> DeviceProxy: read_attr()
   activate DeviceProxy
 
   DeviceProxy -> Connector: read_device_attr()
   activate Connector
 
-  Connector ->> Backend: << request >>
+  Connector ->> Backend: << req >>
+  activate Backend
 
   Connector --> DeviceProxy:
   deactivate Connector
@@ -88,6 +94,7 @@ loop on polling timer expiration
   |||
 
   Backend -->> Widget: << response >>
+  deactivate Backend
 
   |||
 
