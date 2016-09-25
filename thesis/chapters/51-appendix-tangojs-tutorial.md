@@ -6,8 +6,12 @@ The one built in this chapter visualizes two scalar attributes using the
 *trend* widget. Additionally, value of the writable one can be changed by the
 user with the *line-edit *widget.
 
-This process is visualized in []. Description of each step is provided in the
-following sections.
+This process is visualized in [@Fig:51-tutorial-create-app-sequence].
+Description of each step is provided in the following sections.
+
+![Steps required to create basic TangoJS application.](
+  figures/uml/51-tutorial-create-app-sequence.tex){
+  #fig:51-tutorial-create-app-sequence width=100% }
 
 ## Configuring the backend
 
@@ -21,8 +25,6 @@ development. It may be used with the existing TANGO deployment. The rest of
 this section shows how to configure mTango manually from scratch.
 
 [^A-mtango-docker]: <https://hub.docker.com/r/mliszcz/mtango/>
-
-TODO: rysunek z blokami
 
 **Deploying mTango on Tomcat.**
 A servlet container, like Apache Tomcat[^A-tomcat], is required to make mTango

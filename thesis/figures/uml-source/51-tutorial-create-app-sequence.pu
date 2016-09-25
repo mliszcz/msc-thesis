@@ -1,0 +1,49 @@
+@startuml
+start
+
+:Choose and configure backend;
+note right
+  This also determines //TangoJS Connector//.
+  ====
+  Currently only //mTango// is supported.
+end note
+
+:Configure Node.js;
+
+if (Starting from a scratch?) then (yes)
+  :Create empty Node.js project
+   * add ""http-server"" dependency;
+  :Create empty HTML file;
+  :In ""<head>"" section:
+   * load //TangoJS Core//
+   * load appropriate //TangoJS Connector//
+   * load desired widgets
+   * create connector instance
+   * pass connector to
+     ""tangojs.core.setConnector"";
+  : Declare widgets in ""<body>"" section, e.g:
+   ""<tangojs-line-edit model="/sys/tg_test/1"/>"";
+else (no)
+  :Modify //TangoJS WebApp Template//;
+endif
+
+:Run local server
+ ""./node_modules/.bin/http-server"";
+note right
+  This is required to bypass CORS issues.
+  You may omit this steps if your browser
+  allows for XHRs to ""file://"" resources
+  (e.g. Mozilla Firefox supports this).
+end note
+
+
+:Visit ""http://localhost:8080"" in your browser;
+note right
+  Or just open the HTML file in your browser
+  (see note above).
+end note
+
+
+stop
+
+@enduml
