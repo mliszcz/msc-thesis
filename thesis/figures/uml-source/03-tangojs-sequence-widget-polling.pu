@@ -1,0 +1,100 @@
+@startuml
+
+participant Widget
+participant DeviceProxy
+participant Connector
+
+box " TangoJS WebComponents" #LightGreen
+  participant Widget
+end box
+
+box "TangoJS Core" #LightPink
+  participant AttributeProxy
+  participant DeviceProxy
+end box
+
+box "TangoJS Connector" #LightBlue
+	participant Connector
+end box
+
+participant "Backend server" as Backend
+
+activate Widget
+
+note over Widget
+  initialization or reinitialization triggered
+end note
+
+create AttributeProxy
+Widget -> AttributeProxy: << new >>
+
+create DeviceProxy
+AttributeProxy -> DeviceProxy: << new >>
+
+opt if configuration is requred
+
+  Widget -> AttributeProxy: get_info()
+  activate AttributeProxy
+
+  AttributeProxy -> DeviceProxy: get_attr_info()
+  activate DeviceProxy
+
+  DeviceProxy -> Connector: get_device_attr_info()
+  activate Connector
+
+  Connector ->> Backend: << request >>
+
+  Connector --> DeviceProxy:
+  deactivate Connector
+
+  DeviceProxy --> AttributeProxy:
+  deactivate DeviceProxy
+
+  AttributeProxy --> Widget:
+  deactivate AttributeProxy
+
+  |||
+
+  Backend -->> Widget: << response >>
+
+  |||
+
+  Widget -> Widget: << configuration >>
+
+end
+
+loop on polling timer expiration
+
+  Widget -> AttributeProxy: read()
+  activate AttributeProxy
+
+  AttributeProxy -> DeviceProxy: read_attr(')
+  activate DeviceProxy
+
+  DeviceProxy -> Connector: read_device_attr()
+  activate Connector
+
+  Connector ->> Backend: << request >>
+
+  Connector --> DeviceProxy:
+  deactivate Connector
+
+  DeviceProxy --> AttributeProxy:
+  deactivate DeviceProxy
+
+  AttributeProxy --> Widget:
+  deactivate AttributeProxy
+
+  |||
+
+  Backend -->> Widget: << response >>
+
+  |||
+
+  Widget -> Widget: << UI update >>
+
+end
+
+deactivate Widget
+
+@enduml

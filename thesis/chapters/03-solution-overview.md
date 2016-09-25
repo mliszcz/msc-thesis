@@ -1,4 +1,4 @@
-# Solution Overview { #sec:solution-overview }
+# Solution and Implementation { #sec:solution-overview }
 
 Each of the existing solutions presented in the previous chapter has some
 drawbacks. There is no *best choice* that will suit everyone's needs. **To
@@ -257,7 +257,8 @@ The module is internally divided into two packages: the `api` and `tango`. The
 *Device*, *Attribute* and *Command* entities. The `tango` package has been
 generated from the TANGO IDL and provides the common TANGO data types.
 Event-related APIs are unavailable, since **events are not currently
-supported**.
+supported**. A class diagram of this module is presented in
+[@Fig:03-tangojs-internal-core].
 
 [^03-umd-module]: <https://github.com/umdjs/umd>
 
@@ -442,6 +443,37 @@ TODO: rysunki przegrupowac w chmurki
 * `tangojs-form` - displays a group of widgets for multiple models. The best
   matching widget is chosen for each model depending on its type and
   read/read-write mode.
+
+## Interworking between TangoJS layers
+
+TangoJS modules are separated and have different responsibilities. However,
+even simple use cases like reading device's state or setting an attribute,
+require interactions between all the layers.
+
+When it comes to the programmable access, application developer typically
+interacts with the `TangoJS Core` layer. All actions are passed down through
+the TangoJS stack until they reach the *Connector* layer, where any network
+communication occurs. In the connector, a \gls{promise} of result is always
+returned. It is later resolved to a concrete value. A scenario with reading
+a single attribute is presented in [@Fig:03-tangojs-sequence-read]. Other use
+cases, like writing value to an attribute, reading device's state or invoking
+a command follow similar pattern.
+
+![Reading value of an attribute using TangoJS Core API.](
+  figures/uml/03-tangojs-sequence-read.tex){
+  #fig:03-tangojs-sequence-read width=90% }
+
+More complex scenarios are often implemented in widgets. Widgets are
+usually bound to TANGO \glspl{model}. Upon initialization or reinitialization
+widget has to fetch its configuration from the device and then periodically
+poll the device to update its value. An abstract widget performing this process
+is shown in [@Fig:03-tangojs-sequence-widget-polling]. Some widgets, like
+`tangojs-trend` or `tangojs-form` offers support for multiple models, which
+makes actions flow even more complex.
+
+![(Re)Initialization of a widget upon model update.](
+  figures/uml/03-tangojs-sequence-widget-polling.tex){
+  #fig:03-tangojs-sequence-widget-polling width=90% }
 
 ## TangoJS Panel - synoptic panel application
 

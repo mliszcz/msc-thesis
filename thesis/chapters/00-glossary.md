@@ -176,6 +176,13 @@
     different technologies. It often works in distributed environments}
 }
 
+\newglossaryentry{model}
+{
+  name=model,
+  description={is, in \Gls{taurus} framework, an abstract entity that
+    represents a physical device or its attribute}
+}
+
 \newglossaryentry{model-view}
 {
   name={Model-View-*},

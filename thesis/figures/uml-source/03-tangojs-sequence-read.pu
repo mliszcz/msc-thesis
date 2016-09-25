@@ -1,0 +1,43 @@
+@startuml
+
+actor User
+participant DeviceProxy
+participant Connector
+
+box " TangoJS Core  " #LightPink
+  participant DeviceProxy
+end box
+
+box "TangoJS Connector" #LightBlue
+	participant Connector
+end box
+
+participant "Backend server" as Backend
+
+create DeviceProxy
+User -> DeviceProxy: new DeviceProxy('sys/tg_test/1')
+
+User -> DeviceProxy: read_attribute('long_scalar')
+activate DeviceProxy
+
+DeviceProxy -> Connector: read_device_attribute(\n    'sys/tg_test/1', 'long_scalar')
+activate Connector
+
+Connector ->> Backend: << request >>
+activate Backend
+
+Connector --> DeviceProxy: Promise<DeviceAttribute>
+deactivate Connector
+
+DeviceProxy --> User: Promise<DeviceAttribute>
+deactivate DeviceProxy
+
+...
+
+Backend -->> User: << response >>
+note right of User
+  response triggers Promise resolution
+end note
+deactivate Backend
+
+@enduml
