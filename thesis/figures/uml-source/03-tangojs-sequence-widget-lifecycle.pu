@@ -1,0 +1,75 @@
+@startuml
+
+participant Widget
+participant DeviceProxy
+
+box " TangoJS WebComponents" #LightGreen
+  participant Widget
+end box
+
+box "TangoJS Core" #LightPink
+  participant DeviceProxy
+end box
+
+note over Widget: Widget has been created
+
+[-> Widget: createdCallback
+activate Widget
+
+group Initialization
+opt initialization required
+  create DeviceProxy
+  Widget ->> DeviceProxy: << create >>
+
+  Widget ->> DeviceProxy: get_info()
+  activate DeviceProxy
+
+  DeviceProxy ->> Widget:
+  deactivate DeviceProxy
+
+  Widget -> Widget: << configuration >>
+end
+end
+
+
+group Event loop
+par
+
+  loop polling timer expiration
+    Widget ->> DeviceProxy: read_attr()
+    activate DeviceProxy
+
+    DeviceProxy ->> Widget:
+    deactivate DeviceProxy
+
+    Widget -> Widget: << UI update >>
+  end
+
+  |||
+
+else
+
+  |||
+
+  [->>Widget: << user input >>
+  Widget ->> DeviceProxy: write_attr()
+  activate DeviceProxy
+  DeviceProxy ->> Widget:
+  deactivate DeviceProxy
+
+end
+end
+
+...
+
+[-> Widget: attributeChangedCallback
+
+note over Widget: 'model' or 'poll-period' has changed
+
+ref over Widget, DeviceProxy: Initialization
+ref over Widget, DeviceProxy: Event loop
+
+
+deactivate Widget
+
+@enduml

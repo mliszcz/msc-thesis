@@ -442,6 +442,35 @@ TODO: rysunki przegrupowac w chmurki
   matching widget is chosen for each model depending on its type and
   read/read-write mode.
 
+**Widget's lifecycle.**
+Behavior of most widgets is similar. Each one represents the status of a
+*device server* or a value of *device server*'s attribute.
+Upon initialization the widget is
+configured according to the HTML attributes specified, e.g. the `model`
+attribute. Then, with help of lower TangoJS layers, the widget starts polling
+the *device server*. Widget updates its interface periodically, using the latest
+data received from the *device server*, e.g. `tangojs-trend` draws a new point
+on plot. Most attributes of a widget may be changed dynamically, after the
+widget has been created. Change of some attributes, like mentioned `model` or
+`poll-period` leads to widget's reinitialization. During reinitialization,
+polling loop is usually restarted.
+
+Apart from constantly updating its layout, a widget also handles user's input.
+`tangojs-line-edit`, for instance, reads value entered by used, converts it
+to a TANGO data type and sends it to the *device server*. This is performed
+independently of layout updates.
+
+All widgets are custom HTML elements. As such, their lifecycle is controlled
+by callbacks defined in *Custom Elements* specification. Widget initialization
+is handled in `createdCallback`. Reinitialization due to attribute change is
+performed in `attributeChangedCallback`. A sequence diagram with widget's
+lifecycle is presented in [@Fig:03-tangojs-sequence-widget-lifecycle]. Widgets
+and *Custom Elements* are covered more deeply in [] and [] chapters.
+
+![Widget's lifecycle. Interactions with *TangoJS Core* has been simplified.](
+  figures/uml/03-tangojs-sequence-widget-lifecycle.tex){
+  #fig:03-tangojs-sequence-widget-lifecycle width=90% }
+
 ## Interworking between TangoJS layers
 
 TangoJS modules are separated and have different responsibilities. However,
