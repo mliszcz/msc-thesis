@@ -35,9 +35,6 @@ lof: true
 toc: true
 toc-depth: 1
 
-nocite: |
-  @*
-
 header-includes:
   - \supervisor{dr inż. Włodzimierz Funika}
   - \major{Informatyka}

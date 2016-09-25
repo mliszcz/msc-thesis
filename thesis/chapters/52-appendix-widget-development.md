@@ -7,7 +7,7 @@ proceed.
 
 ## *TangoJS WebComponents* utilities
 
-TangoJS ships with utilities that facilitate development of new widgets. The
+TangoJS provides utilities that facilitate development of new widgets. The
 APIs described here are completely optional to use and are provided just for
 convenience. One may start with a blank HTML file as well.
 

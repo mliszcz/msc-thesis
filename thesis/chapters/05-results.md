@@ -89,7 +89,7 @@ frontend libraries.
 Feature | Canone | Taurus Web | mTango | TangoJS
 ---------------|---------------|---------------|---------------|---------------
 Has widgets | yes, (limited AJAX support) | no | yes, (5 default views) | **yes, (7 base widgets + variants)**
-Ships with interactive *synoptic panel* | yes | N/A | no | **yes, (*TangoJS Panel*)**
+Has interactive *synoptic panel* | yes | N/A | no | **yes, (*TangoJS Panel*)**
 Supports user accounts | yes, (database) | no | yes, (multiple options) | **N/A, (depends on backend)**
 Supports TANGO events | no | no | yes | **no**
 Backend server technology | PHP, Python | Python, Tornado, WebSocket | Java, RESTEasy, HTTP | **any possible (depends on used connector)**
@@ -125,7 +125,7 @@ experts who provide a usability feedback.
 
 The heuristic evaluation is relatively a simple method and produces a
 reasonable outcome. It has been chosen to evaluate TangoJS' usability and user
-experience. The 10 heuristics, as formulated by Nielsen[@nielsen1994usability]:
+experience. The 10 heuristics, as formulated by Nielsen [@nielsen1994usability]:
 
 > 1. **Visibility of system status:**
 >    *«The system should always keep users informed about what is going on,

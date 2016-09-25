@@ -151,7 +151,7 @@ set of widgets useful in building client applications. mTango allows for user
 The mTango architecture consists of a few loosely coupled components. There is
 a server part, called *mTangoREST server*, which interacts directly with TANGO
 and exposes its APIs via a RESTful gateway. The clients connect directly to
-this server via HTTP protocol. mTango ships with two clients. The First one is
+this server via HTTP protocol. mTango offers two clients. The first one is
 called *mTangoREST client* and is written in Java. The second client, called
 *jsTangORB* is written in Javascript and runs in web browsers. On top of this
 browser-based client there is a UI layer, called *mTangoUI*. The architecture
@@ -256,7 +256,7 @@ since they affect the way software can be extended (e.g. with new widgets).
 +------------+-----------+------------+------------+------------+------------+
 |            |           |            |            |            |            |
 +------------+-----------+------------+------------+------------+------------+
-| Ships with | yes       | N/A        | N/A        | N/A        | no         |
+| Has        | yes       | N/A        | N/A        | N/A        | no         |
 | interactive|           |            |            |            |            |
 | *synoptic  |           |            |            |            |            |
 | panel*     |           |            |            |            |            |

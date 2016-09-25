@@ -68,7 +68,7 @@ may be developing a *Connector* for a new backend server or creating a new
 widget that will integrate neatly with the rest of *TangoJS Web Components*
 modules.
 
-**Learning from the best.**
+**Using well-proven concepts.**
 Some of the existing web-based TANGO solutions provide configurable widgets
 that can be used as building blocks for larger graphical client applications,
 like *synoptic panels*. The leading solution for desktop TANGO clients, the
@@ -175,9 +175,9 @@ TANGO API is required, one can use *TangoJS Core*. *TangoJS Connector*
 implementations are used only by the core layer and are not exposed directly
 to the developer. The backend server is not part of TangoJS. Any backend may
 be used to access TANGO infrastructure, provided that a dedicated *Connector*
-is available. TangoJS ships with two default connectors: an in-memory *mock
-connector* and a **mTango connector** which allows to use mTango as a backend
-for TangoJS. The architecture of TangoJS is depicted in
+is available. Currently there are two connectors to choose from: an in-memory
+*mock connector* and a **mTango connector** which allows to use mTango as a
+backend for TangoJS. The architecture of TangoJS is depicted in
 [@Fig:03-tangojs-architecture-simple]. Below we briefly discuss each layer.
 
 ![An overview of TangoJS high-level architecture.](
@@ -196,8 +196,6 @@ time there are two separate components in this layer: a server-side part and
 a client-side part. TangoJS specifies only the interface of the client-side
 part. How the client communicates with the server is an implementation detail
 and depends on used backend.
-TangoJS ships with a mTango connector, which interacts with mTango RESTful
-server using standard Fetch API available in browsers.
 
 **TangoJS Core.**
 This is a package that brings all the TANGO datatypes, structures,
@@ -310,8 +308,8 @@ secure these credentials and re-instantiate the connector when the user's
 identity changes.
 
 **In-memory mock connector.**
-TangoJS ships with a mocked connector implementation, which mimics a real TANGO
-infrastructure with in-memory hierarchy of objects. There is no network
+TangoJS also offers a mocked connector implementation, which mimics a real
+TANGO infrastructure with in-memory hierarchy of objects. There is no network
 communication performed. This approach is useful for e.g. automated testing
 the upper layers. This connector is flexible and can be configured with a list
 of *device* objects, where each device exposes some attributes and commands.

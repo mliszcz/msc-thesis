@@ -3,10 +3,11 @@
 TangoJS has been designed to be easy to start with. Only a basic experience
 in web development is required to build a simple TangoJs application.
 The one built in this chapter visualizes two scalar attributes using the
-*trend* widget. Additionally, the writable one can be changed using the
-*line-edit *widget.
+*trend* widget. Additionally, value of the writable one can be changed by the
+user with the *line-edit *widget.
 
-This process is described in following steps.
+This process is visualized in []. Description of each step is provided in the
+following sections.
 
 ## Configuring the backend
 
@@ -59,7 +60,7 @@ Cross Origin Resource Sharing has to be enabled in the container to allow
 TangoJS access the mTango RESTful API. With the container shut down, one should
 edit the `web.xml` file located where the mTango archive has been extracted.
 A new filter has to be appended to the filter chain. Tomcat, like most web
-containers, ships with a configurable filter that can handle the CORS
+containers, offers a configurable filter that can handle the CORS
 preflights. Apart from configuring the filter, the OPTIONS request should be
 allowed to pass the security constraints. This requires modifications to the
 default security configuration, also in the `web.xml` file. The changes are
