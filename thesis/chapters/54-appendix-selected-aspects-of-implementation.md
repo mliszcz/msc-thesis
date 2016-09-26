@@ -1,4 +1,4 @@
-# Selected Aspects of Implementation
+# Selected Aspects of Implementation { #sec:selected-aspects-of-implementation }
 
 This chapter discusses the web technologies used by TangoJS. The focus is
 put on the frontend-related aspects, like layout, styling and componentization.
@@ -241,7 +241,7 @@ the promise. This allows asynchronous functions to return a value, instead of
 accepting a callback as an argument. The promises are chainable which means
 that the result of previous computation may be passed to the next one. The
 errors may safely flow through the chain and should be caught at the end.
-The example code is shown at [@Lst:D-es-promise].
+The example code is shown on [@Lst:D-es-promise].
 
 ```{#lst:D-es-promise .javascript .numberLines}
 (new Promise((resolve, reject) => {

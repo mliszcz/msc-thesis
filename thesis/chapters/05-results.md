@@ -1,4 +1,4 @@
-# Results
+# Results { #sec:results }
 
 In this chapter we discuss the outcomes of the presented work, review
 fulfillment of the initial goals and summarize the achievements. TangoJS is

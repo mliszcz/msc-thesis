@@ -1,4 +1,4 @@
-# CORBA IDL to Javascript translation
+# CORBA IDL to Javascript translation { #sec:corba-idl-to-js }
 
 One of TangoJS's goals was to bring the standard TANGO data types to the
 browser. These types represent abstractions that TANGO developers are already

@@ -2,7 +2,7 @@
 
 Each of the existing solutions presented in the previous chapter has some
 drawbacks. There is no *best choice* that will suit everyone's needs. **To
-address these issues and fulfill the goals ~~discussed~~ in [Introduction],
+address these issues and fulfill the goals ~~discussed~~ in [@Sec:introduction],
 the TangoJS project has been developed.**
 
 This chapter describes the implemented solution in terms of the formulated
@@ -32,10 +32,10 @@ All these components are described in detail later in this chapter.
 
 ## Design Goals
 
-Apart from the general goals formulated in [Introduction], a set of design goals
-has been established before TangoJS development has started. These goals aim to
-meet the challenges where the existing solutions have failed. The goals are
-mostly related to the technological aspects of implementation.
+Apart from the general goals formulated in [@Sec:introduction], a set of design
+goals has been established before TangoJS development has started. These goals
+aim to meet the challenges where the existing solutions have failed. The goals
+are mostly related to the technological aspects of implementation.
 
 **Compliance with the latest web standards.**
 The Web started to evolve faster and faster in recent years. A lot of
@@ -152,9 +152,7 @@ TangoJS has been written using the latest standard of Javascript language,
 called ECMAScript 2015. It brings a lot of new features and goodness known
 from e.g. CoffeeScript. It also works in all modern browsers without a need for
 transcompilation to ECMAScript 5. The ECMAScript 2015 and its role in TangoJS
-is discussed in Chapter 4.
-
-TODO: zmienic na referencje do Chapter 4
+is discussed in [@Sec:results] and [@Sec:selected-aspects-of-implementation].
 
 **Select a popular platform.**
 Node.js has been chosen as both the development and target platform for
@@ -276,7 +274,7 @@ in [@Fig:03-tangojs-internal-connector].
   #fig:03-tangojs-internal-connector width=60% }
 
 A concrete **connector implementation has to be plugged into TangoJS**, before
-it may be used. This process is shown at [@Lst:03-connector-setup].
+it may be used. This process is shown on [@Lst:03-connector-setup].
 There is always only one connector active. The upper layer, which is *TangoJS
 Core*, forwards most calls to this connector and awaits for the results. Since
 the core knows nothing about the backend used, it cannot perform any caching

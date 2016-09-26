@@ -1,4 +1,4 @@
-# Getting started with TangoJS
+# Getting started with TangoJS { #sec:tangojs-tutorial }
 
 TangoJS has been designed to be easy to start with. Only a basic experience
 in web development is required to build a simple TangoJs application.

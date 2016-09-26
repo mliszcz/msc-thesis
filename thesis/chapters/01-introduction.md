@@ -1,4 +1,4 @@
-# Introduction
+# Introduction { sec:introduction }
 
 This chapter provides an introduction to the field of research and briefly
 describes problems addressed in this thesis. Later on the thesis goals are

@@ -1,4 +1,4 @@
-# State-of-the-art
+# State-of-the-art { sec:state-of-the-art }
 
 There have been a few projects aiming to enable development of web-based TANGO
 client applications. Most of them have been abandoned at early proof-of-concept

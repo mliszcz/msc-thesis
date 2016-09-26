@@ -1,4 +1,4 @@
-# Conclusions
+# Conclusions { #sec:conclusions }
 
 It's there to conclude the thesis, the research performed and the solution
 delivered.

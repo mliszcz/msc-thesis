@@ -14,8 +14,9 @@
 * [done] spacje przy cytowaniu[]
 * [done] uzupelnic brakujace cytaty
 * przypisy [^1] vs wpisy w bibliografii
-* Tbl. -> Table
+* [reject] Tbl. -> Table
 * poprawic formatowanie tabelek
-* referencje do rozdzialow -> Chapter X (to samo Appendix)
+* [done] referencje do rozdzialow -> Chapter X (to samo Appendix)
+  Wszedzie Sec. X
 * duzo jest zdan gdzie *The* jest pierwszym slowem kilka razy z rzedu
-* in Figure, on Listing ?
+* [done] in Figure, on Listing
