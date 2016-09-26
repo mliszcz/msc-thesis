@@ -245,7 +245,7 @@ to a value or may be rejected in error case. The use of promises may save the
 user from the situations like *calback hell*.
 
 **Module structure.**
-The *TangoJS Core* **is distributed as an UMD module** [^03-umd-module]. This
+The *TangoJS Core* **is distributed as an UMD module** [@www-umd]. This
 makes it easy to load it in different environments, like Node.js or web browser.
 When loaded in the browser, it is attached to the global object `tangojs.core`.
 The module is internally divided into two packages: the `api` and `tango`. The
@@ -255,8 +255,6 @@ generated from the TANGO IDL and provides the common TANGO data types.
 Event-related APIs are unavailable, since **events are not currently
 supported**. A class diagram of this module is presented in
 [@Fig:03-tangojs-internal-core].
-
-[^03-umd-module]: <https://github.com/umdjs/umd>
 
 [Class diagram of *TangoJS Core* package.](
   figures/uml/03-tangojs-internal-core.tex){

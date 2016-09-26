@@ -26,7 +26,7 @@ fontsize: 12pt
 papersize: a4
 
 bibliography: build/references.bib
-csl: documentclass/archives-of-computational-methods-in-engineering.csl
+csl: documentclass/ieee.csl
 
 link-citations: true
 codeBlockCaptions: true

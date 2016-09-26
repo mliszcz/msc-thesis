@@ -31,8 +31,8 @@ write a simple web application using TangoJS, one have to write nearly no
 Javascript code.
 
 **Framework-less solutions.**
-From many available frontend frameworks, like Angular [@wwwAngular] or
-React [@wwwReact], TangoJS chooses
+From many available frontend frameworks, like Angular [@www-angular] or
+React [@www-react], TangoJS chooses
 none. Developing even complex web applications using plain DOM APIs is possible
 nowadays. Features once available only in libraries like jQuery have been
 incorporated into the DOM. A one, popular argument against this framework-less
@@ -45,7 +45,7 @@ TODO: jest jakas uwaga odnosnie tego paragrafu
 **Componentized approach.**
 The recent emergence of *Web Components* standard is going to put a definitive
 end to monolithic web applications. The componentized approach is already used
-in frameworks like Angular 2, React or Polymer [@wwwPolymer], but *Web
+in frameworks like Angular 2, React or Polymer [@www-polymer], but *Web
 Components* allow to
 achieve the same effects, when not being tied to any particular framework.
 The component-based web applications are more maintainable than a classic

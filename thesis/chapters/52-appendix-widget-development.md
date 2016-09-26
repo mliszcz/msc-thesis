@@ -55,12 +55,10 @@ below.
 
 **Functions from the `tangojs.web.util.mixins` package.**
 There are many ways how Javascript mixins can be implemented. TangoJS uses the
-convention proposed in [^B-url-mixins]. The mixins are just functions that
+convention proposed in [@croll2011]. The mixins are just functions that
 append various methods to a given class prototype. This prototype is passed
 as `this`, thus mixing-in has to be performed using, e.g. a `call` method, like
 ```mixin.call(prototype, args...)```.
-
-[^B-url-mixins]: <https://javascriptweblog.wordpress.com/2011/05/31/a-fresh-look-at-javascript-mixins/>
 
 * ```javascript
   export function withPolledModel ()

@@ -21,7 +21,7 @@ are discussed next.
 [^D-url-webcomponents-polyfills]: <http://webcomponents.org/polyfills/>
 
 **HTML Templates.**
-The specification for HTML Templates[^D-url-webcomponents-templates] has been
+The specification for HTML Templates [@www-w3c-html-templates] has been
 already finished and it has been included in the HTML5 standard. This feature
 adds the new `template` element to the set of HTML tags. The purpose of the
 `template` element is to hold a reusable fragment of HTML that can be later
@@ -34,8 +34,6 @@ the browser, but it can be accessed programmatically, using APIs like
 `DocumentFragment` that represents all its children. An example of cloning the
 template and inserting the clone into a document as shown on
 [@Lst:D-code-html-templates].
-
-[^D-url-webcomponents-templates]: <https://www.w3.org/TR/html-templates/>
 
 ```{#lst:D-code-html-templates .html .numberLines}
 <body>
@@ -60,7 +58,7 @@ template and inserting the clone into a document as shown on
 Listing: Using the HTML Template.
 
 **Custom Elements.**
-The *Custom Elements*[^D-url-webcomponents-elements] standard provides a way to
+The *Custom Elements* [@www-w3c-custom-elements] standard provides a way to
 extend the HTML with user-defined custom tags. These tags behave like ordinary
 HTML elements, e.g. `input`, and can be created both declaratively in HTML and
 using the `document.createElement` in Javascript. Any prototype that extends
@@ -81,8 +79,6 @@ callbacks that are invoked by the browser on certain conditions:
 * `detachedCallback()` is invoked whenever the element is removed from the DOM;
 * `attributeChangedCallback(name, oldVal, newVal)` is invoked whenever an
   attribute on this element is added, changed or removed;
-
-[^D-url-webcomponents-elements]: <https://www.w3.org/TR/custom-elements/>
 
 The custom element may also extend any of the existing HTML elements. The base
 prototype should be in element's prototype chain and the `extends` property
@@ -118,7 +114,7 @@ document.registerElement('reverse-widget', {
 Listing: Creating a Custom Element.
 
 **HTML Imports.**
-The *HTML Imports*[^D-url-webcomponents-imports] specification describes how
+The *HTML Imports* [@www-w3c-html-imports] specification describes how
 HTML documents (*imported documents*) can be included from another documents
 (*import referrers*). The `link` element has been extended to support *HTML
 Imports*. Its `rel` attribute can be also `import`:
@@ -126,8 +122,6 @@ Imports*. Its `rel` attribute can be also `import`:
 ```{.html .numberLines}
 <link rel="import" href="imported-document.html">
 ```
-
-[^D-url-webcomponents-imports]: <https://www.w3.org/TR/html-imports/>
 
 The external document is asynchronously fetched and parsed when such a `link`
 is encountered. When accessed from Javascript, the `import` property of a
@@ -140,7 +134,7 @@ parsed. This allows custom elements, like widgets, to register themselves in
 the browser.
 
 **Shadow DOM.**
-The *Shadow DOM*[^D-url-webcomponents-shadow] is the most complex of the *Web
+The *Shadow DOM* [@www-w3c-shadow-dom] is the most complex of the *Web
 Components* standards. It brings a concept of *shadow tree* to the DOM. The
 existing DOM trees are called *light DOM* from now on. With each HTML element
 there may be multiple `ShadowRoot` elements associated. A *shadow tree* may be
@@ -158,8 +152,6 @@ a widget that appears to the user as a single entity that has no internal
 structure. The widget will always look the same, no matter what stylesheets
 are loaded. External code cannot modify widget's behavior accidentally.
 The example that creates a shadow root is shown on [@Lst:D-code-shadow].
-
-[^D-url-webcomponents-shadow]: <https://www.w3.org/TR/shadow-dom/>
 
 [^D-node-shadow-piercing]: The *shadow-piercing selectors* have been deprecated
 and no alternative has been proposed yet.
@@ -200,14 +192,9 @@ third-party frameworks. This is often desirable, e.g. when building a widget
 library like TangoJS. The user can integrate such widgets with any framework,
 just like the standard `input`s or `button`s.
 If one wants to sacrifice the flexibility for a nicer APIs, there are a few
-alternatives available, the frameworks like Angular 2[^D-url-angular] and
-built on top of the *Web Components*: Google's Polymer[^D-url-polymer],
-Mozilla's Brick[^D-url-brick] and Microsoft's X-Tag[^D-url-xtag].
-
-[^D-url-angular]: <https://angular.io/>
-[^D-url-polymer]: <https://www.polymer-project.org/1.0/>
-[^D-url-brick]: <http://brick.mozilla.io/>
-[^D-url-xtag]: <https://x-tag.github.io/>
+alternatives available, the frameworks like Angular 2 [@www-angular] and
+built on top of the *Web Components*: Google's Polymer [@www-polymer],
+Mozilla's Brick [@www-brick] and Microsoft's X-Tag [@www-xtags].
 
 ## ECMAScript 2015
 
@@ -343,11 +330,9 @@ An important part of ECMAScript 2015 is the module specification. This is the
 first step to a truly modular Javascript applications. The standard specifies
 only the syntax used to export and import objects from modules. The *module
 loader* specification is still under development, but the new module syntax can
-be used already thanks to the tools like Rollup[^D-url-rollup]. Rollup
+be used already thanks to the tools like Rollup [@www-rollup]. Rollup
 preprocesses Javascript sources and changes the `export`s and `import`s to
 the global variables or `require` calls, depending on the targeted environment.
-
-[^D-url-rollup]: <http://rollupjs.org/>
 
 A module in ECMAScript 2015 is a *file*, that contains `import` and `export`
 statements. Any variable or constant may be exported. An example of such module
@@ -388,13 +373,11 @@ Each module evolves independently, reaching new *levels*. Each builds upon a
 previous level. TangoJS uses modules described here to handle its layout.
 
 **CSS Custom Properties.**
-The *CSS Custom Properties for Cascading Variables Module Level
-1*[^D-url-properties] adds support for variables to the stylesheets. Variables
+The *CSS Custom Properties for Cascading Variables Module Level 1*
+[@www-w3c-css-variables] adds support for variables to the stylesheets. Variables
 may be defined on any element using the syntax `--name: value;`. Variables are
 cascading and are inherited by all child nodes. An example of a variable is
 shown on [@Lst:D-css-variables].
-
-[^D-url-properties]: <https://www.w3.org/TR/css-variables-1/>
 
 ```{#lst:D-css-variables .css .numberLines}
 :root {
@@ -408,13 +391,11 @@ shown on [@Lst:D-css-variables].
 Listing: Using the CSS variables.
 
 **CSS Values.**
-The *CSS Values and Units Module Level 3*[^D-url-values] introduces two new
-functions, namely `calc` and `attr`. The first one allows calculating values
-for attributes dynamically. The second one allows referencing a value of a
-certain attribute. An example using this functions is shown on
+The *CSS Values and Units Module Level 3* [@www-w3c-css-values] introduces two
+new functions, namely `calc` and `attr`. The first one allows calculating
+values for attributes dynamically. The second one allows referencing a value of
+a certain attribute. An example using this functions is shown on
 [@Lst:D-css-values].
-
-[^D-url-values]: <https://www.w3.org/TR/css3-values/>
 
 ```{#lst:D-css-values .css .numberLines}
 section {
@@ -427,16 +408,14 @@ section {
 Listing: Using the CSS values.
 
 **CSS Flexible Box.**
-The *CSS Flexible Box Layout Module Level 1*[D^url-flexbox] is a new `display`
-option for building containers filled with items that occupy all available
-space in horizontal or vertical direction. Each item gets space proportional to
-its `flex` attribute. On the orthogonal axis the elements may be aligned,
-centered or stretched. This gives the flexibility in positioning elements and
-building complex user interfaces without the need for *floats*. The elements
-within a flexbox may be reordered using CSS attributes. A vertical flexbox
-where each item gets the same space is shown on [@Lst:D-css-flexbox].
-
-[^D-url-flexbox]: <https://www.w3.org/TR/css-flexbox-1/>
+The *CSS Flexible Box Layout Module Level 1* [@www-w3c-css-flexbox] is a new
+`display` option for building containers filled with items that occupy all
+available space in horizontal or vertical direction. Each item gets space
+proportional to its `flex` attribute. On the orthogonal axis the elements may
+be aligned, centered or stretched. This gives the flexibility in positioning
+elements and building complex user interfaces without the need for *floats*.
+The elements within a flexbox may be reordered using CSS attributes. A vertical
+flexbox where each item gets the same space is shown on [@Lst:D-css-flexbox].
 
 ```{#lst:D-css-flexbox .css .numberLines}
 .root {
@@ -450,7 +429,7 @@ where each item gets the same space is shown on [@Lst:D-css-flexbox].
 Listing: Using the CSS Flexbox.
 
 **CSS Grid Layout.**
-The *CSS Grid Layout Module Level 1*[^D-url-grid]
+The *CSS Grid Layout Module Level 1* [@www-w3c-css-grid]
 allows specifying `grid` as a `display`
 option. An element which is displayed as a grid is divided into a number of
 rows and columns. Each of them may be assigned a `grid-column` or a `grid-row`
@@ -460,8 +439,6 @@ flexibility on how the items can be aligned on the grid. Multiple areas can
 be defined on the grid. An area is a named set of adjacent cells. Child nodes
 may be assigned to these areas without need for setting rows and columns.
 This is presented on [@Lst:D-css-grid].
-
-[^D-url-grid]: <https://www.w3.org/TR/css-grid-1/>
 
 ```{#lst:D-css-grid .css .numberLines}
 #grid {

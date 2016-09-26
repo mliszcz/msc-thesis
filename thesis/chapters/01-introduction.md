@@ -1,4 +1,4 @@
-# Introduction { sec:introduction }
+# Introduction { #sec:introduction }
 
 This chapter provides an introduction to the field of research and briefly
 describes problems addressed in this thesis. Later on the thesis goals are
@@ -22,7 +22,8 @@ The core TANGO is a free and open source software, released under GPLv3
 license.
 
 **What is TANGO?**
-TANGO Controls is a distributed system built on top of CORBA and ZeroMQ.
+TANGO Controls is a distributed system built on top of CORBA [@www-corba;
+@www-corba-spec; @natan1995] and ZeroMQ [@www-zeromq].
 It introduces a concept of *device server* to represent a physical piece of
 hardware. This device server is available as a *remote object* that implements
 a well defined interface. TANGO is object-oriented middleware, and each device
@@ -50,9 +51,7 @@ device servers or a command that exports a new device.
 A MySQL or MariaDB server is required to run TANGO. It is also possible to run
 TANGO without a database and with a limited functionality. In cases where high
 availability is required TANGO may run in a multi-database configuration
-[^01-multi-db].
-
-[^01-multi-db]: http://www.esrf.eu/computing/cs/tango/tango_doc/kernel_doc/ds_prog/node10.html
+([@tango2016manual], p. 186).
 
 The hardware is controlled by human operators. They use **graphical client
 applications**, that connect to the device servers. Typical tasks include
@@ -191,10 +190,7 @@ benefits, including:
 * over 250,000 open source packages are available in npm, which is the
   standard repository for Javascript and other frontend code;
 * the applications are portable between platforms thanks to the projects like
-  Electron[^01-web-electron] or Apache Cordova[^01-web-cordova];
-
-[^01-web-electron]: <http://electron.atom.io/>
-[^01-web-cordova]: <https://cordova.apache.org/>
+  Electron [@www-electron] or Apache Cordova [@www-cordova].
 
 There are also disadvantages of using web technologies [@charland2011mobile],
 like performance degradation and limitations in UI, but this are the costs

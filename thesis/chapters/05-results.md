@@ -25,16 +25,13 @@ provide end-user with an option to change the layout manually. In TangoJS' case
 both options are supported. This is true on a widget level and also for the
 whole *TangoJS Panel* application, built with these widgets.
 
-TangoJS widgets benefit from the latest CSS features, like
-Flexbox[^05-css-flexbox] and Grid Layout[^05-css-grid-layout]. This allows for
+TangoJS widgets benefit from the latest CSS features, like Flexbox
+[@www-w3c-css-flexbox] and Grid Layout [@www-w3c--css-grid]. This allows for
 flexible layout adaptation to the available space and other sizing constraints.
 As a web technology, TangoJS layout can be configured via CSS rules. The
 application developer may then use media queries [@gardner2011responsive]
 together with appropriate selectors to adapt the widgets automatically to the
 device they are displayed on.
-
-[^05-css-flexbox]: <https://www.w3.org/TR/css-flexbox-1/>
-[^05-css-grid-layout]: <https://www.w3.org/TR/css-grid-1/>
 
 Apart from all adaptability aspects offered by separate widgets, the *TangoJS
 Panel* application allows users to configure the interface manually, by
