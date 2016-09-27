@@ -476,7 +476,7 @@ require interactions between all the layers.
 When it comes to the programmable access, application developer typically
 interacts with the `TangoJS Core` layer. All actions are passed down through
 the TangoJS stack until they reach the *Connector* layer, where any network
-communication occurs. In the connector, a \gls{promise} of result is always
+communication occurs. In the connector, a promise of result is always
 returned. It is later resolved to a concrete value. A scenario with reading
 a single attribute is presented in [@Fig:03-tangojs-sequence-read]. Other use
 cases, like writing value to an attribute, reading device's state or invoking
@@ -487,7 +487,7 @@ a command follow similar pattern.
   #fig:03-tangojs-sequence-read width=90% }
 
 More complex scenarios are often implemented in widgets. Widgets are
-usually bound to TANGO \glspl{model}. Upon initialization or reinitialization
+usually bound to TANGO models. Upon initialization or reinitialization
 widget has to fetch its configuration from the device and then periodically
 poll the device to update its value. An abstract widget performing this process
 is shown in [@Fig:03-tangojs-sequence-widget-polling]. Some widgets, like

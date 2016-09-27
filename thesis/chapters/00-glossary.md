@@ -1,10 +1,30 @@
 
+\newglossaryentry{javascript}
+{
+  name=Javascript,
+  description={is a scripting language for web browsers}
+}
+
+\newglossaryentry{json}
+{
+  name=JSON,
+  description={(Javascript Object Notation) is a textual data exchange format
+    which uses \gls{javascript} syntax to represent objects}
+}
+
 \newglossaryentry{ajax}
 {
   name=AJAX,
   description={(Asynchronous Javascript and XML) is a set of technologies used
     by the web browsers to make asynchronous requests to the web servers. Often
     XML is replaced by \gls{json}}
+}
+
+\newglossaryentry{framework}
+{
+  name=framework,
+  description={is a software used by another software to facilitate certain
+    tasks}
 }
 
 \newglossaryentry{api}
@@ -31,7 +51,7 @@
 \newglossaryentry{cli}
 {
   name=CLI,
-  description={(Command-line Interface) is a textual \gls(ui) where any
+  description={(Command-line Interface) is a textual UI where any
     interactions are performed by typing commands}
 }
 
@@ -40,6 +60,13 @@
   name=Comet,
   description={is a model of connection handling between a browser and a
   server where the server side can initialize communication}
+}
+
+\newglossaryentry{middleware}
+{
+  name=middleware,
+  description={is a software that allows connecting systems created using
+    different technologies. It often works in distributed environments}
 }
 
 \newglossaryentry{corba}
@@ -54,7 +81,14 @@
   name=CORS,
   description={(Cross Origin Resource Sharing) is a technique that allows
     accessing resources from another \textit{origin} (domain) using
-    OPTIONS method}
+    OPTIONS HTTP method}
+}
+
+\newglossaryentry{html}
+{
+  name=HTML,
+  description={(HyperText Markup Language) is a markup language for defining
+    web page layout}
 }
 
 \newglossaryentry{css}
@@ -63,18 +97,25 @@
   description={(Cascading Style Sheets) is a styling language for \gls{html}}
 }
 
-\newglossaryentry{databaseds}
-{
-  name=DataBaseds,
-  description={is a purely software \gls{device-server} that allows for
-  interactions with \gls{tango-database}}
-}
-
 \newglossaryentry{device-server}
 {
   name={device server},
   description={is an abstract entity in TANGO system. It often controls a
     single piece of hardware}
+}
+
+\newglossaryentry{tango-database}
+{
+  name={TANGO database},
+  description={is a database where configuration of all \glspl{device-server}
+    is stored}
+}
+
+\newglossaryentry{databaseds}
+{
+  name=DataBaseds,
+  description={is a purely software \gls{device-server} that allows for
+    interactions with \gls{tango-database}}
 }
 
 \newglossaryentry{dom}
@@ -97,13 +138,6 @@
   description={is a person for whom the software has been designed}
 }
 
-\newglossaryentry{framework}
-{
-  name=framework,
-  description={is a software used by another software to facilitate certain
-    tasks}
-}
-
 \newglossaryentry{frontend}
 {
   name=frontend,
@@ -114,15 +148,8 @@
 \newglossaryentry{gui}
 {
   name=GUI,
-  description={(Graphical User Interface) is an \gls{ui} where iteractions may
+  description={(Graphical User Interface) is an UI where iteractions may
     be performed using graphical icons and dialogs}
-}
-
-\newglossaryentry{html}
-{
-  name=HTML,
-  description={(HyperText Markup Language) is a markup language for defining
-    web page layout}
 }
 
 \newglossaryentry{idl}
@@ -132,25 +159,11 @@
     language-independent interfaces}
 }
 
-\newglossaryentry{javascript}
-{
-  name=Javascript,
-  description={is a scripting language for web browsers. It follows
-    \gls{ecmascript} specification}
-}
-
 \newglossaryentry{jsdoc}
 {
   name=JSDoc,
   description={is a tool that generates \gls{api} documentation from
     \gls{javascript} source comments}
-}
-
-\newglossaryentry{json}
-{
-  name=JSON,
-  description={(Javascript Object Notation) is a textual data exchange format
-    which uses \gls{javascript} syntax to represent objects}
 }
 
 \newglossaryentry{jsonp}
@@ -169,11 +182,11 @@
     purposes}
 }
 
-\newglossaryentry{middleware}
+\newglossaryentry{taurus}
 {
-  name=middleware,
-  description={is a software that allows connecting systems created using
-    different technologies. It often works in distributed environments}
+  name=Taurus,
+  description={is a Qt-based \gls{framework} for creating TANGO
+    \gls{gui} applications in Python}
 }
 
 \newglossaryentry{model}
@@ -207,7 +220,8 @@
 \newglossaryentry{operator}
 {
   name=operator,
-  description={is a person who controls the hardware during an experiment}
+  description={is a person who controls the hardware during an experiment.
+    Also \gls{end-user} of TANGO \gls{gui} tools}
 }
 
 \newglossaryentry{polyfill}
@@ -220,7 +234,7 @@
 \newglossaryentry{promise}
 {
   name=promise,
-  description={is a class introduced in ECMAScript 2015 that encapsulatesi a
+  description={is a class introduced in ECMAScript 2015 that encapsulates a
     result of an asynchronous computation}
 }
 
@@ -246,18 +260,18 @@
     located on another domain (\textit{origin})}
 }
 
-\newglossaryentry{servlet}
-{
-  name=servlet,
-  description={is an entity that runs inside a \gls{servlet-container} and
-    acts as a web server, receiving requests and sending responses}
-}
-
 \newglossaryentry{servlet-container}
 {
   name={servlet container},
   description={is a JVM program that runs servlets and provides them with
     common APIs}
+}
+
+\newglossaryentry{servlet}
+{
+  name=servlet,
+  description={is an entity that runs inside a \gls{servlet-container} and
+    acts as a web server, receiving requests and sending responses}
 }
 
 \newglossaryentry{synoptic-panel}
@@ -274,13 +288,6 @@
     fine-grained access control over other \glspl{device-server}}
 }
 
-\newglossaryentry{tango-database}
-{
-  name={TANGO database},
-  description={is a database where configuration of all  \glspl{device-server}
-    is stored}
-}
-
 \newglossaryentry{tango-idl}
 {
   name={TANGO IDL},
@@ -288,18 +295,11 @@
     types}
 }
 
-\newglossaryentry{taurus}
-{
-  name=Taurus,
-  description={is a Qt-based \gls{framework} for creating TANGO
-    \{gui} applications in Python}
-}
-
 \newglossaryentry{ui}
 {
   name=UI,
   description={(User Interface) is a general term that describes interactions
-    between the software and the user. Most common \glspl{ui} are \glspl{gui}
+    between the software and the user. Most common UIs are \glspl{gui}
     and \glspl{cli}}
 }
 

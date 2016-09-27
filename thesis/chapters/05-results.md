@@ -26,7 +26,7 @@ both options are supported. This is true on a widget level and also for the
 whole *TangoJS Panel* application, built with these widgets.
 
 TangoJS widgets benefit from the latest CSS features, like Flexbox
-[@www-w3c-css-flexbox] and Grid Layout [@www-w3c--css-grid]. This allows for
+[@www-w3c-css-flexbox] and Grid Layout [@www-w3c-css-grid]. This allows for
 flexible layout adaptation to the available space and other sizing constraints.
 As a web technology, TangoJS layout can be configured via CSS rules. The
 application developer may then use media queries [@gardner2011responsive]
