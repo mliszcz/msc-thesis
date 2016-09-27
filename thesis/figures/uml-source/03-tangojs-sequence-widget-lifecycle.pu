@@ -69,6 +69,9 @@ note over Widget: 'model' or 'poll-period' has changed
 ref over Widget, DeviceProxy: Initialization
 ref over Widget, DeviceProxy: Event loop
 
+...
+
+[-> Widget: attributeChangedCallback
 
 deactivate Widget
 

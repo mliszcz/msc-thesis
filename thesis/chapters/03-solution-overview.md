@@ -208,6 +208,10 @@ collection of standalone widgets, which may be included in any web application.
 No third-party framework is required. The library offers widgets similar to
 Taurus core widgets, but provides means for developing new components.
 
+![TangoJS component-level architecture.](
+  figures/uml/03-tangojs-architecture.tex){
+  #fig:03-tangojs-architecture width=80% }
+
 A more detailed view on TangoJS architecture is shown in
 [@Fig:03-tangojs-architecture]. The topmost module, *TangoJS WebComponents*,
 offers a set of widgets and an API for creating own widgets. Application
@@ -215,10 +219,6 @@ developer also have access to *TangoJS Core API*, when direct access to raw
 TANGO proxies is required. This API forwards all actions to the *Connector*
 layer, which is then responsible for making the requests to the backend and
 collecting the responses.
-
-![TangoJS component-level architecture.](
-  figures/uml/03-tangojs-architecture.tex){
-  #fig:03-tangojs-architecture width=90% }
 
 Any kind of web application can build upon the layers described above. As a
 proof of concept, **a synoptic panel application has been developed**. This
@@ -244,6 +244,10 @@ immediately a standard *Promise* object. This promise may be later resolved
 to a value or may be rejected in error case. The use of promises may save the
 user from the situations like *calback hell*.
 
+![Class diagram of *TangoJS Core* package.](
+  figures/uml/03-tangojs-internal-core.tex){
+  #fig:03-tangojs-internal-core width=100% }
+
 **Module structure.**
 The *TangoJS Core* **is distributed as an UMD module** [@www-umd]. This
 makes it easy to load it in different environments, like Node.js or web browser.
@@ -255,10 +259,6 @@ generated from the TANGO IDL and provides the common TANGO data types.
 Event-related APIs are unavailable, since **events are not currently
 supported**. A class diagram of this module is presented in
 [@Fig:03-tangojs-internal-core].
-
-[Class diagram of *TangoJS Core* package.](
-  figures/uml/03-tangojs-internal-core.tex){
-  #fig:03-tangojs-internal-core width=100% }
 
 ## TangoJS Connector - pluggable backends
 
@@ -309,6 +309,10 @@ TANGO infrastructure with in-memory hierarchy of objects. There is no network
 communication performed. This approach is useful for e.g. automated testing
 the upper layers. This connector is flexible and can be configured with a list
 of *device* objects, where each device exposes some attributes and commands.
+
+![Reading value of an attribute using TangoJS Core API.](
+  figures/uml/03-tangojs-sequence-read.tex){
+  #fig:03-tangojs-sequence-read width=90% }
 
 ## TangoJS WebComponents - HTML widget toolkit {#sec:solution-tangojs-webcomponents}
 
@@ -461,7 +465,8 @@ by callbacks defined in *Custom Elements* specification. Widget initialization
 is handled in `createdCallback`. Reinitialization due to attribute change is
 performed in `attributeChangedCallback`. A sequence diagram with widget's
 lifecycle is presented in [@Fig:03-tangojs-sequence-widget-lifecycle]. Widgets
-and *Custom Elements* are covered more deeply in [] and [] chapters.
+and *Custom Elements* are covered more deeply in [@Sec:widget-development] and
+[@Sec:selected-aspects-of-implementation].
 
 ![Widget's lifecycle. Interactions with *TangoJS Core* has been simplified.](
   figures/uml/03-tangojs-sequence-widget-lifecycle.tex){
@@ -482,22 +487,12 @@ a single attribute is presented in [@Fig:03-tangojs-sequence-read]. Other use
 cases, like writing value to an attribute, reading device's state or invoking
 a command follow similar pattern.
 
-![Reading value of an attribute using TangoJS Core API.](
-  figures/uml/03-tangojs-sequence-read.tex){
-  #fig:03-tangojs-sequence-read width=90% }
-
 More complex scenarios are often implemented in widgets. Widgets are
 usually bound to TANGO models. Upon initialization or reinitialization
 widget has to fetch its configuration from the device and then periodically
-poll the device to update its value. An abstract widget performing this process
-is shown in [@Fig:03-tangojs-sequence-widget-polling]. Some widgets, like
+poll the device to update its value. Some widgets, like
 `tangojs-trend` or `tangojs-form` offers support for multiple models, which
 makes actions flow even more complex.
-
-![Interactions of a widget with other modules during its lifecycle. Message
-details omitted.](
-  figures/uml/03-tangojs-sequence-widget-polling.tex){
-  #fig:03-tangojs-sequence-widget-polling width=100% }
 
 ## TangoJS Panel - synoptic panel application
 

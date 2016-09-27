@@ -118,6 +118,18 @@ as `this`, thus mixing-in has to be performed using, e.g. a `call` method, like
   * `onChange` - a callback function, called whenever the attribute value is
     changed.
 
+## Widget's behavior
+
+An abstract widget performing this process
+is shown in [@Fig:03-tangojs-sequence-widget-polling].
+
+TODO:
+
+![Interactions of a widget with other modules during its lifecycle. Message
+details omitted.](
+  figures/uml/03-tangojs-sequence-widget-polling.tex){
+  #fig:03-tangojs-sequence-widget-polling width=100% }
+
 ## Building a basic widget
 
 With the utilities described in previous section, it is relatively easy to
