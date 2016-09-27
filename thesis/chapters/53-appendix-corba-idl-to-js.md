@@ -79,11 +79,9 @@ Listing: Example structure translated to Javascript.
 
 **Translation.**
 The translator has been written in Scala language. It uses the `IDLLexer`,
-`IDLParser` and `IDLVisitor` classes from the Apache Axis2[^C-url-axis2]
+`IDLParser` and `IDLVisitor` classes from the Apache Axis2 [@www-axis2]
 project to generate the internal representation of the parsed IDL. Then, each
 type is transformed to its Javascript equivalent, as discussed above.
-
-[^C-url-axis2]: <http://axis.apache.org/axis2/java/core/>
 
 **Using the idl2js.**
 The *idl2js* is a simple, command line utility, that takes a single argument,

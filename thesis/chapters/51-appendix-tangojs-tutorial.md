@@ -27,7 +27,7 @@ this section shows how to configure mTango manually from scratch.
 [^A-mtango-docker]: <https://hub.docker.com/r/mliszcz/mtango/>
 
 **Deploying mTango on Tomcat.**
-A servlet container, like Apache Tomcat[^A-tomcat], is required to make mTango
+A servlet container, like Apache Tomcat [@www-tomcat], is required to make mTango
 work with TangoJS. The standalone `.jar` version of mTango won't work, since
 additional configuration is required. A standard `.war` archive may be
 downloaded from the mTango webpage[^A-mtango-war]. This archive should be
@@ -39,7 +39,6 @@ TANGO database using a tool like e.g. Jive:
 * class/instance: `TangoRestServer/development`;
 * device `test/rest/0`;
 
-[^A-tomcat]: <http://tomcat.apache.org/>
 [^A-mtango-war]: <https://bitbucket.org/hzgwpn/mtango/downloads/mtango.server-rc2-0.3.zip>
 
 mTango uses the role-based authorization offered by Tomcat. One have to add a

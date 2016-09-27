@@ -7,18 +7,15 @@ why it has been chosen over the competing solutions.
 
 ## Web Components
 
-The *Web Components*[^D-url-webcomponents-w3c] standard is the most important
+The *Web Components* [@www-w3c-webcomponents] standard is the most important
 technology used by TangoJS.
 It is a set of four independent standards that emerged recently to satisfy
 the growing need for componentization and reusability in today's web. The
 specification is open and maintained by W3C. Although the standardization
 process is currently in progress, the vendors have already implemented these
 features in their browsers. For older browsers the community have developed a
-set of polyfills[^D-url-webcomponents-polyfills]. The mentioned four standards
+set of polyfills [@www-webcomponents-org]. The mentioned four standards
 are discussed next.
-
-[^D-url-webcomponents-w3c]: <https://www.w3.org/standards/techs/components>
-[^D-url-webcomponents-polyfills]: <http://webcomponents.org/polyfills/>
 
 **HTML Templates.**
 The specification for HTML Templates [@www-w3c-html-templates] has been

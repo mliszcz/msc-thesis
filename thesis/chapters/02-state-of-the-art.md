@@ -15,11 +15,9 @@ stored in a database, and provides fine-grained authorization for these
 accounts with permissions at a device level. The example application is presented
 in [@Fig:02-canone-gui].
 
-![Canone Web Interface. (source[^02-canone-url])](
+![Canone Web Interface. (source[@www-canone])](
   figures/images/02-canone-tutorial4.png){
   #fig:02-canone-gui width=60% }
-
-[^02-canone-url]: <http://plone.tango-controls.org/download/canone/canone>
 
 Canone development started in 2005. The last release that brought new
 features was in May 2007. Since then, there was a bugfix release in 2011.
