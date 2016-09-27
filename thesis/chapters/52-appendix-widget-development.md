@@ -120,10 +120,25 @@ as `this`, thus mixing-in has to be performed using, e.g. a `call` method, like
 
 ## Widget's behavior
 
-An abstract widget performing this process
-is shown in [@Fig:03-tangojs-sequence-widget-polling].
+There are two types of external triggers that alter widget's state: lifecycle
+callbacks and user's input. User actions are specific for each widget, e.g.
+user may click on a *button* or enter value in a *text-box*. Lifecycle
+callbacks are part of the *Custom Elements* standard. Their detailed
+description is provided in [@Sec:selected-aspects-of-implementation].
+[@Fig:52-widgets-state-transitions] shows possible widget's states and
+transitions between them as a result of above mentioned triggers.
 
-TODO:
+![Widget states and transitions.](
+  figures/uml/52-widgets-state-transitions.tex){
+  #fig:52-widgets-state-transitions width=65% }
+
+Since TangoJS widgets are built with Web Components, they behave like ordinary
+HTML elements. During intialization widget prepares its layout, attaches event
+handlers and (usually) starts polling timer to periodically update its state.
+Update of widget's attributes may require reinitialization, recreation of the
+underlying `DeviceProxy` or restart of the polling timer. Sequence chart in
+[@Fig:03-tangojs-sequence-widget-polling] shows these procedures and their
+interactions with other parts of TangoJS stack.
 
 ![Interactions of a widget with other modules during its lifecycle. Message
 details omitted.](
@@ -132,7 +147,7 @@ details omitted.](
 
 ## Building a basic widget
 
-With the utilities described in previous section, it is relatively easy to
+With the utilities described in first section, it is relatively easy to
 build a simple widget for TangoJS.
 
 **Widget structure.**

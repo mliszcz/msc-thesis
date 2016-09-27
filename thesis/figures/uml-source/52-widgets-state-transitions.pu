@@ -1,0 +1,19 @@
+@startuml
+
+state "Delcared in HTML" as Declared
+state "HTMLUnknownElement" as Unknown
+state "Upgraded (Custom Element)" as Upgraded
+
+[*] --> Declared
+[*] --> Unknown: document.createElement('widget')
+Declared --> Unknown: << document parsing >>
+Unknown --> Upgraded: automatically when:\n*<< inserted into DOM >>\n*<< prototype registered >>
+
+Upgraded --> Upgraded: << userInput >> or\nattributeChangedCallback()
+
+Upgraded --> [*]
+
+Declared: * <widget>
+Upgraded: * on entry: createdCallback()
+
+@enduml
