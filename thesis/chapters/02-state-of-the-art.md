@@ -15,7 +15,7 @@ stored in a database, and provides fine-grained authorization for these
 accounts with permissions at a device level. The example application is presented
 in [@Fig:02-canone-gui].
 
-![Canone Web Interface. (source[@www-canone])](
+![Canone Web Interface. (source [@www-canone])](
   figures/images/02-canone-tutorial4.png){
   #fig:02-canone-gui width=60% }
 
