@@ -134,13 +134,11 @@ compared to the dedicated backend implementation, is depicted in
 
 TODO: usunac rysunek z Conclusions
 
-One example of such a middleware is JSON-WS[^06-connect-jsonws] based on
+One example of such a middleware is JSON-WS [@www-jsonws] based on
 JSON-RPC specification. This project aims to support creating of RPC-based
 application that may be accessed from a web-browser. It may automatically
 generate code for in-browser client proxies. Both HTTP and WebSocket are
 supported as transport mechanisms.
-
-[^06-connect-jsonws]: <https://github.com/ChaosGroup/json-ws>
 
 Currently, no project uses above mentioned approach. **Future work aims to
 investigate the RPC-based solutions more deeply and try to implement a new
@@ -153,16 +151,13 @@ The GIOP, *General Inter-ORB Protocol*, is the specification if a protocol
 that CORBA uses for communication. The IIOP, *Internet Inter-ORB Protocol*
 is the default implementation of GIOP used by the request brokers. It requires
 full access to the TCP/IP stack, which is not possible in web browsers.
-There is also an implementation called HTIOP[^06-connect-htiop], *HyperText
+There is also an implementation called HTIOP [@www-ace-htiop], *HyperText
 Inter-ORB protocol*, which is basically an IIOP over HTTP. This protocol has
-been developed as a part of ACE[^06-connect-ace], the Adaptive Communication
+been developed as a part of ACE [@www-ace], the Adaptive Communication
 Environment, which offers TAO, a CORBA-compliant ORB. It is however not used
 by any project.
 
 TODO: uwaga dot. ostatniego zdania
-
-[^06-connect-ace]: <http://www.cs.wustl.edu/~schmidt/ACE.html>
-[^06-connect-htiop]: <https://github.com/cflowe/ACE/tree/master/TAO/orbsvcs/orbsvcs/HTIOP>
 
 Using TAO broker in TANGO implementation may put into question the need of
 using a proxy server for TANGO-browser communication. This significantly
@@ -176,14 +171,12 @@ support for HTIOP in TangoJS.**
 **Removing the CORBA.**
 There have been several attempts to remove the heavyweight and complex CORBA
 from TANGO and replace it with another technology, e.g.
-ZeroMQ[^06-connect-zmq]. All these attempts have failed. With the recent
+ZeroMQ[@www-tango-zmq]. All these attempts have failed. With the recent
 emergence of lightweight RPC frameworks, that work in a web browser, like gRPC
 or Apache Thrift, it should be possible to replace the middleware layer
 without any modifications to the TANGO code, just by implementing proxy
 wrappers for new stubs and skeletons, to expose CORBA-like interface to the
 TANGO code.
-
-[^06-connect-zmq]: <https://github.com/taurel/tango_zmq>
 
 ## Future work
 
