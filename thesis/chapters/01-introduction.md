@@ -38,7 +38,6 @@ TANGO represents each piece of hardware as a *device server*, an abstract
 object that can be accessed from client applications over the network. These
 graphical client applications allow operators to control the hardware. TANGO
 supports creating client applications in **Java**, **Python** and **C++**. 
-
 An overview of TANGO Control System architecture  and discussion of TANGO GUI
 frameworks is provided in [@Sec:tango-overview].
 
@@ -51,21 +50,19 @@ stack, which is not the case for the web browsers.
 
 **Trends in GUI development.**
 The use of Web frontend technologies for GUI development for both mobile and
-desktop is
-gaining more and more popularity. Compared with the traditional approach of
+desktop is gaining more and more popularity. Compared with the traditional approach of
 writing a native, dedicated application for each platform, it brings many
 benefits, including:
 
 * the deployment process is simplified, especially in case of browser
-  applications, where new version is immediately available to users;
-* there are many frameworks and libraries available, multiple programming
-  styles are supported like object-oriented or functional programming;
-* there is a wide choice of tools like linters, transpilers, build tools,
-  editors and other utilities appreciated by developers;
-* over 250,000 open source packages are available in npm, which is the
-  standard repository for Javascript and other frontend code;
-* the applications are portable between platforms thanks to the projects like
-  Electron [@www-electron] or Apache Cordova [@www-cordova].
+  applications;
+* multiple programming styles are supported, including functional and
+  object-oriented;
+* there is a wide choice of tools like transpilers, build tools,
+  editors and other utilities;
+* lots of open source frameworks, libraries and packages are available;
+* portability thanks to the projects like Electron [@www-electron] or Apache
+  Cordova [@www-cordova].
 
 There are also disadvantages of using web technologies [@charland2011mobile],
 like performance degradation and limitations in UI, but this are the costs
@@ -116,16 +113,14 @@ applications and GUI frameworks. The thesis goals may be formulated as follows:
   community like ATK or Taurus has; identify any pain points;
 
 * consider the extending and updating of the existing solutions if possible,
-  or **design and develop a new one**, reusing the ~  ~good~~ parts;
+  or **design and develop a new one**, reusing the ~~good~~ parts;
 
-* if the new solution is delivered, it shall be implemented according to the
-  following principles:
+* if the new solution is delivered, implementation shall follow the principles:
 
   * use modern, standardized web technologies; it should not be tied to any
     particular web framework and should have a limited number of dependencies;
 
-  * focus on *user experience* and adaptivity; the interface should be adaptive
-    both automatically and manually;
+  * focus on *user experience* and adaptivity, both automatic and manual;
 
   * be widget based, providing at least basic widgets from the Taurus
     framework, which are recognized and appreciated by the users;
@@ -133,12 +128,8 @@ applications and GUI frameworks. The thesis goals may be formulated as follows:
   * be flexible and modular, allowing users to create their own widgets and
     extend the system functionality via plugins;
 
-  * offer a *TaurusGUI*-like application, where end-users can build and adapt
-    the GUI at runtime;
-
-  * be lightweight, easy to start with and have a documentation for both
-    developers and end users;
-
+  * offer an application, where end-users can build and adapt the GUI at
+    runtime.
 
 # Overview of TANGO Control System { #sec:tango-overview }
 
@@ -160,7 +151,7 @@ server is characterized by:
   e.g a current of a power supply;
 * *commands* - a set of actions that device can perform, e.g. a reset action;
 * *properties* - a set of parameters not reflected in the hardware, but
-  essential to the device server's implementation;
+  essential to the device server's implementation.
 
 Device servers are distributed by vendors with the hardware or they are created
 by the community. The internal implementation, especially how the device server
@@ -203,6 +194,10 @@ of scope of this thesis and some simplifications have been made here. All these
 topics are discussed deeply in the TANGO Control System Manual
 [@tango2016manual].
 
+![TANGO Control System architecture overview.](
+  figures/uml/01-tango-architecture.tex){
+  #fig:01-tango-architecture width=80% }
+
 **Architecture overview.**
 TANGO deployment usually spans over several machines, connected in a network.
 There are clients and servers. *Clients* are just terminals that allow operators
@@ -219,10 +214,6 @@ authorization service, the *TangoAccessControl* device server. This
 and offers fine-grained permission control, at a single attribute level.
 An overview of the TANGO architecture is depicted in
 [@Fig:01-tango-architecture].
-
-![TANGO Control System architecture overview.](
-  figures/uml/01-tango-architecture.tex){
-  #fig:01-tango-architecture width=80% }
 
 ## TANGO GUI frameworks
 
