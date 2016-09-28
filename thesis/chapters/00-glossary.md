@@ -260,6 +260,13 @@
     located on another domain (\textit{origin})}
 }
 
+\newglossaryentry{scada}
+{
+  name=SCADA,
+  description={(Supervisory Control And Data Acquisition) is a type of
+    computer system that allows for hardware control and supervision}
+}
+
 \newglossaryentry{servlet-container}
 {
   name={servlet container},

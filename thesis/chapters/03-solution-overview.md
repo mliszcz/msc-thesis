@@ -424,8 +424,6 @@ Below, each widget is provided with a short description:
   \label{fig:03-tangojs-widgets-all}
 \end{figure}
 
-TODO: rysunki przegrupowac w chmurki
-
 * `tangojs-label` - displays name, value, unit and status of a *read-only*
   attribute;
 * `tangojs-line-edit` - displays name, value, unit, status and edit box of a
