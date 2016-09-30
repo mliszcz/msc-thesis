@@ -9,16 +9,40 @@ author: Michał Liszcz
 date: 2016
 
 abstract: >
-  TANGO Control System is a system designed to control *devices* in a
-  distributed environment, widely used in automation industry and scientific
-  facilities. The hardware is controlled by operators, using many graphical
-  applications. Providing usability and ease of access has become a crucial
-  part in design and development of modern GUIs. The web-based approach to
-  GUI development has emerged recently to meet these requirements.
-  However, TANGO, as a CORBA-based software, cannot benefit from this new
-  approach. This thesis presents **TangoJS** - a modular, extensible
-  software stack for building TANGO client applications using the latest web
-  standards.
+
+  Hardware installations in natural sciences and industry are becoming more and
+  more complex. This raised a need for more sophisticated methods of control
+  over growing number of devices. To address these needs, the **TANGO Control
+  System** has been developed at ESRF as a generic framework for building
+  distributed control systems. TANGO allows building graphical control panels
+  composed of various widgets. As TANGO is a CORBA-based software, these client
+  applications can run only on desktop.
+
+
+  Recently,
+  thanks to their numerous benefits over conventional desktop applications,
+  **web applications** are more and more widely utilized in different areas.
+  Among a few attempts of moving TANGO applications to the web browsers, none
+  gained popularity and wide adoption. Most projects have been abandoned
+  reaching only a proof-of-concept stage.
+
+
+  In this thesis we present **TangoJS**, a modular, extensible software stack
+  for building TANGO client applications. TangoJS addresses faults and
+  drawbacks of existing solutions. Its architecture is layered for increased
+  flexibility and easier maintenance. Multiple backend modules are supported,
+  which allows accessing TANGO infrastructure using different technologies and
+  protocol. TangoJS' Programmable API uses well-defined abstractions and
+  interfaces from TANGO IDL specification. Web application developers are
+  provided with a set of configurable widgets, which are building blocks for
+  more complex user interfaces.
+  TangoJS has been designed in compliance with the latest web standards and
+  componentization in mind.
+  Use of frontend technologies allows building adaptive user interfaces,
+  where widget's sizing and layout depends on context. Other than that,
+  TangoJS provides an interactive application that allows manually manipulating
+  its interface at runtime.
+
 
 documentclass: documentclass/aghthesis2016
 classoption: [english, titlepage-polish]

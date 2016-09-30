@@ -133,7 +133,7 @@ transitions between them as a result of above mentioned triggers.
   #fig:52-widgets-state-transitions width=65% }
 
 Since TangoJS widgets are built with Web Components, they behave like ordinary
-HTML elements. During intialization widget prepares its layout, attaches event
+HTML elements. During initialization widget prepares its layout, attaches event
 handlers and (usually) starts polling timer to periodically update its state.
 Update of widget's attributes may require reinitialization, recreation of the
 underlying `DeviceProxy` or restart of the polling timer. Sequence chart in

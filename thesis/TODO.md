@@ -22,10 +22,11 @@
 * duzo jest zdan gdzie *The* jest pierwszym slowem kilka razy z rzedu
 * [done] in Figure, on Listing
 * naprawic wszystkie TODO w tekscie
-  * chapter 1 - rozbity na dwa
-  * chapter 3 - rysunki w chmurkach - nie dam rady tego zrobic z latexa
+  * chapter 1 - rozbity na dwa (1+2)
+  * chapter 3 (4) - rysunki w chmurkach - nie dam rady tego zrobic z latexa
+  * chapter 5 (6) - tutaj rysunki sa wazne, nie mozna ich wyrzucic -> czy zrobic na to appendix?
 * KUKDM -> zalacznik z posterem czy cytowac abstrakt
-* napisac nowy abstrakt
+* [done] napisac nowy abstrakt
 
 01-introduction.md:The concepts ~~described in this section~~ are just an overview to give the reader
 01-introduction.md:  or **design and develop a new one**, reusing the ~~good~~ parts;
