@@ -382,43 +382,43 @@ Below, each widget is provided with a short description:
 \begin{figure}
   \centering
   \begin{subfigure}[b]{0.80\textwidth}
-    \includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-label}
-    \caption{\texttt{tangojs-label}}
+    \fbox{\includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-label}}
+    \caption{\texttt{tangojs-label} bound to a scalar attribute.}
   \end{subfigure}
   \quad
   \par\bigskip\par\bigskip
   \begin{subfigure}[b]{0.80\textwidth}
-    \includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-line-edit-bool}
-    \caption{\texttt{tangojs-line-edit}}
+    \fbox{\includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-line-edit-bool}}
+    \caption{\texttt{tangojs-line-edit} bound to a boolean attribute.}
   \end{subfigure}
   \quad
   \par\bigskip\par\bigskip
   \begin{subfigure}[b]{0.80\textwidth}
-    \includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-state-led}
-    \caption{\texttt{tangojs-state-led}}
+    \fbox{\includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-state-led}}
+    \caption{\texttt{tangojs-state-led} bound to a device instance.}
   \end{subfigure}
   \quad
   \par\bigskip\par\bigskip
   \begin{subfigure}[b]{0.80\textwidth}
-    \includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-command-button}
-    \caption{\texttt{tangojs-command-button}}
+    \fbox{\includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-command-button}}
+    \caption{A set of \texttt{tangojs-command-button}s.}
   \end{subfigure}
   \quad
   \par\bigskip\par\bigskip
   \begin{subfigure}[b]{0.30\textwidth}
-    \includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-device-tree}
-    \caption{\texttt{tangojs-device-tree}}
+    \fbox{\includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-device-tree}}
+    \caption{\texttt{tangojs-device-tree} with all devices from the database.}
   \end{subfigure}
   \quad
   \begin{subfigure}[b]{0.50\textwidth}
-    \includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-trend}
-    \caption{\texttt{tangojs-trend}}
+    \fbox{\includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-trend}}
+    \caption{\texttt{tangojs-trend} bound to two scalar attributes}
   \end{subfigure}
   \quad
   \par\bigskip\par\bigskip
   \begin{subfigure}[b]{0.80\textwidth}
-    \includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-form}
-    \caption{\texttt{tangojs-form}}
+    \fbox{\includegraphics[width=\textwidth]{figures/images/03-tangojs-widgets-form}}
+    \caption{\texttt{tangojs-form} bound to three models of different kinds}
   \end{subfigure}
   \caption{TangoJS widgets.}
   \label{fig:03-tangojs-widgets-all}
@@ -511,13 +511,13 @@ The application is presented in [@Fig:03-tangojs-panel].
 \begin{figure}
   \centering
   \begin{subfigure}[b]{\textwidth}
-    \includegraphics[width=\textwidth]{figures/images/03-tangojs-panel-01-fixed}
+    \fbox{\includegraphics[width=\textwidth]{figures/images/03-tangojs-panel-01-fixed}}
     \caption{Dashboard with widgets.}
   \end{subfigure}
   \quad
   \par\bigskip\par\bigskip
   \begin{subfigure}[b]{\textwidth}
-    \includegraphics[width=\textwidth]{figures/images/03-tangojs-panel-02}
+    \fbox{\includegraphics[width=\textwidth]{figures/images/03-tangojs-panel-02}}
     \caption{\textit{New widget} dialog window.}
   \end{subfigure}
   \caption{\textit{TangoJS Panel} application.}

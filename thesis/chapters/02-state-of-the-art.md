@@ -138,12 +138,12 @@ third party frontend layer to create a complete web-based TANGO client.
 ## mTango
 
 mTango [@mtango2016] is a complete solution for building TANGO client
-applications for **web browsers** and **mobile devices**. It consists of multiple
-components, which may be used together to create flexible web-based TANGO GUIs.
-The key part of mTango is a REST server which allows to access TANGO *device
-servers* using HTTP protocol and a well defined API. The UI part ships with a
-set of widgets useful in building client applications. mTango allows for user
-**authentication from many sources, including LDAP**.
+applications for **web browsers** and **mobile devices**. It consists of
+multiple components, which may be used together to create flexible web-based
+TANGO GUIs. The key part of mTango is a REST server which allows to access
+TANGO *device servers* using HTTP protocol and a well defined API. The UI part
+ships with a set of widgets useful in building client applications. mTango
+allows for user **authentication from many sources, including LDAP**.
 
 **Architecture.**
 The mTango architecture consists of a few loosely coupled components. There is
@@ -189,7 +189,7 @@ provides abstractions like *Page*, and widgets like *DeviceAttribute*,
 wrappers for the JavascriptMVC CLI tools) to create a minimal application
 template. Then, widgets can be created declaratively, by placing a
 `mtango:attr` tag on a webpage. The `mtango:attr` tag can be customized by
-using a *view* attribute that controls widget's appearance. Only two views are
+using a *view* attribute that controls widget's appearance. Two views are
 available: a text field and a list, both in read-only and writable variants.
 The user may also implement his own view. The `mtango:img` and `mtango:plot`
 tags can be used to create an image or a plot. The example read-write widget
@@ -208,8 +208,8 @@ official TANGO REST API was started by the community, and mTango has been
 chosen as a reference implementation. **This is the most complete and feature
 rich RESTful interface to TANGO**.
 
-On the other side, the frontend part, both `jsTangORB` and `mTangoUI` are far
-from being ideal. They are dependent on an old version of Javascript MVC, a
+On the other side, the frontend part, both `jsTangORB` and `mTangoUI` have some
+drawbacks. They are dependent on an old version of JavascriptMVC, a
 framework that never gained attention and has not been widely adopted by the
 web developers community. This is especially controversial in case of
 `jsTangORB`, as a non-UI library, to depend on a model-view-controller
@@ -222,8 +222,9 @@ callback functions for asynchronous code. This may lead to writing
 unmaintainable and unreadable code [@kambona2013]. A solution for the *callback
 hell* problem is to use standard *Promise* API, or a polyfill library when
 older browsers have to be supported.
-**All these factors make `jsTangoORB` and `mTangoUI` unsuitable for building
-lightweight, modern, standards-driven user interfaces in a web browser**.
+Taking into consideration all these factors, **building lightweight, modern,
+standards-driven user interfaces for a web browser using `jsTangoORB` and
+`mTangoUI` may be a challenging task.**
 
 Due to the incorporation of an unpopular, third party frontend framework and
 CLI tools, mTango has a steep learning curve that may slow developers down. It
@@ -237,60 +238,56 @@ The main focus is put on user experience, flexibility, extensibility. The
 technological aspects and software architecture are important factors as well,
 since they affect the way software can be extended (e.g. with new widgets).
 
-+------------+-----------+------------+------------+------------+------------+
-| Feature    | Canone    | Taurus Web | TangoREST  | GoTan      | mTango     |
-+============+===========+============+============+============+============+
-| Has        | yes,      | yes,       | no,        | no         | yes,       |
-| frontend   | (PHP)     |(Javascript)| (native    | (native    |(Javascript)|
-| layer      |           |            | Android)   | Android    |            |
-|            |           |            |            | and iPhone)|            |
-+------------+-----------+------------+------------+------------+------------+
-|            |           |            |            |            |            |
-+------------+-----------+------------+------------+------------+------------+
-| Has        | yes,      | no         | N/A        | N/A        | yes,       |
-| widgets    | (limited  |            |            |            | (few       |
-|            | AJAX      |            |            |            | default    |
-|            | support)  |            |            |            | views)     |
-+------------+-----------+------------+------------+------------+------------+
-|            |           |            |            |            |            |
-+------------+-----------+------------+------------+------------+------------+
-| Has        | yes       | N/A        | N/A        | N/A        | no         |
-| interactive|           |            |            |            |            |
-| *synoptic  |           |            |            |            |            |
-| panel*     |           |            |            |            |            |
-+------------+-----------+------------+------------+------------+------------+
-|            |           |            |            |            |            |
-+------------+-----------+------------+------------+------------+------------+
-| Supports   | yes,      | no         | yes,       | no         | yes,       |
-| user       | (database)|            | (LDAP)     |            | (multiple  |
-| accounts   |           |            |            |            |  options)  |
-|            |           |            |            |            |            |
-+------------+-----------+------------+------------+------------+------------+
-|            |           |            |            |            |            |
-+------------+-----------+------------+------------+------------+------------+
-| Supports   | TBD       | no         | no         | TBD        | yes,       |
-| TANGO      |           |            |            |            | (Comet     |
-| events     |           |            |            |            | model)     |
-|            |           |            |            |            |            |
-+------------+-----------+------------+------------+------------+------------+
-|            |           |            |            |            |            |
-+------------+-----------+------------+------------+------------+------------+
-| Backend    | PHP,      | Python,    | Java,      | Groovy,    | Java,      |
-| server     | Python    | Tornado,   | JAX-RS,    | Restlet    | RESTEasy,  |
-| technology |           | WebSocket  | HTTP       | HTTP       | HTTP       |
-|            |           |            |            |            |            |
-+------------+-----------+------------+------------+------------+------------+
-|            |           |            |            |            |            |
-+------------+-----------+------------+------------+------------+------------+
-| Initial    | 2005      | 2011       | 2015       | 2012       | 2013       |
-| release    |           |            |            |            |            |
-+------------+-----------+------------+------------+------------+------------+
-|            |           |            |            |            |            |
-+------------+-----------+------------+------------+------------+------------+
-| Is         | no        | no         | no         | no         | yes        |
-| actively   |           |            |            |            |            |
-| developed  |           |            |            |            |            |
-+------------+-----------+------------+------------+------------+------------+
++------------+-----------+-------------+-------------+------------+------------+
+| Feature    | Canone    | Taurus Web  | TangoREST   | GoTan      | mTango     |
++============+===========+=============+=============+============+============+
+| Has        | yes,      | yes,        | no,         | no         | yes,       |
+| frontend   | (PHP)     | (Javascript)| (native     | (native    |(Javascript)|
+| layer      |           |             | Android)    | Android    |            |
+|            |           |             |             | an iOS)    |            |
++------------+-----------+-------------+-------------+------------+------------+
+|            |           |             |             |            |            |
++------------+-----------+-------------+-------------+------------+------------+
+| Has        | yes,      | no          | N/A         | N/A        | yes,       |
+| widgets    | (basic    |             |             |            | (just a few|
+|            | AJAX)     |             |             |            | views)     |
++------------+-----------+-------------+-------------+------------+------------+
+|            |           |             |             |            |            |
++------------+-----------+-------------+-------------+------------+------------+
+| Has        | yes       | N/A         | N/A         | N/A        | no         |
+| interactive|           |             |             |            |            |
+| *synoptic  |           |             |             |            |            |
+| panel*     |           |             |             |            |            |
++------------+-----------+-------------+-------------+------------+------------+
+|            |           |             |             |            |            |
++------------+-----------+-------------+-------------+------------+------------+
+| Supports   | yes,      | no          | yes,        | no         | yes,       |
+| user       | (database)|             | (multiple   |            | (multiple  |
+| accounts   |           |             | options)    |            | options)   |
++------------+-----------+-------------+-------------+------------+------------+
+|            |           |             |             |            |            |
++------------+-----------+-------------+-------------+------------+------------+
+| Supports   | N/A       | no          | no          | no         | yes,       |
+| TANGO      |           |             |             |            | (Comet     |
+| events     |           |             |             |            | model)     |
++------------+-----------+-------------+-------------+------------+------------+
+|            |           |             |             |            |            |
++------------+-----------+-------------+-------------+------------+------------+
+| Backend    | PHP,      | Python,     | Java,       | Groovy,    | Java,      |
+| server     | Python    | Tornado,    | JAX-RS,     | Restlet    | RESTEasy,  |
+| technology |           | WebSocket   | HTTP        | HTTP       | HTTP       |
++------------+-----------+-------------+-------------+------------+------------+
+|            |           |             |             |            |            |
++------------+-----------+-------------+-------------+------------+------------+
+| Released   | 2005      | 2011        | 2015        | 2012       | 2013       |
+|            |           |             |             |            |            |
++------------+-----------+-------------+-------------+------------+------------+
+|            |           |             |             |            |            |
++------------+-----------+-------------+-------------+------------+------------+
+| Is         | no        | no          | no          | no         | yes        |
+| actively   |           |             |             |            |            |
+| developed  |           |             |             |            |            |
++------------+-----------+-------------+-------------+------------+------------+
 
 Table: Comparison of existing solutions. {#tbl:02-summary-comparison}
 

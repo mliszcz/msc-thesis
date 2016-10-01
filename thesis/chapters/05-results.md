@@ -83,13 +83,37 @@ used as a replacement for its native frontend layer.
 [@Tbl:05-comparison-existing] compares TangoJS to the existing web-based TANGO
 frontend libraries.
 
-Feature | Canone | Taurus Web | mTango | TangoJS
----------------|---------------|---------------|---------------|---------------
-Has widgets | yes, (limited AJAX support) | no | yes, (5 default views) | **yes, (7 base widgets + variants)**
-Has interactive *synoptic panel* | yes | N/A | no | **yes, (*TangoJS Panel*)**
-Supports user accounts | yes, (database) | no | yes, (multiple options) | **N/A, (depends on backend)**
-Supports TANGO events | no | no | yes | **no**
-Backend server technology | PHP, Python | Python, Tornado, WebSocket | Java, RESTEasy, HTTP | **any possible (depends on used connector)**
++---------------+---------------+---------------+---------------+---------------+
+| Feature       | Canone        | Taurus Web    | mTango        | TangoJS       |
++===============+===============+===============+===============+===============+
+| Has widgets   | yes, (limited | no            | yes, (5 views,| **yes, (7 base|
+|               | AJAX support) |               |image and plot)| widgets and   |
+|               |               |               |               | variants)**   |
++---------------+---------------+---------------+---------------+---------------+
+|               |               |               |               |               |
++---------------+---------------+---------------+---------------+---------------+
+| Has           | yes           | N/A           | no            | **yes, (      |
+| interactive   |               |               |               | *TangoJS      |
+| *synoptic     |               |               |               | Panel*)**     |
+| panel*        |               |               |               |               |
++---------------+---------------+---------------+---------------+---------------+
+|               |               |               |               |               |
++---------------+---------------+---------------+---------------+---------------+
+| Supports user | yes (database)| no            | yes (multiple | **N/A,        |
+| accounts      |               |               | options)      | (depends on   |
+|               |               |               |               | backend)**    |
++---------------+---------------+---------------+---------------+---------------+
+|               |               |               |               |               |
++---------------+---------------+---------------+---------------+---------------+
+| Supports      | no            | no            | ues           | **no**        |
+| TANGO events  |               |               |               |               |
++---------------+---------------+---------------+---------------+---------------+
+|               |               |               |               |               |
++---------------+---------------+---------------+---------------+---------------+
+| Backend server| PHP, Python   | Python,       | Java,         | **N/A,        |
+| technology    |               | Tornado,      | RESTEasy,     | (depends on   |
+|               |               | WebSocket     | HTTP          | backend)**    |
++---------------+---------------+---------------+---------------+---------------+
 
 Table: Comparison of TangoJS with existing web-based GUI libraries. {#tbl:05-comparison-existing}
 
