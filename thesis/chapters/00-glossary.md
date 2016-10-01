@@ -267,20 +267,6 @@
     computer system that allows for hardware control and supervision}
 }
 
-\newglossaryentry{servlet-container}
-{
-  name={servlet container},
-  description={is a JVM program that runs servlets and provides them with
-    common APIs}
-}
-
-\newglossaryentry{servlet}
-{
-  name=servlet,
-  description={is an entity that runs inside a \gls{servlet-container} and
-    acts as a web server, receiving requests and sending responses}
-}
-
 \newglossaryentry{synoptic-panel}
 {
   name={synoptic panel},
