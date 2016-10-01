@@ -154,10 +154,8 @@ full access to the TCP/IP stack, which is not possible in web browsers.
 There is also an implementation called HTIOP [@www-ace-htiop], *HyperText
 Inter-ORB protocol*, which is basically an IIOP over HTTP. This protocol has
 been developed as a part of ACE [@www-ace], the Adaptive Communication
-Environment, which offers TAO, a CORBA-compliant ORB. It is however not used
-by any project.
-
-TODO: uwaga dot. ostatniego zdania
+Environment, which offers TAO, a CORBA-compliant ORB. However, this project
+has been abandoned by the authors.
 
 Using TAO broker in TANGO implementation may put into question the need of
 using a proxy server for TANGO-browser communication. This significantly
