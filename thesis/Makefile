@@ -43,6 +43,7 @@ $(OUTDIR)/$(PROJECT).tex: $(HEADER) $(CHAPTERS) $(REFFILE) $(UML_DIAGRAMS) | $(O
 	pandoc $(FLAGS) \
 		-o $@ \
 		$(HEADER) $(CHAPTERS)
+	sed -i -r 's/(\s+[a-zA-Z0-9])\s+/\1~/g' $@
 
 $(OUTDIR)/$(PROJECT).pdf: $(OUTDIR)/$(PROJECT).tex
 	cd $(OUTDIR); ln -sf ../documentclass

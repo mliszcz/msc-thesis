@@ -13,24 +13,24 @@
 \newcommand*{\LangSupervisor}{Opiekun pracy}
 \newcommand*{\LangStatementHead}{OŚWIADCZENIE AUTORA PRACY}
 \newcommand*{\LangStatementBody}{
-  Uprzedzony o odpowiedzialności karnej na podstawie art. 115 ust. 1 i 2 ustawy
-  z dnia 4 lutego 1994 r. o prawie autorskim i prawach pokrewnych (t.j. Dz.U.
-  z 2006 r. Nr 90, poz. 631  z późn. zm.): "Kto przywłaszcza sobie autorstwo
-  albo wprowadza w błąd co do autorstwa całości lub części cudzego utworu albo
+  Uprzedzony o~odpowiedzialności karnej na podstawie art. 115 ust. 1 i 2 ustawy
+  z~dnia 4~lutego 1994 r. o~prawie autorskim i~prawach pokrewnych (t.j. Dz.U.
+  z~2006 r. Nr 90, poz. 631  z~późn. zm.): "Kto przywłaszcza sobie autorstwo
+  albo wprowadza w~błąd co do autorstwa całości lub części cudzego utworu albo
   artystycznego wykonania, podlega grzywnie, karze ograniczenia wolności albo
   pozbawienia wolności do lat 3. Tej samej karze podlega, kto rozpowszechnia
-  bez podania nazwiska lub pseudonimu twórcy cudzy utwór w wersji oryginalnej
-  albo w postaci opracowania, artystyczne wykonanie albo publicznie
+  bez podania nazwiska lub pseudonimu twórcy cudzy utwór w~wersji oryginalnej
+  albo w~postaci opracowania, artystyczne wykonanie albo publicznie
   zniekształca taki utwór, artystyczne wykonanie, fonogram, wideogram lub
-  nadanie.", a także uprzedzony o odpowiedzialności dyscyplinarnej na
-  podstawie art. 211 ust. 1 ustawy z dnia 27 lipca 2005 r. Prawo o
-  szkolnictwie wyższym (t.j. Dz. U. z 2012 r. poz. 572, z późn. zm.) "Za
-  naruszenie przepisów obowiązujących w uczelni oraz za czyny uchybiające
+  nadanie.", a~także uprzedzony o~odpowiedzialności dyscyplinarnej na
+  podstawie art. 211 ust. 1~ustawy z~dnia 27 lipca 2005 r. Prawo o
+  szkolnictwie wyższym (t.j. Dz. U. z~2012 r. poz. 572, z~późn. zm.) "Za
+  naruszenie przepisów obowiązujących w~uczelni oraz za czyny uchybiające
   godności studenta student ponosi odpowiedzialność dyscyplinarną przed komisją
   dyscyplinarną albo przed sądem koleżeńskim samorządu studenckiego, zwanym
   dalej 'sądem koleżeńskim'", oświadczam, że niniejszą pracę dyplomową
-  wykonałem(-am) osobiście i samodzielnie i że nie korzystałem(-am) ze źródeł
-  innych niż wymienione w pracy.
+  wykonałem(-am) osobiście i~samodzielnie i~że nie korzystałem(-am) ze źródeł
+  innych niż wymienione w~pracy.
 }
 \newcommand*{\LangSignature}{PODPIS}
 \newcommand*{\LangThesisType}{Praca dyplomowa magisterska}
