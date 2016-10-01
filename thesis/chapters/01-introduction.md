@@ -99,8 +99,8 @@ The second form of adaptive user interface is an interface that may be
 dynamically changed by the user according to their needs. This allows for
 creating personalized views for different users and different situations
 [@miller2005implications].
-This approach is supported in TANGO world by the Taurus framework, which offers
-tools for manipulating the UI at runtime.
+This approach is supported in TANGO world by the Taurus framework
+[@pascual2015taurus], which offers tools for manipulating the UI at runtime.
 
 ## Goals and objectives
 
@@ -110,7 +110,7 @@ applications and GUI frameworks. The thesis goals may be formulated as follows:
 
 * **evaluate existing solutions (if any) for building TANGO clients for web
   browsers**; find out why these solutions have not been adopted by the
-  community like ATK or Taurus has; identify any pain points;
+  community like their desktop counterparts; identify any pain points;
 
 * consider the extending and updating of the existing solutions if possible,
   or **design and develop a new one**, reusing the ~~good~~ parts;
@@ -122,8 +122,8 @@ applications and GUI frameworks. The thesis goals may be formulated as follows:
 
   * focus on *user experience* and adaptivity, both automatic and manual;
 
-  * be widget based, providing at least basic widgets from the Taurus
-    framework, which are recognized and appreciated by the users;
+  * be widget based, providing at least basic widgets known from other
+    frameworks, which are recognized and appreciated by the users;
 
   * be flexible and modular, allowing users to create their own widgets and
     extend the system functionality via plugins;
