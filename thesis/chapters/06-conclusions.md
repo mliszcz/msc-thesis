@@ -40,8 +40,6 @@ approach was that the *vanilla* JS application are unstructured, and thus
 unmaintainable. This is not true anymore, thanks to the technologies like
 *Web Components*.
 
-TODO: jest jakas uwaga odnosnie tego paragrafu
-
 **Componentized approach.**
 The recent emergence of *Web Components* standard is going to put a definitive
 end to monolithic web applications. The componentized approach is already used
@@ -131,8 +129,6 @@ compared to the dedicated backend implementation, is depicted in
   \caption{Backend access methods compared.}
   \label{fig:06-connection-dedicated-generic-compared}
 \end{figure}
-
-TODO: usunac rysunek z Conclusions
 
 One example of such a middleware is JSON-WS [@www-jsonws] based on
 JSON-RPC specification. This project aims to support creating of RPC-based
