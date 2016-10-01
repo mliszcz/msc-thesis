@@ -153,6 +153,7 @@
 
 \end{center}
 
+%------------------------------------------------------------------------------
 
 \newpage
 \thispagestyle{empty}
@@ -173,6 +174,28 @@
 \makebox[6cm][c]{\small \LangSignature}
 
 \end{flushright}
+
+%------------------------------------------------------------------------------
+
+\newpage
+
+\newenvironment{acknowledgements}%
+{\cleardoublepage\thispagestyle{empty}\null\vfill\begin{center}%
+\bfseries Acknowledgements\end{center}}%
+{\vfill\null}
+\begin{acknowledgements}
+
+I would like to express my gratitude to my supervisor, \textbf{Dr.~Włodzimierz
+Funika} for his guidance and support over the last two years. This work would
+not have been possible without his help and engagement.
+
+
+I would also like to thank the whole NSRC Solaris team, especially \textbf{
+Mr.~Łukasz Żytniak} and \textbf{Mr.~Piotr Goryl}. Łukasz was an invaluable
+source of field-related expertise.
+
+\end{acknowledgements}
+
 
 %------------------------------------------------------------------------------
 
