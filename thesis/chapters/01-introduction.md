@@ -3,12 +3,13 @@
 Control of the expensive and sensitive hardware components in large
 installations like scientific facilities may be a challenging task. In order
 to conduct an experiment, multiple elements like motors, ion pumps, valves and
-power-supplies have to be orchestrated. Example of such an installation,
-located at XZY is presented on [@Fig:01-hardware].
+power-supplies have to be orchestrated. Example part of such an installation,
+located at NSRC Solaris is presented on [@Fig:01-hardware].
 
-![Hardware installation at XYZ used for ABC.](
-  figures/images/01-hardware.png){
-  #fig:01-hardware width=65% }
+![A storage ring magnet in National Synchrotron Radiation Centre "Solaris" in
+  Krakow. (source [@www-nsrc-solaris-resources])](
+  figures/images/01-solaris-storage-ring-magnet-resized45.jpg){
+  #fig:01-hardware width=80% }
 
 This infrastructure has to be reliable and shall provide uninterruptible
 services to its users. It is the hardware operators and control systems
