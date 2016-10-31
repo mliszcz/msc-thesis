@@ -192,7 +192,8 @@ not have been possible without his help and engagement.
 
 I would also like to thank the whole NSRC Solaris team, especially \textbf{
 Mr.~Łukasz Żytniak} and \textbf{Mr.~Piotr Goryl}. Łukasz was an invaluable
-source of field-related expertise.
+source of field-related expertise while Piotr took the responsibility for the
+project management.
 
 \end{acknowledgements}
 
