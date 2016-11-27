@@ -1,1 +1,5 @@
+
+\glsaddall
+\printglossaries
+
 # References

@@ -177,10 +177,11 @@
 
 %------------------------------------------------------------------------------
 
-\newpage
+\clearpage
+\setcounter{page}{3}
 
 \newenvironment{acknowledgements}%
-{\cleardoublepage\thispagestyle{empty}\null\vfill\begin{center}%
+{\cleardoublepage\thispagestyle{plain}\null\vfill\begin{center}%
 \bfseries Acknowledgements\end{center}}%
 {\vfill\null}
 \begin{acknowledgements}
@@ -197,11 +198,53 @@ project management.
 
 \end{acknowledgements}
 
-
 %------------------------------------------------------------------------------
 
-\clearpage
-\setcounter{page}{3}
+\cleardoublepage
+
+\begin{abstract}
+
+\setcounter{page}{5}
+\thispagestyle{plain}
+
+Hardware installations in natural sciences and industry are becoming more and
+more complex. This raised a need for more sophisticated methods of control
+over growing number of devices. To address these needs, the \textbf{TANGO
+Control System} has been developed at ESRF as a generic framework for building
+distributed control systems. TANGO allows building graphical control panels
+composed of various widgets. As TANGO is a CORBA-based software, these client
+applications can run only on desktop.
+
+
+Recently,
+thanks to their numerous benefits over conventional desktop applications,
+\textbf{web applications} are more and more widely used in different areas.
+Among a few attempts of moving TANGO applications to the web browsers, none
+gained popularity and wide adoption. Most projects have been abandoned
+reaching only a proof-of-concept stage.
+
+
+In Thesis we present \textbf{TangoJS}, a modular, extensible software
+stack for building TANGO client applications. TangoJS addresses the faults and
+drawbacks of the existing solutions. Its architecture is layered for increased
+flexibility and easier maintenance. Multiple backend modules are supported,
+which allows accessing TANGO infrastructure using different technologies and
+protocols. TangoJS' Programmable API uses well-defined abstractions and
+interfaces from TANGO IDL specification. Web application developers are
+provided with a set of configurable widgets, which are building blocks for
+more complex user interfaces.
+TangoJS has been designed in compliance with the latest web standards and
+componentization in mind.
+The use of frontend technologies allows for building adaptive user interfaces,
+where widget's sizing and layout depends on context. Other than that,
+TangoJS provides an interactive application that allows to manually manipulate
+its interface at runtime.
+\end{abstract}
+
+\cleardoublepage
+
+% \clearpage
+% \setcounter{page}{3}
 
 }
 

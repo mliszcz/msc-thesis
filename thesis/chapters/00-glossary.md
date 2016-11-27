@@ -345,6 +345,3 @@
   description={is a \gls{middleware} for \gls{rpc} and message-based
     communication}
 }
-
-\glsaddall
-\printglossaries

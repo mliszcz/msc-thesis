@@ -1,9 +1,9 @@
 # Solution and Implementation { #sec:solution-overview }
 
-Each of the existing solutions presented in the previous chapter has some
+Each of the existing solutions presented in Chapter 3 has some
 drawbacks. There is no *best choice* that will suit everyone's needs. **To
-address these issues and fulfill the goals ~~discussed~~ in [@Sec:introduction],
-the TangoJS project has been developed.**
+address these issues and fulfill the goals set up in [@Sec:introduction],
+we have developed a project called TangoJS.**
 
 This chapter describes the implemented solution in terms of the formulated
 design goals and provides a high level overview of the system architecture,
@@ -11,30 +11,30 @@ including all related software layers.
 
 ## Introduction to TangoJS
 
-TangoJS allows building TANGO client applications with the standard web
+TangoJS allows building TANGO client applications with standard web
 front-end technologies like HTML, CSS and Javascript. It gives TANGO
 developers a complete set of tools and APIs required for this task. There is a
-minimal set of dependencies is required.
+minimal set of dependencies required.
 
-TangoJS has been designed to be a modular ecosystem - one includes only
-required modules and configures everything according to the project
-requirements. There are three main layers, which are separated and connected
-with well-defined interfaces.
+TangoJS has been designed to be a modular ecosystem - one includes only the
+modules one needs and configures everything according to the project
+requirements. There are three main separate layers, which are connected via
+well-defined interfaces.
 
 * **TangoJS Core** - Javascript API for programmatic interactions with TANGO
   from a web browser, partly generated from TANGO IDL;
 * **TangoJS Connector** - interface that abstracts-out communication with TANGO
   infrastructure via pluggable backend servers;
 * **TangoJS WebComponents** - an extensible widget toolkit for rapid GUI
-  applications development, inspired by Taurus;
+  applications development, inspired by Taurus.
 
-All these components are described in detail later in this chapter.
+All these components are described in details later on in this chapter.
 
 ## Design Goals
 
 Apart from the general goals formulated in [@Sec:introduction], a set of design
-goals has been established before TangoJS development has started. These goals
-aim to meet the challenges where the existing solutions have failed. The goals
+goals has been established before the development of TangoJS has started. These
+goals aim to meet the challenges where the existing solutions have failed. The goals
 are mostly related to the technological aspects of implementation.
 
 **Compliance with the latest web standards.**
