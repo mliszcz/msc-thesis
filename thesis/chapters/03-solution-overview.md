@@ -1,6 +1,6 @@
 # Solution and Implementation { #sec:solution-overview }
 
-Each of the existing solutions presented in Chapter 3 has some
+Each of the existing solutions presented in [@Sec:state-of-the-art] has some
 drawbacks. There is no *best choice* that will suit everyone's needs. **To
 address these issues and fulfill the goals set up in [@Sec:introduction],
 we have developed a project called TangoJS.**
@@ -121,7 +121,7 @@ web-development and Node.js [@tools-nodejs] is required to get started.
 
 **Considering of security aspects.**
 Each application, especially one that involves network communication, has to
-secure sensible data and prevent from unwanted access. In case of TangoJS this
+secure sensible data against unwanted access. In case of TangoJS this
 is the job for the *Connector* and the corresponding backend server. For
 instance, mTango server may use the roles defined in the servlet container. It
 also integrates with TangoAccessControl. The authentication in the server is

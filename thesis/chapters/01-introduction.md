@@ -1,7 +1,8 @@
 # Introduction { #sec:introduction }
 
-This chapter provides introduction to the field of research and describes
-motivations behind presented work. At the end, project goals are formulated.
+This chapter provides an introduction to the field of research, presents
+essential concepts and describes motivations behind Thesis. At the end,
+project goals are formulated.
 
 ## Research background
 
@@ -25,7 +26,7 @@ In recent days, computer software is used by operators to access and control
 the devices. Many systems aiming to facilitate hardware control and maintenance
 have been developed [@daneels1999selection]. A common name for these systems is
 SCADA, which stands for *Supervisory Control And Data Acquisition*
-[@daneels1999scada; @boyer2009].  
+[@daneels1999scada; @boyer2009].
 
 ### TANGO Control System
 
@@ -120,7 +121,7 @@ formulated as follows:
   community like their desktop counterparts; identify any pain points;
 
 * consider the extending and updating of the existing solutions if possible,
-  or **design and develop a new one**, reusing the ~~good~~ parts;
+  or **design and develop a new one**, reusing the good parts;
 
 * if a new solution is delivered, implementation shall follow the principles:
 
@@ -173,7 +174,8 @@ clients do not access the database directly. Instead, the database is exposed
 as a device server, called *DataBaseds*, and interaction is performed using
 commands, e.g. there is a command that returns a list of all the registered
 device servers or a command that exports a new device.
-A MySQL or MariaDB server is required to run TANGO. It is also possible to run
+A MySQL [@tools-mysql] or MariaDB [@tools-mariadb] server is required to run
+TANGO. It is also possible to run
 TANGO without a database and with a limited functionality. In cases where high
 availability is required TANGO can run in a multi-database configuration
 ([@tango2016manual], p. 186).
@@ -196,7 +198,7 @@ otherwise the client would constantly poll the device server. Device server
 developers may also fire events when server-initiated communication is
 required.
 
-The concepts ~~described in this section~~ are just an overview to give the
+The concepts presented in this section are just an overview to give the
 reader a glimpse of what TANGO is. Providing an extensive description of TANGO
 is out of scope of this thesis and some simplifications have been made here.
 All these topics are discussed much deeper in the TANGO Control System Manual

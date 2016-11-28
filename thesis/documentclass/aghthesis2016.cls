@@ -62,7 +62,7 @@
 
 % PROCESSING OPTIONS
 \ProcessOptions
-\LoadClass[a4paper,twoside]{report}
+\LoadClass[a4paper,twoside,openright]{report}
 
 
 \RequirePackage{setspace}
