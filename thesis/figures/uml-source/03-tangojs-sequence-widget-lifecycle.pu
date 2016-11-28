@@ -24,7 +24,7 @@ opt initialization required
   Widget ->> DeviceProxy: get_info()
   activate DeviceProxy
 
-  DeviceProxy ->> Widget:
+  DeviceProxy ->> Widget: Promise<DeviceInfo>
   deactivate DeviceProxy
 
   Widget -> Widget: << configuration >>
@@ -39,7 +39,7 @@ par
     Widget ->> DeviceProxy: read_attr()
     activate DeviceProxy
 
-    DeviceProxy ->> Widget:
+    DeviceProxy ->> Widget: Promise<DeviceAttr>
     deactivate DeviceProxy
 
     Widget -> Widget: << UI update >>
@@ -54,7 +54,7 @@ else
   [->>Widget: << user input >>
   Widget ->> DeviceProxy: write_attr()
   activate DeviceProxy
-  DeviceProxy ->> Widget:
+  DeviceProxy ->> Widget: Promise<undefined>
   deactivate DeviceProxy
 
 end

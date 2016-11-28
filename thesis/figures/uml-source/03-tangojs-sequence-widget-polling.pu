@@ -48,19 +48,23 @@ opt if configuration is requred
   Connector ->> Backend: << req >>
   activate Backend
 
-  Connector --> DeviceProxy:
+  Connector --> DeviceProxy: Promise<AttrInfo>
   deactivate Connector
 
-  DeviceProxy --> AttributeProxy:
+  DeviceProxy --> AttributeProxy: Promise<AttrInfo>
   deactivate DeviceProxy
 
-  AttributeProxy --> Widget:
+  AttributeProxy --> Widget: Promise<AttrInfo>
   deactivate AttributeProxy
 
   |||
 
-  Backend -->> Widget: << response >>
+  Backend -->> Connector: << response >>
   deactivate Backend
+
+  note over Widget
+    Promise resolution
+  end note
 
   |||
 
@@ -82,19 +86,24 @@ loop on polling timer expiration
   Connector ->> Backend: << req >>
   activate Backend
 
-  Connector --> DeviceProxy:
+  Connector --> DeviceProxy: Promise<DeviceAttr>
   deactivate Connector
 
-  DeviceProxy --> AttributeProxy:
+  DeviceProxy --> AttributeProxy: Promise<DeviceAttr>
   deactivate DeviceProxy
 
-  AttributeProxy --> Widget:
+  AttributeProxy --> Widget: Promise<DeviceAttr>
   deactivate AttributeProxy
 
   |||
 
-  Backend -->> Widget: << response >>
+  Backend -->> Connector: << response >>
   deactivate Backend
+
+  note over Widget
+    Promise resolution
+  end note
+
 
   |||
 

@@ -34,7 +34,7 @@ deactivate DeviceProxy
 
 ...
 
-Backend -->> User: << response >>
+Backend -->> Connector: << response >>
 note right of User
   response triggers Promise resolution
 end note
