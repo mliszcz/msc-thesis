@@ -1,8 +1,10 @@
 @startuml
-top to bottom direction
 
-cloud "TANGO" {
-  [Device Servers ...] as DevSrv
+node "Web Browser" {
+  [TangoJS\nWeb Components] as WC
+  [TangoJS\nConnector 1] as C1
+  [TangoJS\nConnector 2] as C2
+  [TangoJS Core] as Core
 }
 
 node "Server (I)" {
@@ -13,17 +15,14 @@ node "Server (II)" {
   [Backend 2\n(WebSocket)] as B2
 }
 
-node "Web Browser" {
-  [TangoJS\nWeb Components] as WC
-  [TangoJS\nConnector 1] as C1
-  [TangoJS\nConnector 2] as C2
-  [TangoJS Core] as Core
+cloud "TANGO" {
+  [Device Servers ...] as DevSrv
 }
 
-[DevSrv] <--> B1 : IIOP
-[DevSrv] <--> B2 : IIOP
-B1 <--> C1 : HTTP
-B2 <--> C2 : WebSocket
+[DevSrv] <-u-> B1 : IIOP
+[DevSrv] <-u-> B2 : IIOP
+B1 <-u-> C1 : HTTP
+B2 <-u-> C2 : WebSocket
 Core ..> C1
 Core ..> C2
 Core <.. WC

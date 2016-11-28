@@ -1,14 +1,5 @@
 @startuml
 
-package "TangoJS Connector" {
-  [Server] <-> HTTP
-  HTTP <-> [Client]
-}
-
-package "TangoJS Core" {
-  [TangoJS API] as API
-}
-
 package "TangoJS Web Components" {
   [line-edit\nwidget] as WLineEdit
   [label\nwidget] as WLabel
@@ -18,20 +9,25 @@ package "TangoJS Web Components" {
   [...]
 }
 
-[TANGO] <-> IIOP
-IIOP <-> [Server]
-[Client] <.. [API]
-[API] <.. WLineEdit
-[API] <.. WLabel
-[API] <.. WTrend
-[API] <.. WForm
+package "TangoJS Core" {
+  [TangoJS API] as API
+}
 
-' [Web Application] as WA
-'
-' WA ..> [line-edit]
-' WA ..> [label]
-' WA ..> [trend]
-' WA ..> [form]
-' WA ..> [API]
+package "TangoJS Connector" {
+  [Server] <-> HTTP
+  HTTP <-> [Client]
+}
+
+cloud "TANGO" {
+  IIOP <-> [Server]
+  [Device Servers ...] <-> IIOP
+}
+
+
+[Client] <.u. [API]
+[API] <.u. WLineEdit
+[API] <.u. WLabel
+[API] <.u. WTrend
+[API] <.u. WForm
 
 @enduml

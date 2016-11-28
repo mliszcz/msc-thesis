@@ -1,5 +1,0 @@
-
-\glsaddall
-\printglossaries
-
-# References

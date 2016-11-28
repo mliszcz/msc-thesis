@@ -1,28 +1,28 @@
 # Results { #sec:results }
 
-In this chapter we discuss the outcomes of the presented work, review
+In this chapter we discuss the outcomes of the presented work, review the
 fulfillment of the initial goals and summarize the achievements. TangoJS is
 compared to the existing solutions and its usability and usefulness in web
 development is evaluated.
 
 ## Goals review
 
-The goals of this work formulated initially has not been in form of strict,
+The goals of this work formulated initially has not been in a form of strict,
 measurable requirements. It was rather a set of design principles and
 guidelines to follow during the project development. **All the goals have been
 achieved.**
 
-The main reason behind the development of TangoJS was to provide **simple, yet
+The main reason behind the development of TangoJS was to provide a **simple, yet
 extensible and flexible** solution for building web-based client applications
 for TANGO Control System. This has been reflected in design decisions, software
-architecture, platform choice and even the distribution model. ~~Below~~ are
+architecture, platform choice and even the distribution model. There are
 highlighted the areas where most focus has been put into.
 
 **Adaptability.**
-Adaptive user interface changes its layout depending on the current context.
+An adaptive user interface changes its layout depending on the current context.
 This process can be performed automatically by the UI layer, or the UI can
 provide end-user with an option to change the layout manually. In TangoJS' case
-both options are supported. This is true on a widget level and also for the
+both options are supported. This is true at a widget level and also for the
 whole *TangoJS Panel* application, built with these widgets.
 
 TangoJS widgets benefit from the latest CSS features, like Flexbox
@@ -33,10 +33,10 @@ application developer may then use media queries [@gardner2011responsive]
 together with appropriate selectors to adapt the widgets automatically to the
 device they are displayed on.
 
-Apart from all adaptability aspects offered by separate widgets, the *TangoJS
-Panel* application allows users to configure the interface manually, by
-choosing what widgets are displayed, where the widgets are displayed and what
-fields are included in each widget. This allows the user for building
+Apart from all the adaptability aspects offered by separate widgets, the
+*TangoJS Panel* application allows users to configure the interface manually,
+by choosing *what widgets* are displayed, *where* the widgets are displayed and
+*what fields* are included in each widget. This allows the user for building
 personalized *synpotic panels*, adapted for the current requirements and
 changed dynamically.
 
@@ -46,7 +46,7 @@ knowledge of web development is required to create own applications. There
 are no third-party frameworks involved and the set of dependencies is kept
 minimal. All components from the TangoJS stack have been deployed to the npm.
 Thus, including TangoJS is as simple as adding a new dependency to the
-project. Developers new to TangoJS may choose to start with a blank web
+project. Novice developers to TangoJS may choose to start with a blank web
 application template available in TangoJS repositories.
 
 **Extensibility.**
@@ -125,9 +125,9 @@ traffic, but it requires support on both the frontend and backend side.**
 
 ## Usability evaluation { #sec:05-usability-evaluation }
 
-Quantitative evaluation of user interfaces is a complex task and the results are
-often different from real user experiences [vaananen2008towards]. This is due
-to the involvement of rather unpredictable human factors, like mind,
+A quantitative evaluation of user interfaces is a complex task and the results
+are often different from real user experiences [@vaananen2008towards]. This is
+due to the involvement of rather unpredictable human factors, like mind,
 perception or personal preferences. To address these issues, a method called
 *heuristic evaluation* has emerged [@nielsen1990heuristic]. This is one of the
 *usability engineering* methods.
@@ -144,7 +144,7 @@ like *cognitive walkthrouhgs*, *formal inspections*, *feature inspections* or
 *standards inspections*. These methods usually require involving domain
 experts who provide a usability feedback.
 
-The heuristic evaluation is relatively a simple method and produces a
+The heuristic evaluation is quite a simple method and produces a
 reasonable outcome. It has been chosen to evaluate TangoJS' usability and user
 experience. The 10 heuristics, as formulated by Nielsen [@nielsen1994usability]:
 
@@ -222,10 +222,10 @@ library for creating widget-based GUI clients for TANGO on desktops.
 
 **Error prevention.**
 In case of web-based or distributed applications it is impossible to prevent
-error from occurring. This is due to the fact that whenever network
+errors from occurring. This is due to the fact that whenever network
 communication is involved, the errors may happen. In such a case, the widgets
 are inoperable, until the communication is back, e.g. the backend server
-becomes reachable again. These errors are indicated to the user. Other kind of
+becomes reachable again. These errors are indicated to the user. Other kinds of
 errors are handled and corrected by the widget code, e.g. a bad input.
 
 **Recognition rather than recall.**
@@ -237,8 +237,8 @@ widget, like HTML attributes configuration.
 
 **Flexibility and efficiency of use.**
 From the end-user's perspective, the *accelerators*, as defined by Nielsen,
-are not applicable to TangoJS at the current stage. The UI is flat and, most of
-the time, use cases are just single actions.
+are not applicable to TangoJS at the current stage. The UI is flat, with almost
+no nested dialogs. Most of the time use cases are just single actions.
 
 **Aesthetic and minimalist design.**
 The TangoJS GUI is kept clean and minimal. It's up to the application developer
@@ -247,7 +247,7 @@ field or a quality bulb. In the case of the *Panel* application, the user can
 decide which widgets are present on the dashboard and what fields are included.
 
 **Help users recognize, diagnose, and recover from errors.**
-If an error occurs within widget, the user is only informed by the change of
+If an error occurs within a widget, the user is only informed by the change of
 indicator's color. No message is displayed to the user. The same applies to
 the *Panel* application.
 
@@ -265,8 +265,8 @@ future TangoJS releases. Since a widget should not pop with alerts on its own,
 a reasonable way of error indication has to be proposed.
 
 The analysis performed according to Nielsen's heuristics may quickly provide
-GUI developers with useful feedback, without a need to involve other people,
+GUI developers with a useful feedback, without a need to involve other people,
 like UI experts or targeted users. The outcome of heuristic evaluation are
-those usability problems that may affect user experience. Performing the
-analysis during software development, one may address these issues on an early
+those usability problems that may affect user experience. By performing the
+analysis during software development, one may address these issues at an early
 stage.
