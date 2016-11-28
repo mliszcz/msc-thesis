@@ -64,7 +64,7 @@ as `this`, thus mixing-in has to be performed using, e.g. a `call` method, like
   export function withPolledModel ()
   ```
 
-  Adds polling behavior to the widget. The underlying attribute model is
+  Adds a polling behavior to the widget. The underlying attribute model is
   constantly polled to keep the widget up-to-date. The prototype that mixes
   this in should have the following methods defined:
 
@@ -92,7 +92,7 @@ as `this`, thus mixing-in has to be performed using, e.g. a `call` method, like
   This mixins supports multiple attributes, when a string array is passed to
   the `onModelChange` method. The polling is started when this method is called
   for the first time.
-  An example on how to use this mixin is presented later.
+  An example of how to use this mixin is presented later.
 
 * ```javascript
   export function withReflectedAttribute (descriptor)
@@ -126,7 +126,7 @@ user may click on a *button* or enter value in a *text-box*. Lifecycle
 callbacks are part of the *Custom Elements* standard. Their detailed
 description is provided in [@Sec:selected-aspects-of-implementation].
 [@Fig:52-widgets-state-transitions] shows possible widget's states and
-transitions between them as a result of above mentioned triggers.
+transitions between them as a result of the above mentioned triggers.
 
 ![Widget states and transitions.](
   figures/uml/52-widgets-state-transitions.tex){
@@ -134,9 +134,9 @@ transitions between them as a result of above mentioned triggers.
 
 Since TangoJS widgets are built with Web Components, they behave like ordinary
 HTML elements. During initialization widget prepares its layout, attaches event
-handlers and (usually) starts polling timer to periodically update its state.
+handlers and (usually) starts the polling timer to periodically update its state.
 Update of widget's attributes may require reinitialization, recreation of the
-underlying `DeviceProxy` or restart of the polling timer. Sequence chart in
+underlying `DeviceProxy` or restart of the polling timer. The sequence chart in
 [@Fig:03-tangojs-sequence-widget-polling] shows these procedures and their
 interactions with other parts of TangoJS stack.
 
@@ -154,7 +154,7 @@ build a simple widget for TangoJS.
 One may start with an empty HTML file and populate it with the contents shown
 on [@Lst:B-html-blank]. It is a standard HTML file with two elements, `template`
 and `script`. The `template` element is part of *HTML Templates* standard and
-allows for defining reusable HTML blocks. This template is the widget's view,
+allows for defining the reusable HTML blocks. This template is the widget's view,
 which will be rendered on the webpage. The `script` element will contain the
 widget's logic. It is wrapped in an IIFE and the `window`, `document` and
 `tangojs` global variables are injected into this function.
@@ -189,7 +189,7 @@ The widget described here will be a simple label that displays the value of an
 attribute. A single `span` element will be enough to achieve this. This has
 been already appended to the `template` element. An `id` has been assigned to
 that element, but still there may be multiple instances of this widget in a
-single document, thanks to the encapsulation provided by the *Shadow DOM*.
+single document, due to the encapsulation provided by the *Shadow DOM*.
 
 **The widget class.**
 A widget is a class, or a prototype that extends `HTMLElement` and is
@@ -259,15 +259,14 @@ deprecated, but no browser implements the V1 API yet.
 **Polling the model.**
 To poll the device and be notified whenever a new value is obtained, the
 `withPolledModel` mixin may be used. This requires implementing the four
-methods mentioned above.
+methods mentioned below.
 The `createProxy` method parses the model and instantiates an `AttributeProxy`
-from the *TangoJS Core* package. The `onModelRead` is called with a map of
-models, but this widget expects only one model, stored in the `model` property.
-This property is defined later. The `onModelRead` and `onErrorRead` are
-responsible for updating the widget's view periodically. In these methods,
-the label's text is set to the obtained value.
-This mixin is invoked on the widget's prototype, immediately after class
-definition.
+from the *TangoJS Core* package. The `onModelRead` method is called with a map
+of models, but this widget expects only one model, stored in the `model`
+property. The `onModelRead` and `onErrorRead` methods are responsible for
+updating the widget's view periodically. In these methods, the label's text is
+set to the obtained value. This mixin is invoked on the widget's prototype,
+immediately after class definition.
 
 **Reflecting the attributes.**
 The widget has two attributes, a `model` and a `poll-period`. The first one

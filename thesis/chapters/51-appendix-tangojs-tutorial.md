@@ -1,13 +1,13 @@
 # Getting started with TangoJS { #sec:tangojs-tutorial }
 
 TangoJS has been designed to be easy to start with. Only a basic experience
-in web development is required to build a simple TangoJs application.
-The one built in this chapter visualizes two scalar attributes using the
-*trend* widget. Additionally, value of the writable one can be changed by the
-user with the *line-edit *widget.
+in web development is required to build a simple TangoJS application.
+The one whose building is shown in this Appendix visualizes two scalar
+attributes using the *trend* widget. Additionally, value of the writable one
+can be changed by the user with the *line-edit* widget.
 
 This process is visualized in [@Fig:51-tutorial-create-app-sequence].
-Description of each step is provided in the following sections.
+The description of each step is provided in the following sections.
 
 ![Steps required to create basic TangoJS application.](
   figures/uml/51-tutorial-create-app-sequence.tex){
@@ -33,16 +33,16 @@ additional configuration is required. A standard `.war` archive may be
 downloaded from the mTango webpage[^A-mtango-war]. This archive should be
 deployed in the container as usually, e.g. by placing the archive in the
 `webapps` directory.
-Then, a device with following parameters should be registered in the
-TANGO database using a tool like e.g. Jive:
+Then, a device with the following parameters should be registered in the
+TANGO database using a tool like Jive:
 
 * class/instance: `TangoRestServer/development`;
 * device `test/rest/0`;
 
 [^A-mtango-war]: <https://bitbucket.org/hzgwpn/mtango/downloads/mtango.server-rc2-0.3.zip>
 
-mTango uses the role-based authorization offered by Tomcat. One have to add a
-new user to the `config/tomcat-users.xml` file, like shown on
+mTango uses the role-based authorization offered by Tomcat. One has to add a
+new user to the `config/tomcat-users.xml` file, like shown in
 [@Lst:A-mtango-user].
 
 ```{#lst:A-mtango-user .xml .numberLines}
@@ -65,7 +65,7 @@ containers, offers a configurable filter that can handle the CORS
 preflights. Apart from configuring the filter, the OPTIONS request should be
 allowed to pass the security constraints. This requires modifications to the
 default security configuration, also in the `web.xml` file. The changes are
-shown on [@Lst:A-mtango-cors].
+shown in [@Lst:A-mtango-cors].
 
 ```{#lst:A-mtango-cors .xml .numberLines}
 <?xml version="1.0"?>
@@ -131,7 +131,7 @@ packages are available in npm registry under the following names:
 * mTango connector - `tangojs-connector-mtango`;
 
 The rest of this section assumes that Node.js has been installed and
-configured. To create an empty project, one have to type `npm init` in an
+configured. To create an empty project, one has to type `npm init` in an
 empty directory and then respond to a few questions. The TangoJS packages may
 be then installed like: `npm install tangojs-core`. The required steps are as
 follows:
@@ -147,7 +147,7 @@ During the above process,
 the TangoJS packages have been pulled to the `node_modules` directory.
 Also, a `package.json` file has been created in the current directory.
 This file contains the project definition, including all the installed
-dependencies. Changes to this file may be done manually, but when a version
+dependencies. Changes to this file may be made manually, but when a version
 of a dependency is changed or a new dependency is added, one should type
 `npm install`, with no package names, to update the dependencies.
 
@@ -155,7 +155,7 @@ of a dependency is changed or a new dependency is added, one should type
 
 The steps described in the previous section may be omitted, and the *TangoJS
 WebApp Template*[^A-tangojs-webapp-link] may be used instead. It is a starter
-TangoJS project that has all required dependencies declared and provides an
+TangoJS project that has all the required dependencies declared and provides an
 `index.html` file skeleton.
 
 [^A-tangojs-webapp-link]: <https://github.com/tangojs/tangojs-webapp-template>
@@ -199,7 +199,7 @@ the developer may choose which widgets to load. Each widget is packaged in
 a separate file, which should be loaded as an *HTML Import*, using the `link`
 element.
 
-When all packages have been loaded, the connector has to be configured.
+Once all the packages have been loaded, the connector has to be configured.
 This is also usually done in the `head` section, inside a `script` tag. One
 may instantiate a desired connector, e.g. the *TangoJS mTango Connector* and
 then pass this connector to the `tangojs.core.setConnector(connector)`
@@ -258,18 +258,18 @@ function. The process described here is shown in [@Lst:A-tangojs-setup].
 Listing: TangoJS configuration.
 
 **Using the widgets.**
-TangoJS widgets may be used declaratively, by placing desired the tags in the
-document `body`. Widgets may be also created using the imperative DOM
+TangoJS widgets may be used declaratively, by placing the desired the tags in
+the document `body`. Widgets may be also created using the imperative DOM
 manipulation APIs. The available widgets have been discussed in
-[@Sec:solution-tangojs-webcomponents] of this thesis. The TangoJS project
+[@Sec:solution-tangojs-webcomponents] of Thesis. The TangoJS project
 webpage[^A-tangojs-link] also lists the widgets, as well as provides the
 description of the attributes that may alter the widgets's layout or behavior.
 
 [^A-tangojs-link]: <http://tangojs.github.io/>
 
-In this example application, two widgets will be added to the page, using two
-possible approaches. The first widget is a `tangojs-trend`, which displays the
-values of two attributes over time. These attributes are
+In this example application, two widgets are going to be added to the page,
+using two possible approaches. The first widget is a `tangojs-trend`, which
+displays the values of two attributes over time. These attributes are
 `sys/tg_test/1/long_scalar_w` and `sys/tg_test/1/double_scalar`. The
 `long_scalar_w` is a writable attribute. Thus, another widget,
 `tangojs-line-edit` will be added to allow one change to the value of this
@@ -306,7 +306,7 @@ attribute. The code shown in [@Lst:A-tangojs-widgets] should be added to the
     if (HTMLImports && !HTMLImports.useNative) {
       // If HTMLImports polyfill is used, custom elements are not yet
       // upgraded when the DOMContentLoaded is fired. The polyfill
-      // fires special event to indicate that all imports have been
+      // fires a special event to indicate that all imports have been
       // loaded. This is required to work in Firefox.
       window.addEventListener('HTMLImportsLoaded', initApplication, true)
     } else {
@@ -319,9 +319,9 @@ attribute. The code shown in [@Lst:A-tangojs-widgets] should be added to the
 ```
 Listing: Creating TangoJS widgets from application's code.
 
-The application built in this section is shown in
+The layout of the application built in this section is shown in
 [@Fig:A-tangojs-webapp-template].
 
-![The *TangoJS WebApp Template* application.](
+![The *TangoJS WebApp Template* application's view.](
   figures/images/A-tangojs-webapp-template.png){
   #fig:A-tangojs-webapp-template width=49% }
