@@ -30,7 +30,7 @@ Javascript from IDL. To address this, we have developed the
 **idl2js.**
 The *idl2js* does not aim to be a Javascript equivalent of the existing tools
 that generate *stubs* and the marshalling code. This is not possible, since
-CORBA cannot run in a web browser. All the TangoJS needs is to have the TANGO
+CORBA cannot run in a web browser. All what TangoJS needs is to have the TANGO
 structures, enumerations and interfaces translated to the Javascript. The
 mapping is relatively simple:
 
@@ -44,7 +44,7 @@ For each generated entity a docstring comment is also generated. The comments
 use the syntax supported by the JSDoc and ESDoc tools. These comment strings
 can be used to generate the API documentation. Also, static typecheckers or
 code intelligence tools can use such comments as a source of information about
-data types. The example output of generated Javascript code is shown on
+data types. The example output of generated Javascript code is shown in
 [@Lst:C-generated-code].
 
 ```{#lst:C-generated-code .javascript .numberLines}
@@ -75,7 +75,7 @@ export class DevAttrHistory {
   }
 }
 ```
-Listing: Example structure translated to Javascript.
+Listing: Example structure translated from IDL to Javascript.
 
 **Translation.**
 The translator has been written in Scala language. It uses the `IDLLexer`,
