@@ -1,7 +1,7 @@
 ---
 title: Adaptive Web User Interfaces for TANGO Control System
 subtitle: |
-  MSc thesis
+  MSc thesis defense
 author: |
   Michal Liszcz\
   Supervisor: Wlodzimierz Funika, PhD
@@ -21,34 +21,32 @@ include-before:
   - \graphicspath{{./}}
 ---
 
-# Agenda
+# Presentation plan
 
 * TANGO Controls - introduction
+* TANGO architecture
 * Motivation and goals
 * State of the Art
-* Introducing TangoJS
+* TangoJS introduction
 * TangoJS architecture
     * *core* (API)
-    * *mtango-connector* (backend client)
+    * *connector* (backend client)
     * *web-components* (widget toolkit)
 * *Panel* application
-* Security considerations
-* Other outcomes
 * Summary
 
 ---
 
 # TANGO Controls - introduction
 
-* A distributed system for controlling *devices*,
+* A software toolkit for controlling hardware in distributed environment,
 
-* *Device* is an abstract entity that has:
-    * attributes - "fields", parameters (read-only or writable),
-    * commands - "methods", actions, that may be invoked,
+* Built on top of **CORBA** with bindings for C++, Java and Python,
 
-* Implemented on top of CORBA and ZeroMQ,
+* *Device* in TANGO is a remote object that has:
 
-* Bindings for C++, Java and Python,
+    * attributes - *fields*, parameters of the device,
+    * commands - *methods*, actions that device can perform,
 
 * **GUI libraries based on Swing (ATK) and Qt (Taurus)**.
 
@@ -56,21 +54,27 @@ include-before:
 
 # TANGO Controls - architecture (simplified)
 
-![TANGO Controls architecture overview.](images/tango-cs-archi-simple.png){ width=95% }
+![TANGO Controls architecture overview.](images/01-tango-architecture.png){ width=60% }
+
+---
+
+# TANGO Controls - graphical client application (Taurus)
+
+![Desktop client application built with Taurus framework.](images/01-tango-gui-taurus.png){ width=80% }
 
 ---
 
 # Motivation and goals
 
 * Web technologies (HTML, JS, CSS) are extensively used for building modern
-  UIs:
+  GUI applications:
     * for web browser,
-    * for desktop (Electron -> Atom, Min, ...),
+    * for desktop (Github Electron),
     * for mobile (Apache Cordova),
 
 * Benefits:
     * hundreds of frameworks,
-    * thousands of libraries and components,
+    * thousands of libraries and reusable components,
     * fast prototyping,
     * ease of deployment,
 
@@ -81,82 +85,67 @@ include-before:
 
 ---
 
-# State of the Art
+# State-of-the-art
 
-* Canone - HTML + PHP + Python (for TANGO access)
-    * discontinued in 2007, used by nobody
+* Canone
+    * PHP and Python on server side,
+    * limited interaction options,
+    * first release in 2005, discontinued in 2007,
 
-* Taurus Web - TANGO over WebSockets
-    * discontinued proof-of-copcept
+* Taurus Web - TANGO over
+    * WebSocket gateway for TANGO (implemented in Python),
+    * almost no frontend code,
+    * discontinued at proof-of-concept stage
 
-* a few more proofs-of-concept, works-in-progress and dead projects
+* Tango REST
+    * RESTful API for TANGO,
+    * server written in Java, no frontend code
 
 ---
 
-# State of the Art (continued)
+# State-of-the-art (continued)
 
 * mTango (<https://bitbucket.org/hzgwpn/mtango>):
     * actively developed since 2013,
     * RESTful gateway to TANGO (Java servlet),
     * Javascript client,
-    * collection of UI components,
+    * collection of UI components.
 
-* However, the frontend have some drawbacks:
-    * uses JavascriptMVC (1.5) (SO Q&A query yields 192 results for
-    '*javasciptmvc*' and 176k for '*angularjs*'),
+* However, the frontend part has some drawbacks:
+    * depends on JavascriptMVC (old version of unpopular framework),
     * uses JsonP (instead of CORS requests),
-    * requires Java and Rhino runtime (but everyone wants Node.js),
-    * provides just basic widgets
-    * it is hard to get started
+    * requires Java and Rhino runtime (instead of Node.js),
+    * provides just basic widgets,
+    * it is hard to learn and get started.
 
 ---
 
-# Introducing TangoJS
+# TangoJS introduction
 
 * *Modular, extensible, framework-agnostic __frontend__ stack for TANGO
   Controls*,
 
-* Uses modern web standards:
-    * Web Components,
-    * works with(out) any framework,
+* Uses modern web standards: ES2015, Web Components, CSS3,
 
-* Multiple configuration options:
-    * supports mTango in backend,
-    * works in Node (API) and browsers (API + widgets),
+* Works with (or without) any framework,
 
-* Built with Node, available in npm:
-    * just grab what you need.
+* Pluggable backends for communication with TANGO (may be integrated with
+  mTango),
+
+* Can run in Node.js (API only) and all major browsers (API + widgets),
+
+* Built with Node, available in npm, can be easily integrated into existing
+  Node projects.
 
 ---
 
 # TangoJS architecture
 
-\columnsbegin
-
-\column{.3\textwidth}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.7\textwidth]{images/tangojs-stack.png}
-  \caption{TangoJS stack.}
-\end{figure}
-
-\column{.7\textwidth}
-
-* Allows for building TANGO client apps using any Javascript-based solution,
-
-* Provides complete set of widgets similar inspired by Taurus library,
-
-* Core API uses structures and entities from TANGO IDL,
-
-* May be configured with any backend:
-    * ships with mTango connector.
-
-\columnsend
+![TangoJS architecture and modules](images/03-tangojs-architecture.png){ width=80% }
 
 ---
 
-# TangoJS architecture - *core*
+# TangoJS architecture - *core* (API)
 
 * Tango API for Javascript,
 
@@ -168,27 +157,32 @@ include-before:
 * Backend-agnostic:
     * all calls are passed to the underlying
       connector,
-    * ongoing work: communicate directly with TANGO,
 
-* Written in ES2015 - maintainable, clean, modular code,
-
-* Each function returns a Promise - no callback madness.
+* Written with ES2015 - maintainable, clean design, modular code,
 
 ---
 
-# TangoJS architecture - *mtango-connector*
+# TangoJS architecture - *connector* (backend client)
 
-* Client for the mTango RESTful server,
+* A plugin for accessing TANGO infrastructure,
 
-* Uses Fetch API,
+* integrates browser with TANGO,
 
-* Requires to configure mTango for CORS.
+* default connector uses mTango on server side,
+
+* *mtango-connector* client is implemented with Fetch API,
+
+* requires mTango to be configured with CORS support,
+
+* possible other implementations (e.g. with WebSocket),
+
+* responsible for user authentication and authorization.
 
 ---
 
 # TangoJS architecture - *web-components*
 
-* Inspired by Taurus library,
+* A collection of widgets inspired by Taurus library,
 
 * Built with *Web Components*:
     * *Custom Elements*, *HTML Imports*, *Shadow DOM*,
@@ -202,7 +196,6 @@ include-before:
     * `tangojs-state-led`
     * `tangojs-trend`
     * `tangojs-form`
-        * adapts to bound model
     * `tangojs-device-tree`
 
 ---
@@ -236,38 +229,22 @@ le.showName = true
 
 ---
 
-# Security considerations
-
-* Authentication:
-    * handled by the connector
-    * *mTango-connector* uses HTTP basic auth
-    * authentication filter may be configured for e.g. LDAP
-
-* Authorization:
-    * handled by TANGO
-    * `TangoAccessControl` device
-
-# Other outcomes and artifacts
-
-* Website: <https://tangojs.github.io>
-
-* API documentation
-
-* *getting-started* application template,
-
-* Docker containers
-    * TANGO 9
-    * mTango rc2
-
----
-
 # Summary
 
-* Objectives have been achieved,
+* Objectives have been achieved:
+    * TangoJS allows for building *adaptive* web-based client applications,
+    * widget's layout may be controlled via media queries and adapted to the
+      environment,
+    * operator may adapt the UI interactively using the TangoJS Panel application,
 
-* Positive feedback from NSRC Solaris team,
+* Solution is extensible:
+    * new widgets may be added in future,
+    * new ways of communication with TANGO may be implemented (requires changes
+      only in connector),
 
-* Presented on KUKDM'16.
+* Positive feedback from NSRC Solaris and TANGO community,
+
+* Work presented at KUKDM'16.
 
 ---
 
