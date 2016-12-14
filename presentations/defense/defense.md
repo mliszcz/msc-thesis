@@ -18,6 +18,10 @@ header-includes:
   - \usepackage{listings}
   - \usepackage{caption}
   - \captionsetup[figure]{labelformat=empty}
+  - \setbeamercolor{frametitle}{fg=AGHred}
+  - \setbeamertemplate{itemize item}{\color{AGHgreen}$\blacktriangleright$}
+  - \setbeamertemplate{itemize subitem}{\color{AGHblack}\tiny$\blacktriangleright$}
+  - \setbeamercolor{itemize/enumerate subbody}{fg=AGHgreen}
 
 include-before:
   - \graphicspath{{./}}
@@ -132,7 +136,7 @@ include-before:
 
 ---
 
-# TangoJS architecture (1/4) - *core* (API)
+# TangoJS overview (1/4) - *core* (API)
 
 * Tango API for Javascript,
 
@@ -149,7 +153,7 @@ include-before:
 
 ---
 
-# TangoJS architecture (2/4) - *connector* (backend client)
+# TangoJS overview (2/4) - *connector* (backend client)
 
 * A plugin for accessing TANGO infrastructure,
 
@@ -167,7 +171,7 @@ include-before:
 
 ---
 
-# TangoJS architecture (3/4) - *web-components*
+# TangoJS overview (3/4) - *web-components*
 
 * A collection of widgets inspired by Taurus library,
 
@@ -187,7 +191,7 @@ include-before:
 
 ---
 
-# TangoJS architecture (4/4) - *web-components* (continued)
+# TangoJS overview (4/4) - *web-components* (continued)
 
 * Create components declaratively:
 

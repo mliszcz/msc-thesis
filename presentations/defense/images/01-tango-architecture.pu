@@ -1,5 +1,7 @@
 @startuml
 
+cloud "CORBA" {
+
 node "Server 1" {
   component "<<DeviceServer>>\nDataBaseds" as DBDS
 '  component "<<DeviceServer>>\nTangoAccessControl" as TAC
@@ -10,12 +12,14 @@ node "Server 2" {
   component "<<DeviceServer>>\nDeviceServer 2" as DS2
 }
 
-database "MySQL database" {
-  component "TANGO Schema" as DB
-}
-
 node "Client" {
   component "TANGO API" as DP
+}
+
+}
+
+database "MySQL database" {
+  component "TANGO Schema" as DB
 }
 
 component "Hardware 1" as HW1
