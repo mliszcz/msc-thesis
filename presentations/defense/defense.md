@@ -16,6 +16,8 @@ header-includes:
   - \graphicspath{{../beamerthemeAGH/}}
   - \usepackage{{../beamerthemeAGH/beamerthemeAGH}}
   - \usepackage{listings}
+  - \usepackage{caption}
+  - \captionsetup[figure]{labelformat=empty}
 
 include-before:
   - \graphicspath{{./}}
@@ -24,11 +26,9 @@ include-before:
 # Presentation plan
 
 * TANGO Controls - introduction
-* TANGO architecture
 * Motivation and goals
 * State of the Art
-* TangoJS introduction
-* TangoJS architecture
+* TangoJS overview
     * *core* (API)
     * *connector* (backend client)
     * *web-components* (widget toolkit)
@@ -43,7 +43,7 @@ include-before:
 
 * Built on top of **CORBA** with bindings for C++, Java and Python,
 
-* *Device* in TANGO is a remote object that has:
+* *Device* in TANGO is represented a remote object that has:
 
     * attributes - *fields*, parameters of the device,
     * commands - *methods*, actions that device can perform,
@@ -54,13 +54,13 @@ include-before:
 
 # TANGO Controls - architecture (simplified)
 
-![TANGO Controls architecture overview.](images/01-tango-architecture.png){ width=60% }
+![](images/01-tango-architecture.png){ width=70% }
 
 ---
 
 # TANGO Controls - graphical client application (Taurus)
 
-![Desktop client application built with Taurus framework.](images/01-tango-gui-taurus.png){ width=80% }
+![](images/01-tango-gui-taurus.png)
 
 ---
 
@@ -87,36 +87,23 @@ include-before:
 
 # State-of-the-art
 
-* Canone
-    * PHP and Python on server side,
-    * limited interaction options,
-    * first release in 2005, discontinued in 2007,
+* Canone - PHP and Python on server side:
+    * limited interaction options, discontinued in 2007,
 
-* Taurus Web - TANGO over
-    * WebSocket gateway for TANGO (implemented in Python),
-    * almost no frontend code,
-    * discontinued at proof-of-concept stage
+* Taurus Web - TANGO over - WebSocket gateway for TANGO:
+    * almost no frontend code, discontinued proof-of-concept,
 
-* Tango REST
-    * RESTful API for TANGO,
-    * server written in Java, no frontend code
-
----
-
-# State-of-the-art (continued)
+* Tango REST RESTful API for TANGO:
+    * server written in Java, no frontend code,
 
 * mTango (<https://bitbucket.org/hzgwpn/mtango>):
     * actively developed since 2013,
     * RESTful gateway to TANGO (Java servlet),
-    * Javascript client,
-    * collection of UI components.
-
-* However, the frontend part has some drawbacks:
-    * depends on JavascriptMVC (old version of unpopular framework),
-    * uses JsonP (instead of CORS requests),
-    * requires Java and Rhino runtime (instead of Node.js),
-    * provides just basic widgets,
-    * it is hard to learn and get started.
+    * Javascript client library,
+    * collection of UI components,
+    * **drawbacks**: dependency on JavascriptMVC and Rhino, use of JsonP,
+    no CORS support, just a few basic widgets, requires high effort to get
+    started.
 
 ---
 
@@ -139,13 +126,13 @@ include-before:
 
 ---
 
-# TangoJS architecture
+# TangoJS architecture and modules
 
-![TangoJS architecture and modules](images/03-tangojs-architecture.png){ width=80% }
+![](images/03-tangojs-architecture.png)
 
 ---
 
-# TangoJS architecture - *core* (API)
+# TangoJS architecture (1/4) - *core* (API)
 
 * Tango API for Javascript,
 
@@ -158,29 +145,29 @@ include-before:
     * all calls are passed to the underlying
       connector,
 
-* Written with ES2015 - maintainable, clean design, modular code,
+* Written with ES2015 - maintainable, clean design, modular code.
 
 ---
 
-# TangoJS architecture - *connector* (backend client)
+# TangoJS architecture (2/4) - *connector* (backend client)
 
 * A plugin for accessing TANGO infrastructure,
 
-* integrates browser with TANGO,
+* Integrates browser with TANGO,
 
-* default connector uses mTango on server side,
+* Default connector uses mTango on server side,
 
 * *mtango-connector* client is implemented with Fetch API,
 
-* requires mTango to be configured with CORS support,
+* Requires mTango to be configured with CORS support,
 
-* possible other implementations (e.g. with WebSocket),
+* Possible other implementations (e.g. with WebSocket),
 
-* responsible for user authentication and authorization.
+* Responsible for user authentication and authorization.
 
 ---
 
-# TangoJS architecture - *web-components*
+# TangoJS architecture (3/4) - *web-components*
 
 * A collection of widgets inspired by Taurus library,
 
@@ -200,7 +187,7 @@ include-before:
 
 ---
 
-# TangoJS architecture - *web-components* (continued)
+# TangoJS architecture (4/4) - *web-components* (continued)
 
 * Create components declaratively:
 
@@ -223,9 +210,9 @@ le.showName = true
 
 ---
 
-# *Panel* application
+# *TangoJS Panel* - synoptic panel build with TangoJS
 
-![*TangoJS Panel* - synoptic panel application built with TangoJS](images/tangojs-panel.png)
+![](images/tangojs-panel.png)
 
 ---
 
@@ -244,8 +231,10 @@ le.showName = true
 
 * Positive feedback from NSRC Solaris and TANGO community,
 
-* Work presented at KUKDM'16.
+* Work presented at KUKDM'16 conference.
 
 ---
 
-# Thank you
+#
+
+## Thank you!
