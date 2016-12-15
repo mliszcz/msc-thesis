@@ -47,7 +47,7 @@ include-before:
 
 * Built on top of **CORBA** with bindings for C++, Java and Python,
 
-* *Device* in TANGO is represented a remote object that has:
+* *Device* in TANGO is represented as a remote object that has:
 
     * attributes - *fields*, parameters of the device,
     * commands - *methods*, actions that device can perform,
@@ -94,7 +94,7 @@ include-before:
 * Canone - PHP and Python on server side:
     * limited interaction options, discontinued in 2007,
 
-* Taurus Web - TANGO over - WebSocket gateway for TANGO:
+* Taurus Web - WebSocket gateway for TANGO:
     * almost no frontend code, discontinued proof-of-concept,
 
 * Tango REST RESTful API for TANGO:
@@ -120,13 +120,13 @@ include-before:
 
 * Works with (or without) any framework,
 
-* Pluggable backends for communication with TANGO (may be integrated with
-  mTango),
+* Pluggable backends for communication with TANGO (mTango can be used on
+  server side),
 
 * Can run in Node.js (API only) and all major browsers (API + widgets),
 
-* Built with Node, available in npm, can be easily integrated into existing
-  Node projects.
+* Built with Node.js, available in npm, can be easily integrated into existing
+  Node.js projects.
 
 ---
 
@@ -161,9 +161,9 @@ include-before:
 
 * Default connector uses mTango on server side,
 
-* *mtango-connector* client is implemented with Fetch API,
+    * client is implemented with Fetch API,
 
-* Requires mTango to be configured with CORS support,
+    * requires mTango to be configured with CORS support,
 
 * Possible other implementations (e.g. with WebSocket),
 
@@ -177,8 +177,8 @@ include-before:
 
 * Built with *Web Components*:
     * *Custom Elements*, *HTML Imports*, *Shadow DOM*,
-    * Each widget is a self contained entity,
-    * Widgets may be loaded on demand,
+    * each widget is a self contained entity,
+    * widgets may be loaded on demand,
 
 * Available widgets:
     * `tangojs-label`
