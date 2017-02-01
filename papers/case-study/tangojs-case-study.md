@@ -1,10 +1,10 @@
 ---
-title: A case study of web-based control panel with TangoJS
+title: A case study of a web-based control panel with TangoJS
 subtitle: subtitle
 author:
     - Michał Liszcz
     - Włodzimierz Funika
-date: 19.08.2016
+date: 20.01.2017
 geometry: margin=6em
 header-includes:
     - \usepackage{mathrsfs}
@@ -25,31 +25,32 @@ header-includes:
 
 * introduction to Tango Controls
 * introduction to TangoJS
-* problem setting (vacuum control system)
-    * existing software
-    * requirements of web-based panel
-    * benefits of web transition
 
-# Device server and existing infrastructure
+# Example of existing solutions
 
-* TBD (interface, functionality, deployment details etc.)
-* analysis of requirements
-    * collecting logs, generating plots, etc.
+* SarDemo
+    * screenshot + functionality
 
-# Building web-based control panel
+# Building a web-based control panel
 
-* description of development process
-* covers as many TangoJS aspects as possible
-* TBD (depends on requirements)
-    * use existing widgets
-    * code case-specific parts
+There were many attempts for building web-based client applications for Tango,
+including Canone [], GoTan [], Taurus Web [], mTango [] and TangoJS []. In this
+paper TangoJS is used to develop a web-based control panel application.
 
-# Deployment and maintenance
+## TangoJS introduction
 
-* how developed software will be deployed
-    * mTango server, client terminal
-* integration with existing software
-* maintenance costs
+TangoJS framework takes a novel approach to address the problem of integrating
+Tango Controls with web browser environments.
+
+* blah blah blah copy paste from thesis, ch. 4.
+
+## Interactive synoptic panel
+
+# Deployment
+
+* tango container
+* mTango container
+* app repository + deployed online version
 
 # Summary
 
