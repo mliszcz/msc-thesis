@@ -24,7 +24,6 @@ header-includes:
 # Introduction
 
 * introduction to Tango Controls
-* introduction to TangoJS
 
 # Example of existing solutions
 
@@ -33,20 +32,28 @@ header-includes:
 
 # Building a web-based control panel
 
-There were many attempts for building web-based client applications for Tango,
-including Canone [], GoTan [], Taurus Web [], mTango [] and TangoJS []. In this
-paper TangoJS is used to develop a web-based control panel application.
+There were many attempts to allow building web-based client applications for
+Tango, including Canone [], GoTan [], Taurus Web [], mTango [].
+In [] the TangoJS project has been presented.
+In this paper, we show how to use TangoJS  develop a web-based control panel
+application. The following sections provide introduction to TangoJS development,
+formulate control panel requirements, present development process step-by-step
+and give an overview of configuration and deployment process.
 
 ## TangoJS introduction
 
 TangoJS framework takes a novel approach to address the problem of integrating
 Tango Controls with web browser environments.
 
-* blah blah blah copy paste from thesis, ch. 4.
+* blah blah blah copy paste from thesis, Ch. 4.
+
+## Goal setting and requirements analysis
+
+
 
 ## Interactive synoptic panel
 
-# Deployment
+## Deployment
 
 * tango container
 * mTango container
