@@ -19,26 +19,55 @@ header-includes:
     - \usepackage{gensymb}
     - \usepackage{caption}
     - \usepackage{subcaption}
+
+abstract: >
+  The TANGO Controls is SCADA software widely used in science and industry.
+  As it is based on CORBA, developers cannot build control applications using
+  web technologies. Recently, the TangoJS project provided a new way for
+  integrating TANGO with web browsers. This paper presents a case study that
+  demonstrates process of building a web-based control panel application using
+  TangoJS. Lightweight frontend technology stack has been paired with TangoJS
+  to build interactive synoptic panel inspired by SarDemo, a widget container
+  for Tango on desktop. The application is finally deployed in a production
+  environment using Docker containers.
 ---
 
 # Introduction
 
-* introduction to Tango Controls
+Conducting an experiment in a scientific facility requires orchestration of
+multiple hardware components, like motors, pumps and power-supplies.
+Hardware operators use various software systems that facilitate this task.
+One of such systems is TANGO Controls [], a generic framework for building
+SCADA [] software, developed at ESRF synchrotron radiation facility.
 
-# Example of existing solutions
-
-* SarDemo
-    * screenshot + functionality
-
-# Building a web-based control panel
+TANGO is a distributed system built on top of CORBA [] and ZeroMQ []. Each
+physical piece of hardware is represented by a *device server*, that has
+parameters (*attributes*) and can perform some actions (*commands*).
+Device servers are registered in a central MySQL database.
+Client applications, used by the operators, can access device servers on remote
+machines via CORBA protocols. These client applications can be created in C++,
+Java or Python, but due to incorporation of CORBA, cannot run inside a web
+browser.
 
 There were many attempts to allow building web-based client applications for
 Tango, including Canone [], GoTan [], Taurus Web [], mTango [].
 In [] the TangoJS project has been presented.
 In this paper, we show how to use TangoJS  develop a web-based control panel
-application. The following sections provide introduction to TangoJS development,
-formulate control panel requirements, present development process step-by-step
+application.
+
+# Building a web-based control panel
+
+The following sections
+formulate requirements for dynamic control panel application,
+provide introduction to TangoJS,
+present development process step-by-step
 and give an overview of configuration and deployment process.
+
+## Goal setting and requirements analysis
+
+
+* SarDemo
+* screenshot + functionality
 
 ## TangoJS introduction
 
@@ -46,10 +75,6 @@ TangoJS framework takes a novel approach to address the problem of integrating
 Tango Controls with web browser environments.
 
 * blah blah blah copy paste from thesis, Ch. 4.
-
-## Goal setting and requirements analysis
-
-
 
 ## Interactive synoptic panel
 
