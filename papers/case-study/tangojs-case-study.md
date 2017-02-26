@@ -118,7 +118,7 @@ Among all
 frontend frameworks, it is the Facebook's React which gained a lot attention
 from developers in recent days. Although it offers some controversal features
 like JSX (which implies transcompilation) and is heavyweight with all its
-components and dependencies[], a stripped-down version, called React Core[]
+components and dependencies[], a stripped-down version, called Preact[]
 is availabe. It contains everything what is needed to build highly reactive
 applications including stateless views, functional rendering logic or ???.
 
@@ -136,12 +136,113 @@ neatly with React Core.
 
 ### Application architecture
 
+TODO
+
+### Selected aspects of implementation
+
+TODO
+
 ## Deployment
 
-* tango container
-* mTango container
-* app repository + deployed online version
+An important advantage of web applications over desktop applications is the ease
+of deployment. Users access the application stored on a server. Thus, the only
+requirement on client side is a web browser. Served application is always
+up-to-date. This is especially important in large-scale deployments, like
+applications for use in big companies or scientific facilities.
+
+In case of the TangoJS panel application, apart from Tango installation, a
+two separate parts have to be considered during deployment planning: the mTango
+server and the application itself.
+
+The application is a bunch of static HTML files and other resources, like JS
+scripts or CSS stylesheets. It can be stored on an ordinary web server, like
+Apache. No server-side procesing is involved.
+
+The application communicates with mTango via AJAX calls. Although mTango is
+released with an embedded Tomcat servlet container, a separate container
+gives the administrators a greater flexibility and better configuration
+options.
+
+Zipping together a web server, a servlet container and (optionally, for
+demonstration purposes) a Tango database server with TangoTest device
+requires using tools for configuration management (???) and service
+orchestration, widely adopted and popular in DevOps culture.
+
+### Containerizing applications
+
+A popular tool that provides isolated, repeatable environments for running
+applications is Docker. Docker uses LXC containers[], cgroups[] ando other
+Linux kernel features to isolate processes from the host operating system and
+to restrict the resources available to these processes.
+
+Docker instantiates containers from images. Image definitions are stored in
+plaintext Dockerfiles. Dockerfile contains instructions required to build a
+minimal operating system image required to run desired application. An online
+service, called DockerHub[] can be used to publish and share ready images.
+
+As an additional outcome of the TangoJS project, Docker images with mTango and
+Tango itself have been developed. The Tango image[] is available in
+Docker registry as `tangocs/tango-cs`. The mTango image[] is available as
+`mliszcz/mtango`.
+
+TangoJS Panel application is straightforward to install, as the only requirement
+is a web server. Since it is a Node.js project, we can leverage npm to pull the
+dependencies on a production server and run directly from a git checkout. Also,
+a simple web server running on Node.js can be used instead a full-blown Apache
+solution. The Dockerfile (based on tiny Alpine linux) with TangoJS Panel
+applications is shown on [].
+
+```Dockerfile
+FORM alpine
+```
+
+### Service orchestration
+
+To efficiently manage three (four if we separate TangoTest from DatabaseDs)
+containers described in previous section, an orchestration tool is required.
+The Docker Compose, a community project which recently became an official Docker
+part, has been designed to address this problem.
+
+Docker Compose allows one to define containers, dependencies between them,
+network links and mount points using convenient YAML file.
+A popular tools suitable for this tasks and widely adopted in DevOps culture
+are Docker[] and Docker Compose[]. Docker uses LXC containers[], cgroups[] and
+other Linux kernel features to provide isolated, repeatable environments for
+running applications. The Docker Compose, a community project which recently
+became an official Docker part, allows for orchestration of multiple Docker
+containers.
+
+The containers, dependencies between them and network links are defined in a
+convenient YAML file. Definitions required to run TangoJS Panel application are
+shown on []. After running:
+
+`docker-compose up`
+
+TangoJS Panel image will be built from `Dockerfile` in current directory whereas
+images with Tango and mTango will be pulled down from Docker registry.
+
+### Securing the application
+
+The further work is to make the application secureDefinitions required to run
+TangoJS Panel application are
+shown on []. After running:
+
+`docker-compose up`
+
+TangoJS Panel image will be built from `Dockerfile` in current directory whereas
+images with Tango and mTango will be pulled down from Docker registry.
+
+### Securing the application
+
+The final part of the work before moving to production is to harden/enforce/made(?)
+the application secure. This includes adding encryption on the HTTP interfaces
+of TangoJS Panel and mTango and providing better authentication mechanism on
+mTango side, instead of hardcoded credentials.
 
 # Summary
 
-* work summary
+link to online version of the app
+
+link to the repo
+
+TODO
