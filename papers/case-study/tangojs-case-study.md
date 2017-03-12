@@ -4,7 +4,7 @@ subtitle: subtitle
 author:
     - Michał Liszcz
     - Włodzimierz Funika
-date: 20.01.2017
+date: 12.03.2017
 geometry: margin=6em
 header-includes:
     - \usepackage{mathrsfs}
@@ -21,15 +21,15 @@ header-includes:
     - \usepackage{subcaption}
 
 abstract: >
-  The TANGO Controls is SCADA software widely used in science and industry.
-  As it is based on CORBA, developers cannot build control applications using
-  web technologies. Recently, the TangoJS project provided a new way for
-  integrating TANGO with web browsers. This paper presents a case study that
-  demonstrates process of building a web-based control panel application using
-  TangoJS. Lightweight frontend technology stack has been paired with TangoJS
-  to build interactive synoptic panel inspired by SarDemo, a widget container
-  for Tango on desktop. The application is finally deployed in a production
-  environment using Docker containers.
+  The Tango Controls is SCADA software widely used in science and industry.
+  As it is based on CORBA, the developers cannot build control applications
+  using web technologies. Recently the TangoJS project has been developed as
+  an attempt to integrate Tango with web browsers.
+  This paper presents a case study that demonstrates the process of building
+  a web-based control panel application using TangoJS. Lightweight frontend
+  technology stack has been paired with TangoJS to build interactive synoptic
+  panel similar to existing desktop solutions. The application is deployed
+  in a production environment using Docker containers.
 ---
 
 # Introduction
@@ -37,106 +37,167 @@ abstract: >
 Conducting an experiment in a scientific facility requires orchestration of
 multiple hardware components, like motors, pumps and power-supplies.
 Hardware operators use various software systems that facilitate this task.
-One of such systems is TANGO Controls [], a generic framework for building
+One of such systems is Tango Controls [], a generic framework for building
 SCADA [] software, developed at ESRF synchrotron radiation facility.
 
-TANGO is a distributed system built on top of CORBA [] and ZeroMQ []. Each
+Tango is a distributed system built on top of CORBA [] and ZeroMQ []. Each
 physical piece of hardware is represented by a *device server*, that has
-parameters (*attributes*) and can perform some actions (*commands*).
-Device servers are registered in a central MySQL database.
-Client applications, used by the operators, can access device servers on remote
-machines via CORBA protocols. These client applications can be created in C++,
-Java or Python, but due to incorporation of CORBA, cannot run inside a web
-browser.
+some parameters (*attributes*) and can perform some actions (*commands*).
+Device servers are registered in a MySQL database.
+Hardware operators use graphical client applications that can access device
+servers running on remote machines using standard IIOP protocol [].
+The client applications can be created using languages like C++, Java or
+Python, but due to dependency on CORBA, these applications cannot run inside
+a web browsers.
 
-There were many attempts to allow building web-based client applications for
-Tango, including Canone [], GoTan [], Taurus Web [], mTango [].
-In [] the TangoJS project has been presented.
-In this paper, we show how to use TangoJS  develop a web-based control panel
-application.
+There were many attempts to create web-based client applications for Tango,
+including Canone [], GoTan [], Taurus Web [] and mTango []. Only mTango is
+being actively developed, but most of development effort is put into the server
+part. In [praca mgr] a modular web frontend framework for Tango, the TangoJS,
+has been presented. In this paper we show how to use TangoJS to develop a
+web-based control panel application.
 
 # Building a web-based control panel
 
-The following sections
-formulate requirements for dynamic control panel application,
-provide introduction to TangoJS,
-present development process step-by-step
-and give an overview of configuration and deployment process.
+In the following sections we formulate the requirements for a dynamic control
+panel application, provide a brief introduction to TangoJS, present selected
+aspects of development process and give an overview of possible deployment
+options.
 
 ## Goal setting and requirements analysis
 
-Application presented in this work is inspired by SarDemo, which is often used
-to demonstrate abilities of Sardana suite and Taurus widgets. Main SarDemo's UI
-is shown on Fig. []. It is a dashboard, where user can place widgets and move
-them around. (TODO: more on SarDemo). To help TangoJS gain adoption across
-the TANGO community, a similar application has to be created. Users should be
-able to test TangoJS widgets with their own TANGO deployment. The
-*TangoJS Panel* should be easy to deploy and should require zero-configuration.
+The application described in this work is inspired by the SarDemo project,
+which is often used to demonstrate the abilities of the Sardana toolset []
+on desktop installations of Tango. The main view of SarDemo's user interface
+is shown on Fig. []. It is a dashboard where the user can place multiple
+widgets representing the attributes and commands of various devices.
 
-*TODO: SarDemo screenshot*
+*Fig. ?: SarDemo user interface.*
 
+A similar application for TangoJS, the *TangoJS Panel*, will help TangoJS
+project to gain popularity in the Tango community. The users should be able
+to test TangoJS widgets with their own Tango installation. The Panel
+application needs to be easy to deploy and should require zero configuration.
 A set of functional requirements was formulated as a guidance for development
 process. The user should be able to:
 
-* use panel application with his own mTango installation,
-* change the Tango database instance the application is using,
-* browse defined device servers,
+* use Panel application with his own Tango installation (and mTango on server
+  side),
+* browse all device servers defined in the database,
 * create interactive widgets for selected attributes of the devices,
-* place widgets on a dashboard,
-* move widgets freely over the dashboard,
-* save and restore the dashboard layout.
+* place the widgets on a dashboard and move them around,
+* save and restore the layout of the dashboard.
 
-Web technologies are very suitable for creating any kind of dashboard-like
-layouts. Pairing TangoJS with a lightweight frontend framework should do the
-job perfectly. Technical details of implementation and architectural
-considerations are described later in the paper.
+The web technologies are the best choice for creating dashboard-like layouts.
+TangoJS paired with a lightweight frontend framework will allow to address
+goals formulated above with minimal effort required.
+Technical details of implementation and architectural considerations are
+described later in this section.
 
 ## TangoJS introduction
 
-TangoJS framework takes a novel approach to address the problem of integrating
-Tango Controls with web browser environments.
+TangoJS allows building Tango client applications with standard front-end
+technologies like HTML, CSS and Java. It gives Tango developers a complete set
+of tools and APIs required for this task. There is a minimal set of dependencies
+required.
 
-* blah blah blah copy paste from thesis, Ch. 4.
+TangoJS has been designed to be a modular ecosystem - one includes only the
+modules one needs and configures everything according to the project
+requirements. There are three separate layers, which are connected via
+well-defined interfaces.
+
+**TangoJS Core** is a Javascript API for programmatic interactions with Tango
+from a web browser. It has been partly generated from Tango IDL [], which makes
+its interface familiar to the Tango developers.
+
+**TangoJS Connector** is an interface that abstracts-out communication with
+Tango infrastructure via pluggable backend services. mTango can be used on the
+server side as a RESTful endpoint used to access a existing Tango installation.
+
+**TangoJS WebComponents** is a collection of standalone widgets useful for rapid
+application development. The library offers counterparts of most popular widgets
+from the Taurus framework on desktops. Each widget can represent one or more
+attributes or commands of a device, e.g. the *tangojs-label* widget is an
+textbox which allows one to view and change the value of an attribute. The
+widgets use a set of W3C standards known under a common name as the *Web
+Components* []. From the developer point of view, these widgets behave like
+native web controls, e.g. an *input* or a *button*.
 
 ## Interactive synoptic panel development
 
-This chapter describes the full design and development process process of a
-control panel application. First, a technology stack is defined. Then, overall
-architecture of the solution is discussed. Finally, most important aspects of
-implementation are presented.
+This chapter describes the design and development process process of the TangoJS
+Panel application. First a technology stack is defined. Then obverall
+architecture of the solution is discussed. Finally, the most important aspects
+of implementation are covered.
 
 ### Software stack
 
 TangoJS is just a set of APIs and widgets. To build a real application,
-other technologies has to be incorporated. TangoJS provides widgets that
-behave like a ordinary HTML elements. This allows for seamless integration
-of TangoJS with any framework.
-It's up to the developer to decide if he creates his application using
-Angular[], React[] or stick to plain DOM manipulation APIs[].
+other technologies have to be incorporated. TangoJS provides widgets that
+behave like ordinary HTML elements. This allows for a seamless integration
+of TangoJS with any web framework.
+It's up to the developer to decide if he/she creates the application using
+Angular [], React [] or with raw DOM APIs.
 
-Among all
-frontend frameworks, it is the Facebook's React which gained a lot attention
-from developers in recent days. Although it offers some controversal features
-like JSX (which implies transcompilation) and is heavyweight with all its
-components and dependencies[], a stripped-down version, called Preact[]
-is availabe. It contains everything what is needed to build highly reactive
-applications including stateless views, functional rendering logic or ???.
+Among all frontend frameworks the Facebook's React is often choosen by the
+developers to create web applications of any scale. Although it comes with some
+controversial features like the JSX (which, when used, requires
+transcompilation), and is heavyweight with all its dependencies [], a
+stripped-down fork called Preact [] is availabe. It offers API compatibility
+with React, but is much smaller in size (due to the limited support of legacy
+browsers). Preact contains everything what is required to build highly reactive
+applications including stateless (functional) components, and unidirectional
+data flow.
 
-React on its own is merely a presentation layer, a *view*. For real application,
-like the control panel, a state, or *model*, needs to be introduced. When it
-is possible to represent stante as a bunch of variables, mutating them from
-different places as a result of various events is error prone, hard to test,
-hard to track bugs and hard to maintain. Using predictable state containers
-had become popular in recent days. They force developers to perform state
-mutations from a centralized place. Such functionality can be implemented by
-a developer, but there are existing solutions like [], [] or [], which provide
-convenient *reductors*, to predicably transform state under a stream of events.
-For building control panel application, we have choosen ???, as it integrates
-neatly with React Core.
+React on its own is merely a presentation layer, that can be used to create
+*views*. For most real-world applications, like the TangoJS Panel, a state, or
+a data *model*, needs to be introduced. While it is possible to represent the
+state as a bunch of variables scattered accross the codebase, mutating these
+variables from different places is error prone, hard to test and hard to
+maintain. To address this problem, Facebook proposed the Flux architecture [].
+In Flux, the state is stored in a central place, called *store*. Various
+*actions* can change the state, but these changes always happen inside the store
+in a well-defined order. The store acts as a *single source of truth* [] for an
+application. Only changes in the store can result in UI updates. There are many
+implementations of Flux architecture, all offer some sort of predictable state
+container that can transform under a stream of events. For building TangoJS
+Panel we have choosen Redux [], as it integrates easily with Preact.
 
 ### Application architecture
 
-TODO
+The application has a standard React-Redux architecture. The state (or store)
+contains both the domain-specific parts like list of visible widgets and the
+ordinary UI state, like indication that modal window is visible. The read-only
+state is passed to the *presentational components* [], which build the
+application's UI. The components trigger various actions that are dispatched
+back to the store.
+
+There are just three *presentational components*, the `Dashboard`, the
+`Menu` and the `WidgetSelector`. Each has a corresponding *container component*
+defined that maps the state to component's properties. These components are
+combined into the `Application` component.
+
+The `Dashboard` component is a thin wrapper around `react-grid-layout`
+component []. Its purpose is to visualize TangoJS widgets on a grid with draggable
+and resizable elements. It is responsive and different layouts can be used for
+differens screen sizes.
+
+The `Menu` is a sidebar that contains `tangojs-tree-view` widget and additional
+controls for interacting with the device tree. The user can use this tree to
+browse all objects stored in the Tango database. When he/she selects a desired
+object, he can create widget to visualize it on the `Dashboard`.
+
+The `WidgetSelector` is a modal window (built with `react-modal` []) that is
+triggered when the user chooses a device, an attribute or a command from the
+`Menu`. `WidgetSelector` uses the *capabilities* property defined on each
+TangoJS widget to determine widgets suitable for visualizing selected object.
+When the user selects the desired widget, a dynamic form with configurable
+attributes of this widget is generated using the `react-jsonschema-form`
+component [].
+
+All the components and interactions between them are presented on Fig. [].
+
+*Fig. ?: Application architecture.*
 
 ### Selected aspects of implementation
 
