@@ -1,5 +1,5 @@
 ---
-title: A case study of a web-based control panel with TangoJS
+title: A case study of a web-based control panel built with TangoJS
 subtitle: subtitle
 author:
     - Michał Liszcz
