@@ -123,30 +123,29 @@ widgets use a set of W3C standards known under a common name as the *Web
 Components* []. From the developer point of view, these widgets behave like
 native web controls, e.g. an *input* or a *button*.
 
-TangoJS widgets are usually bound to a model, which can be a Tango device,
-device's attribute or a command. Each widgets periodically pollis the
-underlying model and update its layout basing on the changes in the model.
+TangoJS widgets are usually bound to a *model*, which can be a Tango device,
+device's attribute or a command. Each widget periodically polls the
+underlying model and updates its layout basing on the changes in the model.
 Examples of such widgets are `tangojs-label`, `tangojs-line-edit`,
 `tangojs-command-button`, `tangojs-state-led`, `tangojs-trend`, or
 `tangojs-form`. One widget that differs from the others is the
-`tangojs-tree-view`. It is not bound to any model. Instead it visualizes all
-models defined in the Tango database using a tree-like structure.
+`tangojs-tree-view`. It does not represent a particular model. Instead it
+visualizes all objects defined in the Tango database using a tree-like
+structure.
 
-In TangoJS Panel application the user should be able to freely choose widgets
-suitable to visualize his/her devices. All TangoJS widgets which are available
-in the TangoJS WebComponents module have their constructor functions attached
-to the `window.tangojs.web.components` global object. Each constructor has a
-static property `capabilities` which describes what kind of models (devices,
-attributes or commands) the widget can visualize. Given a set of models, the
-Panel application can use these capabilities to find the most suitable widgets.
-Apart from capabilities, each constructor exposes the `attributes`
-property, which describes all configurable HTML attributes of the widget. Each
-attribute is characterized by a name, a data type and a default value.
+All TangoJS widgets which are available in the TangoJS WebComponents module
+have their constructor functions attached to the
+`window.tangojs.web.components` global object. Each constructor has a
+static property `capabilities`, which describes what kind of models (devices,
+attributes or commands) the widget can visualize.
+Apart from capabilities, each constructor function exposes the `attributes`
+property, which describes all configurable HTML attributes of a widget. Each
+HTML attribute is characterized by a name, a data type and a default value.
 
 ## Interactive synoptic panel development
 
-This chapter describes the design and development process process of the TangoJS
-Panel application. First a technology stack is defined. Then obverall
+This chapter describes the design and development process process of the
+TangoJS Panel application. First a technology stack is defined. Then obverall
 architecture of the solution is discussed. Finally, the most important aspects
 of implementation are covered.
 
@@ -185,7 +184,7 @@ Panel we have choosen Redux [], as it integrates easily with Preact.
 
 ### Application architecture
 
-The application has a standard React-Redux architecture. The state (or store)
+The application follows a standard React-Redux architecture. The state (or store)
 contains both the domain-specific parts like list of visible widgets and the
 ordinary UI state, like indication that modal window is visible. The read-only
 state is passed to the *presentational components* [], which build the
@@ -194,136 +193,155 @@ back to the store.
 
 There are just three *presentational components*, the `Dashboard`, the
 `Menu` and the `WidgetSelector`. Each has a corresponding *container component*
-defined that maps the state to component's properties. These components are
-combined into the `Application` component.
+[] defined that maps the global state to component's properties. These container
+components are combined into the `Application` component.
 
-The `Dashboard` component is a thin wrapper around `react-grid-layout`
-component []. Its purpose is to visualize TangoJS widgets on a grid with draggable
-and resizable elements. It is responsive and different layouts can be used for
-differens screen sizes.
+The `Dashboard` component is a thin wrapper around the `react-grid-layout`
+component []. Its purpose is to visualize TangoJS widgets on a grid with
+draggable and resizable elements. It is responsive and different layouts can
+be used for differens screen sizes.
 
 The `Menu` is a sidebar that contains `tangojs-tree-view` widget and additional
 controls for interacting with the device tree. The user can use this tree to
 browse all objects stored in the Tango database. When he/she selects a desired
-object, he can create widget to visualize it on the `Dashboard`.
+object, he/she can create a widget to visualize this object on the `Dashboard`.
 
-The `WidgetSelector` is a modal window (built with `react-modal` []) that is
-triggered when the user chooses a device, an attribute or a command from the
-`Menu`. `WidgetSelector` uses the *capabilities* property defined on each
-TangoJS widget to determine widgets suitable for visualizing selected object.
-When the user selects the desired widget, a dynamic form with configurable
-attributes of this widget is generated using the `react-jsonschema-form`
-component [].
+The `WidgetSelector` is a modal window, built with `react-modal` [], that is
+displayed when the user chooses a device, an attribute or a command from the
+`Menu`. `WidgetSelector` uses the *capabilities* property of each possible
+TangoJS widget to determine which one is the most suitable to visualize
+selected objects. When the user selects the desired widget, a dynamic form
+with all configurable HTML attributes of this widget is generated using the
+`react-jsonschema-form` component [].
 
-All the components and interactions between them are presented on Fig. [].
+The bootstraping code fetches Tango database address from query string,
+configures appropriate TangoJS Connector and initializes the application
+inside the document's body. All the components and interactions between
+them are presented on Fig. [].
 
 *Fig. ?: Application architecture.*
 
 ### Selected aspects of implementation
 
-TODO
+The example dashboard of a complete application is shown on Fig. []. An online
+demo is available at <https://mliszcz.github.io/(...)>. The source code can be
+cloned from the repository [^app-repo]. This section describes the most
+important aspects of the implementation.
+
+[^app-repo]: <https://github.com/mliszcz/tangojs-panel>
+
+#### Initialization of the TangoJS framework
+
+#### Interacting with `tangojs-tree-view` from a React application
+
+#### Inspecting widgets and rendering widget configuration form
 
 ## Deployment
 
-An important advantage of web applications over desktop applications is the ease
-of deployment. Users access the application stored on a server. Thus, the only
-requirement on client side is a web browser. Served application is always
-up-to-date. This is especially important in large-scale deployments, like
-applications for use in big companies or scientific facilities.
+An important advantage of the web applications over the desktop applications
+is the ease of deployment. End users access the application that is stored on
+a remote server. The only requirement on the client side is a web browser.
+Developers and administrators can easily push new version to the server and
+users always access up-to-date application. This is especially important in
+the large-scale deployments, like corporate intranets or control rooms in
+scientific facilities, where the application has to be delivered to tenths of
+users.
 
-In case of the TangoJS panel application, apart from Tango installation, a
-two separate parts have to be considered during deployment planning: the mTango
-server and the application itself.
+In case of the TangoJS Panel application deployment planning a few aspect have
+to be considered. Existing Tango installation needs to be accessible from
+TangoJS backend server. The backend server should also have access to some sort
+of users directory, like e.g. LDAP. This is needed for authentication and
+authorization purposes. mTango can be used on server side to perform these
+tasks. The Panel application communicates with mTango via AJAX calls. Although
+mTango is released with an embedded Tomcat servlet container, a separate
+container gives offers greater flexibility and better configuration options.
 
-The application is a bunch of static HTML files and other resources, like JS
-scripts or CSS stylesheets. It can be stored on an ordinary web server, like
-Apache. No server-side procesing is involved.
+The frontend part, which is TangoJS Panel application itself, has to be
+stored in a ordinary web server. Since no server-side processing is required,
+any server can be used. Possible examples are Apache, nginx or Node.js-based
+`http-server` package.
 
-The application communicates with mTango via AJAX calls. Although mTango is
-released with an embedded Tomcat servlet container, a separate container
-gives the administrators a greater flexibility and better configuration
-options.
-
-Zipping together a web server, a servlet container and (optionally, for
-demonstration purposes) a Tango database server with TangoTest device
-requires using tools for configuration management (???) and service
-orchestration, widely adopted and popular in DevOps culture.
+Zipping together a web server, a servlet container and (optionally) a Tango
+database with an example devic requires using tools for service orchestration.
+These tools are discussed later in this section.
 
 ### Containerizing applications
 
-A popular tool that provides isolated, repeatable environments for running
-applications is Docker. Docker uses LXC containers[], cgroups[] ando other
-Linux kernel features to isolate processes from the host operating system and
-to restrict the resources available to these processes.
+Docker [] is a popular tool that provides isolated, reproducible environments
+for running applications. Docker uses LXC containers [], cgroups [] and other
+Linux kernel features to isolate processes from the host operating system.
+A fine-grained management of available resources like fileststems and networks
+is possible for Docker *containers*.
 
-Docker instantiates containers from images. Image definitions are stored in
-plaintext Dockerfiles. Dockerfile contains instructions required to build a
-minimal operating system image required to run desired application. An online
-service, called DockerHub[] can be used to publish and share ready images.
+Docker instantiates containers from *images*. Image definitions are stored in
+plaintext *Dockerfiles*. Dockerfile is a recpie that describe steps required to
+build a minimal filesystem required to run the desired application.
+An online service, called DockerHub [], can be used to publish and share
+Docker images.
 
-As an additional outcome of the TangoJS project, Docker images with mTango and
-Tango itself have been developed. The Tango image[] is available in
-Docker registry as `tangocs/tango-cs`. The mTango image[] is available as
+TangoJS project offers Docker images with mTango and Tango itself. The images
+require zero configuration and are designed for instant TangoJS deployment.
+The Tango image [^docker-tangocs] is available in the registry as
+`tangocs/tango-cs`. The mTango image [^docker-mtango] is available as
 `mliszcz/mtango`.
 
-TangoJS Panel application is straightforward to install, as the only requirement
-is a web server. Since it is a Node.js project, we can leverage npm to pull the
-dependencies on a production server and run directly from a git checkout. Also,
-a simple web server running on Node.js can be used instead a full-blown Apache
-solution. The Dockerfile (based on tiny Alpine linux) with TangoJS Panel
-applications is shown on [].
+[^docker-tangocs]: <https://hub.docker.com/r/tangocs/tango-cs/>
+[^docker-mtango]: <https://hub.docker.com/r/mliszcz/mtango/>
+
+TangoJS Panel application is straightforward to install, as the only
+requirement is a static web server. Since it is a Node.js project, we can
+use npm to pull the dependencies on a production server and run directly from
+a git checkout. A simple Node.js-based web server can be used instead a
+full-blown solution like the Apache
+The Dockerfile (based on tiny Alpine linux) with TangoJS Panel application is
+shown on Lst. [].
 
 ```Dockerfile
-FORM alpine
+FROM alpine:edge
+
+RUN  apk add git nodejs \
+  && git clone https://github.com/mliszcz/tangojs-panel /tangojs-panel \
+  && cd /tangojs-panel \
+  && npm install
+
+EXPOSE 8080
+
+CMD cd /tangojs-panel && npm run server
 ```
+
+*Lst. ?: A Dockerfile with TangoJS application.*
 
 ### Service orchestration
 
-To efficiently manage three (four if we separate TangoTest from DatabaseDs)
-containers described in previous section, an orchestration tool is required.
-The Docker Compose, a community project which recently became an official Docker
-part, has been designed to address this problem.
+To efficiently manage three (or even four if we separate TangoTest device from
+Tango database server) containers described in the previous section, an
+orchestration tool is required. The Docker Compose [], a community project
+which recently became an official part of Docker, has been designed to address
+this problem.
 
-Docker Compose allows one to define containers, dependencies between them,
-network links and mount points using convenient YAML file.
-A popular tools suitable for this tasks and widely adopted in DevOps culture
-are Docker[] and Docker Compose[]. Docker uses LXC containers[], cgroups[] and
-other Linux kernel features to provide isolated, repeatable environments for
-running applications. The Docker Compose, a community project which recently
-became an official Docker part, allows for orchestration of multiple Docker
-containers.
-
-The containers, dependencies between them and network links are defined in a
-convenient YAML file. Definitions required to run TangoJS Panel application are
-shown on []. After running:
-
-`docker-compose up`
-
-TangoJS Panel image will be built from `Dockerfile` in current directory whereas
-images with Tango and mTango will be pulled down from Docker registry.
-
-### Securing the application
-
-The further work is to make the application secureDefinitions required to run
-TangoJS Panel application are
-shown on []. After running:
-
-`docker-compose up`
-
-TangoJS Panel image will be built from `Dockerfile` in current directory whereas
-images with Tango and mTango will be pulled down from Docker registry.
-
-### Securing the application
-
-The final part of the work before moving to production is to harden/enforce/made(?)
-the application secure. This includes adding encryption on the HTTP interfaces
-of TangoJS Panel and mTango and providing better authentication mechanism on
-mTango side, instead of hardcoded credentials.
+Docker Compose allows one to define containers, dependencies, network links
+and mount points using convenient YAML file.
+This file together with all other artifacts required to run the TangoJS Panel
+application together with a minimal Tango installation are available at [].
+When the administrator runs `docker-compse up` command, an image with TangoJS
+Panel application will be created from the Dockerfile shown in the previous
+section. Other images, like the Tango database, TangoTest device or mTango
+server will be pulled down from the Docker registry. TangoJS Panel application
+will be available at `http://{container-ip}:8080` immediately after the start
+of the cluster.
 
 # Summary
 
-link to online version of the app
+The approach described in this work proved that the framework-less TangoJS can
+easily be integrated with any frontend framework. The was Preact was used in
+this case study, but use of other technologies is possible. TangoJS does not
+enforce any specific technology stack or development style.
 
-link to the repo
+The TangoJS Panel application is a fully functional synoptic panel. It
+allows users and developers new to TangoJS immediately try the framework. As it
+can be configued with an existing Tango database or use an in-memory mocked
+database, it is suitable for demonstrational purposes. When additional security
+is added, like configuring web server to work over SSL, the application can also
+be used in real-world environments in production-grade deployments.
 
-TODO
+# References
