@@ -117,11 +117,31 @@ server side as a RESTful endpoint used to access a existing Tango installation.
 **TangoJS WebComponents** is a collection of standalone widgets useful for rapid
 application development. The library offers counterparts of most popular widgets
 from the Taurus framework on desktops. Each widget can represent one or more
-attributes or commands of a device, e.g. the *tangojs-label* widget is an
+attributes or commands of a device, e.g. the *tangojs-line-edit* widget is an
 textbox which allows one to view and change the value of an attribute. The
 widgets use a set of W3C standards known under a common name as the *Web
 Components* []. From the developer point of view, these widgets behave like
 native web controls, e.g. an *input* or a *button*.
+
+TangoJS widgets are usually bound to a model, which can be a Tango device,
+device's attribute or a command. Each widgets periodically pollis the
+underlying model and update its layout basing on the changes in the model.
+Examples of such widgets are `tangojs-label`, `tangojs-line-edit`,
+`tangojs-command-button`, `tangojs-state-led`, `tangojs-trend`, or
+`tangojs-form`. One widget that differs from the others is the
+`tangojs-tree-view`. It is not bound to any model. Instead it visualizes all
+models defined in the Tango database using a tree-like structure.
+
+In TangoJS Panel application the user should be able to freely choose widgets
+suitable to visualize his/her devices. All TangoJS widgets which are available
+in the TangoJS WebComponents module have their constructor functions attached
+to the `window.tangojs.web.components` global object. Each constructor has a
+static property `capabilities` which describes what kind of models (devices,
+attributes or commands) the widget can visualize. Given a set of models, the
+Panel application can use these capabilities to find the most suitable widgets.
+Apart from capabilities, each constructor exposes the `attributes`
+property, which describes all configurable HTML attributes of the widget. Each
+attribute is characterized by a name, a data type and a default value.
 
 ## Interactive synoptic panel development
 
