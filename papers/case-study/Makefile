@@ -1,4 +1,4 @@
-FLAGS=--number-sections --standalone
+FLAGS=--number-sections --standalone --template=template.tex
 
 BUILDDIR=build
 

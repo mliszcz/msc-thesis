@@ -1,11 +1,11 @@
 ---
 title: A case study of a web-based control panel built with TangoJS
-subtitle: subtitle
-author:
-    - Michał Liszcz
-    - Włodzimierz Funika
-date: 12.03.2017
-geometry: margin=6em
+title-short: TangoJS Case Study
+author: Michał \surname{Liszcz}, Włodzimierz \surname{Funika}
+author-short: M. Liszcz, W. Funika
+affiliation: AGH UST
+keywords: SCADA, web, browser, Javascript, Tango, HTML, CORBA, REST
+mathclass: AB-XYZ
 header-includes:
     - \usepackage{mathrsfs}
     - \usepackage{amssymb}
@@ -21,15 +21,17 @@ header-includes:
     - \usepackage{subcaption}
 
 abstract: >
-  The Tango Controls is SCADA software widely used in science and industry.
-  As it is based on CORBA, the developers cannot build control applications
-  using web technologies. Recently the TangoJS project has been developed as
-  an attempt to integrate Tango with web browsers.
-  This paper presents a case study that demonstrates the process of building
-  a web-based control panel application using TangoJS. Lightweight frontend
-  technology stack has been paired with TangoJS to build interactive synoptic
-  panel similar to existing desktop solutions. The application is deployed
-  in a production environment using Docker containers.
+  Scientific and industrial hardware installations are becoming more and more
+  complex and require sophisticated methods of control. To address these needs,
+  Tango Controls system has been developed. As Tango is a CORBA-based software,
+  the developers cannot build control applications using web technologies.
+  Recently the TangoJS project has been developed as an attempt to integrate
+  Tango with web browsers. This paper describes the TangoJS' design and
+  architecture, evaluates TangoJS against existing solutions,
+  presents a case study of building an interactive control-panel application
+  and discusses possible production-grade deployment scenarios for TangoJS
+  applications.
+
 ---
 
 # Introduction
@@ -46,16 +48,20 @@ some parameters (*attributes*) and can perform some actions (*commands*).
 Device servers are registered in a MySQL database.
 Hardware operators use graphical client applications that can access device
 servers running on remote machines using standard IIOP protocol [].
-The client applications can be created using languages like C++, Java or
+Client applications can be created using languages like C++, Java or
 Python, but due to dependency on CORBA, these applications cannot run inside
 a web browsers.
 
 There were many attempts to create web-based client applications for Tango,
 including Canone [], GoTan [], Taurus Web [] and mTango []. Only mTango is
-being actively developed, but most of development effort is put into the server
+being actively developed, but most of the development effort is put into the server
 part. In [praca mgr] a modular web frontend framework for Tango, the TangoJS,
 has been presented. In this paper we show how to use TangoJS to develop a
 web-based control panel application.
+
+## Related work
+
+TODO
 
 # Building a web-based control panel
 
@@ -66,10 +72,10 @@ options.
 
 ## Goal setting and requirements analysis
 
-The application described in this work is inspired by the SarDemo project,
+The demo application described in this work is inspired by the SarDemo project,
 which is often used to demonstrate the abilities of the Sardana toolset []
 on desktop installations of Tango. The main view of SarDemo's user interface
-is shown on Fig. []. It is a dashboard where the user can place multiple
+is shown in Fig. []. It is a dashboard where the user can place multiple
 widgets representing the attributes and commands of various devices.
 
 *Fig. ?: SarDemo user interface.*
@@ -115,7 +121,7 @@ Tango infrastructure via pluggable backend services. mTango can be used on the
 server side as a RESTful endpoint used to access a existing Tango installation.
 
 **TangoJS WebComponents** is a collection of standalone widgets useful for rapid
-application development. The library offers counterparts of most popular widgets
+application development. The library offers counterparts of the most popular widgets
 from the Taurus framework on desktops. Each widget can represent one or more
 attributes or commands of a device, e.g. the *tangojs-line-edit* widget is an
 textbox which allows one to view and change the value of an attribute. The
@@ -130,7 +136,7 @@ Examples of such widgets are `tangojs-label`, `tangojs-line-edit`,
 `tangojs-command-button`, `tangojs-state-led`, `tangojs-trend`, or
 `tangojs-form`. One widget that differs from the others is the
 `tangojs-tree-view`. It does not represent a particular model. Instead it
-visualizes all objects defined in the Tango database using a tree-like
+visualizes all the objects defined in the Tango database using a tree-like
 structure.
 
 All TangoJS widgets which are available in the TangoJS WebComponents module
@@ -138,14 +144,14 @@ have their constructor functions attached to the
 `window.tangojs.web.components` global object. Each constructor has a
 static property `capabilities`, which describes what kind of models (devices,
 attributes or commands) the widget can visualize.
-Apart from capabilities, each constructor function exposes the `attributes`
-property, which describes all configurable HTML attributes of a widget. Each
+Apart from the capabilities, each constructor function exposes the `attributes`
+property, which describes all the configurable HTML attributes of a widget. Each
 HTML attribute is characterized by a name, a data type and a default value.
 
 ## Interactive synoptic panel development
 
-This chapter describes the design and development process process of the
-TangoJS Panel application. First a technology stack is defined. Then obverall
+In this chapter we describe the design and development process process of the
+TangoJS Panel application. First a technology stack is defined. Then the overall
 architecture of the solution is discussed. Finally, the most important aspects
 of implementation are covered.
 
@@ -158,7 +164,7 @@ of TangoJS with any web framework.
 It's up to the developer to decide if he/she creates the application using
 Angular [], React [] or with raw DOM APIs.
 
-Among all frontend frameworks the Facebook's React is often choosen by the
+Among all frontend frameworks the Facebook's React is often chosen by the
 developers to create web applications of any scale. Although it comes with some
 controversial features like the JSX (which, when used, requires
 transcompilation), and is heavyweight with all its dependencies [], a
@@ -180,20 +186,20 @@ in a well-defined order. The store acts as a *single source of truth* [] for an
 application. Only changes in the store can result in UI updates. There are many
 implementations of Flux architecture, all offer some sort of predictable state
 container that can transform under a stream of events. For building TangoJS
-Panel we have choosen Redux [], as it integrates easily with Preact.
+Panel we have chosen Redux [], as it easily integrates with Preact.
 
 ### Application architecture
 
 The application follows a standard React-Redux architecture. The state (or store)
 contains both the domain-specific parts like list of visible widgets and the
-ordinary UI state, like indication that modal window is visible. The read-only
-state is passed to the *presentational components* [], which build the
-application's UI. The components trigger various actions that are dispatched
+ordinary UI state, like indication that a modal window is visible. The read-only
+state is passed to the *presentational components* [], which the
+application's UI is composed of. The components trigger various actions that are dispatched
 back to the store.
 
 There are just three *presentational components*, the `Dashboard`, the
 `Menu` and the `WidgetSelector`. Each has a corresponding *container component*
-[] defined that maps the global state to component's properties. These container
+[] defined that maps the global application's state to component's properties. These container
 components are combined into the `Application` component.
 
 The `Dashboard` component is a thin wrapper around the `react-grid-layout`
@@ -209,21 +215,21 @@ object, he/she can create a widget to visualize this object on the `Dashboard`.
 The `WidgetSelector` is a modal window, built with `react-modal` [], that is
 displayed when the user chooses a device, an attribute or a command from the
 `Menu`. `WidgetSelector` uses the *capabilities* property of each possible
-TangoJS widget to determine which one is the most suitable to visualize
-selected objects. When the user selects the desired widget, a dynamic form
+TangoJS widget to determine which widget is the most suitable to visualize
+the selected objects. When the user selects the desired widget, a dynamic form
 with all configurable HTML attributes of this widget is generated using the
 `react-jsonschema-form` component [].
 
-The bootstraping code fetches Tango database address from query string,
-configures appropriate TangoJS Connector and initializes the application
-inside the document's body. All the components and interactions between
+The bootstrapping code fetches Tango database address from query string,
+configures an appropriate TangoJS Connector and initializes the application
+inside the HTML document's body. All the components and interactions between
 them are presented on Fig. [].
 
-*Fig. ?: Application architecture.*
+*Fig. ?: Demo application architecture.*
 
 ### Selected aspects of implementation
 
-The example dashboard of a complete application is shown on Fig. []. An online
+The example dashboard of a complete application is shown in Fig. []. An online
 demo is available at <https://mliszcz.github.io/(...)>. The source code can be
 cloned from the repository [^app-repo]. This section describes the most
 important aspects of the implementation.
@@ -241,22 +247,22 @@ important aspects of the implementation.
 An important advantage of the web applications over the desktop applications
 is the ease of deployment. End users access the application that is stored on
 a remote server. The only requirement on the client side is a web browser.
-Developers and administrators can easily push new version to the server and
-users always access up-to-date application. This is especially important in
+Developers and administrators can easily push a new version to the server and
+users always access the up-to-date application. This is especially important in
 the large-scale deployments, like corporate intranets or control rooms in
 scientific facilities, where the application has to be delivered to tenths of
 users.
 
 In case of the TangoJS Panel application deployment planning a few aspect have
-to be considered. Existing Tango installation needs to be accessible from
-TangoJS backend server. The backend server should also have access to some sort
-of users directory, like e.g. LDAP. This is needed for authentication and
+to be considered. The existing Tango installation needs to be accessible from
+TangoJS backend server. The backend server should also has access to some sort
+of users' directory, like e.g. LDAP. This is needed for authentication and
 authorization purposes. mTango can be used on server side to perform these
 tasks. The Panel application communicates with mTango via AJAX calls. Although
 mTango is released with an embedded Tomcat servlet container, a separate
 container gives offers greater flexibility and better configuration options.
 
-The frontend part, which is TangoJS Panel application itself, has to be
+The frontend part, which is a TangoJS Panel application itself, has to be
 stored in a ordinary web server. Since no server-side processing is required,
 any server can be used. Possible examples are Apache, nginx or Node.js-based
 `http-server` package.
@@ -274,7 +280,7 @@ A fine-grained management of available resources like fileststems and networks
 is possible for Docker *containers*.
 
 Docker instantiates containers from *images*. Image definitions are stored in
-plaintext *Dockerfiles*. Dockerfile is a recpie that describe steps required to
+plaintext *Dockerfiles*. Dockerfile is a recipe that describe steps required to
 build a minimal filesystem required to run the desired application.
 An online service, called DockerHub [], can be used to publish and share
 Docker images.
