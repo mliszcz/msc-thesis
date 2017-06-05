@@ -200,6 +200,12 @@ $endif$
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+
 %% LATEX-TEMPLATE-META-END %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \volume{32}
@@ -259,34 +265,6 @@ $endif$
 
 
 $body$
-
-
-\begin{thebibliography}{99}
-\bibitem{cai-style}
-Ja\v{s}\v{s}ov\'a, I.---Tak\'a\v{c}, M.: CAI Style for Articles. Available on:
-\texttt{http://www.cai.sk/style/}, 2003.
-
-\bibitem{cai-web}
-CAI web site. Availaible on\hbox{:} \texttt{http://www.cai.sk}.
-
-\bibitem{aklbruda}
-Akl, S.~G.---BRUDA, S.~D.: Parallel Real-Time Optimization: Beyond Speedup. Parallel Processing Letters,
-Vol.~9, 1999, No.~4, pp.~499--509.
-
-\bibitem{hintikka}
-Hintikka, J.: Knowledge and Belief: An Introduction to the Logic of Two Notions. Cornell University Press,
-Ithaca, NZ, 1962.
-
-\bibitem{marektruszczinski}
-Marek, W.---Truszczinski, M.: Relating Autoepistemic and Dolomit Logic. In: R.~Brachman and H.~Levesque
-(Eds.): Principles of Knowledge Representation and Reasoning, Proceedings of the First International
-Conference, KR'89, Toronto, May 1989, pp.~276--288.
-\end{thebibliography}
-
-
-\bio{}Ivana,Ja\v{s}\v{s}ov\'a\\ works in the CAI Editorial Office. \dots
-
-\bio{}Marcel,Tak\'a\v{c}\\ works for the CAI Editorial Office. \dots
 
 
 \label{lastpage}
