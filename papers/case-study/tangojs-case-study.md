@@ -8,7 +8,9 @@ keywords: SCADA, web, browser, Javascript, Tango, HTML, CORBA, REST
 mathclass: AB-XYZ
 bibliography: ../../thesis/build/references.bib
 link-citations: true
-lof: false
+csl: ../../thesis/documentclass/ieee.csl
+listings: true
+codeBlockCaptions: true
 header-includes:
   - \usepackage{graphicx}
   - \usepackage{tikz}
@@ -25,6 +27,17 @@ header-includes:
   - \usepackage{caption}
   - \newcommand*\listfigurename{}
   - \newcommand*\listtablename{}
+  - >
+    \lstset{ language=C
+    , basicstyle=\fontsize{10}{12}\fontencoding{T1}\ttfamily
+    , keepspaces=true
+    , showspaces=false
+    , showstringspaces=false
+    , breaklines=true
+    , frame=tb
+    }
+
+
 
 abstract: >
   Scientific and industrial hardware installations are becoming more and more
@@ -57,134 +70,309 @@ SCADA, which stands for *Supervisory Control And Data Acquisition*
 
 Tango [@gotz1999tango] is a generic framework for building SCADA systems.
 Each piece of hardware is represented as a *device server*, an abstract
-object that can be accessed from client applications over the network.
-Tango embraces OOP paradigm, characterizing devices with *attributes*
-(parameters of the hardware), *commands* (actions the hardware can perform)
-and *properties* of the device server itself. Tango
-supports creating client applications in **Java**, **Python** and **C++**.
-Tango's middleware layer is built on top of
+object that can be accessed from the client applications over the network.
+Tango uses OOP paradigm for it's data model and characterizes devices with
+*attributes* (parameters of the hardware), *commands* (actions the hardware
+can perform) and *properties* of the device servers. Tango
+supports creating client applications in *Java*, *Python* and *C++*
+languages. Tango's middleware layer is built on top of
 CORBA [@www-corba; @www-corba-spec; @natan1995] and ZeroMQ [@www-zeromq].
-A central MySQL database [@tools-mysql] is
-used to store all registered devices and their configuration. An overview of
-Tango architecture is depicted in [@Fig:01-tango-architecture].
+A central MySQL database [@tools-mysql] is used to store all registered devices
+and their configuration. An overview of Tango architecture is depicted in
+[@Fig:01-tango-architecture].
 
 ![TANGO Control System architecture overview.](
   ../../../thesis/figures/uml/01-tango-architecture.tex){
   #fig:01-tango-architecture width=80% }
 
-During the years of development, Tango has been also widely adopted in the
-automation industry and gained popularity in the community, who contribute
+During the years of development, Tango has been widely adopted in both science
+and automation industry. Constantly growing community contribute
 a lot of tools and utilities related to the Tango project.
 The core Tango is a free and open source software, released under GPLv3
 license.
 
 # Web-based control applications
 
-Motivations TODO
+The use of Web frontend technologies for GUI development for both mobile and
+desktop is gaining more and more popularity. Compared with the traditional
+approach of writing a native, dedicated application for each platform, it
+brings many benefits, wide choice of tools and libraries, simplified deployment
+process or portability thanks to the projects like Electron [@www-electron] or
+Apache Cordova [@www-cordova].
+
+Whereas it is easy to create a desktop client application, the _web-based
+approach to TANGO GUI development is still an unexplored area_. This is
+mainly because TANGO, as a CORBA-based technology, requires access to the
+TCP/IP stack, which is not the case for the web browsers.
 
 ## Related work
 
 There were many attempts to create web-based client applications for Tango,
-including Canone [], GoTan [], Taurus Web [] and mTango []. Only mTango is
-being actively developed, but most of the development effort is put into the server
-part. In [praca mgr] a modular web frontend framework for Tango, the TangoJS,
-has been presented. In this paper we show how to use TangoJS to develop a
-web-based control panel application.
+including Canone [@pelkocanone07; @www-canone], GoTan [@gotan2012], Taurus Web
+[@taurusweb2013,] and mTango [@mtango2016]. Each of these systems has it's
+unique properties, advantages and drawbacks ([@liszcz-msc-thesis-tangojs],
+p. 19). These days only mTango is being actively developed, but most of the
+development effort is put into the backend part.
+
+In [@liszcz-msc-thesis-tangojs] a modular web frontend library for Tango,
+the TangoJS, has been presented. *In this paper we provide an overview of
+TangoJS and show how to use it to develop a web-based control panel
+application.*
 
 ## TangoJS introduction
 
 TangoJS allows building Tango client applications with standard front-end
-technologies like HTML, CSS and Java. It gives Tango developers a complete set
-of tools and APIs required for this task. There is a minimal set of dependencies
-required.
+technologies like HTML, CSS and Javascript. It gives Tango developers a complete
+set of tools and APIs required for this task. There is a minimal set of
+dependencies required.
+
+TangoJS' design goals address the issues where the existing solutions have
+failed. The goals are mostly related to the technological aspects of
+implementation. TangoJS is *compliant with the latest web standards*, which makes
+it attractive for developers and allows to keep the codebase clean and
+maintainable. *Use of Web Components* [@www-w3c-webcomponents] technology and
+*framework-less architecture* enables *many integration options* between TangoJS
+and other frontend libraries. *Modular design* and well-defined interfaces
+allow developers to easily swap TangoJS modules, e.g. the backend module.
+TangoJS uses *well-proven concepts*, as TangoJS' widgets has been inspired by
+the widgets available in the Taurus framework, the leading and the most mature
+solution for building graphical control applications on desktop platforms.
 
 TangoJS has been designed to be a modular ecosystem - one includes only the
 modules one needs and configures everything according to the project
-requirements. There are three separate layers, which are connected via
-well-defined interfaces.
+requirements. There are three separate layers, as shown in
+[@Fig:03-tangojs-architecture].
 
-**TangoJS Core** is a Javascript API for programmatic interactions with Tango
-from a web browser. It has been partly generated from Tango IDL [], which makes
-its interface familiar to the Tango developers.
+![TangoJS layered architecture on existing Tango infrastructure.](
+  ../figures/uml/03-tangojs-architecture-simple.tex){
+  #fig:03-tangojs-architecture width=100% }
 
-**TangoJS Connector** is an interface that abstracts-out communication with
-Tango infrastructure via pluggable backend services. mTango can be used on the
-server side as a RESTful endpoint used to access a existing Tango installation.
+Each of TangoJS' layers has a strict set of responsibilities. The lower layers
+provide services to the upper layers, as each builds on previous one. The top
+layer is the *TangoJS Web Components* module, which is a collection of widgets
+ready to be included in client applications. The widgets use APIs exposed by the
+*TangoJS Core* layer, which talks to the *TangoJS Connector* layer in order to
+access the *backend server*. The backend implementation is out of TangoJS'
+scope, as it uses mTango as a reference backend server implementation. More
+detailed descriptions of TangoJS modules are provided in following paragraphs.
 
-**TangoJS WebComponents** is a collection of standalone widgets useful for rapid
-application development. The library offers counterparts of the most popular widgets
-from the Taurus framework on desktops. Each widget can represent one or more
-attributes or commands of a device, e.g. the *tangojs-line-edit* widget is an
-textbox which allows one to view and change the value of an attribute. The
-widgets use a set of W3C standards known under a common name as the *Web
-Components* []. From the developer point of view, these widgets behave like
-native web controls, e.g. an *input* or a *button*.
+**TangoJS Core**. \quad
+It is a library for programmatic access to Tango APIs.
+The goal of this layer is to provide a well-defined, convenient set of
+abstractions that hide the lower layers of the TangoJS stack.
+The Core module *gives the user access to the concepts like DeviceProxy*,
+a client side representation of a device server. This module also *contains
+all the structures, enums, typedefs and interfaces*, as specified by the
+TANGO IDL [^ftn-idl].
 
-TangoJS widgets are usually bound to a *model*, which can be a Tango device,
-device's attribute or a command. Each widget periodically polls the
-underlying model and updates its layout basing on the changes in the model.
-Examples of such widgets are `tangojs-label`, `tangojs-line-edit`,
-`tangojs-command-button`, `tangojs-state-led`, `tangojs-trend`, or
-`tangojs-form`. One widget that differs from the others is the
-`tangojs-tree-view`. It does not represent a particular model. Instead it
-visualizes all the objects defined in the Tango database using a tree-like
-structure.
+[^ftn-idl]: *Interface Description Language*, which defines abstract objects
+  in a language-agnostic way.
 
-All TangoJS widgets which are available in the TangoJS WebComponents module
-have their constructor functions attached to the
-`window.tangojs.web.components` global object. Each constructor has a
-static property `capabilities`, which describes what kind of models (devices,
-attributes or commands) the widget can visualize.
-Apart from the capabilities, each constructor function exposes the `attributes`
-property, which describes all the configurable HTML attributes of a widget. Each
-HTML attribute is characterized by a name, a data type and a default value.
+**TangoJS Connector**. \quad
+The Connector concept allows the TangoJS to support multiple backends. A
+Connector is an implementation of the `tangojs.core.Connector` interface.
+A concrete *connector implementation has to be plugged into TangoJS*, before
+TangoJS can be used. The Core layer forwards most calls to the connector
+instance and awaits for the results. The Connector performs operations specific
+to the backend server in use, e.g. makes HTTP calls to a RESTful endpoint in
+case of mTango on the server. Different connectors can be implemented for
+different way of accessing Tango from the browser, e.g. via Websockets.
+Connector is also the place where any optimizations (like caching) or security
+hardening (like transport over SSL), can be introduced.
 
+**TangoJS Web Components**. \quad
+The most important part of TangoJS, from end user's perspective, is the widget
+toolkit. This module sits on top of the core layer in TangoJS stack. It contains
+a set of customizable widgets suitable for rapid Tango web applications
+development. Each widget can represent one or more models. A model can be a
+Tango device, a device's attribute or a command. For example the Line Edit
+widget allows one to change the value of a selected attribute, using a convenient
+edit box. Widgets are standalone and independent of each other. Thanks to the
+use of *Custom Elements* [@www-w3c-custom-elements] W3C standard, the widgets
+behave like native web controls, e.g. input or button elements.
 
-# Building a web-based control panel
+**Available widgets**. \quad
+The *TangoJS Web Components* is highly influenced by the Taurus library. The
+initial goal was to bring the most commonly used widgets to the browser. The
+widgets offer a layout and appearance similar to their counterparts from Taurus.
+The available widgets are depicted in [@Fig:03-tangojs-widgets-all].
+Below, each widget is provided with a short description:
 
-In the following sections we formulate the requirements for a dynamic control
-panel application, provide a brief introduction to TangoJS, present selected
-aspects of development process and give an overview of possible deployment
-options.
+<div id="fig:03-tangojs-widgets-all">
+![\texttt{tangojs-label} bound to a scalar attribute.
+](../figures/images/03-tangojs-widgets-label.png){#fig:cfa width=80%}
+\par\bigskip
+![\texttt{tangojs-line-edit} bound to a boolean attribute.
+](../figures/images/03-tangojs-widgets-line-edit-bool.png){#fig:cfb width=80%}
+\par\bigskip
+![\texttt{tangojs-state-led} bound to a device instance.
+](../figures/images/03-tangojs-widgets-state-led.png){#fig:cfc width=80%}
+\par\bigskip
+![A set of \texttt{tangojs-command-button}s.
+](../figures/images/03-tangojs-widgets-command-button.png){#fig:cfc1 width=80%}
+\par\bigskip
+![\texttt{tangojs-device-tree} with all devices from the database.
+](../figures/images/03-tangojs-widgets-device-tree.png){#fig:cfd1 width=30%}
+\quad
+![\texttt{tangojs-trend} bound to two scalar attributes.
+](../figures/images/03-tangojs-widgets-trend.png){#fig:cfd2 width=50%}
+\par\bigskip
+![\texttt{tangojs-form} bound to three models of different kinds.
+](../figures/images/03-tangojs-widgets-form.png){#fig:cfc2 width=80%}
+
+TangoJS widgets.
+</div>
+
+* `tangojs-label` - displays the name, value, unit and status of a *read-only*
+  attribute;
+* `tangojs-line-edit` - displays the name, value, unit, status and edit box of
+  a *writable* attribute. Depending on an attribute type, the edit box may be a
+  text field, a spinner or a checkbox;
+* `tangojs-state-led` - displays the name, state and status of a device;
+* `tangojs-command-button` - when pressed, executes a command. Fires a DOM
+  event when result becomes available;
+* `tangojs-device-tree` - displays all devices defined in TANGO database. This
+  is the only widget that is not bound to any model;
+* `tangojs-trend` - displays the values of multiple attributes in the time
+  domain;
+* `tangojs-form` - displays a group of widgets for multiple models. The best
+  matching widget is chosen for each model depending on its type and
+  read/read-write mode.
+
+# A case study of building a control panel app
+
+In the following sections we show how to build a dynamic control panel
+application. The case study includes requirements analysis, review of
+development techniques available in TangoJS, overview of selected aspects of
+implementation and discussion of possible deployment options.
 
 ## Goal setting and requirements analysis
 
-The demo application described in this work is inspired by the SarDemo project,
-which is often used to demonstrate the abilities of the Sardana toolset []
-on desktop installations of Tango. The main view of SarDemo's user interface
-is shown in Fig. []. It is a dashboard where the user can place multiple
-widgets representing the attributes and commands of various devices.
+The TangoJS Panel application is inspired by the SarDemo project, which is often
+used to demonstrate the abilities of the Sardata toolset []
+on desktop installations of Tango. A similar application available for TangoJS
+will help this project gain more popularity within the Tango community.
+The users should be able to test TangoJS widgets with their own Tango
+installations. The TangoJS Panel application needs to be easy to deploy and
+should require zero configuration.
 
-*Fig. ?: SarDemo user interface.*
+A set of functional requirements has been formulated as a guidance for
+development process. The user should be able to:
 
-A similar application for TangoJS, the *TangoJS Panel*, will help TangoJS
-project to gain popularity in the Tango community. The users should be able
-to test TangoJS widgets with their own Tango installation. The Panel
-application needs to be easy to deploy and should require zero configuration.
-A set of functional requirements was formulated as a guidance for development
-process. The user should be able to:
+* user shoul be able to use the TangoJS Panel application with his own Tango
+  installation (and mTango on server side),
+* application should display all device servers defined in the database,
+* user should be able to create interactive widgets for selected attributes
+  of the devices,
+* it should be possible to place the widgets on a dashboardview and move
+  them around,
+* the user should be able to save and restore the layout of the dashboard.
 
-* use Panel application with his own Tango installation (and mTango on server
-  side),
-* browse all device servers defined in the database,
-* create interactive widgets for selected attributes of the devices,
-* place the widgets on a dashboard and move them around,
-* save and restore the layout of the dashboard.
-
-The web technologies are the best choice for creating dashboard-like layouts.
-TangoJS paired with a lightweight frontend framework will allow to address
-goals formulated above with minimal effort required.
+The web technologies are the best choice for creating any kind of a
+dashboard-like layout. TangoJS paired with a lightweight frontend framework
+will allow to address the goals formulated above with minimal effort required.
+The main view of TangoJS Panel's user
+interface is shown in [@Fig:03-tangojs-panel-01]. It is a dashboard where the
+user can place multiple widgets representing the attributes and commands of
+various devices.
 Technical details of implementation and architectural considerations are
-described later in this section.
+described later in the following sections.
 
-## Interactive synoptic panel development
+![TangoJS Panel application's main view.
+](../figures/images/03-tangojs-panel-01-fixed.png){#fig:03-tangojs-panel-01 width=50%}
 
-In this chapter we describe the design and development process process of the
-TangoJS Panel application. First a technology stack is defined. Then the overall
-architecture of the solution is discussed. Finally, the most important aspects
-of implementation are covered.
+## TangoJS from developer's perspective
 
-## Software stack
+TangoJS framework it targeting software developers as it's end users.
+Most of the time the developers interact either with the Core module or the Web
+Components module. The Connector module is an implementation detail transparent
+to the developers and it's configuration depends on environment.
+
+TangoJS has been designed to *minimize dependencies on third party code* and use
+the *latest web standards*, like HTML5, CSS Level 3 modules or ECMAScript 2016.
+The standard solutions rarely become deprecated. Instead, they evolve
+gradually, which makes easy to keep the project up-to-date. These technologies
+are already implemented in all modern browsers, thus no transcompilation is
+required. To start using TangoJS, the developer should be familiar with Tango
+and know the basic web-development concepts and techniques.
+
+**TangoJS Core**. \quad
+One of the TangoJS project goals was to minimize the learning curve. TangoJS
+Core API brings familiar Tango abstractions, like *DeviceProxy* to the browser
+ecosystem. All these objects are stored in a global `window.tangojs.core.api`
+object. For instance, to read/write value from/to an attribute of a device of
+choice, one simply instantiates an `AttributeProxy` object and calls the
+apropriate method, like shown on [@Lst:03-tangojs-core-read-attr]. Before
+performing any communication using TangoJS Core API, the connector has to be
+configured, as shown on [@Lst:03-tangojs-connector-configuration]. The mTango
+connector, `tangojs.connector.MTangoConnector`, is a Connector implementation
+ready to use with mTango on the server side.
+
+```{ #lst:03-tangojs-core-read-attr .javascript }
+const { AttributeProxy, AttributeValue } = tangojs.core.api
+
+const attributeProxy = new AttributeProxy('sys/tg_test/1/long_scalar')
+
+const inValue = new tangojs.core.api.AttributeValue({value: 32})
+attributeProxy.write(inValue)
+
+attributeProxt.read()
+  .then(outVal => console.log(`Value: ${outVal.value}`))
+  .catch(error => console.error(`Failure: ${error}`))
+```
+Listing: Accessing attribute's value using TangoJS Core API.
+
+```{ #lst:03-tangojs-connector-configuration .javascript }
+const connector = new MyConnectorImpl(...)
+tangojs.core.setConnector(connector)
+```
+
+Listing: Wiring Connector implementation to TangoJS Core.
+
+**TangoJS Web Components**. \quad
+TangoJS' widget collection has been inspired by the Taurus framework -
+the leading solution for building TANGO clients in Python/Qt. It was designed
+with the ease-of-use and ease-of-deployment in mind.
+
+The developer should be able to include the desired widgets in his/her
+application. He/she may then optionally configure these widgets to match
+his/her requirements. The widgets can be instantiated and configured in two
+ways. The first way is via standard DOM manipulation APIs as shown in
+[@Lst:03-widget-instantiation-js]. Apart from the imperative access, there is
+also a way to create widgets declaratively, by simply putting a desired tag
+in a HTML markup. This is shown in [@Lst:03-widget-instantiation-html].
+
+```{ #lst:03-widget-instantiation-js .javascript }
+const lineEdit = document.createElement('tangojs-line-edit')
+
+lineEdit.setAttribute('model', 'sys/tg_test/1/long_scalar_w')
+lineEdit.pollPeriod = 1000
+lineEdit.showName = true
+lineEdit.showQuality = true
+
+document.body.appendChild(lineEdit)
+```
+Listing: Imperative widget instantiation from Javascript code.
+
+```{ #lst:03-widget-instantiation-html .html }
+<tangojs-trend
+  model="sys/tg_test/1/long_scalar_w,sys/tg_test/1/double_scalar"
+  poll-period="1000"
+  data-limit="20">
+</tangojs-trend>
+```
+Listing: Declarative widget instantiation from HTML markup.
+
+All TangoJS widgets which are available in the TangoJS WebComponents module
+have their constructor functions attached to the global
+`window.tangojs.web.components` object. Each constructor has a static
+`capabilities` property, which describes what kind of models (devices,
+attributes or commands) the widget can visualize. Apart from the capabilities,
+each constructor function exposes the `attributes` property, which describes all
+the configurable HTML attributes of a widget. Each HTML attribute is
+characterized by a name, a data type and a default value.
+
+## Control panel application - software stack
 
 TangoJS is just a set of APIs and widgets. To build a real application,
 other technologies have to be incorporated. TangoJS provides widgets that
@@ -217,7 +405,7 @@ implementations of Flux architecture, all offer some sort of predictable state
 container that can transform under a stream of events. For building TangoJS
 Panel we have chosen Redux [], as it easily integrates with Preact.
 
-## Application architecture
+## Control panel application - architecture
 
 The application follows a standard React-Redux architecture. The state (or store)
 contains both the domain-specific parts like list of visible widgets and the
@@ -256,7 +444,7 @@ them are presented on Fig. [].
 
 *Fig. ?: Demo application architecture.*
 
-## Selected aspects of implementation
+## Control panel application - selected aspects of implementation
 
 The example dashboard of a complete application is shown in Fig. []. An online
 demo is available at <https://mliszcz.github.io/(...)>. The source code can be
@@ -271,7 +459,7 @@ important aspects of the implementation.
 
 ### Inspecting widgets and rendering widget configuration form
 
-# Deployment strategies
+# Deployment strategies for TangoJS applications
 
 An important advantage of the web applications over the desktop applications
 is the ease of deployment. End users access the application that is stored on

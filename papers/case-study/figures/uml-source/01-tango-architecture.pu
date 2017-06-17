@@ -1,0 +1,37 @@
+@startuml
+
+node "Server 1" {
+  component "<<DeviceServer>>\nDataBaseds" as DBDS
+  component "<<DeviceServer>>\nTangoAccessControl" as TAC
+}
+
+node "Server 2" {
+  component "<<DeviceServer>>\nDeviceServer 1" as DS1
+  component "<<DeviceServer>>\nDeviceServer 2" as DS2
+}
+
+database "MySQL database" {
+  component "TANGO Schema" as DB
+}
+
+node "Client" {
+  component "TANGO API" as DP
+}
+
+component "Hardware 1" as HW1
+component "Hardware 2" as HW2
+
+HW1 <.> DS1
+HW2 <.> DS2
+
+DS1 <-> DBDS
+DS2 <-> DBDS
+
+DBDS <.> DB
+TAC  <.> DB
+
+DP <-> DBDS
+DP <-> TAC
+DP <-> DS1
+
+@enduml
