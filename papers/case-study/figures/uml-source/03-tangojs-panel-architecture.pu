@@ -1,0 +1,33 @@
+@startuml
+
+top to bottom direction
+
+node "TangoJS Panel" {
+
+  component Dashboard as DB
+  component WidgetSelector as WS
+  component Menu as MENU
+}
+
+node "TangoJS Web Components" {
+
+  component "tangojs-tree-view" as TREE
+  component "tangojs-some-widget" as WIDGETS
+}
+
+component "react-grid-layout" as RGL
+component "react-modal" as MODAL
+
+DB --> RGL : uses
+
+DB --> WIDGETS : contains
+
+WS --> WIDGETS : creates
+
+MENU --> MODAL : uses
+
+MENU --> TREE : uses
+
+MENU -> WS : triggers
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+
+actor User as USER
+box "TangoJS Panel" #LightBlue
+  participant Menu as MENU
+  participant WidgetSelector as WS
+  participant Dashboard as DB
+  participant Store as STORE
+end box
+
+activate MENU
+activate DB
+activate STORE
+
+USER --> MENU : select device
+MENU --> STORE : open widget selector
+STORE --> WS: open
+activate WS
+USER --> WS : select widget
+WS --> STORE : add widget
+deactivate WS
+STORE --> DB : update
+
+@enduml

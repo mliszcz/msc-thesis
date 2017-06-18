@@ -6,7 +6,9 @@ author-short: M. Liszcz, W. Funika
 affiliation: AGH UST
 keywords: SCADA, web, browser, Javascript, Tango, HTML, CORBA, REST
 mathclass: AB-XYZ
-bibliography: ../../thesis/build/references.bib
+bibliography:
+  - ../../thesis/build/references.bib
+  - references.bib
 link-citations: true
 csl: ../../thesis/documentclass/ieee.csl
 listings: true
@@ -379,15 +381,17 @@ other technologies have to be incorporated. TangoJS provides widgets that
 behave like ordinary HTML elements. This allows for a seamless integration
 of TangoJS with any web framework.
 It's up to the developer to decide if he/she creates the application using
-Angular [], React [] or with raw DOM APIs.
+Angular [@www-angular; @darwin2013angularjs], React [@www-react] or just
+plain DOM APIs.
 
 Among all frontend frameworks the Facebook's React is often chosen by the
 developers to create web applications of any scale. Although it comes with some
 controversial features like the JSX (which, when used, requires
-transcompilation), and is heavyweight with all its dependencies [], a
-stripped-down fork called Preact [] is availabe. It offers API compatibility
-with React, but is much smaller in size (due to the limited support of legacy
-browsers). Preact contains everything what is required to build highly reactive
+transcompilation), and is heavyweight with all its dependencies, a
+stripped-down fork called *Preact* [@www-preact] is availabe. It offers API
+compatibility with React, but is much smaller in size [@www-preact-vs-react] and
+offers better performance [@www-preact-perf].
+Preact contains everything what is required to build highly reactive
 applications including stateless (functional) components, and unidirectional
 data flow.
 
@@ -396,68 +400,129 @@ React on its own is merely a presentation layer, that can be used to create
 a data *model*, needs to be introduced. While it is possible to represent the
 state as a bunch of variables scattered accross the codebase, mutating these
 variables from different places is error prone, hard to test and hard to
-maintain. To address this problem, Facebook proposed the Flux architecture [].
+maintain. To address this problem, Facebook proposed the *Flux architecture*
+[@www-flux].
 In Flux, the state is stored in a central place, called *store*. Various
 *actions* can change the state, but these changes always happen inside the store
-in a well-defined order. The store acts as a *single source of truth* [] for an
+in a well-defined order. The store acts as a *single source of truth* for an
 application. Only changes in the store can result in UI updates. There are many
-implementations of Flux architecture, all offer some sort of predictable state
-container that can transform under a stream of events. For building TangoJS
-Panel we have chosen Redux [], as it easily integrates with Preact.
+implementations of Flux architecture, all offer some sort of *predictable state
+container* that can transform under a stream of events. For building TangoJS
+Panel we have chosen *Redux* [@www-redux], as it easily integrates with Preact.
 
 ## Control panel application - architecture
 
 The application follows a standard React-Redux architecture. The state (or store)
 contains both the domain-specific parts like list of visible widgets and the
 ordinary UI state, like indication that a modal window is visible. The read-only
-state is passed to the *presentational components* [], which the
-application's UI is composed of. The components trigger various actions that are dispatched
-back to the store.
+state is passed to the *presentational components* [@www-smart-dumb-components],
+which form the application's UI. The components trigger various actions that are
+dispatched back to the store.
 
 There are just three *presentational components*, the `Dashboard`, the
-`Menu` and the `WidgetSelector`. Each has a corresponding *container component*
-[] defined that maps the global application's state to component's properties. These container
-components are combined into the `Application` component.
+`Menu` and the `WidgetSelector`. Each component is paired with a corresponding
+*container component* [@www-smart-dumb-components] that maps the global
+application's state to component's properties. These container components are
+combined into the `Application` component.
 
 The `Dashboard` component is a thin wrapper around the `react-grid-layout`
-component []. Its purpose is to visualize TangoJS widgets on a grid with
+component[^foot-rgl]. Its purpose is to visualize TangoJS widgets on a grid with
 draggable and resizable elements. It is responsive and different layouts can
 be used for differens screen sizes.
+
+[^foot-rgl]: <https://github.com/STRML/react-grid-layout>
 
 The `Menu` is a sidebar that contains `tangojs-tree-view` widget and additional
 controls for interacting with the device tree. The user can use this tree to
 browse all objects stored in the Tango database. When he/she selects a desired
 object, he/she can create a widget to visualize this object on the `Dashboard`.
 
-The `WidgetSelector` is a modal window, built with `react-modal` [], that is
-displayed when the user chooses a device, an attribute or a command from the
-`Menu`. `WidgetSelector` uses the *capabilities* property of each possible
-TangoJS widget to determine which widget is the most suitable to visualize
-the selected objects. When the user selects the desired widget, a dynamic form
+The `WidgetSelector` is a modal window, built with `react-modal`[^foot-rmodal].
+It is displayed when the user chooses a device, an attribute or a command from
+the device tree browser. `WidgetSelector` uses the capabilities of each possible
+TangoJS widget to determine which widget is the most suitable for visualization
+of selected objects. When the user selects the desired widget, a dynamic form
 with all configurable HTML attributes of this widget is generated using the
-`react-jsonschema-form` component [].
+`react-jsonschema-form` component[^foot-jsonschema].
 
-The bootstrapping code fetches Tango database address from query string,
-configures an appropriate TangoJS Connector and initializes the application
-inside the HTML document's body. All the components and interactions between
-them are presented on Fig. [].
+[^foot-rmodal]: <https://github.com/reactjs/react-modal>
+[^foot-jsonschema]: <https://github.com/mozilla-services/react-jsonschema-form>
 
-*Fig. ?: Demo application architecture.*
+![TangoJS Panel application's top-level architecture.
+](../figures/uml/03-tangojs-panel-architecture.tex){#fig:03-tangojs-panel-arch width=100%}
+
+The bootstrapping code fetches Tango database address from browser's query
+string, configures an appropriate TangoJS Connector and initializes the
+application inside the HTML document's body. Top level components of TangoJS
+Panel application and interactions between the are presented in
+[@Fig:03-tangojs-panel-arch]. These components can be further divided into
+smaller units of functionality, like functions or classes.
 
 ## Control panel application - selected aspects of implementation
 
-The example dashboard of a complete application is shown in Fig. []. An online
-demo is available at <https://mliszcz.github.io/(...)>. The source code can be
-cloned from the repository [^app-repo]. This section describes the most
-important aspects of the implementation.
+This section covers the most important aspects of the implementation, including
+backend configuration, TangoJS initialization, Preact/Redux-based state
+maintenance and dynamic widget discovery. Complete source code of the TangoJS
+Panel application is available online[^foot-app-repo].
 
-[^app-repo]: <https://github.com/mliszcz/tangojs-panel>
+[^foot-app-repo]: <https://github.com/mliszcz/tangojs-panel>
 
-### Initialization of the TangoJS framework
+**mTango configuration**. \quad
+TangoJS Panel application uses mTango server to access the Tango infrastructure.
+mTango requires some initial configuration to handle requests from TangoJS.
 
-### Interacting with `tangojs-tree-view` from a React application
+* TangoJS Panel can be deployed in a different domain (*origin*), thus mTango
+needs to be configured to accept cross-domain connections. CORS[^foot-cors]
+requests can be enabled in most servlet containers using configuration files.
+There's no need to change application's code.
 
-### Inspecting widgets and rendering widget configuration form
+[^foot-cors]: Cross Origin Resource Sharing
+
+* *TangoJS mTango Connector* uses HTTP basic authentication and such method
+should be supported by the mTango server. Most servlet containers allow one to
+configure such authentication with differen backends, e.g. a fixed list of users,
+a database or a LDAP directory.
+
+A preconfigured mTango REST server is available in a Docker container
+[^foot-mtango-docker]. This container has been created during the TangoJS
+development. It may be used with the existing Tango deployment.
+
+[^foot-mtango-docker]: <https://hub.docker.com/r/mliszcz/mtango/>
+
+**Initialization of the TangoJS framework**. \quad
+Before TangoJS can be used, a connector needs to be configured. This can be done
+immediately after required objects are loaded. To instantiate mTango Connector
+one has to supply the address of the server-side API endpoint and authentication
+credentials. This process is shown in [@Lst:03-tangojs-mtango-connector]. To
+avoid hardcoding the credentials in the application's code one can display a
+pop-up window during page loading and ask user for his/her credentials.
+
+```{ #lst:03-tangojs-mtango-connector .html }
+<script type="text/javascript">
+  (function (tangojs) {
+    'use strict'
+
+    const connector = new tangojs.connector.mtango.MTangoConnector(
+      'http://172.18.0.5:8080/rest/rc2', // endpoint
+      'tango',                           // username
+      'secret')                          // password
+
+    tangojs.core.setConnector(connector)
+
+  })(window.tangojs)
+</script>
+```
+Listing: Configuring mTango Connector instance.
+
+
+
+**State handling and widget rendering**. \quad
+
+Any changes in application's state are done in the store. Changes in the store
+result in view updates.
+The applications's state updates and data flow are show in [].
+
+**Discovering available widgets**. \quad
 
 # Deployment strategies for TangoJS applications
 
