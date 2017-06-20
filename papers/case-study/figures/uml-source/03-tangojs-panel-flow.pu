@@ -20,5 +20,9 @@ USER --> WS : select widget
 WS --> STORE : add widget
 deactivate WS
 STORE --> DB : update
+deactivate MENU
+deactivate WS
+deactivate DB
+deactivate STORE
 
 @enduml

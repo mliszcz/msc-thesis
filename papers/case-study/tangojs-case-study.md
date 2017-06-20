@@ -514,13 +514,52 @@ pop-up window during page loading and ask user for his/her credentials.
 ```
 Listing: Configuring mTango Connector instance.
 
+TangoJS widget's are loaded asynchronously using HTML Imports []. In some
+scenarios it is desirable to postopne application initialization until all
+imports are loaded. If native HTML Imports feature is available in the
+browser, `DOMContentLoaded` event indicates that all imports have been resolved.
+In cases where the webcomponents.js polyfill[^foot-wc-poly] is being used, one
+has to wait for `HTMLImportsLoaded` event instead. Complete TangoJS Panel
+application initialization procedure covering both cases is shown in
+[@Lst:03-tangojs-initialization].
 
+[^foot-wc-poly]: <https://www.webcomponents.org/polyfills#html-imports-polyfill>
+
+```{ #lst:03-tangojs-initialization .html }
+<script>
+  (function() {
+    'use strict'
+
+    const root = document.getElementById('root')
+    const run = () => window.tangojsPanel.bootstrap(root)
+
+    if (HTMLImports && !HTMLImports.useNative) {
+      window.addEventListener('HTMLImportsLoaded', run, true)
+    } else {
+      window.addEventListener('DOMContentLoaded', run, true)
+    }
+  })()
+</script>
+```
+Listing: TangoJS Panel delayed initialization.
 
 **State handling and widget rendering**. \quad
+In applications based on Flux architecture, any changes to the state are
+performed in a central *store*. If necessary, these changes can result in view
+updates. These assumptions impact on how actions propagate in the TangoJS Panel
+application.
 
-Any changes in application's state are done in the store. Changes in the store
-result in view updates.
-The applications's state updates and data flow are show in [].
+The basic use case for the TangoJS Panel is a widget addition. When the user
+selects an object from TangoJS Device Tree widget in the application's menu,
+an apropriate action is sent to the store. As a result of this action, store
+updates the application's state. This change causes WidgetSelector component
+to be rendered. Later, when the user selects the desired widget to represent
+his/her object, another action is sent to the store. This new action causes
+widget creation and rendering it on the Dashboard. The whole scenario is shown
+in a sequence chart in [@Fig:03-tangojs-panel-flow].
+
+![Sequence of actions resulting in widget creation.
+](../figures/uml/03-tangojs-panel-flow.tex){#fig:03-tangojs-panel-flow width=100%}
 
 **Discovering available widgets**. \quad
 
