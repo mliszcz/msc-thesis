@@ -562,6 +562,41 @@ in a sequence chart in [@Fig:03-tangojs-panel-flow].
 ](../figures/uml/03-tangojs-panel-flow.tex){#fig:03-tangojs-panel-flow width=100%}
 
 **Discovering available widgets**. \quad
+As stated in the TangoJS overview, by convention constructor functions of all
+widgets are attached to the global `window.tangojs.web.components` object.
+When the user wants to visualize an object (a device, an attribute or a command),
+TangoJS Panel application fetches description of this object from the Tango
+database (e.g. an *AttributeInfo* structure for attributes) and uses this
+description to filter suitable widgets. The filtering is done using
+`capabilities` property attached to constructor function of each widget. When
+the user choses desired widget to be rendered, the TangoJS Panel application
+displays a dynamic form where user can specify HTML attributes for this widget.
+This is done with the help of the `attributes` property of widget's constructor.
+Example code responsible for setting these properties on TangoJS Trend widget is
+shown in [@Lst:03-tangojs-widget-props]. TangoJS Panel application can access
+these values using `window.tangojs.web.components['tangojs-trend'].capabilities`
+and `window.tangojs.web.components['tangojs-trend'].attributes`.
+
+
+```{ #lst:03-tangojs-widget-props .html }
+  window.tangojs.web.util.registerComponent(
+    'tangojs-trend',
+    TangoJsTrendElement,
+    {
+      capabilities: {
+        attributeModel: true,
+        commandModel: false,
+        statusModel: false,
+        readOnlyModel: true
+      },
+      attributes: {
+        'model': { type: [Array, String] },
+        'poll-period': { type: Number },
+        'data-limit': { type: Number }
+      }
+    })
+```
+Listing: Metadata attached to the widget's constructor during widget's registration.
 
 # Deployment strategies for TangoJS applications
 
@@ -594,68 +629,101 @@ These tools are discussed later in this section.
 
 ## Containerizing applications
 
-Docker [] is a popular tool that provides isolated, reproducible environments
-for running applications. Docker uses LXC containers [], cgroups [] and other
-Linux kernel features to isolate processes from the host operating system.
-A fine-grained management of available resources like fileststems and networks
-is possible for Docker *containers*.
+Docker [@www-docker] is a popular tool that provides isolated, reproducible
+environments for running applications. Docker uses LXC containers, cgroups and
+other Linux kernel features to isolate processes from the host operating system
+[@www-containers-anatomy]. A fine-grained management of available resources like
+fileststems and networks is possible for Docker *containers*.
 
 Docker instantiates containers from *images*. Image definitions are stored in
 plaintext *Dockerfiles*. Dockerfile is a recipe that describe steps required to
 build a minimal filesystem required to run the desired application.
-An online service, called DockerHub [], can be used to publish and share
-Docker images.
+An online service, called DockerHub[^foot-docker-hub], can be used to publish
+and share Docker images.
+
+[^foot-docker-hub]: <https://hub.docker.com/>
 
 TangoJS project offers Docker images with mTango and Tango itself. The images
 require zero configuration and are designed for instant TangoJS deployment.
-The Tango image [^docker-tangocs] is available in the registry as
-`tangocs/tango-cs`. The mTango image [^docker-mtango] is available as
+The Tango image[^docker-tangocs] is available in the registry as
+`tangocs/tango-cs`. The mTango image[^docker-mtango] is available as
 `mliszcz/mtango`.
 
 [^docker-tangocs]: <https://hub.docker.com/r/tangocs/tango-cs/>
 [^docker-mtango]: <https://hub.docker.com/r/mliszcz/mtango/>
 
 TangoJS Panel application is straightforward to install, as the only
-requirement is a static web server. Since it is a Node.js project, we can
-use npm to pull the dependencies on a production server and run directly from
-a git checkout. A simple Node.js-based web server can be used instead a
-full-blown solution like the Apache
-The Dockerfile (based on tiny Alpine linux) with TangoJS Panel application is
-shown on Lst. [].
+requirement is a static web server. Since it is a Node.js project, one can
+use npm to pull the dependencies in a production environment and run the
+application directly from a git checkout. A simple Node.js-based web server can
+be used instead a full-blown solution like the Apache server.
+The Dockerfile (based on the tiny Alpine linux) which can be used to start the
+TangoJS Panel application is shown on [@Lst:03-tangojs-alpine-dockerfile].
 
-```Dockerfile
+```{ #lst:03-tangojs-alpine-dockerfile .dockerfile }
 FROM alpine:edge
 
-RUN  apk add git nodejs \
-  && git clone https://github.com/mliszcz/tangojs-panel /tangojs-panel \
+RUN  apk add --no-cache git nodejs nodejs-npm \
+  && git clone --depth 1 -b master https://github.com/mliszcz/tangojs-panel-obsolete /tangojs-panel \
   && cd /tangojs-panel \
-  && npm install
+  && npm install \
+  && npm prune --production \
+  && npm install --no-save http-server \
+  && apk del git nodejs-npm
 
 EXPOSE 8080
 
-CMD cd /tangojs-panel && npm run server
+CMD /tangojs-panel/node_modules/.bin/http-server /tangojs-panel
 ```
-
-*Lst. ?: A Dockerfile with TangoJS application.*
+Listing: A Dockerfile with the TangoJS Panel application.
 
 ## Service orchestration
 
-To efficiently manage three (or even four if we separate TangoTest device from
-Tango database server) containers described in the previous section, an
-orchestration tool is required. The Docker Compose [], a community project
-which recently became an official part of Docker, has been designed to address
-this problem.
+To efficiently manage three (or even four if one separates TangoTest device
+from Tango database server) containers described in the previous section, an
+orchestration tool is required. The Docker Compose[^foot-docker-compose], a
+community project which recently became an official part of Docker, has been
+designed to address this problem.
+
+[^foot-docker-compose]: <https://docs.docker.com/compose/>
 
 Docker Compose allows one to define containers, dependencies, network links
-and mount points using convenient YAML file.
+and mount points using a convenient YAML file.
 This file together with all other artifacts required to run the TangoJS Panel
 application together with a minimal Tango installation are available at [].
-When the administrator runs `docker-compse up` command, an image with TangoJS
-Panel application will be created from the Dockerfile shown in the previous
-section. Other images, like the Tango database, TangoTest device or mTango
-server will be pulled down from the Docker registry. TangoJS Panel application
-will be available at `http://{container-ip}:8080` immediately after the start
-of the cluster.
+A Docker Compose file with Tango, MySQL database and mTango has been created
+during TangoJS development and is available online[^foot-tango-workspace].
+One can add a new entry in the `services` section of `docker-compose.yml` file
+in order to  automatically start TangoJS Panel together with other services.
+Assuming that TangoJS Panel Dockerfile is named `Dockerfile.tangojs-panel`, the
+Docker Compose service could be defined as shown in
+[@Lst:03-tangojs-docker-compose]. mTango service will be available for TangoJS
+Panel under `mtango.workspace` hostname.
+
+[^foot-tango-workspace]: <https://github.com/mliszcz/tango-workspace>
+
+```{ #lst:03-tangojs-docker-compose .yaml }
+services:
+
+  # Tango, MySQL and mTango services ...
+
+  panel:
+    image: tangojs-panel
+    build:
+      context: .
+      dockerfile: Dockerfile.tangojs-panel
+    hostname: panel.workspace
+    links:
+      - mtango:mtango.workspace
+```
+Listing: TangoJS Panel application configured as a Docker Compose service.
+
+When the administrator runs the `docker-compse up` command, an image with
+TangoJS Panel application will be created from the Dockerfile shown in the
+previous section. Other images, like the Tango database, TangoTest device or
+mTango server will be pulled from the Docker registry. TangoJS Panel application
+will be available at `http://{container-ip}:8080` address immediately after
+start of all the services.
 
 # Summary
 
@@ -670,13 +738,6 @@ can be configued with an existing Tango database or use an in-memory mocked
 database, it is suitable for demonstrational purposes. When additional security
 is added, like configuring web server to work over SSL, the application can also
 be used in real-world environments in production-grade deployments.
-
-have been developed [@daneels1999selection]. A common name for these systems is
-[@daneels1999scada; @boyer2009].
-Tango [@gotz1999tango] is a generic framework for building SCADA systems.
-CORBA [@www-corba; @www-corba-spec; @natan1995] and ZeroMQ [@www-zeromq].
-A central MySQL database [@tools-mysql] is
-
 
 # References
 
