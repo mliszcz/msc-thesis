@@ -659,6 +659,8 @@ application directly from a git checkout. A simple Node.js-based web server can
 be used instead a full-blown solution like the Apache server.
 The Dockerfile (based on the tiny Alpine linux) which can be used to start the
 TangoJS Panel application is shown on [@Lst:03-tangojs-alpine-dockerfile].
+This Dockerfile can be built and started using the usual `docker build` and
+`docker run` commands.
 
 ```{ #lst:03-tangojs-alpine-dockerfile .dockerfile }
 FROM alpine:edge
@@ -676,6 +678,12 @@ EXPOSE 8080
 CMD /tangojs-panel/node_modules/.bin/http-server /tangojs-panel
 ```
 Listing: A Dockerfile with the TangoJS Panel application.
+
+It is possible to try the TangoJS Panel application without an existing Tango
+and mTango installation. One can replace the mTango Connector with a mocked
+in-memory connector implementation[^foot-tangojs-connector-mock].
+
+[^foot-tangojs-connector-mock]: <https://github.com/tangojs/tangojs-connector-local>
 
 ## Service orchestration
 
@@ -727,17 +735,22 @@ start of all the services.
 
 # Summary
 
-The approach described in this work proved that the framework-less TangoJS can
-easily be integrated with any frontend framework. The was Preact was used in
-this case study, but use of other technologies is possible. TangoJS does not
-enforce any specific technology stack or development style.
+TangoJS framework was designed to facilitate the creation of web-based client
+applications for Tango Control System. In this paper we showed how TangoJS can
+be used to build a dynamic control panel, the TangoJS Panel application.
+It is a fully functional synoptic panel suitable for visualization of devices of
+any kind. This application allows users and developers new to the TangoJS
+immediately try the framework.
 
-The TangoJS Panel application is a fully functional synoptic panel. It
-allows users and developers new to TangoJS immediately try the framework. As it
-can be configued with an existing Tango database or use an in-memory mocked
-database, it is suitable for demonstrational purposes. When additional security
-is added, like configuring web server to work over SSL, the application can also
-be used in real-world environments in production-grade deployments.
+Although the Preact framework was used during this case study, TangoJS can be
+easily integrated with any other frontend framework. TangoJS does not enforce
+any specific technology stack or development style.
+
+As TangoJS Panel can be configured to either work with an existing Tango
+infrastructure or use an in-memory mocked database, it is suitable for both
+demonstrational purposes and production grade deployments. We showed how Docker
+and Docker Compose can be used to automate the configuration and deployment in
+both cases.
 
 # References
 
