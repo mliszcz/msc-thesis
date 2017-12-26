@@ -3,7 +3,7 @@ FLAGS= \
 	--number-sections \
 	--standalone \
 	--listings \
-	--latex-engine=pdflatex \
+	--pdf-engine=pdflatex \
 	--template=template.tex \
 	--filter pandoc-crossref \
 	--filter pandoc-citeproc \
