@@ -792,6 +792,9 @@ start of all the services.
 
 # Summary
 
+TangoJS framework was designed to facilitate the creation of web-based client
+applications for Tango Control System.
+
 TangoJS allows building Tango client applications with standard front-end
 technologies like HTML, CSS and Javascript. It gives Tango developers a complete
 set of tools and APIs required for this task. There is a minimal set of
@@ -804,14 +807,20 @@ maintainable. *Use of Web Components* [@www-w3c-webcomponents] technology and
 and other frontend libraries. *Modular design* and well-defined interfaces
 allow developers to easily swap TangoJS modules, e.g. the backend module.
 
-TODO: jakie rozwiazania sie sprawdzily, jakie nie, itp
-
-TangoJS framework was designed to facilitate the creation of web-based client
-applications for Tango Control System. In this paper we showed how TangoJS can
+In this paper we showed how TangoJS can
 be used to build a dynamic control panel, the TangoJS Panel application.
 It is a fully functional synoptic panel suitable for visualization of devices of
-any kind. This application allows users and developers new to the TangoJS
+any kind. This application allows users and developers new to the TangoJS to
 immediately try the framework.
+
+TangoJS was designed to be as accessible as possible and not to depend
+on any particular framework. While this approach is preferable for libraries,
+as they target a wide audience, it may not be the best solution in case of GUI
+applications.
+
+TangoJS Panel development process shown that using a framework for application
+development helps to keep the code maintainable and facilitates the
+implementation process.
 
 Although the Preact framework was used during this case study, TangoJS can be
 easily integrated with any other frontend framework. TangoJS does not enforce
@@ -819,9 +828,15 @@ any specific technology stack or development style.
 
 As TangoJS Panel can be configured to either work with an existing Tango
 infrastructure or use an in-memory mocked database, it is suitable for both
-demonstrational purposes and production grade deployments. We showed how Docker
-and Docker Compose can be used to automate the configuration and deployment in
-both cases.
+demonstrational purposes and production grade deployments.
+
+Reliable target enviroment and configuration management is as important as the
+application itself. We showed how Docker and Docker Compose can be used to
+automate the configuration and deployment of the application. Use of lightweight
+containers allowed to maintain application built from a couple of loosely
+connected components with no performance overhead. Such approach allows one to
+use the same environment for development and production. This greatly reduces
+effort needed for performing the deployments.
 
 # References
 
