@@ -1,7 +1,7 @@
 ---
 title: A case study of a web-based control panel built with TangoJS
 title-short: TangoJS Case Study
-author: Michał \surname{Liszcz}, Włodzimierz \surname{Funika}
+author: Michał \\surname{Liszcz}, Włodzimierz \\surname{Funika}
 author-short: M. Liszcz, W. Funika
 affiliation: AGH UST
 keywords: SCADA, web, browser, Javascript, Tango, HTML, CORBA, REST
@@ -106,9 +106,54 @@ approach to TANGO GUI development is still an unexplored area_. This is
 mainly because TANGO, as a CORBA-based technology, requires access to the
 TCP/IP stack, which is not the case for the web browsers.
 
+This work demonstrates how various web technologies can be tied together to
+create a generic, graphical application capable of controling TANGO device
+servers. Presented approach builds on the TangoJS project
+[@liszcz-msc-thesis-tangojs] and uses modern
+architectural patterns to reliably manage the data flow between a set of
+loosely coupled components.
+
 ## Related work
 
-There were many attempts to create web-based client applications for Tango,
+Over the years there were a few attempts to propose a framework for creation of
+web-based Tango applications.
+Each of these projects has it's unique properties, advantages and drawbacks,
+discussed in greater details in ([@liszcz-msc-thesis-tangojs]).
+Most of the projects however were abandoned at the proof-of-concept stage and
+only one is actively maintained these days.
+
+The first project using a web browser as a runtime for Tango applications
+was Canone (2005) [@pelkocanone07; @www-canone].
+It allows one to compose GUI from multipe widgets representing various devices
+and properties of these devices. The user can put widgets on a webpage layout.
+[@Fig:202-canone-gui] presents example application built with Canone.
+Due to the Tango's requirements in regard to the network access, a clear
+separation into the backend and the frontend parts is visible in Canone's
+architecture. The backend part, called *socket server* is a Python application,
+acting as a proxy between Tango device servers and the frontend part, written
+in mostly in PHP. Canone's widgets also use AJAX in a limited way to provide
+users with basic interaction options.
+
+![Canone Web Interface. (source [@www-canone])](
+  ../figures/images/02-canone-tutorial4.png){
+  #fig:02-canone-gui width=60% }
+
+GoTan (2012) [@gotan2012] is a project consisting of two modules, a server
+and a client. The server is a Groovy application that communicates directly
+with Tango device servers. The GoTan server exposes a well documented RESTful
+API, which clients can use to access the devices. While the reference client
+is also implemented in Groovy and cannot be easily ported to a browser
+enviroment, alternative client implementations are possible using HTTP-based
+API. GoTan does not provide any frontend layer to facilitate bulding of user
+interfaces for client applications.
+
+Taurus Web (2013) [@taurusweb2013] is a part of the Taurus project, aiming to
+provide developers with all the means required to build browser-based Tango
+client applications. Like competiting projects, Taurus Web is also divided into
+backend and frontend parts.
+
+mTango [@mtango2016]
+
 including Canone [@pelkocanone07; @www-canone], GoTan [@gotan2012], Taurus Web
 [@taurusweb2013,] and mTango [@mtango2016]. Each of these systems has it's
 unique properties, advantages and drawbacks ([@liszcz-msc-thesis-tangojs]).
@@ -122,19 +167,25 @@ application.*
 
 ## TangoJS introduction
 
+TangoJS' design goals address the issues where the existing solutions have
+failed.
+
+BEGIN zmienic
+
 TangoJS allows building Tango client applications with standard front-end
 technologies like HTML, CSS and Javascript. It gives Tango developers a complete
 set of tools and APIs required for this task. There is a minimal set of
 dependencies required.
 
-TangoJS' design goals address the issues where the existing solutions have
-failed. The goals are mostly related to the technological aspects of
-implementation. TangoJS is *compliant with the latest web standards*, which makes
+TangoJS is *compliant with the latest web standards*, which makes
 it attractive for developers and allows to keep the codebase clean and
 maintainable. *Use of Web Components* [@www-w3c-webcomponents] technology and
 *framework-less architecture* enables *many integration options* between TangoJS
 and other frontend libraries. *Modular design* and well-defined interfaces
 allow developers to easily swap TangoJS modules, e.g. the backend module.
+
+END zmienic
+
 TangoJS uses *well-proven concepts*, as TangoJS' widgets has been inspired by
 the widgets available in the Taurus framework, the leading and the most mature
 solution for building graphical control applications on desktop platforms.
@@ -737,6 +788,20 @@ will be available at `http://{container-ip}:8080` address immediately after
 start of all the services.
 
 # Summary
+
+TangoJS allows building Tango client applications with standard front-end
+technologies like HTML, CSS and Javascript. It gives Tango developers a complete
+set of tools and APIs required for this task. There is a minimal set of
+dependencies required.
+
+TangoJS is *compliant with the latest web standards*, which makes
+it attractive for developers and allows to keep the codebase clean and
+maintainable. *Use of Web Components* [@www-w3c-webcomponents] technology and
+*framework-less architecture* enables *many integration options* between TangoJS
+and other frontend libraries. *Modular design* and well-defined interfaces
+allow developers to easily swap TangoJS modules, e.g. the backend module.
+
+TODO: jakie rozwiazania sie sprawdzily, jakie nie, itp
 
 TangoJS framework was designed to facilitate the creation of web-based client
 applications for Tango Control System. In this paper we showed how TangoJS can
