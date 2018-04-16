@@ -27,9 +27,6 @@ header-includes:
   - \usepackage{listings}
   - \usepackage{gensymb}
   - \usepackage{caption}
-  - \newcommand*\listfigurename{}
-  - \newcommand*\listtablename{}
-  - \newcommand{\passthrough}[1]{#1}
   - >
     \lstset{ language=C
     , basicstyle=\fontsize{10}{12}\fontencoding{T1}\ttfamily
@@ -115,78 +112,90 @@ loosely coupled components.
 
 ## Related work
 
-Over the years there were a few attempts to propose a framework for creation of
-web-based Tango applications.
+Over the years there were a few attempts to create a framework for development
+of web-based Tango applications.
+
+The first project using a web browser as a runtime for Tango applications
+was Canone (2005) [@pelkocanone07; @www-canone].
+Canone allows one to compose the GUI from multipe widgets representing various
+devices
+and properties of these devices. The user can put widgets on a webpage layout.
+[@Fig:202-canone-gui] presents an example application built with Canone.
+Due to the Tango's requirements in regard to the network access, a clear
+separation into the backend and the frontend parts is visible in Canone's
+architecture. The backend part, called *socket server*, is a Python application
+acting as a proxy between Tango device servers and the frontend part. The
+frontend is written mostly in PHP but Canone's widgets also use AJAX in a
+limited way to provide users with basic interaction options.
+
+![Canone Web Interface. (source [@www-canone])](
+  ../figures/images/02-canone-tutorial4.png){
+  #fig:202-canone-gui width=60% }
+
+GoTan (2012) [@gotan2012] is a project consisting of two modules, a server
+and a client. The server is a Groovy application that communicates directly
+with the Tango device servers. The GoTan server exposes a well documented RESTful
+API, which clients can use to access the devices. While the default client
+is also implemented in Groovy and cannot be easily ported to a browser
+enviroment, alternative client implementations are possible thanks to HTTP-based
+API. GoTan does not provide any frontend library to facilitate bulding of user
+interfaces for client applications.
+
+Taurus Web (2013) [@taurusweb2013] project aims to bring Taurus'
+functionality to the web environment. Like competing projects, Taurus Web
+is also divided into a server and a client parts. The server part is written in
+Python and exposes Tango devices over the WebSocket protocol.
+The client part offers the developers access the Tango devices using an API.
+There are no generic widgets available and dedicated UI components need to be
+implemented by the developers aiming to Taurus Web.
+
+mTango [@mtango2016] is a two-tier client/server system that provides developers
+with a complete set of tools for building interactive, web-based and mobile
+Tango client applications.
+The server part, the mTangoREST server, is a Java application that can run
+within a dedicated or an embedded servlet container. The server is responsible for
+communicating with the Tango infrastructure. Tango devices are exposed to the
+clients using a
+well-defined HTTP-based API. mTango provides two client implementations for
+accessing this
+API, a Java client for desktop applications and a Javascript client for web
+applications. The web-based client library offers both a set of low-level
+functions for
+communicating with the devices and a collection of high-level widgets. The widgets
+can represent attributes or properties of arbitrary devices.
+of these devices. Widgets are implemented using the JavascriptMVC
+framework (as of mTango rc0.3). This allows one to compose the UI declaratively,
+using HTML-like tags. For instance,
+`<mtango:plot>` tag can be used to draw a plot with attibute chanes over time.
+
 Each of these projects has it's unique properties, advantages and drawbacks,
 discussed in greater details in ([@liszcz-msc-thesis-tangojs]).
 Most of the projects however were abandoned at the proof-of-concept stage and
 only one is actively maintained these days.
 
-The first project using a web browser as a runtime for Tango applications
-was Canone (2005) [@pelkocanone07; @www-canone].
-It allows one to compose GUI from multipe widgets representing various devices
-and properties of these devices. The user can put widgets on a webpage layout.
-[@Fig:202-canone-gui] presents example application built with Canone.
-Due to the Tango's requirements in regard to the network access, a clear
-separation into the backend and the frontend parts is visible in Canone's
-architecture. The backend part, called *socket server* is a Python application,
-acting as a proxy between Tango device servers and the frontend part, written
-in mostly in PHP. Canone's widgets also use AJAX in a limited way to provide
-users with basic interaction options.
-
-![Canone Web Interface. (source [@www-canone])](
-  ../figures/images/02-canone-tutorial4.png){
-  #fig:02-canone-gui width=60% }
-
-GoTan (2012) [@gotan2012] is a project consisting of two modules, a server
-and a client. The server is a Groovy application that communicates directly
-with Tango device servers. The GoTan server exposes a well documented RESTful
-API, which clients can use to access the devices. While the reference client
-is also implemented in Groovy and cannot be easily ported to a browser
-enviroment, alternative client implementations are possible using HTTP-based
-API. GoTan does not provide any frontend layer to facilitate bulding of user
-interfaces for client applications.
-
-Taurus Web (2013) [@taurusweb2013] project aims to bring Taurus'
-functionality to the web environment. Like competiting projects, Taurus Web
-is also divided into backend and frontend parts. The backend part is a
-WebSocket server implementd in Python. The server exposes Tango devices to the
-frontend part. The frontend is a library that acts as a client for the server.
-There are no customizable widgets and dedicated UI components need to be
-implemented by the developers using Taurus Web.
-
-// TODO read this and double check
-mTango [@mtango2016] is a two-tier system providing developers with complete set
-of tools to build interactive, web-based and mobile Tango client applications.
-The server part, the mTangoREST server is a Java application that can run on a
-dedicated or embedded servlet container. The server is responsible for
-communicating with the Tango infrastructure and exposes the devices via a
-well-defined HTTP-based API. There are two client implementations consuming this
-API, a Java client for desktop applications and a Javascript client for web
-applications. The web-based client is both a library for programmatic access to
-Tango devices and a set of widgets that can represent attributes or properties
-of these devices. The frontend client is implemented using the JavascriptMVC
-framework (as of mTango rc0.3). This allows one to use the widgets like HTML tags. For instance,
-`<mtango:plot>` can be used to visualize changes in attribute over time.
-
 ## TangoJS introduction
 
-All attempts to create software that exposes Tango devices to web applications
+Each of discussed projects has its unique properties, advantages and drawbacks.
+However, all projects that allow to access Tango devices from web applications
 share some common properties:
 
-* a two-tier architecture is used, where the server communicates with Tango and
-  client runs within a web browser,
-* a client communicates with a server via either HTTP or WebSocket
-* the client offers a collection of widgets to facilitate development process
+* a two-tier architecture is used, where a server communicates with Tango and
+  a client runs within a web browser,
+* the client communicates with the server via either HTTP or WebSocket protocol
+* the client offers a collection of widgets to facilitate GUI development process
   and provide consistent end-user experience
 
 From all discussed solutions, mTango is the only one that is actively developed.
 mTango's frontend part has a steep learning curve due to a dependency
-on a third party-framework, the JavascriptMVC. To address this, the TangoJS,
+on a third party-framework, the JavascriptMVC. A complex setup and a set of
+tools (including an SDK and a few CLI utilities) is required to create even a
+simple project.
+
+To address this, the TangoJS,
 a modular web frontend library for Tango has been presented
 in [@liszcz-msc-thesis-tangojs].
 TangoJS focuses only on the frontend part to provide all building blocks
-required for rapid client application development.
+required for the rapid client application development.
 TangoJS can use mTango as it's backend.
 
 TangoJS uses *well-proven concepts*, as TangoJS' widgets has been inspired by
@@ -802,41 +811,41 @@ dependencies required.
 
 TangoJS is *compliant with the latest web standards*, which makes
 it attractive for developers and allows to keep the codebase clean and
-maintainable. *Use of Web Components* [@www-w3c-webcomponents] technology and
+maintainable. *Use of the Web Components* [@www-w3c-webcomponents] technology and a
 *framework-less architecture* enables *many integration options* between TangoJS
 and other frontend libraries. *Modular design* and well-defined interfaces
 allow developers to easily swap TangoJS modules, e.g. the backend module.
 
 In this paper we showed how TangoJS can
-be used to build a dynamic control panel, the TangoJS Panel application.
-It is a fully functional synoptic panel suitable for visualization of devices of
+be used to build a dynamic control panel application, the TangoJS Panel.
+It is a synoptic panel suitable for visualization of devices of
 any kind. This application allows users and developers new to the TangoJS to
 immediately try the framework.
+As TangoJS Panel can be configured to either work with an existing Tango
+infrastructure or use an in-memory mocked database, it is suitable for both
+demonstrational purposes and production-grade deployments.
 
 TangoJS was designed to be as accessible as possible and not to depend
-on any particular framework. While this approach is preferable for libraries,
-as they target a wide audience, it may not be the best solution in case of GUI
-applications.
+on any particular web framework. While this approach is preferable for libraries,
+as lack of dependencies expands the potential user base,
+it may not be the best solution in case of GUI applications.
 
-TangoJS Panel development process shown that using a framework for application
+TangoJS Panel development process showed that using a web framework for
+application
 development helps to keep the code maintainable and facilitates the
-implementation process.
-
+implementation.
 Although the Preact framework was used during this case study, TangoJS can be
 easily integrated with any other frontend framework. TangoJS does not enforce
 any specific technology stack or development style.
 
-As TangoJS Panel can be configured to either work with an existing Tango
-infrastructure or use an in-memory mocked database, it is suitable for both
-demonstrational purposes and production grade deployments.
-
-Reliable target enviroment and configuration management is as important as the
-application itself. We showed how Docker and Docker Compose can be used to
-automate the configuration and deployment of the application. Use of lightweight
-containers allowed to maintain application built from a couple of loosely
-connected components with no performance overhead. Such approach allows one to
-use the same environment for development and production. This greatly reduces
-effort needed for performing the deployments.
+We showed how Docker and Docker Compose can be used to
+automate the configuration and deployment of TangoJS-based applications.
+Each component of the system was running in its own isolated container.
+Such approach allows one to use the same environment for development and
+production,
+reduces the effort needed to perform the deployments or upgrades
+and facilitates the maintenance of application's environment
+(including a database).
 
 # References
 

@@ -4,10 +4,11 @@ FLAGS= \
 	--standalone \
 	--listings \
 	--pdf-engine=pdflatex \
-	--template=template.tex \
 	--filter pandoc-crossref \
 	--filter pandoc-citeproc \
 	--tab-stop=2
+
+# --template=template.tex \
 
 UML_OUTDIR=figures/uml
 UML_SRCDIR=figures/uml-source
