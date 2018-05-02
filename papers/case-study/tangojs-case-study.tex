@@ -1,0 +1,68 @@
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass[10pt]{article}
+
+\usepackage[pdftex]{graphicx}
+\graphicspath{{./figures/}}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\usepackage{moreverb}
+\usepackage{csagh}
+\usepackage{nohyperref}
+% \usepackage{natbib}
+\usepackage{tikz}
+\usepackage{textcomp}
+% \usepackage{listings}
+% \usepackage{tikz}
+\usepackage{standalone}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{empheq}
+\usepackage{braket}
+\usepackage{empheq}
+\usepackage{float}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{gensymb}
+\usepackage{caption}
+
+\def\tightlist{}
+
+\begin{document}
+\begin{opening}
+
+\title{A case study of a web-based control panel built with TangoJS}
+
+\author[Institution, address, the first author's e-mail address]{Michal Liszcz}
+
+\author[Institution, address, the second author's e-mail address]{Author-2}
+\autor{Author-3} % the third author will have the last affiliation
+                 % assigned, that is identical to the second author's
+
+\author[Institution1, address1, the fourth author's e-mail address1
+        Institution2, address2, the fourth author's e-mail address2,]{Wlodzimierz Funika}
+
+\begin{abstract}
+    \input{tangojs-case-study-abstract.tex}
+\end{abstract}
+
+\keywords{SCADA, web, browser, Javascript, Tango, HTML, CORBA, REST}
+
+\end{opening}
+
+\input{tangojs-case-study-sections.tex}
+
+\begin{acknowledgements}
+ The research presented in this paper was partially supported by \ldots
+\end{acknowledgements}
+
+% \nocite{*} %REMOVE
+
+\bibliographystyle{cs-agh}
+\bibliography{tangojs-case-study-bibliography}
+
+\end{document}
+

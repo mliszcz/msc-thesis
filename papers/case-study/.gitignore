@@ -1,3 +1,16 @@
-build/
-cai-style/
 figures/uml/
+tangojs-case-study-sections.tex
+
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.pdf
+*.run.xml
+
+# from https://journals.agh.edu.pl/public/journals/4/styles/StyleWithSamples.zip
+cs-agh.bst
+csagh.sty
+moreverb.sty
