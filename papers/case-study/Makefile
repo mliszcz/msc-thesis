@@ -37,7 +37,10 @@ $(UML_OUTDIR)/%.latex : $(UML_SRCDIR)/%.pu
 
 %.tex: %.md
 	pandoc tangojs-case-study.md --to=latex --natbib --no-highlight --tab-stop=2 \
-		| sed 's/\\citep/\\cite/g' > tangojs-case-study-sections.tex
+		| sed 's/\\citep/\\cite/g' \
+		| sed 's/\\cite{Fig:/\\ref{fig:/g' \
+		| sed 's/\\cite{Lst:/\\ref{lst:/g' \
+		> tangojs-case-study-sections.tex
 
 
 %.pdf: %.tex
