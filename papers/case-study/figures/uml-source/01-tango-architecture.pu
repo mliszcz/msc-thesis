@@ -11,11 +11,11 @@ node "Server 2" {
 }
 
 database "MySQL database" {
-  component "TANGO Schema" as DB
+  component "Tango Schema" as DB
 }
 
 node "Client" {
-  component "TANGO API" as DP
+  component "Tango API" as DP
 }
 
 component "Hardware 1" as HW1

@@ -17,8 +17,8 @@ node "Server (II)" {
   [Backend 2\n(WebSocket)] as B2
 }
 
-cloud "TANGO" {
-  [Device Servers ...] as DevSrv
+cloud "Tango" {
+  [Tango Device Servers ...] as DevSrv
 }
 
 WC <.d.> Core
