@@ -1,0 +1,13 @@
+FROM alpine:edge
+
+RUN  apk add --no-cache git nodejs nodejs-npm \
+  && git clone --depth 1 -b master https://github.com/mliszcz/tangojs-panel-obsolete /tangojs-panel \
+  && cd /tangojs-panel \
+  && npm install \
+  && npm prune --production \
+  && npm install --no-save http-server \
+  && apk del git nodejs-npm
+
+EXPOSE 8080
+
+CMD /tangojs-panel/node_modules/.bin/http-server /tangojs-panel -c-1

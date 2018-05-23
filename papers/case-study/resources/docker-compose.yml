@@ -1,0 +1,71 @@
+version: '2'
+services:
+
+  mysql:
+    image: mysql:5.6
+    hostname: mysql.workspace
+    command: mysqld --sql-mode=""
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: tango_db
+      MYSQL_USER: tango
+      MYSQL_PASSWORD: tango
+    volumes:
+      - ./.config/initdb:/docker-entrypoint-initdb.d:ro
+      # - ./.data/mysql:/var/lib/mysql
+
+  databaseds:
+    image: tangocs/tango-cs:9
+    hostname: databaseds.workspace
+    command: >-
+      /bin/sh -c 'wait-for-it.sh $${MYSQL_HOST} --timeout=30 --strict --
+      supervisord -c /etc/supervisor/init.d/supervisord.databaseds.conf'
+    environment:
+      ORB_PORT: '10000'
+      TANGO_HOST: databaseds.workspace:10000
+      MYSQL_HOST: mysql.workspace:3306
+      MYSQL_DATABASE: tango_db
+      MYSQL_USER: tango
+      MYSQL_PASSWORD: tango
+    volumes:
+      - ./.config/supervisord:/etc/supervisor/init.d:ro
+    links:
+      - mysql:mysql.workspace
+
+  tangotest:
+    image: tangocs/tango-cs:9
+    hostname: tangotest.workspace
+    command: >-
+      /bin/sh -c 'wait-for-it.sh $${TANGO_HOST} --timeout=30 --strict --
+      supervisord -c /etc/supervisor/init.d/supervisord.tangotest.conf'
+    environment:
+      TANGO_HOST: databaseds.workspace:10000
+    volumes:
+      - ./.config/supervisord:/etc/supervisor/init.d:ro
+    links:
+      - databaseds:databaseds.workspace
+
+  mtango:
+    image: mliszcz/mtango:rc3-0.1
+    hostname: mtango.workspace
+    command: >-
+      /bin/sh -c 'wait-for-it.sh $${TANGO_HOST} --timeout=30 --strict --
+      supervisord -c /etc/supervisor/init.d/supervisord.mtango.conf'
+    environment:
+      TANGO_HOST: databaseds.workspace:10000
+      USER_NAME: tango
+      USER_PASSWORD: tango
+      HTTP_PORT: '9091'
+    volumes:
+      - ./.config/supervisord:/etc/supervisor/init.d:ro
+    links:
+      - databaseds:databaseds.workspace
+
+  panel:
+    image: tangojs-panel
+    build:
+      context: .
+      dockerfile: Dockerfile.tangojs-panel
+    hostname: panel.workspace
+    links:
+      - mtango:mtango.workspace
