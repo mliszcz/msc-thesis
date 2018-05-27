@@ -149,7 +149,7 @@ limited way to provide users with basic interaction options.
 
 ![Canone Web Interface. (source [@www-canone])](
   ../figures/images/02-canone-tutorial4.png){
-  #fig:202-canone-gui width=75% }
+  #fig:202-canone-gui width=80% }
 
 GoTan (2012) [@gotan2012] is a project consisting of two modules, a server
 and a client. The server is a Groovy application that communicates directly
@@ -345,15 +345,15 @@ implementation and a discussion of possible deployment options.
 The TangoJS Panel application is inspired by the SarDemo project, which is often
 used to demonstrate the abilities of the Sardana toolset [^foot-sardana]
 on desktop installations of Tango. A similar application available for TangoJS
-will help this project gain more popularity within the Tango community.
+will help the project to gain more popularity within the Tango community.
 The users should be able to test TangoJS widgets with their own Tango
 installations. The TangoJS Panel application needs to be easy to deploy and
-should not need configuration zero configuration.
-provide default configuration. TODO napisac to inaczej.
+should provide a reasonable default configuration (e.g. a web server and user
+accounts).
 
 [^foot-sardana]: <http://www.sardana-controls.org/>
 
-A set of functional requirements has been formulated as a guidance for
+A set of functional requirements has been formulated as a guidance for the
 development process. The user should be able to:
 
 * users should be able to use the TangoJS Panel application with their own Tango
@@ -361,7 +361,7 @@ development process. The user should be able to:
 * application should display all device servers defined in the database,
 * user should be able to create interactive widgets for selected attributes
   of the devices,
-* it should be possible to place the widgets on a dashboardview and move
+* it should be possible to place the widgets on a dashboard, view and move
   them around,
 * the user should be able to save and restore the layout of the dashboard.
 
@@ -376,7 +376,7 @@ Technical details of implementation and architectural considerations are
 described later in the sections that follow.
 
 ![TangoJS Panel application's main view.
-](../figures/images/03-tangojs-panel-01-fixed.png){#fig:03-tangojs-panel-01 width=70%}
+](../figures/images/03-tangojs-panel-01-fixed.png){#fig:03-tangojs-panel-01 width=85%}
 
 \ \
 
@@ -798,7 +798,7 @@ in-memory connector implementation[^foot-tangojs-connector-mock].
 ## Service orchestration
 
 To efficiently manage three (or even four if one separates TangoTest device
-from Tango database server) containers described in the section TODO nr, an
+from Tango database server) containers, an
 orchestration tool is required. The Docker Compose[^foot-docker-compose], a
 community project which recently became an official part of Docker, has been
 designed to address this problem.
@@ -807,8 +807,6 @@ designed to address this problem.
 
 Docker Compose allows to define containers, dependencies, network links
 and mount points using a convenient YAML file.
-This file together with all other TODO artifacts required to run the TangoJS Panel
-application together with a minimal Tango installation are available at TODO [].
 A Docker Compose file with Tango, MySQL database and mTango has been created
 during TangoJS development and is available online[^foot-tango-workspace].
 One can add a new entry in the `services` section of `docker-compose.yml` file
@@ -818,8 +816,11 @@ Docker Compose service could be defined as shown in
 [@Lst:03-tangojs-docker-compose]. With such configuration,
 mTango service endpoint is going to be available for the TangoJS Panel under the
 `mtango.workspace` hostname.
+A complete configuration file and other artifacts required to run TangoJS Panel
+as a Docker Compose service are available online [^foot-tangojs-resources].
 
 [^foot-tango-workspace]: <https://github.com/mliszcz/tango-workspace>
+[^foot-tangojs-resources]: <https://github.com/mliszcz/msc-thesis/papers/case-study/resources>
 
 ```{ #lst:03-tangojs-docker-compose .yaml }
 services:
@@ -873,11 +874,11 @@ As TangoJS Panel can be configured either to work with an existing Tango
 infrastructure or to use an in-memory mocked database, it is suitable for both
 demonstrational purposes and production-grade deployments.
 
-TODO fix
-TangoJS was designed to be as accessible (TODO zle slowo) as possible and not to depend
-on any particular web framework. While this approach is preferable for libraries,
-as lack of dependencies expands the potential user base,
-it may not be the best solution in the case of GUI applications.
+TangoJS is a library intended to be used the software developers to create GUI
+applications.
+Raw DOM APIs are used instead of a third-party web framework. This approach is
+preferable for libraries, as lack of dependencies makes it easier for developers
+to use and integrate the library with their software stack.
 
 The process of TangoJS Panel development showed that using a web framework for
 application
@@ -896,5 +897,25 @@ reduces the effort needed to perform the deployments or upgrades
 and facilitates the maintenance of application's environment
 (including a database).
 
-TODO future work
+\ \
 
+## Future work
+
+Various directions for further development are considered for both the TangoJS
+Panel application and the TangoJS project itself.
+The Panel application can be extended with support for native notifications []
+and features like configuration menu, authentication form and administrative
+accounts.
+As for the TangoJS, future work aims to implement a few more genral-purpose
+widgets, provide a better and simpler API for creating custom widgets and encance
+the discovery mechanism for such widgets.
+
+The biggest challenge, however, will be to add support for event-based
+communication instead of currently implemented device server polling.
+The goal is to reduce the amount of network traffic and decrease the delay
+between hardware changes and UI updates.
+Event-based communication can be implemented using server-sent events []
+or by changing the transport protocol from HTTP to WebSocket.
+Both solutions require support on the backend side as well.
+
+\ \
