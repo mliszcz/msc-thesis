@@ -23,7 +23,7 @@ $(UML_OUTDIR)/%.latex : $(UML_SRCDIR)/%.pu
 	plantuml -o $(PWD)/$(UML_OUTDIR) -tlatex:nopreamble -nbthread 4 $<
 
 %.tex: %.md
-	pandoc $< --to=latex --natbib --no-highlight --tab-stop=2 \
+	pandoc $< --to=latex --natbib --no-highlight --tab-stop=2 --listings \
 		| sed 's/\\citep/\\cite/g' \
 		| sed 's/\\cite{Fig:/\\ref{fig:/g' \
 		| sed 's/\\cite{Lst:/\\ref{lst:/g' \

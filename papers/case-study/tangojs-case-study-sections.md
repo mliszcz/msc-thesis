@@ -406,7 +406,8 @@ configured, as shown in [@Lst:03-tangojs-connector-configuration]. The mTango
 connector, `tangojs.connector.MTangoConnector`, is a Connector implementation
 ready to use with mTango on the server side.
 
-```{ #lst:03-tangojs-core-read-attr .javascript }
+```{ #lst:03-tangojs-core-read-attr .javascript
+  caption="Accessing attribute's value using TangoJS Core API" }
 const { AttributeProxy, AttributeValue } = tangojs.core.api
 
 const attributeProxy = new AttributeProxy('sys/tg_test/1/long_scalar')
@@ -418,14 +419,13 @@ attributeProxt.read()
   .then(outVal => console.log(`Value: ${outVal.value}`))
   .catch(error => console.error(`Failure: ${error}`))
 ```
-Listing: Accessing attribute's value using TangoJS Core API.
 
-```{ #lst:03-tangojs-connector-configuration .javascript }
+```{ #lst:03-tangojs-connector-configuration .javascript
+  caption="Wiring Connector implementation to TangoJS Core" }
 const connector = new MyConnectorImpl(...)
 tangojs.core.setConnector(connector)
 ```
 
-Listing: Wiring Connector implementation to TangoJS Core.
 
 **TangoJS Web Components**. \quad
 TangoJS' widget collection has been inspired by the Taurus framework -
@@ -440,7 +440,8 @@ ways. The first way is via standard DOM manipulation APIs as shown in
 also a way to create widgets *declaratively*, by simply putting a desired tag
 into a HTML markup. This is shown in [@Lst:03-widget-instantiation-html].
 
-```{ #lst:03-widget-instantiation-js .javascript }
+```{ #lst:03-widget-instantiation-js .javascript
+  caption="Imperative widget instantiation from Javascript code." }
 const lineEdit = document.createElement('tangojs-line-edit')
 
 lineEdit.setAttribute('model', 'sys/tg_test/1/long_scalar_w')
@@ -450,16 +451,15 @@ lineEdit.showQuality = true
 
 document.body.appendChild(lineEdit)
 ```
-Listing: Imperative widget instantiation from Javascript code.
 
-```{ #lst:03-widget-instantiation-html .html }
+```{ #lst:03-widget-instantiation-html .html
+  caption="Declarative widget instantiation from HTML markup." }
 <tangojs-trend
   model="sys/tg_test/1/long_scalar_w,sys/tg_test/1/double_scalar"
   poll-period="1000"
   data-limit="20">
 </tangojs-trend>
 ```
-Listing: Declarative widget instantiation from HTML markup.
 
 All TangoJS widgets which are available in the TangoJS WebComponents module
 have their constructor functions attached to the global
@@ -601,7 +601,8 @@ credentials. This process is shown in [@Lst:03-tangojs-mtango-connector]. To
 avoid hardcoding the credentials in the application's code one can display a
 pop-up window during the page loading and ask the user for his/her credentials.
 
-```{ #lst:03-tangojs-mtango-connector .html }
+```{ #lst:03-tangojs-mtango-connector .html
+  caption="Configuring mTango Connector instance." }
 <script type="text/javascript">
   (function (tangojs) {
     'use strict'
@@ -616,7 +617,6 @@ pop-up window during the page loading and ask the user for his/her credentials.
   })(window.tangojs)
 </script>
 ```
-Listing: Configuring mTango Connector instance.
 
 TangoJS widget's are loaded asynchronously using HTML Imports [@www-w3c-html-imports]. In some
 scenarios it is desirable to postpone application's initialization until all
@@ -629,7 +629,8 @@ application initialization procedure covering both cases is shown in
 
 [^foot-wc-poly]: <https://www.webcomponents.org/polyfills#html-imports-polyfill>
 
-```{ #lst:03-tangojs-initialization .html }
+```{ #lst:03-tangojs-initialization .html
+  caption="TangoJS Panel delayed initialization." }
 <script>
   (function() {
     'use strict'
@@ -645,7 +646,6 @@ application initialization procedure covering both cases is shown in
   })()
 </script>
 ```
-Listing: TangoJS Panel delayed initialization.
 
 **State handling and widget rendering**. \quad
 In the applications based on the Flux architecture, any changes to the state are
@@ -682,7 +682,8 @@ these values using `window.tangojs.web.components['tangojs-trend'].capabilities`
 and `window.tangojs.web.components['tangojs-trend'].attributes`.
 
 
-```{ #lst:03-tangojs-widget-props .html }
+```{ #lst:03-tangojs-widget-props .html
+  caption="Metadata attached to the widget's constructor during widget's registration." }
   window.tangojs.web.util.registerComponent(
     'tangojs-trend',
     TangoJsTrendElement,
@@ -700,7 +701,6 @@ and `window.tangojs.web.components['tangojs-trend'].attributes`.
       }
     })
 ```
-Listing: Metadata attached to the widget's constructor during widget's registration.
 
 \ \
 
@@ -770,7 +770,8 @@ TangoJS Panel application is shown in [@Lst:03-tangojs-alpine-dockerfile].
 This Dockerfile can be built and started using the usual `docker build` and
 `docker run` commands.
 
-```{ #lst:03-tangojs-alpine-dockerfile .dockerfile }
+```{ #lst:03-tangojs-alpine-dockerfile .dockerfile
+  caption="A Dockerfile with the TangoJS Panel application." }
 FROM alpine:edge
 
 RUN  apk add --no-cache git nodejs nodejs-npm \
@@ -785,7 +786,6 @@ EXPOSE 8080
 
 CMD /tangojs-panel/node_modules/.bin/http-server /tangojs-panel
 ```
-Listing: A Dockerfile with the TangoJS Panel application.
 
 It is possible to try the TangoJS Panel application without an existing Tango
 and mTango installation. One can replace the mTango Connector with a mocked
@@ -822,7 +822,8 @@ as a Docker Compose service are available online [^foot-tangojs-resources].
 [^foot-tango-workspace]: <https://github.com/mliszcz/tango-workspace>
 [^foot-tangojs-resources]: <https://github.com/mliszcz/msc-thesis/papers/case-study/resources>
 
-```{ #lst:03-tangojs-docker-compose .yaml }
+```{ #lst:03-tangojs-docker-compose .yaml
+  caption="TangoJS Panel application configured as a Docker Compose service." }
 services:
 
   # Tango, MySQL and mTango services ...
@@ -836,7 +837,6 @@ services:
     links:
       - mtango:mtango.workspace
 ```
-Listing: TangoJS Panel application configured as a Docker Compose service.
 
 When the administrator runs the `docker-compose up` command, an image with
 TangoJS Panel application shall be created from the Dockerfile shown in
@@ -903,19 +903,26 @@ and facilitates the maintenance of application's environment
 
 Various directions for further development are considered for both the TangoJS
 Panel application and the TangoJS project itself.
-The Panel application can be extended with support for native notifications []
+The Panel application can be extended with support for native notifications
+[^www-notifications]
 and features like configuration menu, authentication form and administrative
 accounts.
 As for the TangoJS, future work aims to implement a few more genral-purpose
 widgets, provide a better and simpler API for creating custom widgets and encance
 the discovery mechanism for such widgets.
 
-The biggest challenge, however, will be to add support for event-based
+[^www-notifications]: https://notifications.spec.whatwg.org/
+
+The biggest challenge, however, is to add support for event-based
 communication instead of currently implemented device server polling.
 The goal is to reduce the amount of network traffic and decrease the delay
 between hardware changes and UI updates.
-Event-based communication can be implemented using server-sent events []
-or by changing the transport protocol from HTTP to WebSocket.
+Event-based communication can be implemented using HTML's server-sent events
+feature [^www-server-sent-ev]
+or by changing the transport protocol from HTTP to WebSocket in order to allow
+the server to initiate the transaction.
 Both solutions require support on the backend side as well.
+
+[^www-server-sent-ev]: https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events
 
 \ \
