@@ -286,32 +286,63 @@ widgets offer a layout and appearance similar to their counterparts from Taurus.
 The available widgets are depicted in [@Fig:03-tangojs-widgets-all].
 Below, each widget is provided with a short description:
 
-TODO zrobic tu ramki
+\begin{figure}[!htb]
+\centering
+  \begin{subfigure}[b]{0.8\textwidth}
+  \includegraphics[width=\textwidth,height=\textheight]
+    {../figures/images/03-tangojs-widgets-label.png}
+  \caption{\texttt{tangojs-label} bound to a scalar attribute.}
+  \end{subfigure}
 
-<div id="fig:03-tangojs-widgets-all">
-![\texttt{tangojs-label} bound to a scalar attribute.
-](../figures/images/03-tangojs-widgets-label.png){#fig:cfa width=80%}
-\par\bigskip
-![\texttt{tangojs-line-edit} bound to a boolean attribute.
-](../figures/images/03-tangojs-widgets-line-edit-bool.png){#fig:cfb width=80%}
-\par\bigskip
-![\texttt{tangojs-state-led} bound to a device instance.
-](../figures/images/03-tangojs-widgets-state-led.png){#fig:cfc width=80%}
-\par\bigskip
-![A set of \texttt{tangojs-command-button}s.
-](../figures/images/03-tangojs-widgets-command-button.png){#fig:cfc1 width=80%}
-\par\bigskip
-![\texttt{tangojs-device-tree} with all devices from the database.
-](../figures/images/03-tangojs-widgets-device-tree.png){#fig:cfd1 width=30%}
-\quad
-![\texttt{tangojs-trend} bound to two scalar attributes.
-](../figures/images/03-tangojs-widgets-trend.png){#fig:cfd2 width=50%}
-\par\bigskip
-![\texttt{tangojs-form} bound to three models of different kinds.
-](../figures/images/03-tangojs-widgets-form.png){#fig:cfc2 width=80%}
+  \bigskip
 
-TangoJS widgets.
-</div>
+  \begin{subfigure}[b]{0.8\textwidth}
+  \includegraphics[width=\textwidth,height=\textheight]
+    {../figures/images/03-tangojs-widgets-line-edit-bool.png}
+  \caption{\texttt{tangojs-line-edit} bound to a boolean attribute.}
+  \end{subfigure}
+
+  \bigskip
+
+  \begin{subfigure}[b]{0.8\textwidth}
+  \includegraphics[width=\textwidth,height=\textheight]
+    {../figures/images/03-tangojs-widgets-state-led.png}
+  \caption{\texttt{tangojs-state-led} bound to a device instance.}
+  \end{subfigure}
+
+  \bigskip
+
+  \begin{subfigure}[b]{0.8\textwidth}
+  \includegraphics[width=\textwidth,height=\textheight]
+    {../figures/images/03-tangojs-widgets-command-button.png}
+  \caption{A set of \texttt{tangojs-command-button}s.}
+  \end{subfigure}
+
+  \bigskip
+
+  \begin{subfigure}[b]{0.25\textwidth}
+  \includegraphics[width=\textwidth,height=\textheight]
+    {../figures/images/03-tangojs-widgets-device-tree.png}
+  \caption{\texttt{tangojs-device-tree} with all devices from the database.}
+  \end{subfigure}
+    ~
+  \begin{subfigure}[b]{0.65\textwidth}
+  \includegraphics[width=\textwidth,height=\textheight]
+    {../figures/images/03-tangojs-widgets-trend.png}
+  \caption{\texttt{tangojs-trend} bound to two scalar attributes.}
+  \end{subfigure}
+
+  \bigskip
+
+  \begin{subfigure}[b]{0.8\textwidth}
+  \includegraphics[width=\textwidth,height=\textheight]
+    {../figures/images/03-tangojs-widgets-form.png}
+  \caption{\texttt{tangojs-form} bound to three models of different kinds.}
+  \end{subfigure}
+
+\caption{TangoJS widgets.}
+\label{fig:03-tangojs-widgets-all}{}
+\end{figure}
 
 * `tangojs-label` - displays the name, value, unit and status of a *read-only*
   attribute;
@@ -775,7 +806,9 @@ This Dockerfile can be built and started using the usual `docker build` and
 FROM alpine:edge
 
 RUN  apk add --no-cache git nodejs nodejs-npm \
-  && git clone --depth 1 -b master https://github.com/mliszcz/tangojs-panel-obsolete /tangojs-panel \
+  && git clone --depth 1 -b master \
+    https://github.com/mliszcz/tangojs-panel-obsolete \
+    /tangojs-panel \
   && cd /tangojs-panel \
   && npm install \
   && npm prune --production \
@@ -844,7 +877,7 @@ TangoJS Panel application shall be created from the Dockerfile shown in
 Other images, like the Tango database, TangoTest device or
 mTango server shall be pulled from the Docker registry. TangoJS Panel application
 is going be accessible at `http://{container-ip}:8080` address immediately after
-start of all the services.
+the start of all the services.
 
 \ \
 

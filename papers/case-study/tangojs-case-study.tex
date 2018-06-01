@@ -13,11 +13,8 @@
 \usepackage{moreverb}
 \usepackage{csagh}
 \usepackage{nohyperref}
-% \usepackage{natbib}
 \usepackage{tikz}
 \usepackage{textcomp}
-% \usepackage{listings}
-% \usepackage{tikz}
 \usepackage{standalone}
 \usepackage{mathrsfs}
 \usepackage{amssymb}
@@ -26,10 +23,13 @@
 \usepackage{empheq}
 \usepackage{float}
 \usepackage{color}
-\usepackage{listings}
-\newcommand{\passthrough}[1]{#1}
 \usepackage{gensymb}
 \usepackage{caption}
+\usepackage{subcaption}
+
+\def\listingoffset{\leftmargini}
+\def\listinglabel#1{\rlap{\footnotesize\sffamily\the#1}%
+    \hskip\listingoffset{}\relax}
 
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 

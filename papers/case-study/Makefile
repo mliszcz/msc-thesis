@@ -27,6 +27,12 @@ $(UML_OUTDIR)/%.latex : $(UML_SRCDIR)/%.pu
 		| sed 's/\\citep/\\cite/g' \
 		| sed 's/\\cite{Fig:/\\ref{fig:/g' \
 		| sed 's/\\cite{Lst:/\\ref{lst:/g' \
+		| sed 's/{verbatim}/{listing}[1]{1}/g' \
+		| perl -pe 's/\\passthrough\{\\lstinline!(.*?)!\}/\\verb|\1|/g' \
+		| sed -e 's/\\begin{lstlisting}\[.*caption={\(.*\)}, label=\(.*\)\]/\\begin{figure}[!htb]\n\\renewcommand\\figurename{Listing}\n\\caption{\1}\n\\label{\2}\n\\begin{listing}\[1\]{1}/g' \
+		| sed -e 's/\\end{lstlisting}/\\end{listing}\n\\end{figure}/g' \
+		| sed -e 's/\(\\ref{fig:\)/Figure~\1/g' \
+		| sed -e 's/\(\\ref{lst:\)/Listing~\1/g' \
 		> $@
 
 %.pdf: %.tex
