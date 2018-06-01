@@ -2,21 +2,24 @@
 
 top to bottom direction
 
-node "TangoJS Panel" {
+skinparam packageBorderColor Gray
+skinparam Padding 5
 
-  component Dashboard as DB
-  component WidgetSelector as WS
-  component Menu as MENU
+package "TangoJS Panel" {
+
+  component Dashboard as DB #Thistle
+  component WidgetSelector as WS #Thistle
+  component Menu as MENU #Thistle
 }
 
-node "TangoJS Web Components" {
+package "TangoJS Web Components" {
 
-  component "tangojs-tree-view" as TREE
-  component "tangojs-some-widget" as WIDGETS
+  component "tangojs-tree-view" as TREE #DarkSeaGreen
+  component "tangojs-some-widget" as WIDGETS #DarkSeaGreen
 }
 
-component "react-grid-layout" as RGL
-component "react-modal" as MODAL
+component "react-grid-layout" as RGL #RosyBrown
+component "react-modal" as MODAL #DarkKhaki
 
 DB --> RGL : uses
 

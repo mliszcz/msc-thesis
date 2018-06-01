@@ -2,32 +2,38 @@
 
 top to bottom direction
 
+skinparam cloudBorderColor Gray
+skinparam nodeBorderColor Gray
+skinparam Padding 5
+
 node "Web Browser" {
-  [TangoJS\nWeb Components] as WC
-  [TangoJS Core] as Core
-  [TangoJS\nConnector 1] as C1
-  [TangoJS\nConnector 2] as C2
+  [TangoJS\nWeb Components] <<Widget Collection>> as WC #DarkSeaGreen
+  [TangoJS Core] <<API Library>> as Core #Thistle
+  [HTTP Connector] <<TangoJS Connector>> as C1 #DarkKhaki
+  [WebSocket Connector] <<TangoJS Connector>> as C2 #DarkKhaki
 }
 
-node "Server (I)" {
-  [Backend 1\n(HTTP)] as B1
+cloud {
+  [HTTP Server] <<TangoJS Backend>> as B1 #RosyBrown
+  interface HTTP #RosyBrown
+  HTTP - B1
+
+  [WebSocket Server] <<TangoJS Backend>> as B2 #RosyBrown
+  interface WS #RosyBrown
+  WS - B2
+
+  [Tango Device Servers] as DevSrv #LightSteelBlue
+  interface IIOP #LightSteelBlue
+  IIOP - DevSrv
 }
 
-node "Server (II)" {
-  [Backend 2\n(WebSocket)] as B2
-}
-
-cloud "Tango" {
-  [Tango Device Servers ...] as DevSrv
-}
-
-WC <.d.> Core
-Core <.d.> C1
-Core <.d.> C2
-C1 <--> B1 : HTTP
-C2 <--> B2 : WebSocket
-B1 <-do-> [DevSrv] : IIOP
-B2 <-do-> [DevSrv] : IIOP
+WC .d.> Core
+Core .d.> C1
+Core .d.> C2
+C1 --> HTTP
+C2 --> WS
+B1 -do-> IIOP
+B2 -do-> IIOP
 
 note right of WC
   Web Components module contains a collection of
@@ -43,7 +49,7 @@ note right of Core
   to Device Servers.
 end note
 
-note top of C2
+note right of C1
   Connector modules are pluggable bridges between
   browser environment and server side proxies.
 end note

@@ -1,11 +1,11 @@
 @startuml
 
 actor User as USER
-box "TangoJS Panel" #LightBlue
-  participant Menu as MENU
-  participant WidgetSelector as WS
-  participant Dashboard as DB
-  participant Store as STORE
+box "TangoJS Panel" #White
+  participant Menu as MENU #Thistle
+  participant WidgetSelector as WS #Thistle
+  participant Dashboard as DB #Thistle
+  participant Store as STORE #Thistle
 end box
 
 activate MENU

@@ -83,8 +83,8 @@ A central MySQL database [@tools-mysql] is used to store all registered devices
 and their configuration. An overview of Tango architecture is depicted in
 [@Fig:01-tango-architecture].
 
-![Tango Control System architecture overview. TODO color](
-  ../../../thesis/figures/uml/01-tango-architecture.tex){
+![Tango Control System architecture overview.](
+  ../figures/uml/01-tango-architecture.tex){
   #fig:01-tango-architecture width=80% }
 
 During the years of development, Tango has been widely adopted in both science

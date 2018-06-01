@@ -1,37 +1,38 @@
 @startuml
 
-node "Server 1" {
-  component "<<DeviceServer>>\nDataBaseds" as DBDS
-  component "<<DeviceServer>>\nTangoAccessControl" as TAC
+top to bottom direction
+
+skinparam cloudBorderColor Gray
+skinparam Padding 5
+
+cloud {
+component [DataBaseDs] <<Device Server>> as DBDS #LightSteelBlue
+component [TangoAccessControl] <<Device Server>> as TAC #LightSteelBlue
 }
 
-node "Server 2" {
-  component "<<DeviceServer>>\nDeviceServer 1" as DS1
-  component "<<DeviceServer>>\nDeviceServer 2" as DS2
+cloud {
+component [Server 1] <<Device Server>> as DS1 #LightSteelBlue
+component [Server 2] <<Device Server>> as DS2 #LightSteelBlue
 }
 
-database "MySQL database" {
-  component "Tango Schema" as DB
-}
+component [Tango Schema] <<SQL Database>> as DB #DarkSeaGreen
 
-node "Client" {
-  component "Tango API" as DP
-}
+component [Tango Client] <<Application>> as DP #Thistle
 
-component "Hardware 1" as HW1
-component "Hardware 2" as HW2
+component [Motor] <<Hardware>> as HW1 #RosyBrown
+component [Power Supply] <<Hardware>> as HW2 #RosyBrown
 
-HW1 <.> DS1
-HW2 <.> DS2
+HW1 <.. DS1
+HW2 <.. DS2
 
-DS1 <-> DBDS
-DS2 <-> DBDS
+DS1 --> DBDS
+DS2 --> DBDS
 
-DBDS <.> DB
-TAC  <.> DB
+DBDS ..> DB
+TAC  ..> DB
 
-DP <-> DBDS
-DP <-> TAC
-DP <-> DS1
+DP --> DBDS
+DP --> TAC
+DP --> DS1
 
 @enduml
