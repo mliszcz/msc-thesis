@@ -78,10 +78,14 @@ Tango uses OOP paradigm for its data model and characterizes devices with
 can perform) and *properties* of the device servers. Tango
 supports creating client applications in *Java*, *Python* and *C++*
 languages. Tango's middleware layer is built on top of
-CORBA [@www-corba; @www-corba-spec; @natan1995] and ZeroMQ [@www-zeromq].
-A central MySQL database [@tools-mysql] is used to store all registered devices
+CORBA[^www-corba-spec] and ZeroMQ[^www-zeromq].
+A central MySQL database[^www-mysql] is used to store all registered devices
 and their configuration. An overview of Tango architecture is depicted in
 [@Fig:01-tango-architecture].
+
+[^www-corba-spec]: <https://www.omg.org/spec/CORBA/>
+[^www-zeromq]: <http://zeromq.org/>
+[^www-mysql]: <https://www.mysql.com/>
 
 ![Tango Control System architecture overview.](
   ../figures/uml/01-tango-architecture.tex){
@@ -131,11 +135,14 @@ The use of Web frontend technologies for GUI development for both mobile and
 desktop is gaining more and more popularity. Compared with the traditional
 approach of writing a native, dedicated application for each platform, it
 brings many benefits, wide choice of tools and libraries, simplified deployment
-process or portability thanks to the projects like Electron [@www-electron] or
-Apache Cordova [@www-cordova].
+process or portability thanks to the projects like Electron[^www-electron] or
+Apache Cordova[^www-cordova].
+
+[^www-electron]: <http://electron.atom.io/>
+[^www-cordova]: <https://cordova.apache.org/>
 
 The first project using a web browser as a runtime for Tango applications
-was Canone (2005) [@pelkocanone07; @www-canone].
+was Canone[^www-canone] [@pelkocanone07] (2005)
 Canone allows to compose a GUI from multipe widgets representing various
 devices
 and properties of these devices. The user can put widgets on a webpage layout.
@@ -147,11 +154,13 @@ acting as a proxy between Tango device servers and the frontend part. The
 frontend is written mostly in PHP but Canone's widgets also use AJAX in a
 limited way to provide users with basic interaction options.
 
-![Canone Web Interface. (source [@www-canone])](
+[^www-canone]: <http://plone.tango-controls.org/download/canone/canone>
+
+![Canone Web Interface. (source: Canone's website, accessed 2016.09.28)](
   ../figures/images/02-canone-tutorial4.png){
   #fig:202-canone-gui width=80% }
 
-GoTan (2012) [@gotan2012] is a project consisting of two modules, a server
+GoTan[^www-gotan2012] (2012) is a project consisting of two modules, a server
 and a client. The server is a Groovy application that communicates directly
 with the Tango device servers. The GoTan server exposes a well documented RESTful
 API, which clients can use to access the devices. While the default client
@@ -160,7 +169,9 @@ enviroment, alternative client implementations are possible thanks to an HTTP-ba
 API. GoTan does not provide any frontend library to facilitate building the user
 interfaces for client applications.
 
-Taurus Web (2013) [@taurusweb2013] project aims to bring Taurus'
+[^www-gotan2012]: <https://github.com/hardion/GoTan>
+
+Taurus Web[^www-taurusweb2013] (2013) project aims to bring Taurus'
 functionality to the web environment. Like the competing projects, Taurus Web
 is also divided into a server and a client parts. The server part is written in
 Python and exposes Tango devices over the WebSocket protocol.
@@ -168,27 +179,28 @@ The client part offers the developers access the Tango devices using an API.
 There are no generic widgets available and dedicated UI components need to be
 implemented by the developers aiming to use Taurus Web.
 
-mTango [@mtango2016] is a two-tier client/server system that provides developers
-with a complete set of tools for building interactive, web-based and mobile
-Tango client applications.
-The server part, the mTangoREST server, is a Java application that can run
-within a dedicated or an embedded servlet container. The server is responsible for
-communicating with the Tango infrastructure. Tango devices are exposed to the
-clients using a
-well-defined HTTP-based API. mTango provides two client implementations for
-accessing this
-API, a Java client for desktop applications and a Javascript client for web
-applications. The web-based client library offers both a set of low-level
-functions for
-communicating with the devices and a collection of high-level widgets. The widgets
-can represent attributes and properties of arbitrary devices.
-Widgets are implemented using the JavascriptMVC
-framework (as of mTango rc0.3). This allows to compose the UI declaratively,
-using HTML-like tags. For instance,
-`<mtango:plot>` tag can be used to create a time-domain plot of device attributes.
+[^www-taurusweb2013]: \url{http://plone.tango-controls.org/Events/meetings/may_2013/Taurus Web - Tango Collaboration Meeting ALBA 2013.pdf}
 
-Each of these projects has its unique properties, advantages and drawbacks,
-discussed in greater details in ([@liszcz-msc-thesis-tangojs]).
+mTango[^www-mtango2016] (2016) is a two-tier client/server system that provides
+developers with a complete set of tools for building interactive, web-based and
+mobile Tango client applications.
+The server part, the mTangoREST server, is a Java application that can run
+within a dedicated or an embedded servlet container. The server is responsible
+for communicating with the Tango infrastructure. Tango devices are exposed to
+the clients using a well-defined HTTP-based API. mTango provides two client
+implementations for accessing this API, a Java client for desktop applications
+and a Javascript client for web applications. The web-based client library
+offers both a set of low-level functions for communicating with the devices
+and a collection of high-level widgets. The widgets can represent attributes
+and properties of arbitrary devices. Widgets are implemented using the
+JavascriptMVC framework (as of mTango rc0.3). This allows to compose the UI
+declaratively, using HTML-like tags. For instance, `<mtango:plot>` tag can be
+used to create a time-domain plot of device attributes.
+
+[^www-mtango2016]: <https://bitbucket.org/hzgwpn/mtango/wiki/Home>
+
+Each of these projects has its unique properties, advantages and drawbacks
+[@liszcz-msc-thesis-tangojs].
 Most of the projects however were abandoned at the proof-of-concept stage and
 only a single one is actively maintained these days.
 
@@ -251,7 +263,7 @@ abstractions that hide the lower layers of the TangoJS stack.
 The Core module *gives the user access to the concepts like DeviceProxy*,
 a client side representation of a device server. This module also *contains
 all the structures, enums, typedefs and interfaces*, as specified by the
-Tango IDL [^ftn-idl].
+Tango IDL[^ftn-idl].
 
 [^ftn-idl]: *Interface Description Language*, which defines abstract objects
   in a language-agnostic way.
@@ -374,7 +386,7 @@ implementation and a discussion of possible deployment options.
 ## Goal setting and requirements analysis
 
 The TangoJS Panel application is inspired by the SarDemo project, which is often
-used to demonstrate the abilities of the Sardana toolset [^foot-sardana]
+used to demonstrate the abilities of the Sardana toolset[^foot-sardana]
 on desktop installations of Tango. A similar application available for TangoJS
 will help the project to gain more popularity within the Tango community.
 The users should be able to test TangoJS widgets with their own Tango
@@ -407,7 +419,7 @@ Technical details of implementation and architectural considerations are
 described later in the sections that follow.
 
 ![TangoJS Panel application's main view.
-](../figures/images/03-tangojs-panel-01-fixed.png){#fig:03-tangojs-panel-01 width=85%}
+](../figures/images/03-tangojs-panel-01-fixed.png){#fig:03-tangojs-panel-01 width=90%}
 
 \ \
 
@@ -510,27 +522,32 @@ other technologies have to be incorporated. TangoJS provides widgets that
 behave like ordinary HTML elements. This allows for seamless integration
 of TangoJS with any web framework.
 Its up to the developer to decide if he/she creates the application using
-Angular [@www-angular; @darwin2013angularjs], React [@www-react] or just
+Angular[^www-angular], React[^www-react] or just
 plain DOM APIs.
+
+[^www-angular]: <https://www.angularjs.org/>
+[^www-react]: <https://facebook.github.io/react/>
 
 Among all frontend frameworks the Facebook's React is often chosen by
 developers to create web applications of any scale. Although it comes with some
 controversial features like the JSX (which, when used, requires
 transcompilation), and is heavyweight with all its dependencies, a
-stripped-down fork called *Preact* [@www-preact] is availabe. It offers API
+stripped-down fork called *Preact*[^www-preact] is availabe. It offers API
 compatibility with React, but is much smaller in size [@www-preact-vs-react] and
 offers better performance [@www-preact-perf].
 Preact contains everything that is required to build highly reactive
 applications including stateless (functional) components, and unidirectional
 data flow.
 
+[^www-preact]: <https://preactjs.com/>
+
 React on its own is merely a presentation layer that can be used to create
 *views* (as in a classic MVC pattern). For most real-world applications, like the TangoJS Panel, a state, or
 a data *model*, needs to be introduced. While it is possible to represent the
 state as a bunch of variables scattered accross the codebase, mutating these
 variables from different places is error prone, difficult to test and
-maintain. To address this problem, Facebook proposed the *Flux architecture*
-[@www-flux].
+maintain. To address this problem, Facebook proposed the
+*Flux architecture*[^www-flux].
 In Flux, application's state is stored in a central place, called *store*. Various
 *actions* can change the state, but these changes always happen inside the store
 in a well-defined order. The store acts as a *single source of truth* for an
@@ -538,7 +555,10 @@ application - the whole application's state is maintained by the store.
 Only changes in the store can result in UI updates. There are many
 implementations of Flux architecture, all offer some sort of *predictable state
 container* that can transform itself under a stream of events. For building TangoJS
-Panel we have chosen *Redux* [@www-redux], as it easily integrates with Preact.
+Panel we have chosen *Redux*[^www-redux], as it easily integrates with Preact.
+
+[^www-flux]: <https://facebook.github.io/flux/>
+[^www-redux]: <http://redux.js.org/>
 
 \ \
 
@@ -768,7 +788,7 @@ These tools are discussed later in this section.
 
 ## Containerizing applications
 
-Docker [@www-docker] is a popular tool that provides isolated, reproducible
+Docker[^www-docker] is a popular tool that provides isolated, reproducible
 environments for running applications. Docker uses LXC containers, cgroups and
 other Linux kernel features to isolate processes from the host operating system
 [@www-containers-anatomy]. A fine-grained management of available resources like
@@ -780,6 +800,7 @@ build a minimal filesystem required to run the desired application.
 An online service, called DockerHub[^foot-docker-hub], can be used to publish
 and share Docker images.
 
+[^www-docker]: <https://www.docker.com/>
 [^foot-docker-hub]: <https://hub.docker.com/>
 
 TangoJS offers Docker images with mTango and Tango itself. The images
@@ -850,7 +871,7 @@ Docker Compose service could be defined as shown in
 mTango service endpoint is going to be available for the TangoJS Panel under the
 `mtango.workspace` hostname.
 A complete configuration file and other artifacts required to run TangoJS Panel
-as a Docker Compose service are available online [^foot-tangojs-resources].
+as a Docker Compose service are available online[^foot-tangojs-resources].
 
 [^foot-tango-workspace]: <https://github.com/mliszcz/tango-workspace>
 [^foot-tangojs-resources]: <https://github.com/mliszcz/msc-thesis/papers/case-study/resources>
@@ -936,8 +957,8 @@ and facilitates the maintenance of application's environment
 
 Various directions for further development are considered for both the TangoJS
 Panel application and the TangoJS project itself.
-The Panel application can be extended with support for native notifications
-[^www-notifications]
+The Panel application can be extended with support for native
+notifications[^www-notifications]
 and features like configuration menu, authentication form and administrative
 accounts.
 As for the TangoJS, future work aims to implement a few more genral-purpose
@@ -951,7 +972,7 @@ communication instead of currently implemented device server polling.
 The goal is to reduce the amount of network traffic and decrease the delay
 between hardware changes and UI updates.
 Event-based communication can be implemented using HTML's server-sent events
-feature [^www-server-sent-ev]
+feature[^www-server-sent-ev]
 or by changing the transport protocol from HTTP to WebSocket in order to allow
 the server to initiate the transaction.
 Both solutions require support on the backend side as well.
