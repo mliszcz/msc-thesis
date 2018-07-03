@@ -97,18 +97,16 @@ a lot of tools and utilities related to the Tango project.
 The core Tango is a free and open source software, released under GPLv3
 license.
 
-\ \
-
-## Web-based control applications
-
 Whereas it is easy to create a desktop client application, the _web-based
 approach to Tango GUI development is still an unexplored area_.
 Over the years there were a few attempts to create a framework for development
 of web-based Tango applications. Most of proposed solutions have been abandoned
 due to e.g. limited extensibility, obsolete dependencies or low interactivity
-options. The TangoJS project [@liszcz-msc-thesis-tangojs] aims to
+options. The TangoJS project[^www-tangojs] [@liszcz-msc-thesis-tangojs] aims to
 address these problems by being a modular, framework-less system that provides
 users with interactive widgets for visualization of the status of the hardware.
+
+[^www-tangojs]: <https://github.com/tangojs>
 
 This paper is aimed to demonstrate how various web technologies can be tied
 together to create a generic, graphical application capable of controling Tango
@@ -950,10 +948,6 @@ production,
 reduces the effort needed to perform the deployments or upgrades
 and facilitates the maintenance of application's environment
 (including a database).
-
-\ \
-
-## Future work
 
 Various directions for further development are considered for both the TangoJS
 Panel application and the TangoJS project itself.
